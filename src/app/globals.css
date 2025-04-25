@@ -21,6 +21,16 @@
   --breakpoint-lg: 1200px;
   --breakpoint-xl: 1920px;
   
+  --text-1xl: 22px;
+  --text-3xl-plus: 32px;
+  --text-4xl-plus: 46px;
+  
+  --spacing-c-50: 50px;
+  --spacing-c-52: 52px;
+  --spacing-c-60: 60px;
+  --spacing-c-100: 100px;
+  --spacing-c-200: 200px;
+  
   --shadow-block:  0px 0px 15px 10px rgba(0, 0, 0, 0.05);
 }
 
@@ -38,4 +48,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.flex-grow {
+  flex: 1 0 auto;
+}
+
+.flex-fixed {
+  flex: 0 0 auto;
 }

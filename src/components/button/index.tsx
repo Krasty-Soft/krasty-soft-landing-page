@@ -24,10 +24,13 @@ const getVariant = (variant: variant) => {
   }
 }
 
+const paddings = 'py-3 px-8 md:py-5 md:px-10';
+const fontSizes = 'text-sm md:text-base xl:text-lg';
+
 export const Button = ({title, onClick, disabled = false, variant = 'accent', fullSize = false, classes = '', ...props} : BtnProps) => {
   return (
     <button
-      className={`rounded-[40px] cursor-pointer py-3 px-8 ${getVariant(variant)} ${fullSize ? 'w-full' : ''} ${classes}`}
+      className={`rounded-[40px] ${fontSizes} cursor-pointer ${paddings} ${getVariant(variant)} ${fullSize ? 'w-full' : ''} ${classes}`}
       onClick={onClick}
       disabled={disabled}
       {...props}

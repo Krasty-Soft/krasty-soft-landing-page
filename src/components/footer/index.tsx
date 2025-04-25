@@ -1,6 +1,6 @@
 'use client'
 
-import { Input } from "@/components";
+import {Button, Input} from "@/components";
 import MailIcon from "@/assets/footer-mail.svg";
 import PhoneIcon from "@/assets/footer-phone.svg";
 import Insta from "@/assets/footer-instagram.svg";
@@ -17,75 +17,82 @@ export const Footer = () => {
       id="footer"
       className="bg-black text-white font-medium"
     >
-      <div className="px-4 py-12">
+      <div className="px-4 pt-c-50 pb-10 md:px-8 md:py-c-60 md:pb-10 lg:px-c-50 lg:pt-20 lg:pb-12 xl:px-c-200 xl:pt-c-100 xl:pb-c-52">
         <p
-          className="text-xs mb-4"
+          className="text-xs mb-4 md:mb-3 lg:mb-4"
         >
           Contact us
         </p>
         <h2
-          className="text-[22px] mb-10"
+          className="text-1xl lg:text-3xl-plus xl:text-4xl-plus mb-10 md:mb-6 lg:mb-8 xl:mb-c-60 max-w-3xl"
         >
           Get in touch for expert support.
         </h2>
 
-        <div className="mb-10">
-          <p className="mb-8">For job seekers</p>
-          <div className="flex flex-col gap-7">
-            <a
-              className="flex items-center gap-4"
-              href="mailto:sales@krasty.me"
-            >
-              <div className="h-[34px] w-[34px] bg-red rounded-full center">
-                <MailIcon />
-              </div>
-              sales@krasty.me
-            </a>
-            <a
-              className="flex items-center gap-4"
-              href="tel:+380992000187"
-            >
-              <div className="h-[34px] w-[34px] bg-red rounded-full center">
-                <PhoneIcon />
-              </div>
-              +38 (099) 200 01 87
-            </a>
-          </div>
-        </div>
-
-        <div>
-          <p className="mb-8">For job seekers</p>
-          <form
-            className="flex flex-col gap-8"
-            action="#"
-          >
-            <Input placeholder={ 'Your name'} />
-            <Input placeholder={ 'Your email'} />
-            <Input placeholder={ 'Your phone'} />
-            <div className="relative">
-              <textarea
-                className="px-5 py-4 w-full outline-0 resize-none bg-dark-green text-white placeholder-dark-grey rounded-2xl h-48"
-                name="message"
-                id="message"
-                placeholder="Your message"
-              />
-              {
-                error && <p className="absolute top-0 left-0 text-xs text-red">{error}</p>
-              }
+        <div className="lg:grid lg:grid-cols-2 lg:gap-8">
+          <div className="mb-10 md:flex-grow">
+            <p className="mb-8 lg:mb-7 xl:mb-9 text-sm lg:text-lg xl:text-1xl">For job seekers</p>
+            <div className="grid grid-cols-1 gap-7 md:grid-cols-2 text-base xl:text-xl lg:grid-cols-1">
+              <a
+                className="flex items-center gap-4"
+                href="mailto:sales@krasty.me"
+              >
+                <div className="h-[34px] w-[34px] bg-red rounded-full center">
+                  <MailIcon />
+                </div>
+                sales@krasty.me
+              </a>
+              <a
+                className="flex items-center gap-4"
+                href="tel:+380992000187"
+              >
+                <div className="h-[34px] w-[34px] bg-red rounded-full center">
+                  <PhoneIcon />
+                </div>
+                +38 (099) 200 01 87
+              </a>
             </div>
-            <label htmlFor="attach" className="flex items-center gap-4 cursor-pointer">
-              <input className="hidden" type="file" name="attach" id="attach"/>
-              <div className="h-8 w-8 bg-background rounded-md center">
-                <Attach />
+          </div>
+
+          <div className="md:flex-grow">
+            <p className="mb-8 lg:mb-7 xl:mb-9 text-sm lg:text-lg xl:text-1xl">Contact us</p>
+            <form
+              className="flex flex-col gap-8"
+              action="#"
+            >
+              <Input placeholder={ 'Your name'} />
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:gap-9">
+                <Input placeholder={ 'Your email'} />
+                <Input placeholder={ 'Your phone'} />
               </div>
-              Attach your file
-            </label>
-          </form>
+              <div className="relative">
+                <textarea
+                  className="px-5 py-4 w-full outline-0 resize-none bg-dark-green text-white placeholder-dark-grey rounded-2xl h-48"
+                  name="message"
+                  id="message"
+                  placeholder="Your message"
+                />
+                {
+                  error && <p className="absolute top-0 left-0 text-xs text-red">{error}</p>
+                }
+              </div>
+              <label htmlFor="attach" className="flex items-center gap-4 cursor-pointer text-base xl:text-lg">
+                <input className="hidden" type="file" name="attach" id="attach"/>
+                <div className="h-8 w-8 bg-background rounded-md center">
+                  <Attach />
+                </div>
+                Attach your file
+              </label>
+              <Button title="Send" fullSize onClick={() => console.log('sent!')} variant="accent" />
+            </form>
+          </div>
         </div>
       </div>
 
-      <div className="border-t border-t-dark-green py-10">
-        <ul className="flex justify-center gap-4 mb-8">
+      <div
+        className="flex flex-col gap-8 items-center md:flex-row-reverse md:justify-between border-t border-t-dark-green px-4 py-10 md:px-8 md:py-8 lg:px-c-50 xl:px-c-200 xl:py-c-60"
+      >
+        <ul className="flex justify-center gap-4">
           <li className="h-8 w-8 bg-background rounded-md center">
             <a href="#">
               <Insta />
@@ -107,7 +114,7 @@ export const Footer = () => {
             </a>
           </li>
         </ul>
-        <p className="text-center">Copyright © 2025 Krasty Soft</p>
+        <p className="text-sm xl:text-base">Copyright © 2025 Krasty Soft</p>
       </div>
     </footer>
   )

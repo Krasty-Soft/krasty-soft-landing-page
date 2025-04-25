@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <>
       <Header />
-      <main className="flex-auto h-[1000px]">
+      <main className="flex-auto">
         lorem ipsum
       </main>
       <Footer />
