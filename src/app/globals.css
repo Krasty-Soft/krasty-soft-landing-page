@@ -21,15 +21,17 @@
   --breakpoint-lg: 1200px;
   --breakpoint-xl: 1920px;
   
-  --text-1xl: 22px;
-  --text-3xl-plus: 32px;
-  --text-4xl-plus: 46px;
+  --text-1xl: 1.375rem;
+  --text-3xl-plus: 2rem;
+  --text-4xl-plus: 2.875rem;
+  --text-5xl-plus: 3.25rem;
   
-  --spacing-c-50: 50px;
-  --spacing-c-52: 52px;
-  --spacing-c-60: 60px;
-  --spacing-c-100: 100px;
-  --spacing-c-200: 200px;
+  --spacing-c-22: 1.375rem;
+  --spacing-c-50: 3.125rem;
+  --spacing-c-52: 3.25rem;
+  --spacing-c-60: 3.75rem;
+  --spacing-c-100: 6.25rem;
+  --spacing-c-200: 12.5rem;
   
   --shadow-block:  0px 0px 15px 10px rgba(0, 0, 0, 0.05);
 }
@@ -44,6 +46,11 @@ body {
   font-family: var(--font-tt-runs);
 }
 
+.container {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
 .center {
   display: flex;
   justify-content: center;
@@ -56,4 +63,12 @@ body {
 
 .flex-fixed {
   flex: 0 0 auto;
+}
+
+.section-header {
+  @apply font-medium tracking-wider text-1xl lg:text-3xl-plus xl:text-4xl-plus;
+}
+
+.section-label {
+  @apply text-xs mb-4 md:mb-3 lg:mb-4 uppercase
 }

@@ -1,6 +1,6 @@
 'use client'
 
-import {Button, Input} from "@/components";
+import { Button, Input } from "@/components";
 import MailIcon from "@/assets/footer-mail.svg";
 import PhoneIcon from "@/assets/footer-phone.svg";
 import Insta from "@/assets/footer-instagram.svg";
@@ -11,20 +11,17 @@ import Attach from "@/assets/footer-clip.svg";
 import React, {useState} from "react";
 
 export const Footer = () => {
-  const [error, setError] = useState<string | null>(null);
+  const [error] = useState<string | null>(null);
   return (
-    <footer
-      id="footer"
-      className="bg-black text-white font-medium"
-    >
+    <footer className="bg-black text-white font-medium">
       <div className="px-4 pt-c-50 pb-10 md:px-8 md:py-c-60 md:pb-10 lg:px-c-50 lg:pt-20 lg:pb-12 xl:px-c-200 xl:pt-c-100 xl:pb-c-52">
         <p
-          className="text-xs mb-4 md:mb-3 lg:mb-4"
+          className="section-label"
         >
           Contact us
         </p>
         <h2
-          className="text-1xl lg:text-3xl-plus xl:text-4xl-plus mb-10 md:mb-6 lg:mb-8 xl:mb-c-60 max-w-3xl"
+          className="section-header mb-10 md:mb-6 lg:mb-8 xl:mb-c-60 max-w-3xl"
         >
           Get in touch for expert support.
         </h2>
@@ -54,7 +51,7 @@ export const Footer = () => {
             </div>
           </div>
 
-          <div className="md:flex-grow">
+          <div className="md:flex-grow" id="contacts">
             <p className="mb-8 lg:mb-7 xl:mb-9 text-sm lg:text-lg xl:text-1xl">Contact us</p>
             <form
               className="flex flex-col gap-8"
@@ -83,7 +80,13 @@ export const Footer = () => {
                 </div>
                 Attach your file
               </label>
-              <Button title="Send" fullSize onClick={() => console.log('sent!')} variant="accent" />
+              <Button
+                title="Send"
+                fullSize
+                onClick={() => console.log('sent!')}
+                variant="accent"
+                classes="py-3 px-8 md:py-5 md:px-10 text-sm md:text-base xl:text-lg"
+              />
             </form>
           </div>
         </div>
