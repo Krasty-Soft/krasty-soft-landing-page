@@ -45,7 +45,7 @@ export const Services = () => {
           Products and services
         </p>
         <h2
-          className="section-header mb-6 lg:mb-9 xl:mb-c-60 lg:max-w-2xl xl:max-w-3xl"
+          className="section-header mb-6 lg:mb-9 xl:mb-c-60 lg:max-w-2xl xl:max-w-4xl"
         >
           Digital products and five-star services.
         </h2>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ttRuns } from '@/lib/fonts'
 import "./globals.css";
+import { Footer, Header } from "@/components";
 
 export const metadata: Metadata = {
   title: "Krasty Soft",
@@ -17,7 +18,11 @@ export default function RootLayout({
       <body
         className={`font-sans antialiased xs:text-sm md:text-lg ${ttRuns.variable}`}
       >
-        {children}
+        <Header />
+        <main className="flex-auto">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

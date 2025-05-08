@@ -10,6 +10,7 @@ import ArrowLeft from "@/assets/arrow-left.svg";
 import ArrowRight from "@/assets/arrow-right.svg";
 import ArrowTop from "@/assets/arrow-up.svg";
 import ArrowDown from "@/assets/arrow-down.svg";
+import Link from "next/link";
 
 type MenuLevel = 'root' | 'services' | 'industries';
 
@@ -95,22 +96,22 @@ export const Menu = () => {
             <li
               className={menuItemDesktopClass}
             >
-              Case Studies
+              <Link href="/cases">Case Studies</Link>
             </li>
             <li
               className={menuItemDesktopClass}
             >
-              Blog
+              <Link href="/blog">Blog</Link>
             </li>
             <li
               className={menuItemDesktopClass}
             >
-              About us
+              <Link href="/about">About us</Link>
             </li>
             <li
               className={menuItemDesktopClass}
             >
-              Careers
+              <Link href="/careers">Careers</Link>
             </li>
           </ul>
         )
