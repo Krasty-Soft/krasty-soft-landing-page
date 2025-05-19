@@ -4,8 +4,7 @@ import Icon1 from '@/assets/maritime.svg';
 import Icon2 from '@/assets/health-care.svg';
 import Icon3 from '@/assets/fin-tech.svg';
 import Icon4 from '@/assets/protect.svg';
-import Arrow from "@/assets/arrow-right-up.svg";
-import Link from "next/link";
+import {ArrowLink} from "@/components";
 
 const icons = {
   ['Maritime Transportation']: Icon1,
@@ -41,13 +40,7 @@ export const Industries = () => {
                   </div>
                   <h3 className="font-semibold text-base mb-3 lg:mb-2 tracking-wider lg:text-lg xl:text-1xl">{item.title}</h3>
                   <p className="font-medium text-sm leading-loose mb-8 xl:text-base xl:mb-11">{item.description}</p>
-                  <Link
-                    href={item.link}
-                    className="group flex items-center gap-2 font-medium text-base underline underline-offset-4 hover:text-red"
-                  >
-                    Learn More
-                    <Arrow className="group-hover:stroke-red" />
-                  </Link>
+                  <ArrowLink to={item.link} />
                 </li>
               )
             })

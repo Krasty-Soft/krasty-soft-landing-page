@@ -1,12 +1,11 @@
 'use client'
 
 import { useState } from "react";
-import Link from "next/link";
 import { ServiceType } from "@/types";
 
 import Plus from '@/assets/close-plus.svg';
 import Minus from '@/assets/open-minus.svg';
-import Arrow from '@/assets/arrow-right-up.svg';
+import { ArrowLink } from "@/components";
 
 export const Accordion = ({ data, index, initState = false} : { data: ServiceType, index: number, initState?: boolean}) => {
   const [isOpen, setIsOpen] = useState(initState);
@@ -52,13 +51,7 @@ export const Accordion = ({ data, index, initState = false} : { data: ServiceTyp
               >
                 {data.description}
               </p>
-              <Link
-                href={data.link}
-                className="group flex items-center gap-2 text-base underline underline-offset-4 hover:text-red"
-              >
-                Learn More
-                <Arrow className="group-hover:stroke-red" />
-              </Link>
+              <ArrowLink to={data.link} />
             </div>
           </div>
         )

@@ -35,7 +35,7 @@ export const Technologies = () => {
               return (
                 <li
                   key={index}
-                  className="py-3 text-center border border-white rounded-[20px] lg:py-4 xl:py-8"
+                  className="py-3 text-center border border-white rounded-20 lg:py-4 xl:py-8"
                 >
                   <div className="center mb-2 lg:mb-4 lg:h-8 xl:h-10">
                     <Icon className="lg:scale-120 xl:scale-200" />

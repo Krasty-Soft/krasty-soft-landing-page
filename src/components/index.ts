@@ -7,5 +7,8 @@ export * from './footer';
 export * from './header';
 export * from './industries';
 export * from './input';
+export * from './link';
+export * from './pill';
 export * from './services';
+export * from './slider';
 export * from './technologies';
