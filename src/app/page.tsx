@@ -1,4 +1,4 @@
-import { Banner, Cases, Difference, Industries, Services, Technologies } from "@/components";
+import { Banner, Blog, Cases, Difference, Industries, Services, Technologies, Opportunities } from "@/components/blocks";
 
 export default function Home() {
   return (
@@ -9,6 +9,8 @@ export default function Home() {
       <Industries />
       <Technologies />
       <Cases />
+      <Blog />
+      <Opportunities />
     </>
   );
 }

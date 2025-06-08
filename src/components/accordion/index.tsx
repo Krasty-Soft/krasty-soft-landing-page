@@ -5,9 +5,9 @@ import { ServiceType } from "@/types";
 
 import Plus from '@/assets/close-plus.svg';
 import Minus from '@/assets/open-minus.svg';
-import { ArrowLink } from "@/components";
+import { ArrowLink } from "@/components/ui";
 
-export const Accordion = ({ data, index, initState = false} : { data: ServiceType, index: number, initState?: boolean}) => {
+export const Accordion = ({ data, index, initState = false } : { data: ServiceType, index: number, initState?: boolean}) => {
   const [isOpen, setIsOpen] = useState(initState);
 
   return (

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ttRuns } from '@/lib/fonts'
 import "./globals.css";
-import { Footer, Header } from "@/components";
+import { Footer, Header } from "@/components/blocks";
 
 export const metadata: Metadata = {
   title: "Krasty Soft",

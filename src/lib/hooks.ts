@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, useEffect } from 'react'
 
 export const useBreakpoint = (breakpoint: number): boolean | undefined => {

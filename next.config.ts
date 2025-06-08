@@ -2,6 +2,15 @@ import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ['local-origin.dev', '*.local-origin.dev'],
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+        pathname: '/**',
+      },
+    ],
+  },
   webpack(config) {
     // eslint-disable-next-line
     const fileLoaderRule = config.module.rules.find((rule: any) =>
