@@ -1,7 +1,7 @@
 'use client'
 
 import { Breadcrumbs, CaseCard, Filters } from "@/components";
-import {ContactForm, Technologies, Awards, Faq, Placeholder} from "@/components/blocks";
+import { ContactForm, Technologies, Awards, Faq, Placeholder } from "@/components/blocks";
 import React, { useState } from "react";
 import { Case, cases } from "@/lib/cases";
 import { generateTagFilters } from "@/lib/util";

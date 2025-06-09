@@ -7,31 +7,31 @@ const mock: ServiceType[] = [
   {
     title: 'Retool Development',
     description: 'Optimize your business processes with powerful, no-code Retool solutions tailored to your needs.',
-    link: '',
+    link: '/retool-development',
     content: ['Custom Retool Apps', 'Retool Dashboard Development', 'Database & API Integrations', 'Retool UI/UX Customization']
   },
   {
     title: 'Retool Consultancy',
     description: 'Get expert guidance to develop a Retool strategy that aligns with your business goals.',
-    link: '',
+    link: '/retool-development',
     content: ['Retool Strategy Planning', 'App Architecture Review', 'Retool Best Practices Training', 'Migration to Retool'],
   },
   {
     title: 'Custom Software Development',
     description: 'Design, develop, and deploy custom software solutions tailored to your specific business needs.',
-    link: '',
+    link: '/custom-software-development',
     content: ['End-to-End Software Solutions', 'MVP Development', 'Legacy System Modernization', 'Software Maintenance & Support'],
   },
   {
     title: 'Backend Development',
     description: 'Build robust and scalable APIs to power your applications and streamline data exchange.',
-    link: '',
+    link: '/backend-development',
     content: ['API Development', 'Database Architecture Design', 'Serverless Backend Solutions', 'Authentication & Security'],
   },
   {
     title: 'Frontend Development',
     description: 'Create responsive, high-performance web applications with seamless user experiences.',
-    link: '',
+    link: '/case-studies',
     content: ['Custom Web Application Development', 'UI/UX Design Implementation', 'Performance Optimization', 'Cross-Platform Development'],
   },
 ];
