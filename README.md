@@ -20,12 +20,31 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Contentful setup
+
+Create `.env.local` with:
+
+```
+CONTENTFUL_SPACE_ID=xxxxxxxxxxxxxxxx
+CONTENTFUL_DELIVERY_TOKEN=xxxxxxxxxxxxxxxx
+# Optional, for preview:
+# CONTENTFUL_HOST=preview.contentful.com
+# CONTENTFUL_POST_TYPE_ID=post
+# CONTENTFUL_JOB_TYPE_ID=job
+```
+
+Notes:
+
+-   If preview is desired, set `CONTENTFUL_HOST=preview.contentful.com` and use a Preview API token.
+-   Content types expected: `post` with fields `slug (Symbol)`, `title (Text)`, `tags (Array)`, `content (Rich Text/Text)`, `preview (Asset)`; `job` with fields `slug`, `title`, `description`, `tags`, `link`.
+-   Local fallback data remains in `src/lib/posts.ts` and `src/lib/jobs.ts` if env vars are missing.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+-   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
