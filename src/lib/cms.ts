@@ -35,7 +35,7 @@ export async function safeGetEntries<T extends EntrySkeletonType>(
     const client = getContentfulClient()
     if (!client) return null
     try {
-        const res = await client.getEntries<T>(query)
+        const res = await (client as any).getEntries(query)
         return res
     } catch {
         return null

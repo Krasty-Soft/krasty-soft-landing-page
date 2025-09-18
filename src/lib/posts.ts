@@ -105,9 +105,9 @@ export async function getAllSlugs() {
     })
     if (res) {
         return res.items
-            .map((i) => i.fields.slug)
+            .map((i: any) => i.fields.slug)
             .filter(Boolean)
-            .map((slug) => ({ slug }))
+            .map((slug: string) => ({ slug }))
     }
     return posts.map((post) => ({ slug: post.slug }))
 }

@@ -12,9 +12,10 @@ export async function generateStaticParams() {
 export default async function VacancyPage({
     params,
 }: {
-    params: { slug: string }
+    params: Promise<{ slug: string }>
 }) {
-    const job = await getJobBySlug(params.slug)
+    const { slug } = await params
+    const job = await getJobBySlug(slug)
 
     if (!job) return notFound()
 

@@ -16,9 +16,10 @@ export async function generateStaticParams() {
 export default async function CasePage({
     params,
 }: {
-    params: { slug: string }
+    params: Promise<{ slug: string }>
 }) {
-    const post = await getCaseBySlug(params.slug)
+    const { slug } = await params
+    const post = await getCaseBySlug(slug)
 
     if (!post) return notFound()
     return (
