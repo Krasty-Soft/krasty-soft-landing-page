@@ -10,7 +10,7 @@ export const Header = () => {
             <div
                 className={`container flex items-center justify-between h-full ${paddings}`}
             >
-                <Link href={'/'}>
+                <Link href={'/'} className="cursor-pointer">
                     <Logo />
                 </Link>
                 <Menu />
