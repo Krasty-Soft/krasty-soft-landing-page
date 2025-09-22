@@ -41,8 +41,15 @@ export const Menu = () => {
     }
 
     const goToContact = () => {
+        const container = document.getElementById('app-scroll')
         const section = document.getElementById('contacts')
-        section?.scrollIntoView()
+        if (container && section) {
+            const containerRect = container.getBoundingClientRect()
+            const sectionRect = section.getBoundingClientRect()
+            const offsetTop =
+                sectionRect.top - containerRect.top + container.scrollTop
+            container.scrollTo({ top: offsetTop, behavior: 'smooth' })
+        }
         setIsOpen(false)
     }
 
