@@ -12,6 +12,7 @@ export const Filters = ({ filters, onSelect, selected = 'all' } : {filters: any[
                 title={filter.label}
                 variant={filter.value === selected ? 'active' : 'filled'}
                 onSelect={() => onSelect(filter.value)}
+                hoverable
               />
               <span className="text-dark-grey text-xs">{filter.count}</span>
             </div>

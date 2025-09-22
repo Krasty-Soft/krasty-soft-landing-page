@@ -4,6 +4,8 @@ const nextConfig: NextConfig = {
     output: 'export',
     allowedDevOrigins: ['local-origin.dev', '*.local-origin.dev'],
     images: {
+        // for contentful images
+        unoptimized: true,
         remotePatterns: [
             {
                 protocol: 'https',

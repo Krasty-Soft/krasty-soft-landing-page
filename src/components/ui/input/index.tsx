@@ -10,7 +10,7 @@ export const Input = ({ placeholder, error, className, ...props } : InputProps) 
   return (
     <div className="relative w-full">
       <input
-        className={`px-5 py-4 w-full bg-dark-green text-white placeholder-dark-grey rounded-2xl outline-0 border ${error ? 'border-red' : 'border-dark-green'} ${className ? className : ''}`}
+        className={`px-5 py-4 w-full bg-dark-green hover:bg-dark-green/60 focus:bg-dark-green/60 text-white placeholder-dark-grey rounded-2xl outline-0 border ${error ? 'border-red' : 'border-dark-green'} ${className ? className : ''}`}
         placeholder={placeholder}
         {...props}
       />

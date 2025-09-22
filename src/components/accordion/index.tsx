@@ -21,7 +21,7 @@ export const Accordion = ({ data, index, initState = false } : { data: ServiceTy
             className="text-lg tracking-wider font-semibold xl:text-3xl-plus"
           >{data.title}</div>
           <button
-            className="h-8 w-8 center bg-white rounded-sm"
+            className="h-8 w-8 center bg-white rounded-sm hover:bg-light-grey cursor-pointer"
             onClick={() => setIsOpen(!isOpen)}
           >
             {isOpen ? <Minus /> : <Plus />}
