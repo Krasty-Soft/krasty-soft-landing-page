@@ -2,7 +2,7 @@
 
 import Star from '@/assets/Star.svg'
 import { Button } from '@/components/ui'
-import Script from 'next/script'
+import { Widget } from '@/components'
 
 const goToContact = () => {
     const container = document.getElementById('app-scroll')
@@ -35,35 +35,22 @@ export const Banner = () => {
                 onClick={goToContact}
                 classes="px-8 py-3 text-sm mt-8 mb-8 md:mt-6 md:mb-10 max-md:w-full lg:mt-11 lg:mb-12 xl:mt-9 xl:mb-15"
             />
-            <div>
-                <Script
-                    src="https://widget.clutch.co/static/js/widget.js"
-                    strategy="afterInteractive"
+            <div className="flex gap-4">
+
+                <iframe
+                    width="100"
+                    height="100"
+                    src="https://clutch.co/share/badges/2343082/81323?utm_source=clutch_top_company_badge&utm_medium=image_embed"
+                    title="Top Clutch Api Development Company Ukraine 2025"
                 />
-                <div
-                    className="clutch-widget flex gap-4"
-                    data-url="https://widget.clutch.co"
-                    data-widget-type="2"
-                    data-height="45"
-                    data-nofollow="false"
-                    data-expandifr="true"
-                    data-scale="100"
-                    data-clutchcompany-id="2343082"
-                >
-                    <iframe
-                        width="100"
-                        height="100"
-                        src="https://clutch.co/share/badges/2343082/81323?utm_source=clutch_top_company_badge&utm_medium=image_embed"
-                        title="Top Clutch Api Development Company Ukraine 2025"
-                    ></iframe>
-                    <iframe
-                        width="100"
-                        height="100"
-                        src="https://clutch.co/share/badges/2343082/77869?utm_source=clutch_top_company_badge&utm_medium=image_embed"
-                        title="Top Clutch Rest Api Company Ukraine 2025"
-                    ></iframe>
-                </div>
+                <iframe
+                    width="100"
+                    height="100"
+                    src="https://clutch.co/share/badges/2343082/77869?utm_source=clutch_top_company_badge&utm_medium=image_embed"
+                    title="Top Clutch Rest Api Company Ukraine 2025"
+                />
             </div>
+            <Widget />
         </section>
     )
 }
