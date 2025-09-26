@@ -1,7 +1,7 @@
 import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
-    output: 'export',
+    //output: 'export',
     allowedDevOrigins: ['local-origin.dev', '*.local-origin.dev'],
     images: {
         // for contentful images
