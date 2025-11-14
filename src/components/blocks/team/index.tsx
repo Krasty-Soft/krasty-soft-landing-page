@@ -1,8 +1,8 @@
 import { TEAM_MEMBERS } from "@/lib/team";
 import Image from "next/image";
 import Link from "next/link";
-import LinkedInIcon from "@/assets/footer-linkedin.svg";
-import EmailIcon from "@/assets/footer-mail.svg";
+import LinkedInIcon from "@/assets/team-linkedin.svg";
+import EmailIcon from "@/assets/team-mail.svg";
 
 const Team = () => {
   return (
@@ -36,10 +36,10 @@ const Team = () => {
                 {member.email && (
                   <Link
                     href={`mailto:${member.email}`}
-                    className="flex items-center justify-center w-10 h-10 rounded-full bg-light-grey hover:bg-gray-300 transition-colors"
+                    className="flex items-center justify-center w-10 h-10 rounded-full bg-red transition-colors"
                     aria-label={`Email ${member.name}`}
                   >
-                    <EmailIcon className="w-5 h-5" />
+                    <EmailIcon className="w-5 h-5 color-black" />
                   </Link>
                 )}
                 {member.linkedin && (
@@ -47,10 +47,10 @@ const Team = () => {
                     href={member.linkedin}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center w-10 h-10 rounded-full bg-light-grey hover:bg-gray-300 transition-colors"
+                    className="flex items-center justify-center w-10 h-10 rounded-full bg-black transition-colors"
                     aria-label={`LinkedIn profile of ${member.name}`}
                   >
-                    <LinkedInIcon className="w-5 h-5" />
+                    <LinkedInIcon className="w-5 h-5 color-black" />
                   </Link>
                 )}
               </div>

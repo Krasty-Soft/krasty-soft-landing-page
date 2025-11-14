@@ -1,7 +1,7 @@
 import RetoolIcon from "@/assets/retool.svg";
 import ReactIcon from "@/assets/react.svg";
 import PythonIcon from "@/assets/python.svg";
-import CooperationIcon from "@/assets/cooperation.svg";
+import MySpaceIcon from "@/assets/myspace.svg";
 
 export type ExpertiseItem = {
   title: string;
@@ -32,6 +32,6 @@ export const EXPERTISE_ITEMS: ExpertiseItem[] = [
     title: "Consultancy",
     description:
       "We provide expert Technical Consultation and architecture strategy, ensuring your project is built on solid, future-proof decisions that align directly with your business goals.",
-    icon: CooperationIcon,
+    icon: MySpaceIcon,
   },
 ] as const;
