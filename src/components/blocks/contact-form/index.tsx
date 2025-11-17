@@ -46,8 +46,8 @@ export const ContactForm = ({ isDark = false }: { isDark?: boolean }) => {
                             href={'/case-studies'}
                             className={`py-3 border border-light-grey rounded-[40px] cursor-pointer center ${
                                 isDark
-                                    ? 'bg-black text-white'
-                                    : 'bg-white text-black'
+                                    ? 'bg-black text-white hover:text-red hover:border-red'
+                                    : 'bg-white text-black hover:text-red hover:border-red'
                             }`}
                         >
                             See our projects
