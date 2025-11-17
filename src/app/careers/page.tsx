@@ -14,6 +14,7 @@ export default function Page() {
           You’re free: Freedom of time, location, and to balance work and life.
         </h1>
       </div>
+      {/* set isEmpty={false} to show the jobs */}
       <Opportunities isEmpty={true} />
       <Values isDark={false} />
     </div>
