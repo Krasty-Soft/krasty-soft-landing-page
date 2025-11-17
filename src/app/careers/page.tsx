@@ -1,4 +1,4 @@
-import { Opportunities, Placeholder, Values } from "@/components/blocks";
+import { Opportunities, Values } from "@/components/blocks";
 import { Breadcrumbs } from "@/components";
 import React from "react";
 
@@ -14,8 +14,6 @@ export default function Page() {
           You’re free: Freedom of time, location, and to balance work and life.
         </h1>
       </div>
-      <Placeholder size={"tall"}>Gallery</Placeholder>
-      {/* set isEmpty={false} to show the jobs */}
       <Opportunities isEmpty={true} />
       <Values isDark={false} />
     </div>
