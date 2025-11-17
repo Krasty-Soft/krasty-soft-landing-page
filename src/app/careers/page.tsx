@@ -15,6 +15,7 @@ export default function Page() {
         </h1>
       </div>
       <Placeholder size={"tall"}>Gallery</Placeholder>
+      {/* set isEmpty={false} to show the jobs */}
       <Opportunities isEmpty={true} />
       <Values isDark={false} />
     </div>
