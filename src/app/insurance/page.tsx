@@ -1,13 +1,16 @@
-import { Cases, ContactForm, Placeholder } from "@/components/blocks";
+import { Cases, ContactForm, Placeholder } from '@/components/blocks'
+import { getAllCases } from '@/lib/cases'
 
-export default function InsurancePage() {
+export default async function InsurancePage() {
+  const cases = await getAllCases()
+
   return (
     <div>
       <Placeholder variant={'paper'} size={'medium'}>
-        Insurance banner
+          Insurance banner
       </Placeholder>
       <ContactForm isDark />
-      <Cases />
+      <Cases cases={cases} />
     </div>
-  );
+  )
 }

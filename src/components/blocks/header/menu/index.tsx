@@ -170,7 +170,7 @@ export const Menu = () => {
                 onClick={() => handleDesktopMenu(item.key)}
               >
                 <div className="font-medium opacity-0">{item.label}</div>
-                <div className="absolute top-0 left-0">{item.label}</div>
+                <div className="absolute top-[50%] -translate-y-1/2 left-0">{item.label}</div>
                 {isActive ? (
                   <ArrowTop stroke={isActive ? "#E50606" : "#121514"} />
                 ) : (
@@ -187,7 +187,7 @@ export const Menu = () => {
                 onClick={() => setIsOpen(false)}
               >
                 <div className="font-medium opacity-0">{item.label}</div>
-                <div className="absolute top-0 left-0">{item.label}</div>
+                <div className="absolute top-[50%] -translate-y-1/2 left-0">{item.label}</div>
               </Link>
             </li>
           ))}
