@@ -1,16 +1,28 @@
-import { Banner, Blog, Cases, Difference, Industries, Services, Technologies, Opportunities } from "@/components/blocks";
+import {
+    Banner,
+    Blog,
+    Cases,
+    Difference,
+    Industries,
+    Opportunities,
+    Services,
+    Technologies,
+} from '@/components/blocks'
+import { getAllCases } from '@/lib/cases'
 
-export default function Home() {
-  return (
-    <>
-      <Banner />
-      <Services />
-      <Difference />
-      <Industries />
-      <Technologies />
-      <Cases />
-      <Blog />
-      <Opportunities />
-    </>
-  );
+export default async function Home() {
+    const cases = await getAllCases()
+
+    return (
+      <>
+        <Banner />
+        <Services />
+        <Difference />
+        <Industries />
+        <Technologies />
+        <Cases cases={cases} />
+        <Blog />
+        <Opportunities />
+      </>
+    )
 }

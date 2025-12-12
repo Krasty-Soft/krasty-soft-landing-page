@@ -1,16 +1,23 @@
-import React from "react";
-import { Slide } from "./slide";
-import { Section, Slider } from "@/components/ui";
-import { cases } from "@/lib/cases";
+import { Section, Slider } from '@/components/ui'
+import { Case } from '@/lib/cases'
+import { Slide } from './slide'
 
-export const Cases = () => {
-  return (
-    <Section variant={'paper'} title={'Real-world insights and success stories.'} subtitle={'CASE STUDIES'}>
-      <Slider>
-        {cases.map((item, i) => (
-          <Slide slide={item} key={i} />
-        ))}
-      </Slider>
-    </Section>
-  )
+interface CasesProps {
+    cases: Case[]
+}
+
+export const Cases = ({ cases }: CasesProps) => {
+    return (
+        <Section
+            variant={'paper'}
+            title={'Real-world insights and success stories.'}
+            subtitle={'CASE STUDIES'}
+        >
+            <Slider>
+                {cases?.map((item, i) => (
+                    <Slide slide={item} key={i} />
+                ))}
+            </Slider>
+        </Section>
+    )
 }
