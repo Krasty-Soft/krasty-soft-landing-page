@@ -32,6 +32,7 @@ export interface ContentfulCaseFields {
     template?: string
     seoTitle?: string
     seoDescription?: string
+    team?: string
 }
 
 interface CaseSkeleton extends EntrySkeletonType {
@@ -113,6 +114,7 @@ return res.items.map((item: CaseSkeleton) => {
                 template: fields.template || 'default',
                 seoTitle: fields.seoTitle || '',
                 seoDescription: fields.seoDescription || '',
+                team: fields.team,
             } as Case
         })
     }
@@ -174,6 +176,7 @@ export async function getCaseBySlug(slug: string) {
             template: fields.template || 'default',
             seoTitle: fields.seoTitle || '',
             seoDescription: fields.seoDescription || '',
+            team: fields.team,
         } as Case
     }
 
