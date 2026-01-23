@@ -1,17 +1,16 @@
 import { Breadcrumbs } from '@/components'
-import { ContactForm, Industries, Placeholder } from '@/components/blocks'
+import {
+    ContactForm,
+    Industries,
+    Placeholder,
+    TableOfContents,
+} from '@/components/blocks'
 import { Image } from '@/components/ui'
 import { Case } from '@/lib/cases'
+import { createSlug } from '@/lib/util'
 
 interface TemplateSrmProps {
     caseData: Case
-}
-
-function createSlug(text: string): string {
-    return text
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/^-+|-+$/g, '')
 }
 
 const tableOfContents = [
@@ -25,63 +24,45 @@ const tableOfContents = [
 export function TemplateSrm({ caseData }: TemplateSrmProps) {
     return (
         <div>
-            <div className="container bg-background px-4 md:px-8 pb-c-50 md:pb-c-60 lg:px-c-50 lg:pb-20 xl:px-c-200 xl:pb-c-100">
-                <div className="pt-6 pb-8">
-                    <Breadcrumbs />
-                </div>
-                <h1 className="text-1xl mb-8">
-                    Case Study: CRM System Development for US Flooring Retailer
-                    Project Brief
-                </h1>
-
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-                    <div className="col-span-4 text-sm">
-                        {/* Table of Contents */}
-                        <strong className="text-xl mb-3 font-medium block">
-                            Content
-                        </strong>
-                        <nav className="mb-c-50">
-                            <ul className="space-y-2">
-                                {tableOfContents.map((title) => {
-                                    const slug = createSlug(title)
-                                    return (
-                                        <li key={slug}>
-                                            <a
-                                                href={`#${slug}`}
-                                                className="text-dark-grey hover:text-black transition-colors underline"
-                                            >
-                                                {title}
-                                            </a>
-                                        </li>
-                                    )
-                                })}
-                            </ul>
-                        </nav>
-                        <div className="mb-6">
-                            <strong className="text-xl mb-3 font-medium block">
-                                Niche
-                            </strong>
-                            <p className="text-dark-grey">
-                                Home improvement retail — flooring
-                            </p>
-                        </div>
+            <div className="container bg-background pb-c-50 md:pb-c-60 lg:pb-20  xl:pb-c-100">
+                <div className="px-4 md:px-8 lg:px-c-50 xl:px-c-200 bg-[#CAC0C0] pb-c-50 md:pb-c-60 lg:pb-20  xl:pb-c-100">
+                    <div className="pt-6 pb-8">
+                        <Breadcrumbs />
                     </div>
-                    <div className="col-span-8">
+                    <div className="grid md:grid-cols-12 ">
+                        <h1 className="text-1xl mb-8 md:col-span-4 md:self-center">
+                            Case Study: CRM System Development for US Flooring
+                            Retailer Project Brief
+                        </h1>
                         <Image
+                            wrapperClasses="md:col-span-7 md:col-start-6 aspect-video overflow-hidden"
                             src={
                                 caseData.media.find((media) =>
-                                    media.title?.includes('img1')
+                                    media.title?.includes('banner'),
                                 )?.url || ''
                             }
-                            alt={
-                                caseData.media.find((media) =>
-                                    media.title?.includes('img1')
-                                )?.description || ''
-                            }
-                            wrapperClasses="bg-light-grey rounded-20 aspect-video overflow-hidden mb-6"
+                            alt={'text'}
                             fillMode="object-fill"
                         />
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 px-4 md:px-8 lg:px-c-50 xl:px-c-200 pt-c-50 md:pt-c-60 lg:pt-20  xl:pt-c-100">
+                    <div className="col-span-4 text-sm lg:sticky lg:top-8 lg:self-start">
+                        {/* Table of Contents */}
+                        <TableOfContents tableOfContents={tableOfContents} />
+                    </div>
+                    <div className="col-span-8">
                         <section className="mb-c-50">
+                            <div className="mb-6">
+                                <strong className="text-xl mb-3 font-medium block">
+                                    Niche
+                                </strong>
+                                <p className="text-dark-grey">
+                                    Home improvement retail — flooring
+                                </p>
+                            </div>
+
                             <div className="mb-6">
                                 <strong className="text-xl mb-3 font-medium block">
                                     Problematic
@@ -141,11 +122,38 @@ export function TemplateSrm({ caseData }: TemplateSrmProps) {
                                     Retool
                                 </p>
                             </div>
+
+                            {caseData.team && (
+                                <div className="mb-6">
+                                    <strong className="text-xl mb-3 font-medium block">
+                                        Team & Timeline
+                                    </strong>
+                                    <p className="text-dark-grey"></p>
+                                </div>
+                            )}
                         </section>
+
+                        <section className="mb-c-50">
+                            <Image
+                                src={
+                                    caseData.media.find((media) =>
+                                        media.title?.includes('img1'),
+                                    )?.url || ''
+                                }
+                                alt={
+                                    caseData.media.find((media) =>
+                                        media.title?.includes('img1'),
+                                    )?.description || ''
+                                }
+                                wrapperClasses="bg-light-grey rounded-20 aspect-video overflow-hidden mb-6"
+                                fillMode="object-fill"
+                            />
+                        </section>
+
                         <section className="mb-c-50">
                             <h2
                                 id={createSlug(
-                                    'Overview of the Project and CRM System Development'
+                                    'Overview of the Project and CRM System Development',
                                 )}
                                 className="text-2xl mb-4"
                             >
@@ -175,12 +183,12 @@ export function TemplateSrm({ caseData }: TemplateSrmProps) {
                         <section className="mb-c-50">
                             <h2
                                 id={createSlug(
-                                    'Business Context and the Development of CRM System'
+                                    'Business Context and the Development of CRM System',
                                 )}
                                 className="text-2xl mb-4"
                             >
-                                Business Context and the Development of CRM
-                                System
+                                Overview of the Project and CRM System
+                                Development
                             </h2>
                             <p className="text-dark-grey mb-4">
                                 Before the project began, the company relied on
@@ -219,9 +227,26 @@ export function TemplateSrm({ caseData }: TemplateSrmProps) {
                         </section>
 
                         <section className="mb-c-50">
+                            <Image
+                                src={
+                                    caseData.media.find((media) =>
+                                        media.title?.includes('img2'),
+                                    )?.url || ''
+                                }
+                                alt={
+                                    caseData.media.find((media) =>
+                                        media.title?.includes('img2'),
+                                    )?.description || ''
+                                }
+                                wrapperClasses="bg-light-grey rounded-20 aspect-video overflow-hidden mb-6"
+                                fillMode="object-fill"
+                            />
+                        </section>
+
+                        <section className="mb-c-50">
                             <h2
                                 id={createSlug(
-                                    'Approach to Bespoke CRM Development'
+                                    'Approach to Bespoke CRM Development',
                                 )}
                                 className="text-2xl mb-4"
                             >
@@ -255,7 +280,7 @@ export function TemplateSrm({ caseData }: TemplateSrmProps) {
                         <section className="mb-c-50">
                             <h2
                                 id={createSlug(
-                                    'Turnkey CRM System Development and Core Features'
+                                    'Turnkey CRM System Development and Core Features',
                                 )}
                                 className="text-2xl mb-4"
                             >
@@ -326,7 +351,7 @@ export function TemplateSrm({ caseData }: TemplateSrmProps) {
                         <section className="mb-c-50">
                             <h2
                                 id={createSlug(
-                                    'Outcomes and Operational Impact of CRM System Development'
+                                    'Outcomes and Operational Impact of CRM System Development',
                                 )}
                                 className="text-2xl mb-4"
                             >

@@ -19,6 +19,7 @@ export interface Case {
     template?: CaseTemplate
     seoTitle?: string
     seoDescription?: string
+    team?: string
 }
 
 export interface ContentfulCaseFields {
