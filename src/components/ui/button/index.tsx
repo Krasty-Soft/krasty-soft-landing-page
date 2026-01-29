@@ -35,8 +35,8 @@ export const Button = ({
 }: BtnProps) => {
     return (
         <button
-            className={`rounded-[40px] border-1 border-transparent cursor-pointer ${getVariant(
-                variant
+            className={`rounded-[40px] border-1 border-transparent cursor-pointer whitespace-nowrap ${getVariant(
+                variant,
             )} ${fullSize ? 'w-full' : ''} ${classes}`}
             onClick={onClick}
             disabled={disabled}

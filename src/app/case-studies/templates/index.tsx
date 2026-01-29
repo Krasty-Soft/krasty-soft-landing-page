@@ -1,6 +1,5 @@
 import { Case, CaseTemplate } from '@/lib/cases'
 import { TemplateDefault } from './default'
-import { TemplateSrm } from './srm'
 
 interface CaseTemplateRendererProps {
     caseData: Case
@@ -9,13 +8,7 @@ interface CaseTemplateRendererProps {
 
 export function CaseTemplateRenderer({
     caseData,
-    template = 'default',
+    //template = 'default',
 }: CaseTemplateRendererProps) {
-    switch (template) {
-        case 'srm':
-            return <TemplateSrm caseData={caseData} />
-        case 'default':
-        default:
-            return <TemplateDefault caseData={caseData} />
-    }
+    return <TemplateDefault caseData={caseData} />
 }
