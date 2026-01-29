@@ -7,7 +7,7 @@ type ContentfulClientOptions = {
 }
 
 export function getContentfulClient(
-    options?: Partial<ContentfulClientOptions>
+    options?: Partial<ContentfulClientOptions>,
 ) {
     const space = process.env.CONTENTFUL_SPACE_ID
     const accessToken = process.env.CONTENTFUL_DELIVERY_API_TOKEN
@@ -22,7 +22,7 @@ export function getContentfulClient(
 }
 
 export async function safeGetEntries<T extends EntrySkeletonType>(
-    query: Parameters<ReturnType<typeof getContentfulClient>['getEntries']>[0]
+    query: Parameters<ReturnType<typeof getContentfulClient>['getEntries']>[0],
 ) {
     const client = getContentfulClient()
     if (!client) {
@@ -34,7 +34,7 @@ export async function safeGetEntries<T extends EntrySkeletonType>(
         console.log(
             `Contentful query for ${(query as any).content_type} returned ${
                 res?.items?.length || 0
-            } items`
+            } items`,
         )
         return res
     } catch (error) {

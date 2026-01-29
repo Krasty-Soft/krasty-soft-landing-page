@@ -17,7 +17,7 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body
-                className={`font-sans antialiased xs:text-sm md:text-lg flex flex-col ${ttRuns.variable}`}
+                className={`font-sans antialiased text-black xs:text-sm md:text-lg flex flex-col ${ttRuns.variable}`}
             >
                 <Header />
                 <div id="app-scroll" className="overflow-y-auto flex-auto">

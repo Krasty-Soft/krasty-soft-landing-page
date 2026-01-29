@@ -1,129 +1,78 @@
 import { Breadcrumbs } from '@/components'
-import { ContactForm, Industries, Placeholder } from '@/components/blocks'
+import {
+    ContactForm,
+    Industries,
+    Placeholder,
+    TableOfContents,
+} from '@/components/blocks'
+import { Image } from '@/components/ui'
 import { Case } from '@/lib/cases'
+import { extractHeadingsForTOC, renderRichTextAsHtml } from '@/lib/render'
 
-interface TemplateDefaultProps {
+interface TemplateProps {
     caseData: Case
 }
 
-export function TemplateDefault({ caseData }: TemplateDefaultProps) {
+export function TemplateDefault({ caseData }: TemplateProps) {
+    // Extract heading-2 values from caseData.content
+    const tableOfContents = extractHeadingsForTOC(
+        caseData.content?.content || [],
+    )
     return (
         <div>
-            <div className="container bg-background px-4 md:px-8 pb-c-50 md:pb-c-60 lg:px-c-50 lg:pb-20 xl:px-c-200 xl:pb-c-100">
-                <div className="pt-6 pb-8">
-                    <Breadcrumbs />
-                </div>
-                <h1 className="text-1xl mb-8">
-                    Useful articles on design, analytics, and development.
-                </h1>
-
-                <div className="">
-                    <div className="flex flex-col gap-6 mb-c-50">
-                        <div className="flex flex-col text-sm">
-                            <span className="uppercase text-dark-grey">
-                                brand
-                            </span>
-                            <span className="font-medium">Swyft</span>
-                        </div>
-                        <div className="flex flex-col text-sm">
-                            <span className="uppercase text-dark-grey">
-                                Location
-                            </span>
-                            <span className="font-medium">
-                                California, United States
-                            </span>
-                        </div>
-                        <div className="flex flex-col text-sm">
-                            <span className="uppercase text-dark-grey">
-                                Clutch Review
-                            </span>
-                            <span className="font-medium">5.0</span>
-                        </div>
-                        <div className="flex flex-col text-sm">
-                            <span className="uppercase text-dark-grey">
-                                Client
-                            </span>
-                            <span className="font-medium">Swyft Inc.</span>
-                        </div>
-                        <div className="flex flex-col text-sm">
-                            <span className="uppercase text-dark-grey">
-                                Budget
-                            </span>
-                            <span className="font-medium">
-                                $10,000 to $49,999
-                            </span>
-                        </div>
-                        <div className="flex flex-col text-sm">
-                            <span className="uppercase text-dark-grey">
-                                Industry
-                            </span>
-                            <span className="font-medium">Booking</span>
-                        </div>
-                        <div className="flex flex-col text-sm">
-                            <span className="uppercase text-dark-grey">
-                                Environment
-                            </span>
-                            <span className="font-medium">Retool</span>
-                        </div>
-                        <div className="flex flex-col text-sm">
-                            <span className="uppercase text-dark-grey">
-                                Release
-                            </span>
-                            <span className="font-medium">2022</span>
-                        </div>
-                        <div className="flex flex-col text-sm">
-                            <span className="uppercase text-dark-grey">
-                                Live
-                            </span>
-                            <span className="font-medium">Check live</span>
-                        </div>
+            <div className="container bg-background pb-c-50 md:pb-c-60 lg:pb-20  xl:pb-c-100">
+                <div className="px-4 md:px-8 lg:px-c-50 xl:px-c-200 bg-[#CAC0C0] pb-c-50 md:pb-c-60 lg:pb-20  xl:pb-c-100">
+                    <div className="pt-6 pb-8">
+                        <Breadcrumbs />
                     </div>
-                    <div>
-                        <section>
-                            <h3>story behind</h3>
-                            <p>
-                                Our client, a dynamic travel agency, sought a
-                                solution that transcended conventional flight
-                                booking platforms. They envisioned a software
-                                that not only facilitated ticket purchases but
-                                also provided users with a comprehensive
-                                overview of all possible flight routes between
-                                two destinations.
-                            </p>
+                    <div className="grid md:grid-cols-12 ">
+                        <h1 className="text-1xl mb-8 md:col-span-4 md:self-center">
+                            {caseData.title}
+                        </h1>
+                        <Image
+                            wrapperClasses="md:col-span-7 md:col-start-6 aspect-video overflow-hidden"
+                            src={
+                                caseData.media.find((media) =>
+                                    media.title?.includes('banner'),
+                                )?.url || ''
+                            }
+                            alt={'text'}
+                            fillMode="object-fill"
+                        />
+                    </div>
+                </div>
+
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 px-4 md:px-8 lg:px-c-50 xl:px-c-200 pt-c-50 md:pt-c-60 lg:pt-20  xl:pt-c-100">
+                    <div className="col-span-4 text-sm lg:sticky lg:top-8 lg:self-start">
+                        {/* Table of Contents */}
+                        <TableOfContents tableOfContents={tableOfContents} />
+                    </div>
+                    <div className="col-span-8">
+                        {renderRichTextAsHtml(caseData.overview?.content || [])}
+
+                        <section className="mb-c-50">
+                            <Image
+                                src={
+                                    caseData.media.find((media) =>
+                                        media.title?.includes('img1'),
+                                    )?.url || ''
+                                }
+                                alt={
+                                    caseData.media.find((media) =>
+                                        media.title?.includes('img1'),
+                                    )?.description || ''
+                                }
+                                wrapperClasses="bg-light-grey rounded-20 aspect-video overflow-hidden mb-6"
+                                fillMode="object-fill"
+                            />
                         </section>
-                        <section>
-                            <h3>result</h3>
-                            <p>
-                                Krasty Soft team designed a user-friendly
-                                interface that allowed travelers to input their
-                                desired journey details seamlessly. The software
-                                then presented the calculated routes in an
-                                easy-to-read format, with clear information on
-                                layovers, flight durations, and ticket prices.
-                                Users could effortlessly navigate through
-                                options, making informed decisions tailored to
-                                their preferences.
-                            </p>
-                            <p>
-                                Integration with secure payment gateways ensured
-                                a seamless ticket purchasing process directly
-                                through the website.
-                            </p>
-                            <p>
-                                The Flight Booking Software project exemplifies
-                                our commitment to transforming travel
-                                experiences. By combining cutting-edge
-                                technology with a user-centric design, we have
-                                created a platform that not only facilitates
-                                ticket purchases but elevates the entire
-                                journey.
-                            </p>
-                        </section>
+
+                        {renderRichTextAsHtml(caseData.content?.content || [])}
                     </div>
                 </div>
             </div>
+
             <ContactForm isDark />
-            {/* <Cases cases={[]} /> */}
             <Industries />
             <Placeholder size={'medium'}>Awards</Placeholder>
             {/*<Awards />*/}

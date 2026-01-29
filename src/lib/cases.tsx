@@ -19,7 +19,8 @@ export interface Case {
     template?: CaseTemplate
     seoTitle?: string
     seoDescription?: string
-    team?: string
+    content?: any
+    overview?: any
 }
 
 export interface ContentfulCaseFields {
@@ -32,7 +33,8 @@ export interface ContentfulCaseFields {
     template?: string
     seoTitle?: string
     seoDescription?: string
-    team?: string
+    content: any
+    overview: any
 }
 
 interface CaseSkeleton extends EntrySkeletonType {
@@ -51,6 +53,8 @@ export const cases: Case[] = [
         preview: '',
         media: [],
         template: 'srm',
+        content: '',
+        overview: '',
     },
 ]
 
@@ -61,7 +65,7 @@ export async function getAllCases() {
     })
 
     if (res && res.items.length > 0) {
-return res.items.map((item: CaseSkeleton) => {
+        return res.items.map((item: CaseSkeleton) => {
             const fields = item.fields
             const previewUrl = (fields as any).preview?.fields?.file?.url
 
@@ -114,7 +118,8 @@ return res.items.map((item: CaseSkeleton) => {
                 template: fields.template || 'default',
                 seoTitle: fields.seoTitle || '',
                 seoDescription: fields.seoDescription || '',
-                team: fields.team,
+                content: fields.content,
+                overview: fields.overview,
             } as Case
         })
     }
@@ -176,7 +181,8 @@ export async function getCaseBySlug(slug: string) {
             template: fields.template || 'default',
             seoTitle: fields.seoTitle || '',
             seoDescription: fields.seoDescription || '',
-            team: fields.team,
+            content: fields.content,
+            overview: fields.overview,
         } as Case
     }
 
