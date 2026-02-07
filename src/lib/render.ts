@@ -3,7 +3,7 @@ import { createSlug } from './util'
 
 type RichTextNode = {
     nodeType: string
-    data?: any
+    data?: Record<string, unknown>
     content?: RichTextNode[]
     value?: string
 }

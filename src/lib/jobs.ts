@@ -8,6 +8,10 @@ export const jobs = [
         description: '3-4 years of experience',
         tags: 'Remote, full-time',
         link: '/careers',
+        location: 'Remote',
+        type: 'Full-time',
+        datePosted: '2026-01-01T00:00:00Z',
+        validThrough: undefined,
     },
     {
         slug: 'fullstack-dev-887837762378',
@@ -15,6 +19,10 @@ export const jobs = [
         description: '1-4 years of experience',
         tags: 'Remote, full-time',
         link: '/careers',
+        location: 'Remote',
+        type: 'Full-time',
+        datePosted: '2026-01-01T00:00:00Z',
+        validThrough: undefined,
     },
     {
         slug: 'frontend-dev-689831162555',
@@ -22,6 +30,10 @@ export const jobs = [
         description: '2-4 years of experience',
         tags: 'Remote, full-time',
         link: '/careers',
+        location: 'Remote',
+        type: 'Full-time',
+        datePosted: '2026-01-01T00:00:00Z',
+        validThrough: undefined,
     },
 ]
 
@@ -31,6 +43,10 @@ type JobFields = {
     description?: string
     tags?: string
     link?: string
+    location?: string
+    type?: string
+    datePosted?: string
+    validThrough?: string
 }
 
 interface JobSkeleton extends EntrySkeletonType {
@@ -54,6 +70,10 @@ export async function getJobBySlug(slug: string) {
             description: f.description || '',
             tags: f.tags || '',
             link: f.link || '/careers',
+            location: f.location || 'Remote',
+            type: f.type || 'Full-time',
+            datePosted: f.datePosted || new Date().toISOString(),
+            validThrough: f.validThrough,
         }
     }
     return jobs.find((job) => job.slug === slug) || null
