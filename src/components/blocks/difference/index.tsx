@@ -268,7 +268,7 @@ const DifferenceCard = ({
 export const Difference = ({ isDark = true } : { isDark?: boolean }) => {
   return (
     <Section
-      variant={isDark ? 'black' : 'paper'}
+      variant={isDark ? 'primary' : 'secondary'}
       animate={false}
     >
       {/* Custom Title with Typing Effect */}

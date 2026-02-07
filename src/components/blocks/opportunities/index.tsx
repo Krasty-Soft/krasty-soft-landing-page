@@ -7,7 +7,7 @@ import { jobs } from "@/lib/jobs";
 
 export const Opportunities = ({ isEmpty = false }: { isEmpty?: boolean }) => {
   return (
-    <Section variant={"black"} animate={false}>
+    <Section variant="primary" animate={false}>
       {/* Custom Title with Typing Effect */}
       <div className="mb-12 md:mb-16">
         <h2

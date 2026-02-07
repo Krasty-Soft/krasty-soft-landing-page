@@ -22,7 +22,7 @@ type InputProps = {
     icon?: React.ReactNode
     success?: boolean
     helperText?: string
-} & React.InputHTMLAttributes<HTMLInputElement>
+} & Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'>
 
 const getVariant = (variant: InputVariant, error?: string, success?: boolean) => {
     if (error) {

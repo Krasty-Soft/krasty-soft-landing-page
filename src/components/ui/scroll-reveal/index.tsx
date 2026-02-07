@@ -52,7 +52,7 @@ export const ScrollReveal = ({
     margin = '-100px',
 }: ScrollRevealProps) => {
     const ref = useRef(null)
-    const isInView = useInView(ref, { once, margin })
+    const isInView = useInView(ref, { once, margin: margin as any })
 
     const variants = getVariants(variant)
 

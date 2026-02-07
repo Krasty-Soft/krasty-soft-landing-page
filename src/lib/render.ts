@@ -39,7 +39,7 @@ export function extractHeadingsForTOC(content: RichTextNode[]): string[] {
 
         // Also check embedded entries that might contain heading-2 elements
         if (node.nodeType === 'embedded-entry-block') {
-            const embeddedContent = node.data?.target?.fields?.content?.content
+            const embeddedContent = (node.data as any)?.target?.fields?.content?.content
             if (Array.isArray(embeddedContent)) {
                 headings.push(...extractHeadingsForTOC(embeddedContent))
             }
@@ -133,7 +133,7 @@ function renderRichTextNode(
 
     // Embedded entry block (This is Section content type from Contentful)
     if (nodeType === 'embedded-entry-block') {
-        const target = node.data?.target
+        const target = (node.data as any)?.target
         const fields = target?.fields
         const contentType = target?.sys?.contentType?.sys?.id
 

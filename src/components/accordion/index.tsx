@@ -132,18 +132,7 @@ export const Accordion = ({ data, index, initState = false } : { data: ServiceTy
                   }}
                 >
                   <span
-                    className="relative"
-                    style={{
-                      '::after': {
-                        content: '""',
-                        position: 'absolute',
-                        bottom: '-2px',
-                        left: 0,
-                        width: '100%',
-                        height: '1px',
-                        backgroundColor: 'var(--brand-red)',
-                      },
-                    }}
+                    className="relative after:content-[''] after:absolute after:bottom-[-2px] after:left-0 after:w-full after:h-px after:bg-[var(--brand-red)]"
                   >
                     Learn More
                   </span>

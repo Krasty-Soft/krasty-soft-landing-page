@@ -9,9 +9,9 @@ const mock = [
 export const Values = ({ isDark = true } : { isDark?: boolean }) => {
   return (
     <Section
-      variant={isDark ? 'paper' : 'white'}
-      subtitle={'values'}
-      title={'Our approach is formed by several values, which are simple yet crucial for effective workflow.'}
+      variant={isDark ? 'secondary' : 'transparent'}
+      subtitle="values"
+      title="Our approach is formed by several values, which are simple yet crucial for effective workflow."
     >
       <ul className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5 xl:gap-10">
         {

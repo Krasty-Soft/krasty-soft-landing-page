@@ -10,7 +10,7 @@ interface CasesProps {
 
 export const Cases = ({ cases }: CasesProps) => {
     return (
-        <Section variant={'paper'} animate={false}>
+        <Section variant="secondary" animate={false}>
             {/* Custom Title with Typing Effect */}
             <div className="mb-12 md:mb-16">
                 <h2

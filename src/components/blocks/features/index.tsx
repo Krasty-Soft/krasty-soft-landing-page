@@ -40,7 +40,7 @@ const features = [
 export const Features = () => {
   return (
     <Section
-      variant={'paper'}
+      variant="secondary"
       subtitle={'Why choose us'}
       title={'Why choose Retool over other low-code platforms?'}
     >
