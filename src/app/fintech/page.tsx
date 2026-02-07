@@ -1,12 +1,7 @@
-import {Blog, ContactForm, Placeholder} from "@/components/blocks";
+import { getAllCases } from '@/lib/cases'
+import FintechClient from './client'
 
-export default function FintechPage() {
-  return (
-    <div>
-      <Placeholder variant={'black'} size={'tall'}>
-        Fintech banner
-      </Placeholder>
-      <Blog />
-    </div>
-  );
+export default async function FintechPage() {
+  const cases = await getAllCases()
+  return <FintechClient cases={cases} />
 }

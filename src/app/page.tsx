@@ -1,6 +1,5 @@
 import {
     Banner,
-    Blog,
     Cases,
     Difference,
     Industries,
@@ -21,7 +20,6 @@ export default async function Home() {
         <Industries />
         <Technologies />
         <Cases cases={cases} />
-        <Blog />
         <Opportunities />
       </>
     )

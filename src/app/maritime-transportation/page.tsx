@@ -1,12 +1,7 @@
-import { Industries, Placeholder } from "@/components/blocks";
+import { getAllCases } from '@/lib/cases'
+import MaritimeTransportationClient from './client'
 
-export default function MaritimeTransportationPage() {
-  return (
-    <div>
-      <Placeholder variant={'black'}>
-        Transportation banner
-      </Placeholder>
-      <Industries />
-    </div>
-  );
+export default async function MaritimeTransportationPage() {
+  const cases = await getAllCases()
+  return <MaritimeTransportationClient cases={cases} />
 }

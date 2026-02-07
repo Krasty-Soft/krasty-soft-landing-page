@@ -1,9 +1,8 @@
 'use client'
 
-import CloseGrey from '@/assets/close-grey.svg'
-import Attach from '@/assets/footer-clip.svg'
-import { Button, Input } from '@/components/ui'
 import { useEffect, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
+import { Paperclip, X, Send, Check } from 'lucide-react'
 
 const allowedMimeTypes = new Set([
     'application/pdf',
@@ -171,100 +170,260 @@ export const FooterForm = () => {
     }
 
     return (
-        <form className="flex flex-col gap-8" onSubmit={handleSubmit}>
-            <Input
-                placeholder={'Your name'}
-                name="name"
-                required
-                minLength={2}
-                onChange={() => setNameError(null)}
-            />
-            {nameError && <p className="text-xs text-red">{nameError}</p>}
-            <div className="grid grid-cols-1 gap-8 md:grid-cols-2 xl:gap-9">
-                <Input
-                    placeholder={'Your email'}
-                    name="email"
-                    type="email"
+        <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            {/* Name Input */}
+            <div>
+                <input
+                    type="text"
+                    name="name"
+                    placeholder="Your name"
                     required
-                    onChange={() => setEmailError(null)}
+                    minLength={2}
+                    onChange={() => setNameError(null)}
+                    style={{
+                        width: '100%',
+                        padding: '1rem 1.25rem',
+                        fontSize: '1rem',
+                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        borderRadius: 'var(--radius-md)',
+                        color: 'white',
+                        outline: 'none',
+                        transition: 'all 0.2s',
+                    }}
+                    onFocus={(e) => {
+                        e.target.style.borderColor = 'var(--brand-red)'
+                        e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.08)'
+                    }}
+                    onBlur={(e) => {
+                        e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'
+                        e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.05)'
+                    }}
                 />
-                <Input placeholder={'Your phone'} name="phone" />
+                {nameError && <p style={{ color: 'var(--brand-red)', fontSize: '0.875rem', marginTop: '0.5rem' }}>{nameError}</p>}
             </div>
-            {emailError && <p className="text-xs text-red">{emailError}</p>}
-            <div className="relative">
+
+            {/* Email & Phone Grid */}
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '1.5rem' }} className="md:grid-cols-2">
+                <div>
+                    <input
+                        type="email"
+                        name="email"
+                        placeholder="Your email"
+                        required
+                        onChange={() => setEmailError(null)}
+                        style={{
+                            width: '100%',
+                            padding: '1rem 1.25rem',
+                            fontSize: '1rem',
+                            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                            borderRadius: 'var(--radius-md)',
+                            color: 'white',
+                            outline: 'none',
+                            transition: 'all 0.2s',
+                        }}
+                        onFocus={(e) => {
+                            e.target.style.borderColor = 'var(--brand-red)'
+                            e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.08)'
+                        }}
+                        onBlur={(e) => {
+                            e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'
+                            e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.05)'
+                        }}
+                    />
+                    {emailError && <p style={{ color: 'var(--brand-red)', fontSize: '0.875rem', marginTop: '0.5rem' }}>{emailError}</p>}
+                </div>
+
+                <input
+                    type="tel"
+                    name="phone"
+                    placeholder="Your phone (optional)"
+                    style={{
+                        width: '100%',
+                        padding: '1rem 1.25rem',
+                        fontSize: '1rem',
+                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        borderRadius: 'var(--radius-md)',
+                        color: 'white',
+                        outline: 'none',
+                        transition: 'all 0.2s',
+                    }}
+                    onFocus={(e) => {
+                        e.target.style.borderColor = 'var(--brand-red)'
+                        e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.08)'
+                    }}
+                    onBlur={(e) => {
+                        e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'
+                        e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.05)'
+                    }}
+                />
+            </div>
+
+            {/* Message Textarea */}
+            <div>
                 <textarea
-                    className="px-5 py-4 w-full outline-0 resize-none bg-dark-green hover:bg-dark-green/60 focus:bg-dark-green/60 text-white placeholder-dark-grey rounded-2xl h-48"
                     name="message"
-                    id="message"
                     placeholder="Your message"
                     required
                     minLength={10}
                     onChange={() => setMessageError(null)}
+                    rows={6}
+                    style={{
+                        width: '100%',
+                        padding: '1rem 1.25rem',
+                        fontSize: '1rem',
+                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        borderRadius: 'var(--radius-md)',
+                        color: 'white',
+                        outline: 'none',
+                        resize: 'vertical',
+                        transition: 'all 0.2s',
+                        fontFamily: 'inherit',
+                    }}
+                    onFocus={(e) => {
+                        e.target.style.borderColor = 'var(--brand-red)'
+                        e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.08)'
+                    }}
+                    onBlur={(e) => {
+                        e.target.style.borderColor = 'rgba(255, 255, 255, 0.1)'
+                        e.target.style.backgroundColor = 'rgba(255, 255, 255, 0.05)'
+                    }}
                 />
-                {messageError && (
-                    <p className="absolute top-0 left-0 text-xs text-red">
-                        {messageError}
-                    </p>
-                )}
+                {messageError && <p style={{ color: 'var(--brand-red)', fontSize: '0.875rem', marginTop: '0.5rem' }}>{messageError}</p>}
             </div>
-            <div className="flex items-center gap-4">
+
+            {/* File Attachment */}
+            <div>
                 <label
                     htmlFor="attach"
-                    className="flex items-center gap-4 cursor-pointer text-base xl:text-lg"
+                    style={{
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '0.75rem',
+                        cursor: 'pointer',
+                        padding: '1rem 1.25rem',
+                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        borderRadius: 'var(--radius-md)',
+                        transition: 'all 0.2s',
+                    }}
+                    onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.08)'
+                        e.currentTarget.style.borderColor = 'rgba(220, 38, 38, 0.5)'
+                    }}
+                    onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.05)'
+                        e.currentTarget.style.borderColor = 'rgba(255, 255, 255, 0.1)'
+                    }}
                 >
                     <input
-                        className="hidden"
                         type="file"
                         name="attach"
                         id="attach"
-                        accept=".pdf,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/vnd.ms-excel,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-powerpoint,application/vnd.openxmlformats-officedocument.presentationml.presentation,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
+                        accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
                         onChange={handleFileChange}
                         ref={fileInputRef}
+                        style={{ display: 'none' }}
                     />
-                    <div className="h-8 w-8 bg-background rounded-md center">
-                        <Attach />
-                    </div>
-                    {fileName
-                        ? 'You can attach another file or send'
-                        : 'Attach your file'}
-                </label>
-
-                {fileName && (
-                    <span className="flex items-center gap-2 truncate max-w-[60%] text-sm text-white/80">
-                        <span className="truncate">{fileName}</span>
+                    <Paperclip size={20} color="var(--brand-red)" />
+                    <span style={{ fontSize: '0.9375rem', color: 'rgba(255, 255, 255, 0.8)' }}>
+                        {fileName ? fileName : 'Attach file (PDF, DOC, XLS, PPT)'}
+                    </span>
+                    {fileName && (
                         <button
                             type="button"
                             onClick={handleClearFile}
-                            className="cursor-pointer"
+                            style={{
+                                marginLeft: 'auto',
+                                padding: '0.25rem',
+                                display: 'flex',
+                                alignItems: 'center',
+                                background: 'none',
+                                border: 'none',
+                                cursor: 'pointer',
+                                color: 'rgba(255, 255, 255, 0.6)',
+                            }}
                             aria-label="Remove file"
-                            title="Remove file"
                         >
-                            <CloseGrey className="scale-75" />
+                            <X size={18} />
                         </button>
-                    </span>
-                )}
+                    )}
+                </label>
+                {fileError && <p style={{ color: 'var(--brand-red)', fontSize: '0.875rem', marginTop: '0.5rem' }}>{fileError}</p>}
             </div>
-            {<p className="text-xs text-red">{fileError ? fileError : ''}</p>}
 
-            <Button
-                title={submitting ? 'Sending…' : 'Send'}
-                fullSize
+            {/* Submit Button */}
+            <motion.button
                 type="submit"
-                onClick={() => {}}
                 disabled={submitting}
-                variant="accent"
-                classes="py-3 px-8 md:py-5 md:px-10 text-sm md:text-base xl:text-lg"
-            />
-            <div className="w-full flex justify-center h-3">
-                {error && <p className="text-xs text-red">{error}</p>}
-                {success && (
-                    <p
-                        className={`text-xs text-green-500 transition-opacity duration-300 ${
-                            successVisible ? 'opacity-100' : 'opacity-0'
-                        }`}
+                whileHover={!submitting ? { scale: 1.02 } : {}}
+                whileTap={!submitting ? { scale: 0.98 } : {}}
+                style={{
+                    width: '100%',
+                    padding: '1.125rem 2rem',
+                    fontSize: '1rem',
+                    fontWeight: 600,
+                    backgroundColor: submitting ? 'rgba(220, 38, 38, 0.5)' : 'var(--brand-red)',
+                    color: 'white',
+                    border: 'none',
+                    borderRadius: 'var(--radius-md)',
+                    cursor: submitting ? 'not-allowed' : 'pointer',
+                    transition: 'all 0.2s',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.5rem',
+                }}
+            >
+                {submitting ? (
+                    <>
+                        <motion.div
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                        >
+                            <Send size={18} />
+                        </motion.div>
+                        Sending...
+                    </>
+                ) : (
+                    <>
+                        <Send size={18} />
+                        Send Message
+                    </>
+                )}
+            </motion.button>
+
+            {/* Status Messages */}
+            <div style={{ minHeight: '1.5rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                {error && (
+                    <motion.p
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        style={{ color: 'var(--brand-red)', fontSize: '0.875rem', textAlign: 'center' }}
                     >
+                        {error}
+                    </motion.p>
+                )}
+                {success && (
+                    <motion.p
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: successVisible ? 1 : 0, y: 0 }}
+                        transition={{ duration: 0.3 }}
+                        style={{
+                            color: '#10b981',
+                            fontSize: '0.875rem',
+                            textAlign: 'center',
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: '0.5rem',
+                        }}
+                    >
+                        <Check size={16} />
                         {success}
-                    </p>
+                    </motion.p>
                 )}
             </div>
         </form>

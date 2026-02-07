@@ -32,15 +32,15 @@ export const Slider = ({ children } : {children: ReactNode}) => {
   }, [emblaApi, setScrollSnaps, onSelect]);
   return (
     <div className="relative">
-      <div className="overflow-hidden mb-7" ref={emblaRef}>
+      <div className="overflow-hidden mb-10" ref={emblaRef}>
         <div className="flex">
           {children}
         </div>
       </div>
 
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-6 max-w-md mx-auto">
         <Prev onClick={scrollPrev} enabled={prevBtnEnabled} />
-        <div className="flex-grow flex gap-4">
+        <div className="flex-grow flex gap-3">
           {scrollSnaps.map((_, index) => (
             <Dot
               key={index}
@@ -49,7 +49,6 @@ export const Slider = ({ children } : {children: ReactNode}) => {
             />
           ))}
         </div>
-
         <Next onClick={scrollNext} enabled={nextBtnEnabled} />
       </div>
     </div>

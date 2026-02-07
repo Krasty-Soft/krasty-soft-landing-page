@@ -36,7 +36,7 @@ const useCases = [
 
 export const UseCases = () => {
   return (
-    <Section variant={'white'} subtitle={'Retool No-Code'} title={'What do you need today?'}>
+    <Section variant={'secondary'} subtitle={'Retool No-Code'} title={'What do you need today?'}>
       <ul className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-5 lg:grid-cols-4 xl:gap-10">
         {
           useCases.map((item, i) => {

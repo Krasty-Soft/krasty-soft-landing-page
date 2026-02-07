@@ -14,6 +14,11 @@ const PAGES: NavigationConfig = {
     label: "Case Studies",
     description: "Case Studies",
   },
+  blog: {
+    slug: "blog",
+    label: "Blog",
+    description: "Insights and articles",
+  },
   about: {
     slug: "about",
     label: "About us",

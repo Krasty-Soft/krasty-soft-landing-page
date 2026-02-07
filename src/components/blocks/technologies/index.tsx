@@ -1,10 +1,13 @@
-import React from "react";
+'use client'
+
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import technologies from "@/constants/technologies";
 import Icon1 from "@/assets/retool.svg";
 import Icon2 from "@/assets/react.svg";
 import Icon3 from "@/assets/python.svg";
 import Icon4 from "@/assets/node.svg";
-import { Section } from "@/components/ui";
+import { Section, TypingText } from "@/components/ui";
 
 const icons = {
   Retool: Icon1,
@@ -13,29 +16,164 @@ const icons = {
   Node: Icon4,
 }
 
+const TechCard = ({ 
+  tech, 
+  index 
+}: { 
+  tech: typeof technologies[number], 
+  index: number 
+}) => {
+  const [isHovered, setIsHovered] = useState(false)
+  const Icon = icons[tech.key]
+
+  return (
+    <motion.li
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      style={{ listStyle: 'none' }}
+    >
+      <motion.div
+        animate={{
+          y: isHovered ? -12 : 0,
+        }}
+        transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
+        style={{
+          position: 'relative',
+          padding: '2rem 1.5rem',
+          textAlign: 'center',
+          border: '1px solid var(--border-default)',
+          borderRadius: 'var(--radius-xl)',
+          backgroundColor: 'var(--surface-primary)',
+          cursor: 'pointer',
+          overflow: 'hidden',
+        }}
+      >
+        {/* Background glow that awakens */}
+        <motion.div
+          initial={false}
+          animate={{
+            opacity: isHovered ? 0.15 : 0,
+            scale: isHovered ? 1.5 : 1,
+          }}
+          transition={{ duration: 0.5 }}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: `radial-gradient(circle at center, ${tech.brandColor}, transparent 70%)`,
+            pointerEvents: 'none',
+            zIndex: 0,
+            opacity: 0, // Start invisible
+          }}
+        />
+
+        {/* Icon container - awakens with rotation */}
+        <motion.div
+          initial={false}
+          animate={{
+            scale: isHovered ? 1.15 : 1,
+            rotate: isHovered ? 360 : 0,
+          }}
+          transition={{ 
+            scale: { duration: 0.4, ease: [0.32, 0.72, 0, 1] },
+            rotate: { duration: 0.8, ease: [0.32, 0.72, 0, 1] }
+          }}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: '4rem',
+            marginBottom: '1rem',
+            position: 'relative',
+            zIndex: 1,
+          }}
+        >
+          {/* SVG wrapper with color filter */}
+          <motion.div
+            initial={false}
+            animate={{
+              filter: isHovered 
+                ? 'grayscale(0%) brightness(1.2)' 
+                : 'grayscale(100%) brightness(0.7)',
+            }}
+            transition={{ duration: 0.5 }}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              filter: 'grayscale(100%) brightness(0.7)', // Start in sleeping state
+            }}
+          >
+            <Icon className="scale-150" />
+          </motion.div>
+        </motion.div>
+
+        {/* Tech name - color awakens */}
+        <motion.span
+          initial={false}
+          animate={{
+            color: isHovered ? tech.brandColor : 'var(--text-secondary)',
+          }}
+          transition={{ duration: 0.4 }}
+          className="text-base md:text-lg font-bold block"
+          style={{ color: 'var(--text-secondary)' }} // Start in sleeping state
+        >
+          {tech.title}
+        </motion.span>
+
+        {/* Border glow pulse */}
+        <motion.div
+          animate={{
+            opacity: isHovered ? [0.3, 0.6, 0.3] : 0,
+          }}
+          transition={{ 
+            duration: 2,
+            repeat: isHovered ? Infinity : 0,
+            ease: 'easeInOut'
+          }}
+          style={{
+            position: 'absolute',
+            inset: '-2px',
+            borderRadius: 'var(--radius-xl)',
+            background: `linear-gradient(135deg, ${tech.brandColor}, transparent)`,
+            pointerEvents: 'none',
+            zIndex: -1,
+          }}
+        />
+      </motion.div>
+    </motion.li>
+  )
+}
 
 export const Technologies = () => {
   return (
-    <Section variant={'black'} subtitle={'TECHNOLOGIES'} title={'Innovative technologies and premium solutions.'}>
-      <ul className="grid grid-cols-2 gap-5 md:grid-cols-4 lg:gap-8 xl:gap-5">
-        {
-          technologies.map((tech, index) => {
-            const Icon = icons[tech.key]
-            return (
-              <li
-                key={index}
-                className="py-3 text-center border border-white rounded-20 lg:py-4 xl:py-8"
-              >
-                <div className="center mb-2 lg:mb-4 lg:h-8 xl:h-10">
-                  <Icon className="lg:scale-120 xl:scale-200" />
-                </div>
-                <span className="text-sm font-semibold lg:text-base xl:text-1xl">
-                  {tech.title}
-                </span>
-              </li>
-            )
-          })
-        }
+    <Section variant={'primary'} animate={false}>
+      {/* Custom Title with Typing Effect */}
+      <div className="mb-12 md:mb-16">
+        <h2
+          className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold"
+          style={{ 
+            color: 'var(--text-primary)',
+            lineHeight: '1.4'
+          }}
+        >
+          <span style={{ color: 'var(--brand-red)' }}>&gt; </span>
+          <TypingText
+            text="Innovative technologies and premium solutions."
+            speed={50}
+            delay={300}
+            highlightWords={['Innovative', 'premium']}
+          />
+        </h2>
+      </div>
+
+      <ul className="grid grid-cols-2 gap-5 md:grid-cols-4 lg:gap-6 xl:gap-8">
+        {technologies.map((tech, index) => (
+          <TechCard key={index} tech={tech} index={index} />
+        ))}
       </ul>
     </Section>
   )
