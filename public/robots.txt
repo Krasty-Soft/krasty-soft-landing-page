@@ -1,0 +1,11 @@
+# Krasty Soft - robots.txt
+# Allow all crawlers to index the site
+
+User-agent: *
+Allow: /
+
+# Disallow API routes (not meant for indexing)
+Disallow: /api/
+
+# Sitemap location
+Sitemap: https://krastysoft.com/sitemap.xml

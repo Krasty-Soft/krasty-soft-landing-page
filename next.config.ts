@@ -4,8 +4,7 @@ const nextConfig: NextConfig = {
     //output: 'export',
     allowedDevOrigins: ['local-origin.dev', '*.local-origin.dev'],
     images: {
-        // for contentful images
-        unoptimized: true,
+        // Image optimization enabled for better Core Web Vitals
         remotePatterns: [
             {
                 protocol: 'https',

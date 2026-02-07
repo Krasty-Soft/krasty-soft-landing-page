@@ -277,7 +277,7 @@ export default function FintechClient({ cases }: { cases: Case[] }) {
               Ready to revolutionize your fintech product?
             </h2>
             <p style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '1.125rem', maxWidth: '700px', margin: '0 auto' }}>
-              Let's discuss how we can build secure, scalable financial solutions for your business.
+              Let&apos;s discuss how we can build secure, scalable financial solutions for your business.
             </p>
           </div>
         </motion.div>

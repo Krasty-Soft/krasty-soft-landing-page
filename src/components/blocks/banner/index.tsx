@@ -30,7 +30,7 @@ const mockReviews = [
         name: 'Amanda Doe',
         position: 'VP Marketing',
         company: 'Google',
-        review: "Everybody who's seen the app tells me how much they like it. I'm very pleased with the app.",
+        review: "Everybody who&apos;s seen the app tells me how much they like it. I&apos;m very pleased with the app.",
         rating: 5,
     },
     {
@@ -38,7 +38,7 @@ const mockReviews = [
         name: 'Marc Brunet',
         position: 'CEO',
         company: 'Cubebrush',
-        review: "It's been a very, very cool casual partnership that we've had. It's almost like they're my employees.",
+        review: "It&apos;s been a very, very cool casual partnership that we&apos;ve had. It&apos;s almost like they&apos;re my employees.",
         rating: 5,
     },
     {
@@ -333,7 +333,7 @@ export const Banner = () => {
                                 marginBottom: '1.5rem',
                                 fontStyle: 'italic',
                             }}>
-                                "{review.review}"
+                                &quot;{review.review}&quot;
                             </p>
 
                             {/* Author */}

@@ -277,7 +277,7 @@ export default function MaritimeTransportationClient({ cases }: { cases: Case[] 
               Ready to navigate the future of maritime tech?
             </h2>
             <p style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '1.125rem', maxWidth: '700px', margin: '0 auto' }}>
-              Let's build innovative solutions that transform maritime operations.
+              Let&apos;s build innovative solutions that transform maritime operations.
             </p>
           </div>
         </motion.div>

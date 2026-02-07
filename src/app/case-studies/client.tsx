@@ -92,7 +92,7 @@ export default function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
                         >
                             Helping businesses{' '}
                             <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>achieve goals</span>.
-                            Solving people's{' '}
+                            Solving people&apos;s{' '}
                             <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>problems</span>.
                         </motion.p>
 
@@ -190,7 +190,7 @@ export default function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
                             color: 'var(--text-secondary)',
                         }}
                     >
-                        <p style={{ fontSize: '1.125rem' }}>No case studies found matching "{searchTerm}"</p>
+                        <p style={{ fontSize: '1.125rem' }}>No case studies found matching &quot;{searchTerm}&quot;</p>
                     </motion.div>
                 )}
             </Section>
@@ -239,7 +239,7 @@ export default function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
                             Ready to create your success story?
                         </h2>
                         <p style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '1.125rem', maxWidth: '700px', margin: '0 auto' }}>
-                            Let's build something amazing together.
+                            Let&apos;s build something amazing together.
                         </p>
                     </div>
                 </motion.div>

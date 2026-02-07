@@ -93,7 +93,7 @@ export function generateOrganizationSchema() {
         '@type': 'Organization',
         name: SITE_NAME,
         url: BASE_URL,
-        logo: `${BASE_URL}/logo.png`,
+        logo: `${BASE_URL}/logo.svg`,
         sameAs: [
             'https://www.linkedin.com/company/krastysoft',
             // Add other social profiles
@@ -101,7 +101,7 @@ export function generateOrganizationSchema() {
         contactPoint: {
             '@type': 'ContactPoint',
             contactType: 'Customer Service',
-            email: 'contact@krastysoft.com', // Update with actual email
+            email: 'contact@krastysoft.com',
         },
     }
 }
@@ -143,7 +143,7 @@ export function generateArticleSchema({
             name: SITE_NAME,
             logo: {
                 '@type': 'ImageObject',
-                url: `${BASE_URL}/logo.png`,
+                url: `${BASE_URL}/logo.svg`,
             },
         },
         mainEntityOfPage: {
@@ -183,7 +183,7 @@ export function generateJobSchema({
             '@type': 'Organization',
             name: SITE_NAME,
             sameAs: BASE_URL,
-            logo: `${BASE_URL}/logo.png`,
+            logo: `${BASE_URL}/logo.svg`,
         },
         jobLocation: {
             '@type': 'Place',
@@ -254,4 +254,82 @@ export function calculateReadingTime(content: string): number {
     const wordsPerMinute = 200
     const words = content.trim().split(/\s+/).length
     return Math.ceil(words / wordsPerMinute)
+}
+
+/**
+ * Generate JSON-LD structured data for FAQPage
+ */
+export function generateFAQSchema(faqs: Array<{ question: string; answer: string }>) {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: faqs.map((faq) => ({
+            '@type': 'Question',
+            name: faq.question,
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: faq.answer,
+            },
+        })),
+    }
+}
+
+/**
+ * Generate JSON-LD structured data for Service
+ */
+export function generateServiceSchema({
+    name,
+    description,
+    provider,
+    areaServed = 'Worldwide',
+}: {
+    name: string
+    description: string
+    provider?: string
+    areaServed?: string
+}) {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'Service',
+        serviceType: name,
+        description,
+        provider: {
+            '@type': 'Organization',
+            name: provider || SITE_NAME,
+            url: BASE_URL,
+        },
+        areaServed: {
+            '@type': 'Place',
+            name: areaServed,
+        },
+    }
+}
+
+/**
+ * Generate JSON-LD structured data for AggregateRating
+ */
+export function generateAggregateRatingSchema({
+    ratingValue,
+    reviewCount,
+    bestRating = 5,
+    worstRating = 1,
+}: {
+    ratingValue: number
+    reviewCount: number
+    bestRating?: number
+    worstRating?: number
+}) {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'Organization',
+        name: SITE_NAME,
+        url: BASE_URL,
+        aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue,
+            reviewCount,
+            bestRating,
+            worstRating,
+        },
+    }
 }

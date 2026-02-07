@@ -16,14 +16,14 @@ const menuVariants = {
         x: '100%',
         transition: {
             duration: 0.3,
-            ease: [0.4, 0, 1, 1],
+            ease: [0.4, 0, 1, 1] as const,
         },
     },
     open: {
         x: 0,
         transition: {
             duration: 0.3,
-            ease: [0, 0, 0.2, 1],
+            ease: [0, 0, 0.2, 1] as const,
         },
     },
 }
@@ -156,7 +156,7 @@ export const MobileMenu = ({ onClose, onContactClick }: MobileMenuProps) => {
                             Services
                         </h3>
                         <div className="space-y-2">
-                            {PAGES.services.map((service) => (
+                            {(Array.isArray(PAGES.services) ? PAGES.services : []).map((service: any) => (
                                 <Link
                                     key={service.slug}
                                     href={`/${service.slug}`}
@@ -187,7 +187,7 @@ export const MobileMenu = ({ onClose, onContactClick }: MobileMenuProps) => {
                             Industries
                         </h3>
                         <div className="space-y-2">
-                            {PAGES.industries.map((industry) => (
+                            {(Array.isArray(PAGES.industries) ? PAGES.industries : []).map((industry: any) => (
                                 <Link
                                     key={industry.slug}
                                     href={`/${industry.slug}`}
@@ -219,7 +219,7 @@ export const MobileMenu = ({ onClose, onContactClick }: MobileMenuProps) => {
                         fullSize
                         onClick={onContactClick}
                     >
-                        Let's talk
+                        Let&apos;s talk
                     </Button>
                 </motion.div>
             </motion.div>

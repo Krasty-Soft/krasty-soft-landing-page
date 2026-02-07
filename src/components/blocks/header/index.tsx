@@ -116,7 +116,7 @@ export const Header = () => {
                                         backgroundColor: '#fff',
                                     }}
                                 />
-                                Let's talk
+                                Let&apos;s talk
                             </motion.button>
 
                             {/* Hamburger menu button - animated */}

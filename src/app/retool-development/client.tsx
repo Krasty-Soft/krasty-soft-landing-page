@@ -1,48 +1,56 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ShieldCheck, FileText, Users, TrendingUp, Clock, Database, Smartphone, LineChart } from 'lucide-react'
+import { Wrench, Zap, Database, Layout, Workflow, Shield, Clock, RefreshCw } from 'lucide-react'
 import { Section, TypingText } from '@/components/ui'
-import { Cases, Technologies } from '@/components/blocks'
-import { Case } from '@/lib/cases'
+import { Technologies, Cases, UseCases } from '@/components/blocks'
 import { useState } from 'react'
 
-const features = [
+const benefits = [
   {
-    icon: ShieldCheck,
-    title: 'Policy Management',
-    description: 'Complete policy lifecycle management from issuance to claims processing.',
-  },
-  {
-    icon: FileText,
-    title: 'Claims Automation',
-    description: 'Automated claims processing with AI-powered fraud detection and validation.',
-  },
-  {
-    icon: Users,
-    title: 'Customer Portal',
-    description: 'Self-service portals for policyholders to manage policies, file claims, and track status.',
-  },
-  {
-    icon: TrendingUp,
-    title: 'Risk Assessment',
-    description: 'Advanced analytics and machine learning for accurate risk evaluation and pricing.',
-  },
-  {
-    icon: Clock,
-    title: 'Real-Time Processing',
-    description: 'Instant quote generation, policy binding, and claims status updates.',
+    icon: Zap,
+    title: 'Rapid Development',
+    description: 'Build internal tools 10x faster with Retool\'s drag-and-drop interface and pre-built components.',
   },
   {
     icon: Database,
-    title: 'Data Integration',
-    description: 'Seamless integration with legacy systems, third-party data providers, and APIs.',
+    title: 'Any Data Source',
+    description: 'Connect to databases, APIs, and services instantly - PostgreSQL, MongoDB, REST APIs, and more.',
+  },
+  {
+    icon: Layout,
+    title: 'Custom UI Components',
+    description: 'Design beautiful interfaces with tables, charts, forms, and custom React components.',
+  },
+  {
+    icon: Workflow,
+    title: 'Automation & Workflows',
+    description: 'Automate business processes with scheduled jobs, webhooks, and event-driven workflows.',
+  },
+  {
+    icon: Shield,
+    title: 'Enterprise Security',
+    description: 'Built-in authentication, SSO, RBAC, and audit logs for enterprise-grade security.',
+  },
+  {
+    icon: RefreshCw,
+    title: 'Easy Maintenance',
+    description: 'Update tools quickly without deployments - changes go live instantly.',
   },
 ]
 
-const FeatureCard = ({ feature, index }: { feature: typeof features[number], index: number }) => {
+const useCases = [
+  'Admin Panels & Dashboards',
+  'Customer Support Tools',
+  'Data Management Interfaces',
+  'Internal CRM Systems',
+  'Approval Workflows',
+  'Reporting & Analytics Tools',
+]
+
+const BenefitCard = ({ benefit, index }: { benefit: typeof benefits[number], index: number }) => {
   const [isHovered, setIsHovered] = useState(false)
-  const Icon = feature.icon
+  const Icon = benefit.icon
 
   return (
     <motion.div
@@ -111,7 +119,7 @@ const FeatureCard = ({ feature, index }: { feature: typeof features[number], ind
               marginBottom: '0.75rem',
             }}
           >
-            {feature.title}
+            {benefit.title}
           </motion.h3>
 
           <p style={{
@@ -119,7 +127,7 @@ const FeatureCard = ({ feature, index }: { feature: typeof features[number], ind
             lineHeight: '1.7',
             color: 'var(--text-secondary)',
           }}>
-            {feature.description}
+            {benefit.description}
           </p>
         </div>
       </motion.div>
@@ -127,7 +135,12 @@ const FeatureCard = ({ feature, index }: { feature: typeof features[number], ind
   )
 }
 
-export default function InsuranceClient({ cases }: { cases: Case[] }) {
+interface RetoolDevelopmentClientProps {
+  cases: any[]
+}
+
+export default function RetoolDevelopmentClient({ cases }: RetoolDevelopmentClientProps) {
+
   return (
     <>
       {/* Hero Section */}
@@ -157,7 +170,7 @@ export default function InsuranceClient({ cases }: { cases: Case[] }) {
                   borderRadius: 'var(--radius-full)',
                 }}
               >
-                <ShieldCheck size={32} color="var(--brand-red)" style={{ display: 'inline' }} />
+                <Wrench size={32} color="var(--brand-red)" style={{ display: 'inline' }} />
               </motion.div>
             </div>
 
@@ -170,10 +183,10 @@ export default function InsuranceClient({ cases }: { cases: Case[] }) {
             >
               <span style={{ color: 'var(--brand-red)' }}>&gt; </span>
               <TypingText
-                text="Insurance Software Development"
+                text="Retool Development Services"
                 speed={50}
                 delay={300}
-                highlightWords={['Insurance', 'Development']}
+                highlightWords={['Retool', 'Services']}
               />
             </h1>
 
@@ -189,16 +202,16 @@ export default function InsuranceClient({ cases }: { cases: Case[] }) {
                 margin: '0 auto',
               }}
             >
-              Building modern, efficient insurance technology solutions.
-              From <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>policy management</span> to{' '}
-              <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>automated claims processing</span>,
-              we create software that streamlines operations and enhances customer experience.
+              Build <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>powerful internal tools</span> in hours,
+              not months. We help teams leverage Retool to create{' '}
+              <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>admin panels, dashboards, and workflows</span>{' '}
+              that connect to any data source and automate business processes.
             </motion.p>
           </motion.div>
         </div>
       </Section>
 
-      {/* Features Section */}
+      {/* Benefits Section */}
       <Section variant="secondary" animate={false}>
         <div className="mb-12 md:mb-16">
           <h2
@@ -210,10 +223,10 @@ export default function InsuranceClient({ cases }: { cases: Case[] }) {
           >
             <span style={{ color: 'var(--brand-red)' }}>&gt; </span>
             <TypingText
-              text="Why choose us for insurance?"
+              text="Why choose Retool?"
               speed={50}
               delay={300}
-              highlightWords={['insurance']}
+              highlightWords={['Retool']}
             />
           </h2>
         </div>
@@ -223,11 +236,65 @@ export default function InsuranceClient({ cases }: { cases: Case[] }) {
           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
           gap: '1.5rem',
         }}>
-          {features.map((feature, index) => (
-            <FeatureCard key={index} feature={feature} index={index} />
+          {benefits.map((benefit, index) => (
+            <BenefitCard key={index} benefit={benefit} index={index} />
           ))}
         </div>
       </Section>
+
+      {/* Use Cases Section */}
+      <Section variant="primary" animate={false}>
+        <div className="mb-12 md:mb-16">
+          <h2
+            className="text-3xl md:text-4xl lg:text-5xl font-bold"
+            style={{
+              color: 'var(--text-primary)',
+              lineHeight: '1.4',
+            }}
+          >
+            <span style={{ color: 'var(--brand-red)' }}>&gt; </span>
+            <TypingText
+              text="What can you build?"
+              speed={50}
+              delay={300}
+              highlightWords={['build']}
+            />
+          </h2>
+        </div>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '1rem',
+        }}>
+          {useCases.map((useCase, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: index * 0.08, duration: 0.4 }}
+              whileHover={{ scale: 1.02 }}
+              style={{
+                padding: '1.5rem',
+                backgroundColor: 'var(--surface-primary)',
+                border: '1px solid var(--border-default)',
+                borderRadius: 'var(--radius-lg)',
+                textAlign: 'center',
+                fontSize: '1.125rem',
+                fontWeight: 600,
+                color: 'var(--text-primary)',
+              }}
+            >
+              <Clock size={24} color="var(--brand-red)" style={{ margin: '0 auto 0.75rem', display: 'block' }} />
+              {useCase}
+            </motion.div>
+          ))}
+        </div>
+      </Section>
+
+      {/* Use Cases Block (if available) */}
+      <UseCases />
 
       {/* Technologies Section */}
       <Technologies />
@@ -269,15 +336,15 @@ export default function InsuranceClient({ cases }: { cases: Case[] }) {
           />
           
           <div style={{ position: 'relative', zIndex: 1 }}>
-            <LineChart size={48} color="white" style={{ margin: '0 auto 1.5rem', display: 'block' }} />
+            <Zap size={48} color="white" style={{ margin: '0 auto 1.5rem', display: 'block' }} />
             <h2
               className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
               style={{ color: 'white' }}
             >
-              Ready to modernize your insurance operations?
+              Ready to build internal tools faster?
             </h2>
             <p style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '1.125rem', maxWidth: '700px', margin: '0 auto' }}>
-              Let&apos;s build efficient, automated insurance solutions that drive growth.
+              Let&apos;s discuss how Retool can accelerate your internal tool development.
             </p>
           </div>
         </motion.div>

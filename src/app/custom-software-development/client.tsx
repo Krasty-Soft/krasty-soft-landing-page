@@ -1,48 +1,70 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ShieldCheck, FileText, Users, TrendingUp, Clock, Database, Smartphone, LineChart } from 'lucide-react'
+import { Code2, Zap, Layers, Puzzle, Rocket, Users, Settings, Target } from 'lucide-react'
 import { Section, TypingText } from '@/components/ui'
-import { Cases, Technologies } from '@/components/blocks'
-import { Case } from '@/lib/cases'
+import { Technologies, Cases } from '@/components/blocks'
 import { useState } from 'react'
 
-const features = [
+const benefits = [
   {
-    icon: ShieldCheck,
-    title: 'Policy Management',
-    description: 'Complete policy lifecycle management from issuance to claims processing.',
+    icon: Target,
+    title: 'Tailored Solutions',
+    description: 'Custom-built software designed specifically for your business needs and workflows.',
   },
   {
-    icon: FileText,
-    title: 'Claims Automation',
-    description: 'Automated claims processing with AI-powered fraud detection and validation.',
+    icon: Zap,
+    title: 'Scalable Architecture',
+    description: 'Built to grow with your business, handling increased load and complexity effortlessly.',
+  },
+  {
+    icon: Layers,
+    title: 'Modern Tech Stack',
+    description: 'Using cutting-edge technologies for performance, security, and maintainability.',
+  },
+  {
+    icon: Puzzle,
+    title: 'Seamless Integration',
+    description: 'Integrate with your existing systems, APIs, and third-party services smoothly.',
   },
   {
     icon: Users,
-    title: 'Customer Portal',
-    description: 'Self-service portals for policyholders to manage policies, file claims, and track status.',
+    title: 'User-Centric Design',
+    description: 'Intuitive interfaces designed with your users and their workflows in mind.',
   },
   {
-    icon: TrendingUp,
-    title: 'Risk Assessment',
-    description: 'Advanced analytics and machine learning for accurate risk evaluation and pricing.',
-  },
-  {
-    icon: Clock,
-    title: 'Real-Time Processing',
-    description: 'Instant quote generation, policy binding, and claims status updates.',
-  },
-  {
-    icon: Database,
-    title: 'Data Integration',
-    description: 'Seamless integration with legacy systems, third-party data providers, and APIs.',
+    icon: Settings,
+    title: 'Full Control',
+    description: 'Complete ownership of your software with no vendor lock-in or licensing fees.',
   },
 ]
 
-const FeatureCard = ({ feature, index }: { feature: typeof features[number], index: number }) => {
+const process = [
+  {
+    number: '01',
+    title: 'Discovery & Planning',
+    description: 'We analyze your requirements, define scope, and create a detailed roadmap.',
+  },
+  {
+    number: '02',
+    title: 'Design & Architecture',
+    description: 'Designing user interfaces and system architecture that scales.',
+  },
+  {
+    number: '03',
+    title: 'Development & Testing',
+    description: 'Agile development with continuous testing and quality assurance.',
+  },
+  {
+    number: '04',
+    title: 'Deployment & Support',
+    description: 'Smooth deployment with ongoing maintenance and feature updates.',
+  },
+]
+
+const BenefitCard = ({ benefit, index }: { benefit: typeof benefits[number], index: number }) => {
   const [isHovered, setIsHovered] = useState(false)
-  const Icon = feature.icon
+  const Icon = benefit.icon
 
   return (
     <motion.div
@@ -111,7 +133,7 @@ const FeatureCard = ({ feature, index }: { feature: typeof features[number], ind
               marginBottom: '0.75rem',
             }}
           >
-            {feature.title}
+            {benefit.title}
           </motion.h3>
 
           <p style={{
@@ -119,7 +141,7 @@ const FeatureCard = ({ feature, index }: { feature: typeof features[number], ind
             lineHeight: '1.7',
             color: 'var(--text-secondary)',
           }}>
-            {feature.description}
+            {benefit.description}
           </p>
         </div>
       </motion.div>
@@ -127,7 +149,84 @@ const FeatureCard = ({ feature, index }: { feature: typeof features[number], ind
   )
 }
 
-export default function InsuranceClient({ cases }: { cases: Case[] }) {
+const ProcessStep = ({ step, index }: { step: typeof process[number], index: number }) => {
+  const [isHovered, setIsHovered] = useState(false)
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: -30 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ delay: index * 0.15, duration: 0.5 }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      style={{
+        position: 'relative',
+        display: 'flex',
+        gap: '1.5rem',
+      }}
+    >
+      <motion.div
+        animate={{
+          scale: isHovered ? 1.1 : 1,
+          backgroundColor: isHovered ? 'var(--brand-red)' : 'rgba(220, 38, 38, 0.1)',
+        }}
+        transition={{ duration: 0.3 }}
+        style={{
+          width: '4rem',
+          height: '4rem',
+          borderRadius: '50%',
+          border: '2px solid rgba(220, 38, 38, 0.3)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          flexShrink: 0,
+        }}
+      >
+        <motion.span
+          animate={{
+            color: isHovered ? 'white' : 'var(--brand-red)',
+          }}
+          transition={{ duration: 0.3 }}
+          style={{
+            fontSize: '1.25rem',
+            fontWeight: 700,
+          }}
+        >
+          {step.number}
+        </motion.span>
+      </motion.div>
+
+      <div style={{ paddingTop: '0.5rem' }}>
+        <motion.h3
+          animate={{ color: isHovered ? 'var(--brand-red)' : 'var(--text-primary)' }}
+          transition={{ duration: 0.3 }}
+          style={{
+            fontSize: '1.5rem',
+            fontWeight: 700,
+            marginBottom: '0.5rem',
+          }}
+        >
+          {step.title}
+        </motion.h3>
+        <p style={{
+          fontSize: '1rem',
+          lineHeight: '1.7',
+          color: 'var(--text-secondary)',
+        }}>
+          {step.description}
+        </p>
+      </div>
+    </motion.div>
+  )
+}
+
+interface CustomSoftwareClientProps {
+  cases: any[]
+}
+
+export default function CustomSoftwareClient({ cases }: CustomSoftwareClientProps) {
+
   return (
     <>
       {/* Hero Section */}
@@ -157,7 +256,7 @@ export default function InsuranceClient({ cases }: { cases: Case[] }) {
                   borderRadius: 'var(--radius-full)',
                 }}
               >
-                <ShieldCheck size={32} color="var(--brand-red)" style={{ display: 'inline' }} />
+                <Code2 size={32} color="var(--brand-red)" style={{ display: 'inline' }} />
               </motion.div>
             </div>
 
@@ -170,10 +269,10 @@ export default function InsuranceClient({ cases }: { cases: Case[] }) {
             >
               <span style={{ color: 'var(--brand-red)' }}>&gt; </span>
               <TypingText
-                text="Insurance Software Development"
+                text="Custom Software Development"
                 speed={50}
                 delay={300}
-                highlightWords={['Insurance', 'Development']}
+                highlightWords={['Custom', 'Development']}
               />
             </h1>
 
@@ -189,16 +288,16 @@ export default function InsuranceClient({ cases }: { cases: Case[] }) {
                 margin: '0 auto',
               }}
             >
-              Building modern, efficient insurance technology solutions.
-              From <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>policy management</span> to{' '}
-              <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>automated claims processing</span>,
-              we create software that streamlines operations and enhances customer experience.
+              Building <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>bespoke software solutions</span> that
+              perfectly fit your business needs. From web applications to complex enterprise systems,
+              we deliver <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>scalable, secure, and maintainable</span> software
+              that drives your business forward.
             </motion.p>
           </motion.div>
         </div>
       </Section>
 
-      {/* Features Section */}
+      {/* Benefits Section */}
       <Section variant="secondary" animate={false}>
         <div className="mb-12 md:mb-16">
           <h2
@@ -210,10 +309,10 @@ export default function InsuranceClient({ cases }: { cases: Case[] }) {
           >
             <span style={{ color: 'var(--brand-red)' }}>&gt; </span>
             <TypingText
-              text="Why choose us for insurance?"
+              text="Why custom software?"
               speed={50}
               delay={300}
-              highlightWords={['insurance']}
+              highlightWords={['custom']}
             />
           </h2>
         </div>
@@ -223,8 +322,39 @@ export default function InsuranceClient({ cases }: { cases: Case[] }) {
           gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
           gap: '1.5rem',
         }}>
-          {features.map((feature, index) => (
-            <FeatureCard key={index} feature={feature} index={index} />
+          {benefits.map((benefit, index) => (
+            <BenefitCard key={index} benefit={benefit} index={index} />
+          ))}
+        </div>
+      </Section>
+
+      {/* Process Section */}
+      <Section variant="primary" animate={false}>
+        <div className="mb-12 md:mb-16">
+          <h2
+            className="text-3xl md:text-4xl lg:text-5xl font-bold"
+            style={{
+              color: 'var(--text-primary)',
+              lineHeight: '1.4',
+            }}
+          >
+            <span style={{ color: 'var(--brand-red)' }}>&gt; </span>
+            <TypingText
+              text="Our development process."
+              speed={50}
+              delay={300}
+              highlightWords={['process']}
+            />
+          </h2>
+        </div>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(350px, 1fr))',
+          gap: '2.5rem',
+        }}>
+          {process.map((step, index) => (
+            <ProcessStep key={index} step={step} index={index} />
           ))}
         </div>
       </Section>
@@ -269,15 +399,15 @@ export default function InsuranceClient({ cases }: { cases: Case[] }) {
           />
           
           <div style={{ position: 'relative', zIndex: 1 }}>
-            <LineChart size={48} color="white" style={{ margin: '0 auto 1.5rem', display: 'block' }} />
+            <Rocket size={48} color="white" style={{ margin: '0 auto 1.5rem', display: 'block' }} />
             <h2
               className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
               style={{ color: 'white' }}
             >
-              Ready to modernize your insurance operations?
+              Ready to build your custom solution?
             </h2>
             <p style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '1.125rem', maxWidth: '700px', margin: '0 auto' }}>
-              Let&apos;s build efficient, automated insurance solutions that drive growth.
+              Let&apos;s discuss your project and create software that perfectly fits your needs.
             </p>
           </div>
         </motion.div>

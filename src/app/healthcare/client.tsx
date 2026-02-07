@@ -277,7 +277,7 @@ export default function HealthcareClient({ cases }: { cases: Case[] }) {
               Ready to transform healthcare delivery?
             </h2>
             <p style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '1.125rem', maxWidth: '700px', margin: '0 auto' }}>
-              Let's build secure, compliant healthcare solutions that make a difference.
+              Let&apos;s build secure, compliant healthcare solutions that make a difference.
             </p>
           </div>
         </motion.div>

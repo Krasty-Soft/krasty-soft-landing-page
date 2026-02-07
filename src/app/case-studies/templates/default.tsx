@@ -393,7 +393,7 @@ export function TemplateDefault({ caseData }: TemplateProps) {
                             Want similar results for your project?
                         </h2>
                         <p style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '1.125rem', maxWidth: '700px', margin: '0 auto' }}>
-                            Let's discuss how we can help you achieve your goals.
+                            Let&apos;s discuss how we can help you achieve your goals.
                         </p>
                     </div>
                 </motion.div>

@@ -241,7 +241,7 @@ export const CodeEditor = ({ services }: CodeEditorProps) => {
                                         <span style={{ color: '#C792EA' }}>import</span>{' '}
                                         <span style={{ color: '#82AAFF' }}>{'{'} Service {'}'}</span>{' '}
                                         <span style={{ color: '#C792EA' }}>from</span>{' '}
-                                        <span style={{ color: '#C3E88D' }}>'@/types'</span>
+                                        <span style={{ color: '#C3E88D' }}>&apos;@/types&apos;</span>
                                     </CodeLine>
                                     <CodeLine number={2} />
                                 </div>
@@ -249,7 +249,7 @@ export const CodeEditor = ({ services }: CodeEditorProps) => {
                                 {/* Interface */}
                                 <div style={{ marginBottom: '1.5rem' }}>
                                     <CodeLine number={3} color="var(--text-tertiary)">
-                                        <span style={{ color: '#89DDFF' }}>/**</span>
+                                        <span style={{ color: '#89DDFF' }}>&#47;**</span>
                                     </CodeLine>
                                     <CodeLine number={4} color="var(--text-tertiary)">
                                         <span style={{ color: '#89DDFF' }}> * {activeService.description}</span>
@@ -274,7 +274,7 @@ export const CodeEditor = ({ services }: CodeEditorProps) => {
                                     <CodeLine number={7} indent={1}>
                                         <span style={{ color: '#C3E88D' }}>name</span>
                                         <span style={{ color: '#89DDFF' }}>:</span>{' '}
-                                        <span style={{ color: '#C3E88D' }}>'{activeService.title}'</span>
+                                        <span style={{ color: '#C3E88D' }}>&apos;{activeService.title}&apos;</span>
                                         <span style={{ color: '#89DDFF' }}>,</span>
                                     </CodeLine>
 
@@ -286,7 +286,7 @@ export const CodeEditor = ({ services }: CodeEditorProps) => {
 
                                     {activeService.content.map((feature, idx) => (
                                         <CodeLine key={idx} number={9 + idx} indent={2}>
-                                            <span style={{ color: '#C3E88D' }}>'{feature}'</span>
+                                            <span style={{ color: '#C3E88D' }}>&apos;{feature}&apos;</span>
                                             <span style={{ color: '#89DDFF' }}>,</span>
                                         </CodeLine>
                                     ))}
@@ -299,7 +299,7 @@ export const CodeEditor = ({ services }: CodeEditorProps) => {
                                     <CodeLine number={10 + activeService.content.length} indent={1}>
                                         <span style={{ color: '#C3E88D' }}>link</span>
                                         <span style={{ color: '#89DDFF' }}>:</span>{' '}
-                                        <span style={{ color: '#C3E88D' }}>'{activeService.link}'</span>
+                                        <span style={{ color: '#C3E88D' }}>&apos;{activeService.link}&apos;</span>
                                         <span style={{ color: '#89DDFF' }}>,</span>
                                     </CodeLine>
 
