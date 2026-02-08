@@ -1,41 +1,25 @@
-import { Breadcrumbs } from '@/components'
-import {
-    Awards,
-    Cases,
-    ContactForm,
-    Features,
-    Industries,
-    UseCases,
-} from '@/components/blocks'
 import { getAllCases } from '@/lib/cases'
+import { generateSEO } from '@/lib/seo'
+import { Metadata } from 'next'
+import RetoolDevelopmentClient from './client'
 
-export default async function RetoolPage() {
-  const cases = await getAllCases()
+export const metadata: Metadata = generateSEO({
+    title: 'Retool Development Services - Build Internal Tools Fast',
+    description:
+        'Expert Retool development services. Build custom internal tools 10x faster with professional Retool developers. Connect to any data source, create custom UIs, and automate workflows.',
+    path: '/retool-development',
+    tags: [
+        'retool development',
+        'retool developer',
+        'internal tools',
+        'admin panels',
+        'retool apps',
+        'low code development',
+        'rapid development',
+    ],
+})
 
-  return (
-    <div>
-        <div className="container bg-black rounded-b-2xl text-white px-4 pt-5 pb-c-60 md:pb-20 md:px-8 md:pt-8 lg:px-c-50 lg:pb-28 xl:px-c-200">
-            <Breadcrumbs isDark />
-            <h1 className="text-1xl mt-8 mb-10 md:mb-c-60 md:text-3xl-plus lg:mt-14 lg:mb-10 xl:mt-c-60 xl:mb-28 xl:text-4xl-plus font-medium tracking-wider">
-                Retool development
-            </h1>
-            <p className="font-semibold tracking-wider mb-5 md:text-lg lg:mb-6 lg:text-xl xl:text-3xl">
-                👨🏻‍💻 Opt for the Retool No-Code Platform Services
-            </p>
-            <p className="text-sm leading-loose	 tracking-wider xl:text-lg">
-                Optimal Retool solutions for rapid and real-time internal
-                tool development empower teams to efficiently build custom
-                applications without extensive coding knowledge, allowing
-                for seamless integration of data sources, intuitive user
-                interfaces, and agile iterations.
-            </p>
-        </div>
-        <UseCases />
-        <Cases cases={cases} />
-        <ContactForm isDark />
-        <Features />
-        <Awards />
-        <Industries />
-    </div>
-  )
+export default async function RetoolDevelopmentPage() {
+    const cases = await getAllCases()
+    return <RetoolDevelopmentClient cases={cases} />
 }

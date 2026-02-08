@@ -7,13 +7,14 @@ export interface Post {
     tags: string[]
     content: string
     preview: string
+    richContent?: any
 }
 
 type PostFields = {
     slug: string
     title: string
     tags?: string[]
-    content?: string
+    content?: any
     preview?: any
 }
 
@@ -85,7 +86,8 @@ export async function getPostBySlug(slug: string) {
             slug: fields.slug,
             title: fields.title,
             tags: fields.tags || [],
-            content: fields.content || '',
+            content: typeof fields.content === 'string' ? fields.content : '',
+            richContent: typeof fields.content === 'object' ? fields.content : null,
             preview: previewUrl
                 ? previewUrl.startsWith('http')
                     ? previewUrl

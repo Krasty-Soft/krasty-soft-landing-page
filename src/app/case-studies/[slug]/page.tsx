@@ -1,4 +1,5 @@
 import { getAllSlugs, getCaseBySlug } from '@/lib/cases'
+import { generateArticleSchema, StructuredData } from '@/lib/seo'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { CaseTemplateRenderer } from '../templates'
@@ -41,5 +42,20 @@ export default async function CasePage({
 
     const template = caseData.template || 'default'
 
-    return <CaseTemplateRenderer caseData={caseData} template={template} />
+    // Generate Article structured data for case study
+    const articleSchema = generateArticleSchema({
+        title: caseData.title || 'Case Study',
+        description: caseData.seoDescription || caseData.cardDescription || '',
+        slug: `/case-studies/${slug}`,
+        image: caseData.media?.[0]?.url,
+        publishedTime: new Date().toISOString(),
+        authors: ['Krasty Soft Team'],
+    })
+
+    return (
+        <>
+            <StructuredData data={articleSchema} />
+            <CaseTemplateRenderer caseData={caseData} template={template} />
+        </>
+    )
 }

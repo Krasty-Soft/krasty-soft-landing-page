@@ -1,21 +1,22 @@
-import { Opportunities, Values } from "@/components/blocks";
-import React from "react";
+import { generateSEO } from '@/lib/seo'
+import { Metadata } from 'next'
+import CareersClient from './client'
 
-export default function Page() {
-  return (
-    <div>
-      {/* <div className="container bg-background px-4 md:px-8 pb-c-50 md:pb-c-60 lg:px-c-50 lg:pb-20 xl:px-c-200 xl:pb-c-100">
-        <div className="pt-6 pb-8">
-          <Breadcrumbs />
-        </div>
+export const metadata: Metadata = generateSEO({
+    title: 'Careers - Join Our Team',
+    description:
+        'Join Krasty Soft - a remote-first software development company. Explore exciting career opportunities, work on cutting-edge projects, and grow with a talented team.',
+    path: '/careers',
+    tags: [
+        'software developer jobs',
+        'remote software jobs',
+        'tech careers',
+        'developer opportunities',
+        'software engineering jobs',
+        'work remotely',
+    ],
+})
 
-        <h1 className="text-1xl mb-8">
-          You’re free: Freedom of time, location, and to balance work and life.
-        </h1>
-      </div> */}
-      {/* set isEmpty={false} to show the jobs */}
-      <Opportunities isEmpty={true} />
-      <Values isDark={false} />
-    </div>
-  );
+export default function CareersPage() {
+    return <CareersClient />
 }

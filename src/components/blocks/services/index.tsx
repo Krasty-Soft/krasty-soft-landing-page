@@ -1,7 +1,10 @@
-import React from "react";
-import { Accordion } from "@/components";
+'use client'
+
+import React from 'react'
 import { Section } from '@/components/ui'
-import { ServiceType } from "@/types";
+import { TypingText } from '@/components/ui'
+import { CodeEditor } from './code-editor'
+import { ServiceType } from '@/types'
 
 const mock: ServiceType[] = [
   {
@@ -37,26 +40,27 @@ const mock: ServiceType[] = [
 ];
 
 export const Services = () => {
-  return (
-    <Section
-      variant={'paper'}
-      subtitle={'Products and services'}
-      title={'Digital products and five-star services.'}
-    >
-      <div>
-        {
-          mock.map((item, index) => {
-            return (
-              <Accordion
-                key={index}
-                data={item}
-                index={index + 1}
-                initState={index === 0}
-              />
-            )
-          })
-        }
-      </div>
-    </Section>
-  )
+    return (
+        <Section variant={'primary'} animate={false}>
+            <div className="mb-12 md:mb-16">
+                <h2
+                    className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold"
+                    style={{ 
+                        color: 'var(--text-primary)',
+                        lineHeight: '1.4'
+                    }}
+                >
+                    <span style={{ color: 'var(--brand-red)' }}>&gt; </span>
+                    <TypingText
+                        text="Digital products and five-star services."
+                        speed={50}
+                        delay={500}
+                        highlightWords={['products', 'services']}
+                    />
+                </h2>
+            </div>
+            
+            <CodeEditor services={mock} />
+        </Section>
+    )
 }

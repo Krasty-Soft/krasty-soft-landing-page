@@ -3,7 +3,7 @@ import { createSlug } from './util'
 
 type RichTextNode = {
     nodeType: string
-    data?: any
+    data?: Record<string, unknown>
     content?: RichTextNode[]
     value?: string
 }
@@ -39,7 +39,7 @@ export function extractHeadingsForTOC(content: RichTextNode[]): string[] {
 
         // Also check embedded entries that might contain heading-2 elements
         if (node.nodeType === 'embedded-entry-block') {
-            const embeddedContent = node.data?.target?.fields?.content?.content
+            const embeddedContent = (node.data as any)?.target?.fields?.content?.content
             if (Array.isArray(embeddedContent)) {
                 headings.push(...extractHeadingsForTOC(embeddedContent))
             }
@@ -77,7 +77,7 @@ function renderRichTextNode(
     if (nodeType === 'paragraph') {
         return React.createElement(
             'p',
-            { key, className: 'text-dark-grey mb-4' },
+            { key },
             content?.map((child, i) =>
                 renderRichTextNode(child, `${key}-${i}`),
             ),
@@ -88,19 +88,9 @@ function renderRichTextNode(
     if (nodeType.startsWith('heading-')) {
         const level = nodeType.split('-')[1]
         const tag = `h${level}`
-        let className = ''
-
-        // Add specific classes for each heading level
-        if (level === '2') className = 'text-2xl mb-4'
-        if (level === '3') className = 'text-xl mb-4 font-medium'
-        if (level === '4') className = 'text-xl mb-4 font-medium'
 
         // Add id for h2 elements for TOC functionality
-        const props: { key: string | number; className: string; id?: string } =
-            {
-                key,
-                className,
-            }
+        const props: { key: string | number; id?: string } = { key }
 
         if (level === '2') {
             const textContent = extractTextContent(node)
@@ -120,11 +110,7 @@ function renderRichTextNode(
     if (nodeType === 'unordered-list') {
         return React.createElement(
             'ul',
-            {
-                key,
-                className:
-                    'list-disc list-inside text-dark-grey mt-4 space-y-2 mb-4',
-            },
+            { key },
             content?.map((child, i) =>
                 renderRichTextNode(child, `${key}-${i}`),
             ),
@@ -142,12 +128,12 @@ function renderRichTextNode(
             return renderRichTextNode(child, `${key}-${i}`)
         })
 
-        return React.createElement('li', { key, className: '' }, children)
+        return React.createElement('li', { key }, children)
     }
 
     // Embedded entry block (This is Section content type from Contentful)
     if (nodeType === 'embedded-entry-block') {
-        const target = node.data?.target
+        const target = (node.data as any)?.target
         const fields = target?.fields
         const contentType = target?.sys?.contentType?.sys?.id
 
@@ -159,15 +145,32 @@ function renderRichTextNode(
                 sections.push(
                     React.createElement(
                         'div',
-                        { key: `${key}-niche`, className: 'mb-6' },
+                        { 
+                            key: `${key}-niche`, 
+                            style: { 
+                                marginBottom: '2rem',
+                                padding: '1.5rem',
+                                backgroundColor: 'rgba(220, 38, 38, 0.05)',
+                                border: '1px solid rgba(220, 38, 38, 0.2)',
+                                borderRadius: '0.75rem'
+                            } 
+                        },
                         React.createElement(
                             'strong',
-                            { className: 'text-xl mb-3 font-medium block' },
+                            { 
+                                style: { 
+                                    fontSize: '1.125rem',
+                                    marginBottom: '0.75rem',
+                                    fontWeight: 600,
+                                    display: 'block',
+                                    color: 'var(--brand-red)'
+                                } 
+                            },
                             'Niche',
                         ),
                         React.createElement(
                             'p',
-                            { className: 'text-dark-grey' },
+                            { style: { color: 'var(--text-secondary)', lineHeight: '1.7' } },
                             fields.niche,
                         ),
                     ),
@@ -178,10 +181,27 @@ function renderRichTextNode(
                 sections.push(
                     React.createElement(
                         'div',
-                        { key: `${key}-problematic`, className: 'mb-6' },
+                        { 
+                            key: `${key}-problematic`, 
+                            style: { 
+                                marginBottom: '2rem',
+                                padding: '1.5rem',
+                                backgroundColor: 'rgba(220, 38, 38, 0.05)',
+                                border: '1px solid rgba(220, 38, 38, 0.2)',
+                                borderRadius: '0.75rem'
+                            } 
+                        },
                         React.createElement(
                             'strong',
-                            { className: 'text-xl mb-3 font-medium block' },
+                            { 
+                                style: { 
+                                    fontSize: '1.125rem',
+                                    marginBottom: '0.75rem',
+                                    fontWeight: 600,
+                                    display: 'block',
+                                    color: 'var(--brand-red)'
+                                } 
+                            },
                             'Problematic',
                         ),
                         fields.problematic.content.map(
@@ -214,15 +234,32 @@ function renderRichTextNode(
                 sections.push(
                     React.createElement(
                         'div',
-                        { key: `${key}-tech`, className: 'mb-6' },
+                        { 
+                            key: `${key}-tech`, 
+                            style: { 
+                                marginBottom: '2rem',
+                                padding: '1.5rem',
+                                backgroundColor: 'rgba(220, 38, 38, 0.05)',
+                                border: '1px solid rgba(220, 38, 38, 0.2)',
+                                borderRadius: '0.75rem'
+                            } 
+                        },
                         React.createElement(
                             'strong',
-                            { className: 'text-xl mb-3 font-medium block' },
+                            { 
+                                style: { 
+                                    fontSize: '1.125rem',
+                                    marginBottom: '0.75rem',
+                                    fontWeight: 600,
+                                    display: 'block',
+                                    color: 'var(--brand-red)'
+                                } 
+                            },
                             'Technologies',
                         ),
                         React.createElement(
                             'p',
-                            { className: 'text-dark-grey' },
+                            { style: { color: 'var(--text-secondary)', lineHeight: '1.7' } },
                             fields.technologies,
                         ),
                     ),

@@ -1,94 +1,246 @@
 'use client'
-import { ArrowLink, Image, Pill } from '@/components/ui'
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { ArrowRight } from 'lucide-react'
+import Link from 'next/link'
+import { Image, Pill } from '@/components/ui'
 import { Case } from '@/lib/cases'
-import { useBreakpoint } from '@/lib/hooks'
 
 const mockSrc = 'https://placehold.co/600x400.png'
 
 export const CaseCard = ({ data }: { data: Case }) => {
-    const isDesktop = useBreakpoint(1200)
-    const isTablet = useBreakpoint(768)
+    const [isHovered, setIsHovered] = useState(false)
 
     const mediaData = {
-        mobile: data.media.find((media) => media.title?.includes('mobile')),
-        img1: data.media.find((media) => media.title?.includes('img1')),
-        img2: data.media.find((media) => media.title?.includes('img2')),
+        banner: data.media.find((media) => media.title?.includes('banner')),
     }
 
+    const mainImage = mediaData.banner?.url || mockSrc
+
     return (
-        <div className="grid grid-col-1 lg:grid-cols-2 lg:grid-rows-2 gap-5 lg:gap-8 xl:gap-11 bg-white p-4 rounded-20">
-            {isDesktop ? (
-                <>
-                    <div className="flex justify-between aspect-video overflow-hidden">
-                        <div className="w-20 h-5 items-start">
-                            <Image
-                                src={mediaData.mobile?.url || mockSrc}
-                                alt={mediaData.mobile?.description || 'Mobile'}
-                                wrapperClasses={'bg-light-grey'}
-                            />
-                        </div>
+        <motion.div
+            initial={false}
+            onHoverStart={() => setIsHovered(true)}
+            onHoverEnd={() => setIsHovered(false)}
+            style={{
+                position: 'relative',
+                width: '100%',
+                height: '500px',
+                borderRadius: 'var(--radius-xl)',
+                overflow: 'hidden',
+                cursor: 'pointer',
+            }}
+        >
+            <Link href={`/case-studies/${data.slug}`} style={{ textDecoration: 'none' }}>
+                <motion.div
+                    animate={{
+                        y: isHovered ? -8 : 0,
+                    }}
+                    transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
+                    style={{
+                        position: 'relative',
+                        width: '100%',
+                        height: '100%',
+                        backgroundColor: 'var(--surface-primary)',
+                        borderRadius: 'var(--radius-xl)',
+                        overflow: 'hidden',
+                        isolation: 'isolate',
+                        transform: 'translateZ(0)',
+                        willChange: 'transform',
+                        WebkitBackfaceVisibility: 'hidden',
+                        MozBackfaceVisibility: 'hidden',
+                        WebkitTransform: 'translateZ(0)',
+                        MozTransform: 'translateZ(0)',
+                    }}
+                >
+                    {/* Static border layer - doesn't scale */}
+                    <div
+                        style={{
+                            position: 'absolute',
+                            inset: 0,
+                            border: '1px solid var(--border-default)',
+                            borderRadius: 'var(--radius-xl)',
+                            pointerEvents: 'none',
+                            zIndex: 10,
+                        }}
+                    />
+
+                    {/* Background Image with Zoom Effect */}
+                    <motion.div
+                        animate={{
+                            scale: isHovered ? 1.08 : 1,
+                        }}
+                        transition={{ duration: 0.6, ease: [0.32, 0.72, 0, 1] }}
+                        style={{
+                            position: 'absolute',
+                            inset: 0,
+                            zIndex: 0,
+                            transform: 'translateZ(0)',
+                            willChange: 'transform',
+                        }}
+                    >
                         <Image
-                            src={mediaData.mobile?.url || mockSrc}
-                            alt={mediaData.mobile?.description || 'Mobile'}
-                            wrapperClasses="bg-light-grey rounded-20 items-stretch overflow-hidden w-40"
+                            src={mainImage}
+                            alt={data.title}
+                            wrapperClasses="w-full h-full"
+                            style={{ 
+                                objectFit: 'cover',
+                                width: '100%',
+                                height: '100%',
+                                display: 'block',
+                            }}
                         />
+                    </motion.div>
+
+                    {/* Red Tint Overlay - "Sleeping" state that fades on hover */}
+                    <motion.div
+                        initial={false}
+                        animate={{
+                            opacity: isHovered ? 0 : 0.6,
+                        }}
+                        transition={{ duration: 0.5 }}
+                        style={{
+                            position: 'absolute',
+                            inset: 0,
+                            background: 'linear-gradient(135deg, rgba(220, 38, 38, 0.5), rgba(0, 0, 0, 0.7))',
+                            mixBlendMode: 'multiply',
+                            zIndex: 1,
+                            opacity: 0.6,
+                        }}
+                    />
+
+                    {/* Dark gradient overlay at bottom */}
+                    <motion.div
+                        initial={false}
+                        animate={{
+                            opacity: isHovered ? 1 : 0.9,
+                        }}
+                        transition={{ duration: 0.4 }}
+                        style={{
+                            position: 'absolute',
+                            bottom: 0,
+                            left: 0,
+                            right: 0,
+                            height: '60%',
+                            background: 'linear-gradient(to top, rgba(0, 0, 0, 0.95), transparent)',
+                            zIndex: 2,
+                        }}
+                    />
+
+                    {/* Content Container */}
+                    <div
+                        style={{
+                            position: 'absolute',
+                            inset: 0,
+                            padding: '2rem',
+                            display: 'flex',
+                            flexDirection: 'column',
+                            justifyContent: 'space-between',
+                            zIndex: 3,
+                        }}
+                    >
+                        {/* Tags at top */}
+                        <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                            {data?.tags?.map((tag, i) => (
+                                <motion.div
+                                    key={i}
+                                    initial={{ opacity: 0, y: -10 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ delay: i * 0.1 }}
+                                >
+                                    <Pill title={tag} variant={'bordered'} />
+                                </motion.div>
+                            ))}
+                        </div>
+
+                        {/* Bottom content */}
+                        <div>
+                            {/* Title */}
+                            <motion.h3
+                                animate={{
+                                    y: isHovered ? -4 : 0,
+                                }}
+                                transition={{ duration: 0.3 }}
+                                style={{
+                                    fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
+                                    fontWeight: 700,
+                                    color: 'white',
+                                    marginBottom: '0.75rem',
+                                    lineHeight: '1.2',
+                                }}
+                            >
+                                {data.title}
+                            </motion.h3>
+
+                            {/* Description */}
+                            <motion.p
+                                animate={{
+                                    opacity: isHovered ? 1 : 0.8,
+                                    y: isHovered ? -4 : 0,
+                                }}
+                                transition={{ duration: 0.3, delay: 0.05 }}
+                                style={{
+                                    fontSize: '1rem',
+                                    color: 'rgba(255, 255, 255, 0.8)',
+                                    marginBottom: '1.5rem',
+                                    lineHeight: '1.6',
+                                    display: '-webkit-box',
+                                    WebkitLineClamp: 3,
+                                    WebkitBoxOrient: 'vertical',
+                                    overflow: 'hidden',
+                                }}
+                            >
+                                {data.cardDescription}
+                            </motion.p>
+
+                            {/* View Case Study Button */}
+                            <motion.div
+                                animate={{
+                                    opacity: isHovered ? 1 : 0.7,
+                                    x: isHovered ? 4 : 0,
+                                }}
+                                transition={{ duration: 0.3 }}
+                                style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '0.5rem',
+                                    color: 'var(--brand-red)',
+                                    fontSize: '1rem',
+                                    fontWeight: 600,
+                                }}
+                            >
+                                <span>View Case Study</span>
+                                <motion.div
+                                    animate={{
+                                        x: isHovered ? 4 : 0,
+                                    }}
+                                    transition={{ duration: 0.3 }}
+                                >
+                                    <ArrowRight size={20} />
+                                </motion.div>
+                            </motion.div>
+                        </div>
                     </div>
 
-                    <Image
-                        src={mediaData.img1?.url || mockSrc}
-                        alt={mediaData.img1?.description || 'Image 1'}
-                        wrapperClasses="bg-light-grey rounded-20 aspect-video overflow-hidden"
+                    {/* Red Border Glow on Hover */}
+                    <motion.div
+                        initial={false}
+                        animate={{
+                            opacity: isHovered ? 0.4 : 0,
+                        }}
+                        transition={{ duration: 0.4 }}
+                        style={{
+                            position: 'absolute',
+                            inset: '-2px',
+                            borderRadius: 'var(--radius-xl)',
+                            background: 'linear-gradient(135deg, var(--brand-red), transparent)',
+                            pointerEvents: 'none',
+                            zIndex: 4,
+                            opacity: 0,
+                        }}
                     />
-                    <Image
-                        src={mediaData.img2?.url || mockSrc}
-                        alt={mediaData.img2?.description || 'Image 2'}
-                        wrapperClasses="bg-light-grey rounded-20 aspect-video overflow-hidden"
-                    />
-                </>
-            ) : (
-                <div className="flex gap-4">
-                    <Image
-                        src={mediaData.img1?.url || mockSrc}
-                        alt={mediaData.img1?.description || 'Image 1'}
-                        wrapperClasses="bg-light-grey rounded-20 flex-grow aspect-video overflow-hidden"
-                    />
-                    {isTablet && (
-                        <>
-                            <Image
-                                src={mediaData.img2?.url || mockSrc}
-                                alt={mediaData.img2?.description || 'Image 2'}
-                                wrapperClasses="bg-light-grey rounded-20 flex-grow overflow-hidden"
-                            />
-                            <Image
-                                src={mediaData.mobile?.url || mockSrc}
-                                alt={mediaData.mobile?.description || 'Mobile'}
-                                wrapperClasses={
-                                    'bg-light-grey rounded-20 overflow-hidden w-16 flex-fixed'
-                                }
-                            />
-                        </>
-                    )}
-                </div>
-            )}
-            {!isDesktop && (
-                <Image
-                    src={mediaData.mobile?.url || mockSrc}
-                    alt={mediaData.mobile?.description || 'Mobile'}
-                    wrapperClasses={'bg-light-grey w-20 h-5'}
-                />
-            )}
-
-            <div className="lg:aspect-video">
-                <div className="flex gap-2 mb-5">
-                    {data?.tags?.length
-                        ? data?.tags?.map((tag, i) => (
-                              <Pill key={i} title={tag} variant={'bordered'} />
-                          ))
-                        : null}
-                </div>
-                <p className="mb-7">{data.cardDescription}</p>
-                <ArrowLink to={`/case-studies/${data.slug}`} />
-            </div>
-        </div>
+                </motion.div>
+            </Link>
+        </motion.div>
     )
 }

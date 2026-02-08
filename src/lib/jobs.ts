@@ -1,29 +1,17 @@
 import { safeGetEntries } from '@/lib/cms'
 import type { EntrySkeletonType } from 'contentful'
 
-export const jobs = [
-    {
-        slug: 'senior-frontend-dev-552161726681',
-        title: 'Senior Software Engineer',
-        description: '3-4 years of experience',
-        tags: 'Remote, full-time',
-        link: '/careers',
-    },
-    {
-        slug: 'fullstack-dev-887837762378',
-        title: 'Full-Stack Developer',
-        description: '1-4 years of experience',
-        tags: 'Remote, full-time',
-        link: '/careers',
-    },
-    {
-        slug: 'frontend-dev-689831162555',
-        title: 'Front-end Developer',
-        description: '2-4 years of experience',
-        tags: 'Remote, full-time',
-        link: '/careers',
-    },
-]
+export type Job = {
+    slug: string
+    title: string
+    description: string
+    tags: string
+    link: string
+    location: string
+    type: string
+    datePosted: string
+    validThrough?: string
+}
 
 type JobFields = {
     slug: string
@@ -31,7 +19,44 @@ type JobFields = {
     description?: string
     tags?: string
     link?: string
+    location?: string
+    type?: string
+    datePosted?: string
+    validThrough?: string
 }
+
+export const jobs: Job[] = [
+    {
+        slug: 'senior-frontend-dev-552161726681',
+        title: 'Senior Software Engineer',
+        description: '3-4 years of experience',
+        tags: 'Remote, full-time',
+        link: '/careers',
+        location: 'Remote',
+        type: 'Full-time',
+        datePosted: '2026-01-01T00:00:00Z',
+    },
+    {
+        slug: 'fullstack-dev-887837762378',
+        title: 'Full-Stack Developer',
+        description: '1-4 years of experience',
+        tags: 'Remote, full-time',
+        link: '/careers',
+        location: 'Remote',
+        type: 'Full-time',
+        datePosted: '2026-01-01T00:00:00Z',
+    },
+    {
+        slug: 'frontend-dev-689831162555',
+        title: 'Front-end Developer',
+        description: '2-4 years of experience',
+        tags: 'Remote, full-time',
+        link: '/careers',
+        location: 'Remote',
+        type: 'Full-time',
+        datePosted: '2026-01-01T00:00:00Z',
+    },
+]
 
 interface JobSkeleton extends EntrySkeletonType {
     contentTypeId: string
@@ -40,7 +65,7 @@ interface JobSkeleton extends EntrySkeletonType {
 
 const CONTENT_TYPE_JOB = process.env.CONTENTFUL_JOB_TYPE_ID || 'job'
 
-export async function getJobBySlug(slug: string) {
+export async function getJobBySlug(slug: string): Promise<Job | null> {
     const res = await safeGetEntries<JobSkeleton>({
         content_type: CONTENT_TYPE_JOB,
         'fields.slug': slug,
@@ -54,6 +79,10 @@ export async function getJobBySlug(slug: string) {
             description: f.description || '',
             tags: f.tags || '',
             link: f.link || '/careers',
+            location: f.location || 'Remote',
+            type: f.type || 'Full-time',
+            datePosted: f.datePosted || new Date().toISOString(),
+            validThrough: f.validThrough,
         }
     }
     return jobs.find((job) => job.slug === slug) || null

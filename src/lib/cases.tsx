@@ -46,13 +46,38 @@ const CONTENT_TYPE_CASE = process.env.CONTENTFUL_CASE_TYPE_ID || 'case'
 
 export const cases: Case[] = [
     {
+        slug: 'oolu-fractional-hiring-platform',
+        title: 'OOLU - Fractional Hiring Platform',
+        tags: ['SaaS', 'HR Tech', 'Web App'],
+        cardDescription: 'A comprehensive platform for fractional hiring and employment management, connecting companies with top talent through an intuitive dashboard and authentication system.',
+        preview: '/oolu.png',
+        media: [
+            {
+                url: '/oolu.png',
+                title: 'img1',
+                description: 'OOLU platform dashboard'
+            }
+        ],
+        template: 'default',
+        content: '',
+        overview: '',
+        seoTitle: 'OOLU - Fractional Hiring Platform Case Study',
+        seoDescription: 'How we built a modern fractional hiring platform for OOLU',
+    },
+    {
         slug: 'crm-system-with-unified-communications',
         title: 'CRM System with Unified Communications',
-        tags: [''],
-        cardDescription: 'CRM System with Unified Communications',
-        preview: '',
-        media: [],
-        template: 'srm',
+        tags: ['CRM', 'Enterprise', 'Communication'],
+        cardDescription: 'Enterprise-grade CRM solution with integrated communication tools, enabling seamless customer relationship management and team collaboration.',
+        preview: 'https://placehold.co/1200x800/1a1a1a/dc2626?text=CRM+System',
+        media: [
+            {
+                url: 'https://placehold.co/1200x800/1a1a1a/dc2626?text=CRM+System',
+                title: 'img1',
+                description: 'CRM Dashboard'
+            }
+        ],
+        template: 'default',
         content: '',
         overview: '',
     },

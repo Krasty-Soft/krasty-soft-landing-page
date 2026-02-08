@@ -47,7 +47,7 @@ const mockFriends = [
 export const ReviewsBlock = () => {
   return (
     <Section
-      variant={'paper'}
+      variant="secondary"
       subtitle={'Our friends'}
       title={'Join this group of outstanding brands we’re happy to call our clients'}
     >
