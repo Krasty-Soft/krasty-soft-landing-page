@@ -3,12 +3,14 @@ import { Buffer } from 'buffer'
 
 /**
  * Contact form API endpoint
- * 
+ *
  * To enable email sending, add to your .env:
  * RESEND_API_KEY=re_xxxxxxxxxxxx
  * CONTACT_EMAIL_TO=your-email@krasty.me
- * 
+ * RESEND_FROM_EMAIL=noreply@krasty.me (optional, defaults to onboarding@resend.dev)
+ *
  * Get Resend API key from: https://resend.com
+ * Note: Custom domains need to be verified in Resend dashboard
  */
 
 export async function POST(req: Request) {
@@ -63,11 +65,13 @@ export async function POST(req: Request) {
         // Try to send email via Resend (if configured)
         const resendApiKey = process.env.RESEND_API_KEY
         const toEmail = process.env.CONTACT_EMAIL_TO || 'sales@krasty.me'
+        // Use custom domain if verified, otherwise fallback to Resend test domain
+        const fromEmail = process.env.RESEND_FROM_EMAIL || 'onboarding@resend.dev'
 
         if (resendApiKey) {
             try {
                 const emailPayload: any = {
-                    from: 'Krasty Soft Website <noreply@krasty.me>',
+                    from: fromEmail,
                     to: [toEmail],
                     subject: `New Contact Form Submission from ${name}`,
                     html: `
