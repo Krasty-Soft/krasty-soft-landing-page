@@ -117,12 +117,16 @@ const SocialIcon = ({ social, index }) => {
 
 export const SocialNetworks = () => {
     return (
-        <div style={{
+        <div 
+            className="py-10 px-4 md:px-8 lg:px-12 xl:px-24"
+            style={{
             borderTop: '1px solid rgba(255, 255, 255, 0.05)',
-            padding: '2.5rem 1.5rem',
             maxWidth: '1400px',
             margin: '0 auto',
-        }}>
+            width: '100%',
+            boxSizing: 'border-box',
+        }}
+        >
             <div style={{
                 display: 'flex',
                 flexDirection: 'column',

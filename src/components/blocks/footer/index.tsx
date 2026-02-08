@@ -40,13 +40,16 @@ const ContactCard = ({ icon, label, value, href, gradient }: ContactCardProps) =
                 display: 'flex',
                 alignItems: 'center',
                 gap: '1rem',
-                padding: '1.5rem',
+                padding: '1.5rem 1.25rem',
                 textDecoration: 'none',
                 backgroundColor: 'rgba(255, 255, 255, 0.03)',
                 border: '1px solid rgba(255, 255, 255, 0.1)',
                 borderRadius: 'var(--radius-lg)',
                 overflow: 'hidden',
                 cursor: 'pointer',
+                width: '100%',
+                maxWidth: '100%',
+                boxSizing: 'border-box',
             }}
         >
             {/* Background gradient glow */}
@@ -72,10 +75,11 @@ const ContactCard = ({ icon, label, value, href, gradient }: ContactCardProps) =
                     rotate: isHovered ? 5 : 0,
                 }}
                 transition={{ duration: 0.3 }}
+                className="w-12 h-12 md:w-14 md:h-14"
                 style={{
                     position: 'relative',
-                    width: '3.5rem',
-                    height: '3.5rem',
+                    minWidth: '3rem',
+                    minHeight: '3rem',
                     borderRadius: '50%',
                     backgroundColor: 'rgba(220, 38, 38, 0.15)',
                     border: '1px solid rgba(220, 38, 38, 0.3)',
@@ -111,12 +115,13 @@ const ContactCard = ({ icon, label, value, href, gradient }: ContactCardProps) =
                         color: isHovered ? 'var(--brand-red)' : 'white',
                     }}
                     transition={{ duration: 0.2 }}
+                    className="text-base md:text-lg"
                     style={{
-                        fontSize: '1.125rem',
                         fontWeight: 600,
                         overflow: 'hidden',
                         textOverflow: 'ellipsis',
                         whiteSpace: 'nowrap',
+                        maxWidth: '100%',
                     }}
                 >
                     {value}
@@ -131,6 +136,7 @@ const ContactCard = ({ icon, label, value, href, gradient }: ContactCardProps) =
                 style={{
                     position: 'relative',
                     width: '2.5rem',
+                    minWidth: '2.5rem',
                     height: '2.5rem',
                     borderRadius: '50%',
                     backgroundColor: copied ? 'rgba(16, 185, 129, 0.2)' : 'rgba(255, 255, 255, 0.05)',
@@ -178,13 +184,20 @@ export const Footer = () => {
                 backgroundColor: '#000000',
                 color: 'white',
                 scrollMarginTop: '80px', // Account for fixed header
+                width: '100%',
+                overflowX: 'hidden',
             }}
         >
-            <div style={{
-                padding: '4rem 1.5rem',
-                maxWidth: '1400px',
-                margin: '0 auto',
-            }}>
+            <div 
+                style={{
+                    maxWidth: '1400px',
+                    margin: '0 auto',
+                    width: '100%',
+                    padding: '3rem 1rem',
+                    boxSizing: 'border-box',
+                }}
+                className="md:px-8 md:py-16 lg:px-12 lg:py-20 xl:px-24 xl:py-24"
+            >
                 {/* Title Section */}
                 <div className="mb-12 md:mb-16">
                     <h2
@@ -209,6 +222,8 @@ export const Footer = () => {
                     display: 'grid',
                     gridTemplateColumns: '1fr',
                     gap: '3rem',
+                    width: '100%',
+                    maxWidth: '100%',
                 }}
                 className="lg:grid-cols-2">
                     {/* Contact Info */}
@@ -217,6 +232,10 @@ export const Footer = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
+                        style={{
+                            width: '100%',
+                            maxWidth: '100%',
+                        }}
                     >
                         <h3 style={{
                             fontSize: '1.5rem',
@@ -227,7 +246,7 @@ export const Footer = () => {
                             For job seekers & clients
                         </h3>
                         
-                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem', width: '100%', maxWidth: '100%' }}>
                             {/* Email Card */}
                             <ContactCard
                                 icon={<Mail size={22} />}
@@ -254,6 +273,10 @@ export const Footer = () => {
                         whileInView={{ opacity: 1, x: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
+                        style={{
+                            width: '100%',
+                            maxWidth: '100%',
+                        }}
                     >
                         <h3 style={{
                             fontSize: '1.5rem',

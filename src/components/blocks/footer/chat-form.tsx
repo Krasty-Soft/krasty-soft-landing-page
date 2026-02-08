@@ -245,16 +245,23 @@ export const ChatForm = () => {
             border: '1px solid rgba(255, 255, 255, 0.1)',
             borderRadius: 'var(--radius-lg)',
             overflow: 'hidden',
+            width: '100%',
+            maxWidth: '100%',
+            boxSizing: 'border-box',
         }}>
             {/* Chat Messages */}
             <div style={{
                 flex: 1,
                 overflowY: 'auto',
-                padding: '1.5rem',
+                overflowX: 'hidden',
+                padding: '1rem',
                 display: 'flex',
                 flexDirection: 'column',
                 gap: '1rem',
-            }}>
+                width: '100%',
+                boxSizing: 'border-box',
+            }}
+            className="md:p-6">
                 <AnimatePresence mode="popLayout">
                     {messages.map((msg) => (
                         <motion.div
@@ -267,6 +274,8 @@ export const ChatForm = () => {
                                 display: 'flex',
                                 justifyContent: msg.type === 'user' ? 'flex-end' : 'flex-start',
                                 gap: '0.75rem',
+                                width: '100%',
+                                maxWidth: '100%',
                             }}
                         >
                             {msg.type === 'bot' && (
@@ -294,6 +303,8 @@ export const ChatForm = () => {
                                 color: 'white',
                                 fontSize: '0.9375rem',
                                 lineHeight: '1.5',
+                                wordWrap: 'break-word',
+                                overflowWrap: 'break-word',
                             }}>
                                 {msg.content}
                             </div>
@@ -375,12 +386,15 @@ export const ChatForm = () => {
             {/* Input Area */}
             {currentStep !== 'done' && (
                 <div style={{
-                    padding: '1rem 1.5rem',
+                    padding: '1rem',
                     borderTop: '1px solid rgba(255, 255, 255, 0.1)',
                     backgroundColor: 'rgba(0, 0, 0, 0.3)',
-                }}>
+                    width: '100%',
+                    boxSizing: 'border-box',
+                }}
+                className="md:px-6">
                     {currentStep === 'file' ? (
-                        <div style={{ display: 'flex', gap: '0.75rem' }}>
+                        <div style={{ display: 'flex', gap: '0.75rem', width: '100%', maxWidth: '100%' }}>
                             <input
                                 type="file"
                                 ref={fileInputRef}
@@ -429,7 +443,7 @@ export const ChatForm = () => {
                             </motion.button>
                         </div>
                     ) : (
-                        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-end' }}>
+                        <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'flex-end', width: '100%', maxWidth: '100%' }}>
                             <textarea
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
@@ -446,6 +460,7 @@ export const ChatForm = () => {
                                 disabled={isTyping || submitting}
                                 style={{
                                     flex: 1,
+                                    minWidth: 0,
                                     padding: '0.875rem 1rem',
                                     fontSize: '0.9375rem',
                                     backgroundColor: 'rgba(255, 255, 255, 0.05)',
@@ -455,6 +470,8 @@ export const ChatForm = () => {
                                     outline: 'none',
                                     resize: 'none',
                                     fontFamily: 'inherit',
+                                    boxSizing: 'border-box',
+                                    maxWidth: '100%',
                                 }}
                             />
                             <motion.button
@@ -464,6 +481,7 @@ export const ChatForm = () => {
                                 disabled={isTyping || submitting || !input.trim()}
                                 style={{
                                     width: '3rem',
+                                    minWidth: '3rem',
                                     height: '3rem',
                                     borderRadius: '50%',
                                     backgroundColor: (isTyping || submitting || !input.trim()) 
@@ -474,6 +492,7 @@ export const ChatForm = () => {
                                     alignItems: 'center',
                                     justifyContent: 'center',
                                     cursor: (isTyping || submitting || !input.trim()) ? 'not-allowed' : 'pointer',
+                                    flexShrink: 0,
                                 }}
                             >
                                 <Send size={18} color="white" />

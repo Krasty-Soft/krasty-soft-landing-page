@@ -37,8 +37,8 @@ export const Header = () => {
                     borderBottom: '1px solid rgba(42, 42, 42, 0.5)',
                 }}
             >
-                <div className="mx-auto px-4 md:px-8 lg:px-12 xl:px-24" style={{ maxWidth: '1600px' }}>
-                    <div className="flex items-center justify-between" style={{ gap: '2rem', minHeight: '80px', padding: '1rem 0' }}>
+                <div className="mx-auto px-4 md:px-8 lg:px-12 xl:px-24" style={{ maxWidth: '1600px', width: '100%', boxSizing: 'border-box' }}>
+                    <div className="flex items-center justify-between" style={{ gap: '1rem', minHeight: '80px', padding: '1rem 0', width: '100%' }}>
                         {/* Logo */}
                         <motion.div
                             whileHover={{ scale: 1.05 }}

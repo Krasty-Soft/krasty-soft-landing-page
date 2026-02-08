@@ -89,13 +89,32 @@
 }
 
 /* Prevent horizontal scroll on mobile */
-html, body {
+html {
   overflow-x: hidden;
-  max-width: 100vw;
 }
 
-* {
+body {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+/* Ensure all containers respect viewport width */
+.container,
+section,
+footer,
+header {
   max-width: 100%;
+  overflow-x: hidden;
+}
+
+/* Fix for form inputs and buttons on mobile */
+input,
+textarea,
+button,
+select {
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 @theme {
