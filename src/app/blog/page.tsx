@@ -26,7 +26,7 @@ export default function BlogPage() {
     })
 
     return (
-        <Section variant={'primary'} animate={false}>
+        <Section variant={'primary'} animate={false} sectionCls="pt-4 md:pt-8">
             {/* Header */}
             <div className="mb-12 md:mb-16">
                 <h1

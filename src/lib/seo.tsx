@@ -333,3 +333,49 @@ export function generateAggregateRatingSchema({
         },
     }
 }
+
+/**
+ * Generate JSON-LD structured data for Blog Article
+ */
+export function generateBlogSchema({
+    title,
+    description,
+    datePublished,
+    dateModified,
+    author = 'Krasty Soft Team',
+    image,
+}: {
+    title: string
+    description: string
+    datePublished: string
+    dateModified?: string
+    author?: string
+    image?: string
+}) {
+    return {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: title,
+        description,
+        datePublished,
+        dateModified: dateModified || datePublished,
+        author: {
+            '@type': 'Organization',
+            name: author,
+        },
+        publisher: {
+            '@type': 'Organization',
+            name: SITE_NAME,
+            url: BASE_URL,
+            logo: {
+                '@type': 'ImageObject',
+                url: `${BASE_URL}/logo.svg`,
+            },
+        },
+        image: image || `${BASE_URL}/og-image.png`,
+        mainEntityOfPage: {
+            '@type': 'WebPage',
+            '@id': BASE_URL,
+        },
+    }
+}

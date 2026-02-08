@@ -58,7 +58,18 @@ const DifferenceCard = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false)
   const [showContent, setShowContent] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
   const Icon = icons[item.title]
+
+  // Detect if device is touch-enabled
+  React.useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile('ontouchstart' in window || navigator.maxTouchPoints > 0)
+    }
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   // Simple timer for content reveal - but make it cancelable
   React.useEffect(() => {
@@ -70,14 +81,21 @@ const DifferenceCard = ({
     }
   }, [isHovered])
 
+  const handleClick = () => {
+    if (isMobile) {
+      setIsHovered(!isHovered)
+    }
+  }
+
   return (
     <motion.li
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
+      onHoverStart={() => !isMobile && setIsHovered(true)}
+      onHoverEnd={() => !isMobile && setIsHovered(false)}
+      onTap={handleClick}
       style={{
         position: 'relative',
         listStyle: 'none',
@@ -138,8 +156,14 @@ const DifferenceCard = ({
               <Icon size={20} color="white" />
             </motion.div>
 
-            {/* Text content - fixed height container */}
-            <div className="flex-1 min-w-0" style={{ height: '5rem', display: 'flex', flexDirection: 'column' }}>
+            {/* Text content - flexible height container for mobile */}
+            <div className="flex-1 min-w-0" style={{ 
+              minHeight: isHovered ? 'auto' : '5rem',
+              height: isHovered && isMobile ? 'auto' : '5rem', 
+              display: 'flex', 
+              flexDirection: 'column',
+              transition: 'height 0.3s ease'
+            }}>
               {/* Title + Description - shrinks to make room */}
               <motion.div
                 initial={false}
@@ -171,11 +195,13 @@ const DifferenceCard = ({
                 </p>
               </motion.div>
               
-              {/* Detail section - appears in freed space */}
+              {/* Detail section - appears in freed space with bottom margin */}
               <div style={{ 
                 flex: 1,
                 marginTop: '0.5rem',
+                marginBottom: isHovered ? '0.75rem' : '0',
                 position: 'relative',
+                transition: 'margin-bottom 0.3s ease'
               }}>
                 {isHovered && (
                   <motion.div
@@ -242,14 +268,15 @@ const DifferenceCard = ({
                       transition={{ 
                         duration: 0.2,
                       }}
-                      className="text-xs leading-relaxed"
+                      className="text-xs md:text-sm leading-relaxed"
                       style={{ 
                         color: 'var(--text-tertiary)',
-                        position: 'absolute',
-                        inset: 0,
+                        position: isMobile ? 'relative' : 'absolute',
+                        inset: isMobile ? 'auto' : 0,
                         display: 'flex',
                         alignItems: 'center',
-                        padding: '0 0.5rem',
+                        padding: isMobile ? '0.5rem 0.5rem 0.75rem' : '0 0.5rem',
+                        minHeight: isMobile ? 'auto' : undefined,
                       }}
                     >
                       {item.detail}
