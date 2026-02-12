@@ -1,6 +1,7 @@
 export * from './achievement-card'
 export * from './button'
 export * from './card'
+export * from './cta-banner'
 export * from './geometric-pattern'
 export * from './image'
 export * from './image-lightbox'

@@ -25,7 +25,7 @@ const Team = () => {
                 </div>
               )}
               <div className="flex flex-col gap-2">
-                <h3 className="text-lg md:text-xl font-semibold">
+                <h3 className="text-lg md:text-xl font-semibold min-h-[3.5rem] flex items-start">
                   {member.name}
                 </h3>
                 <p className="text-sm md:text-base text-gray-600">

@@ -1,10 +1,10 @@
-'use client'
+"use client";
 
-import { Next, Prev, Dot } from './controls';
+import { Next, Prev, Dot } from "./controls";
 import useEmblaCarousel from "embla-carousel-react";
 import React, { ReactNode, useCallback, useEffect, useState } from "react";
 
-export const Slider = ({ children } : {children: ReactNode}) => {
+export const Slider = ({ children }: { children: ReactNode }) => {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
@@ -18,11 +18,18 @@ export const Slider = ({ children } : {children: ReactNode}) => {
     setNextBtnEnabled(emblaApi.canScrollNext());
   }, [emblaApi, setSelectedIndex]);
 
-  const scrollPrev = useCallback(() => emblaApi && emblaApi.scrollPrev(), [emblaApi]);
-  const scrollNext = useCallback(() => emblaApi && emblaApi.scrollNext(), [emblaApi]);
-  const scrollTo = useCallback((index:number) => emblaApi && emblaApi.scrollTo(index), [
-    emblaApi
-  ]);
+  const scrollPrev = useCallback(
+    () => emblaApi && emblaApi.scrollPrev(),
+    [emblaApi],
+  );
+  const scrollNext = useCallback(
+    () => emblaApi && emblaApi.scrollNext(),
+    [emblaApi],
+  );
+  const scrollTo = useCallback(
+    (index: number) => emblaApi && emblaApi.scrollTo(index),
+    [emblaApi],
+  );
 
   useEffect(() => {
     if (!emblaApi) return;
@@ -31,11 +38,9 @@ export const Slider = ({ children } : {children: ReactNode}) => {
     emblaApi.on("select", onSelect);
   }, [emblaApi, setScrollSnaps, onSelect]);
   return (
-    <div className="relative">
+    <div className="relative w-full">
       <div className="overflow-hidden mb-10" ref={emblaRef}>
-        <div className="flex">
-          {children}
-        </div>
+        <div className="flex">{children}</div>
       </div>
 
       <div className="flex items-center gap-6 max-w-md mx-auto">
@@ -52,5 +57,5 @@ export const Slider = ({ children } : {children: ReactNode}) => {
         <Next onClick={scrollNext} enabled={nextBtnEnabled} />
       </div>
     </div>
-  )
-}
+  );
+};

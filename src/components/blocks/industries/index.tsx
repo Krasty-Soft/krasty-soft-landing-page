@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
@@ -10,6 +10,7 @@ import Icon2 from "@/assets/health-care.svg";
 import Icon3 from "@/assets/fin-tech.svg";
 import Icon4 from "@/assets/protect.svg";
 import { Section, TypingText } from "@/components/ui";
+import { SectionWrapper } from "@/components/ui/section-wrapper";
 
 const icons = {
   ["Maritime Transportation"]: Icon1,
@@ -18,15 +19,15 @@ const icons = {
   Insurance: Icon4,
 };
 
-const IndustryCard = ({ 
-  item, 
-  index 
-}: { 
-  item: { slug: string; label: string; description: string },
-  index: number 
+const IndustryCard = ({
+  item,
+  index,
+}: {
+  item: { slug: string; label: string; description: string };
+  index: number;
 }) => {
-  const [isHovered, setIsHovered] = useState(false)
-  const Icon = icons[item.label as keyof typeof icons]
+  const [isHovered, setIsHovered] = useState(false);
+  const Icon = icons[item.label as keyof typeof icons];
 
   return (
     <motion.li
@@ -37,24 +38,24 @@ const IndustryCard = ({
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
     >
-      <Link href={`/${item.slug}`} style={{ textDecoration: 'none' }}>
+      <Link href={`/${item.slug}`} style={{ textDecoration: "none" }}>
         <motion.div
           animate={{
             y: isHovered ? -8 : 0,
           }}
           transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
           style={{
-            position: 'relative',
-            backgroundColor: 'var(--surface-primary)',
-            border: '1px solid var(--border-default)',
-            borderRadius: 'var(--radius-lg)',
-            padding: '2rem',
-            height: '100%',
-            minHeight: '280px',
-            display: 'flex',
-            flexDirection: 'column',
-            overflow: 'hidden',
-            cursor: 'pointer',
+            position: "relative",
+            backgroundColor: "var(--surface-primary)",
+            border: "1px solid var(--border-default)",
+            borderRadius: "var(--radius-lg)",
+            padding: "2rem",
+            height: "100%",
+            minHeight: "280px",
+            display: "flex",
+            flexDirection: "column",
+            overflow: "hidden",
+            cursor: "pointer",
           }}
         >
           {/* Background glow effect */}
@@ -65,10 +66,11 @@ const IndustryCard = ({
             }}
             transition={{ duration: 0.4 }}
             style={{
-              position: 'absolute',
+              position: "absolute",
               inset: 0,
-              background: 'radial-gradient(circle at 50% 0%, rgba(239, 68, 68, 0.3), transparent 60%)',
-              pointerEvents: 'none',
+              background:
+                "radial-gradient(circle at 50% 0%, rgba(239, 68, 68, 0.3), transparent 60%)",
+              pointerEvents: "none",
             }}
           />
 
@@ -80,15 +82,15 @@ const IndustryCard = ({
             }}
             transition={{ duration: 0.4 }}
             style={{
-              width: '3.5rem',
-              height: '3.5rem',
-              backgroundColor: 'var(--brand-red)',
-              borderRadius: '50%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: '1.5rem',
-              position: 'relative',
+              width: "3.5rem",
+              height: "3.5rem",
+              backgroundColor: "var(--brand-red)",
+              borderRadius: "50%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: "1.5rem",
+              position: "relative",
               zIndex: 1,
             }}
           >
@@ -96,16 +98,16 @@ const IndustryCard = ({
           </motion.div>
 
           {/* Content */}
-          <div style={{ flex: 1, position: 'relative', zIndex: 1 }}>
+          <div style={{ flex: 1, position: "relative", zIndex: 1 }}>
             <h3
               className="text-xl md:text-2xl font-bold mb-3"
-              style={{ color: 'var(--text-primary)' }}
+              style={{ color: "var(--text-primary)" }}
             >
               {item.label}
             </h3>
             <p
               className="text-sm md:text-base leading-relaxed mb-6"
-              style={{ color: 'var(--text-secondary)' }}
+              style={{ color: "var(--text-secondary)" }}
             >
               {item.description}
             </p>
@@ -118,13 +120,13 @@ const IndustryCard = ({
             }}
             transition={{ duration: 0.3 }}
             style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.5rem',
-              color: 'var(--brand-red)',
-              fontSize: '0.875rem',
-              fontWeight: '600',
-              position: 'relative',
+              display: "flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              color: "var(--brand-red)",
+              fontSize: "0.875rem",
+              fontWeight: "600",
+              position: "relative",
               zIndex: 1,
             }}
           >
@@ -147,48 +149,55 @@ const IndustryCard = ({
             }}
             transition={{ duration: 0.4 }}
             style={{
-              position: 'absolute',
-              inset: '-1px',
-              borderRadius: 'var(--radius-lg)',
-              background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.5), transparent 50%)',
-              pointerEvents: 'none',
+              position: "absolute",
+              inset: "-1px",
+              borderRadius: "var(--radius-lg)",
+              background:
+                "linear-gradient(135deg, rgba(239, 68, 68, 0.5), transparent 50%)",
+              pointerEvents: "none",
               zIndex: 0,
             }}
           />
         </motion.div>
       </Link>
     </motion.li>
-  )
-}
+  );
+};
 
 export const Industries = () => {
   return (
     <Section variant={"primary"} animate={false}>
       {/* Custom Title with Typing Effect */}
-      <div className="mb-12 md:mb-16">
-        <h2
-          className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold"
-          style={{ 
-            color: 'var(--text-primary)',
-            lineHeight: '1.4'
-          }}
-        >
-          <span style={{ color: 'var(--brand-red)' }}>&gt; </span>
-          <TypingText
-            text="Tailored solutions for leading industries."
-            speed={50}
-            delay={300}
-            highlightWords={['Tailored', 'industries']}
-          />
-        </h2>
-      </div>
+      <SectionWrapper>
+        <div className="mb-12 md:mb-16">
+          <h2
+            className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold"
+            style={{
+              color: "var(--text-primary)",
+              lineHeight: "1.4",
+              maxWidth: "var(--max-width)",
+            }}
+          >
+            <span style={{ color: "var(--brand-red)" }}>&gt; </span>
+            <TypingText
+              text="Tailored solutions for leading industries."
+              speed={50}
+              delay={300}
+              highlightWords={["Tailored", "industries"]}
+            />
+          </h2>
+        </div>
 
-      <ul className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8">
-        {Array.isArray(PAGES.industries) &&
-          PAGES.industries.map((item, index) => (
-            <IndustryCard key={index} item={item} index={index} />
-          ))}
-      </ul>
+        <ul
+          className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:gap-8 w-full"
+          style={{ width: "100%", maxWidth: "var(--max-width)" }}
+        >
+          {Array.isArray(PAGES.industries) &&
+            PAGES.industries.map((item, index) => (
+              <IndustryCard key={index} item={item} index={index} />
+            ))}
+        </ul>
+      </SectionWrapper>
     </Section>
   );
 };

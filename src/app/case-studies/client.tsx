@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { FolderOpen, Search } from 'lucide-react'
-import { Section, TypingText } from '@/components/ui'
+import { Section, TypingText, CTABanner } from '@/components/ui'
 import { CaseCard } from '@/components'
 import { Technologies } from '@/components/blocks'
 import { Case } from '@/lib/cases'
@@ -200,49 +200,17 @@ export default function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
 
             {/* CTA Section */}
             <Section variant="primary" animate={false}>
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    style={{
-                        padding: '4rem 2rem',
-                        textAlign: 'center',
-                        backgroundColor: 'var(--brand-red)',
-                        borderRadius: 'var(--radius-xl)',
-                        position: 'relative',
-                        overflow: 'hidden',
-                    }}
-                >
-                    <motion.div
-                        animate={{
-                            scale: [1, 1.2, 1],
-                            opacity: [0.3, 0.6, 0.3],
-                        }}
-                        transition={{
-                            duration: 3,
-                            repeat: Infinity,
-                            ease: 'easeInOut',
-                        }}
-                        style={{
-                            position: 'absolute',
-                            inset: 0,
-                            background: 'radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent 70%)',
-                            pointerEvents: 'none',
-                        }}
-                    />
-
-                    <div style={{ position: 'relative', zIndex: 1 }}>
-                        <h2
-                            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
-                            style={{ color: 'white' }}
-                        >
-                            Ready to create your success story?
-                        </h2>
-                        <p style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '1.125rem', maxWidth: '700px', margin: '0 auto' }}>
-                            Let&apos;s build something amazing together.
-                        </p>
-                    </div>
-                </motion.div>
+                <CTABanner>
+                    <h2
+                        className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
+                        style={{ color: 'white' }}
+                    >
+                        Ready to create your success story?
+                    </h2>
+                    <p style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '1.125rem', maxWidth: '700px', margin: '0 auto' }}>
+                        Let&apos;s build something amazing together.
+                    </p>
+                </CTABanner>
             </Section>
         </>
     )

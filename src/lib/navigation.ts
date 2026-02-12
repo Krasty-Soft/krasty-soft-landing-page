@@ -31,12 +31,6 @@ const PAGES: NavigationConfig = {
   },
   industries: [
     {
-      slug: "maritime-transportation",
-      label: "Maritime Transportation",
-      description:
-        "Ship tracking, fleet optimization, cargo management, and port logistics solutions.",
-    },
-    {
       slug: "healthcare",
       label: "Healthcare",
       description:
@@ -47,6 +41,12 @@ const PAGES: NavigationConfig = {
       label: "FinTech",
       description:
         "Crypto solutions, payment gateways, investments app, SaaS etc. Bring your fintech idea into life!",
+    },
+    {
+      slug: "maritime-transportation",
+      label: "Maritime Transportation",
+      description:
+        "Ship tracking, fleet optimization, cargo management, and port logistics solutions.",
     },
     {
       slug: "insurance",

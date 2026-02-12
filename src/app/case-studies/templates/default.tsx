@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowLeft, Calendar, Tag, Rocket, Maximize2 } from 'lucide-react'
 import Link from 'next/link'
-import { Section, TypingText, ImageLightbox } from '@/components/ui'
+import { Section, TypingText, ImageLightbox, CTABanner } from '@/components/ui'
 import { Technologies } from '@/components/blocks'
 import Image from 'next/image'
 import { Case } from '@/lib/cases'
@@ -353,50 +353,18 @@ export function TemplateDefault({ caseData }: TemplateProps) {
 
             {/* CTA Section */}
             <Section variant="primary" animate={false}>
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    style={{
-                        padding: '4rem 2rem',
-                        textAlign: 'center',
-                        backgroundColor: 'var(--brand-red)',
-                        borderRadius: 'var(--radius-xl)',
-                        position: 'relative',
-                        overflow: 'hidden',
-                    }}
-                >
-                    <motion.div
-                        animate={{
-                            scale: [1, 1.2, 1],
-                            opacity: [0.3, 0.6, 0.3],
-                        }}
-                        transition={{
-                            duration: 3,
-                            repeat: Infinity,
-                            ease: 'easeInOut',
-                        }}
-                        style={{
-                            position: 'absolute',
-                            inset: 0,
-                            background: 'radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent 70%)',
-                            pointerEvents: 'none',
-                        }}
-                    />
-
-                    <div style={{ position: 'relative', zIndex: 1 }}>
-                        <Rocket size={48} color="white" style={{ margin: '0 auto 1.5rem', display: 'block' }} />
-                        <h2
-                            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
-                            style={{ color: 'white' }}
-                        >
-                            Want similar results for your project?
-                        </h2>
-                        <p style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '1.125rem', maxWidth: '700px', margin: '0 auto' }}>
-                            Let&apos;s discuss how we can help you achieve your goals.
-                        </p>
-                    </div>
-                </motion.div>
+                <CTABanner>
+                    <Rocket size={48} color="white" style={{ margin: '0 auto 1.5rem', display: 'block' }} />
+                    <h2
+                        className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
+                        style={{ color: 'white' }}
+                    >
+                        Want similar results for your project?
+                    </h2>
+                    <p style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '1.125rem', maxWidth: '700px', margin: '0 auto' }}>
+                        Let&apos;s discuss how we can help you achieve your goals.
+                    </p>
+                </CTABanner>
             </Section>
         </>
     )
