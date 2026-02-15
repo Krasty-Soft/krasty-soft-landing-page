@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Logo from "@/assets/Krasty small.svg";
+import Logo from "@/assets/krastysoft-black.svg";
 import { BookOpen } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";

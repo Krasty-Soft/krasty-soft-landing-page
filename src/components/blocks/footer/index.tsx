@@ -7,6 +7,7 @@ import { SocialNetworks } from "@/components/blocks";
 import { ChatForm } from "./chat-form";
 import { Section, TypingText } from "@/components/ui";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
+import Script from "next/script";
 
 const CONTACT_PHONE = "+380990000000";
 
@@ -20,6 +21,8 @@ function formatPhoneTel(phone: string): string {
   const digits = phone.replace(/\D/g, "");
   return `tel:${digits}`;
 }
+
+const CALENDLY_URL = "https://calendly.com/aleks-krasty/meeting-with-krasty-manager";
 
 interface ContactCardProps {
   icon: React.ReactNode;
@@ -205,6 +208,22 @@ const ContactCard = ({
 };
 
 export const Footer = () => {
+  const openCalendly = () => {
+    if (typeof window === "undefined") return;
+
+    const calendly = (
+      window as Window & {
+        Calendly?: { initPopupWidget: (options: { url: string }) => void };
+      }
+    ).Calendly;
+    if (calendly?.initPopupWidget) {
+      calendly.initPopupWidget({ url: CALENDLY_URL });
+      return;
+    }
+
+    window.open(CALENDLY_URL, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <footer
       id="contacts"
@@ -216,6 +235,14 @@ export const Footer = () => {
         overflowX: "hidden",
       }}
     >
+      <link
+        href="https://assets.calendly.com/assets/external/widget.css"
+        rel="stylesheet"
+      />
+      <Script
+        src="https://assets.calendly.com/assets/external/widget.js"
+        strategy="afterInteractive"
+      />
       <Section variant="primary" animate={false}>
         <SectionWrapper>
           {/* Title Section */}
@@ -280,6 +307,42 @@ export const Footer = () => {
                   href={formatPhoneTel(CONTACT_PHONE)}
                   gradient="linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.05))"
                 />
+
+                <motion.button
+                  type="button"
+                  onClick={openCalendly}
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ duration: 0.2 }}
+                  className="flex items-center justify-center gap-2 px-5 py-3 rounded-lg font-semibold w-full"
+                  style={{
+                    background:
+                      "linear-gradient(135deg, var(--brand-red), #c92a2a)",
+                    color: "white",
+                    boxShadow: "0 0 20px rgba(220, 38, 38, 0.3)",
+                    cursor: "pointer",
+                    border: "none",
+                  }}
+                >
+                  <motion.span
+                    animate={{
+                      scale: [1, 1.2, 1],
+                    }}
+                    transition={{
+                      duration: 2,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+                    style={{
+                      display: "inline-block",
+                      width: "8px",
+                      height: "8px",
+                      borderRadius: "50%",
+                      backgroundColor: "#fff",
+                    }}
+                  />
+                  Book a call
+                </motion.button>
               </div>
             </motion.div>
 
