@@ -16,14 +16,35 @@ export type Job = {
 type JobFields = {
   slug: string;
   title: string;
-  description?: string;
-  tags?: string;
+  description?: string | any;
+  tags?: string | any;
   link?: string;
-  location?: string;
-  type?: string;
+  location?: string | any;
+  type?: string | any;
   datePosted?: string;
   validThrough?: string;
 };
+
+// Helper to extract text from Contentful rich text or return string
+function extractText(field: any): string {
+  if (typeof field === 'string') return field;
+  if (!field) return '';
+  // If it's a Contentful Document object, extract text from paragraphs
+  if (field.nodeType && field.content) {
+    return field.content
+      .map((node: any) => {
+        if (node.nodeType === 'paragraph' && node.content) {
+          return node.content
+            .map((textNode: any) => textNode.value || '')
+            .join('');
+        }
+        return '';
+      })
+      .filter(Boolean)
+      .join('\n');
+  }
+  return String(field);
+}
 
 export const jobs: Job[] = [
   {
@@ -74,15 +95,15 @@ export async function getJobBySlug(slug: string): Promise<Job | null> {
   if (res && res.items.length > 0) {
     const f = res.items[0].fields;
     return {
-      slug: f.slug,
-      title: f.title,
-      description: f.description || "",
-      tags: f.tags || "",
-      link: f.link || "/careers",
-      location: f.location || "Remote",
-      type: f.type || "Full-time",
-      datePosted: f.datePosted || new Date().toISOString(),
-      validThrough: f.validThrough,
+      slug: extractText(f.slug),
+      title: extractText(f.title),
+      description: extractText(f.description) || "",
+      tags: extractText(f.tags) || "",
+      link: extractText(f.link) || "/careers",
+      location: extractText(f.location) || "Remote",
+      type: extractText(f.type) || "Full-time",
+      datePosted: extractText(f.datePosted) || new Date().toISOString(),
+      validThrough: extractText(f.validThrough),
     };
   }
   return jobs.find((job) => job.slug === slug) || null;
@@ -112,15 +133,15 @@ export async function getAllJobs(): Promise<Job[]> {
     return res.items.map((item: JobSkeleton) => {
       const f = item.fields;
       return {
-        slug: f.slug,
-        title: f.title,
-        description: f.description || "",
-        tags: f.tags || "",
-        link: f.link || "/careers",
-        location: f.location || "Remote",
-        type: f.type || "Full-time",
-        datePosted: f.datePosted || new Date().toISOString(),
-        validThrough: f.validThrough,
+        slug: extractText(f.slug) || "",
+        title: extractText(f.title) || "",
+        description: extractText(f.description) || "",
+        tags: extractText(f.tags) || "",
+        link: extractText(f.link) || "/careers",
+        location: extractText(f.location) || "Remote",
+        type: extractText(f.type) || "Full-time",
+        datePosted: extractText(f.datePosted) || new Date().toISOString(),
+        validThrough: extractText(f.validThrough),
       };
     });
   }

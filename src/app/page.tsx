@@ -8,10 +8,13 @@ import {
   Technologies,
 } from "@/components/blocks";
 import { getAllCases } from "@/lib/cases";
+import { getAllJobs } from "@/lib/jobs";
 import { generateAggregateRatingSchema, StructuredData } from "@/lib/seo";
 
 export default async function Home() {
   const cases = await getAllCases();
+  const jobs = await getAllJobs();
+  const isEmpty = jobs.length === 0;
 
   // Generate aggregate rating schema for reviews/testimonials
   const ratingSchema = generateAggregateRatingSchema({
@@ -30,7 +33,7 @@ export default async function Home() {
       <Industries />
       <Technologies />
       <Cases cases={cases} />
-      <Opportunities isEmpty={true} />
+      <Opportunities isEmpty={isEmpty} jobs={jobs} />
     </>
   );
 }

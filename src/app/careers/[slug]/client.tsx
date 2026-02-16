@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight, MapPin, Clock, Briefcase } from "lucide-react";
-import { Section, TypingText } from "@/components/ui";
+import { Section, TypingText, CTABanner } from "@/components/ui";
 import { Opportunities } from "@/components/blocks";
 import Link from "next/link";
 
@@ -137,89 +137,57 @@ export default function JobPageClient({ job }: JobPageClientProps) {
 
       {/* CTA Section */}
       <Section variant="primary" animate={false}>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          style={{
-            padding: "4rem 2rem",
-            textAlign: "center",
-            backgroundColor: "var(--brand-red)",
-            borderRadius: "var(--radius-xl)",
-            position: "relative",
-            overflow: "hidden",
-          }}
-        >
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.6, 0.3],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
+        <CTABanner>
+          <h2
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
+            style={{ color: "white" }}
+          >
+            Interested in this position?
+          </h2>
+          <p
             style={{
-              position: "absolute",
-              inset: 0,
-              background:
-                "radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent 70%)",
-              pointerEvents: "none",
+              color: "rgba(255, 255, 255, 0.9)",
+              fontSize: "1.125rem",
+              maxWidth: "700px",
+              margin: "0 auto 2rem",
             }}
-          />
+          >
+            Apply now and join our innovative team!
+          </p>
 
-          <div style={{ position: "relative", zIndex: 1 }}>
-            <h2
-              className="text-3xl md:text-4xl font-bold mb-4"
-              style={{ color: "white" }}
-            >
-              Interested in this position?
-            </h2>
-            <p
+          {job.applyLink ? (
+            <motion.a
+              href={job.applyLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               style={{
-                color: "rgba(255, 255, 255, 0.9)",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.75rem",
+                padding: "1rem 2.5rem",
+                backgroundColor: "white",
+                color: "#7f1d1d",
+                borderRadius: "var(--radius-full)",
                 fontSize: "1.125rem",
-                marginBottom: "2rem",
+                fontWeight: 700,
+                border: "none",
+                cursor: "pointer",
+                textDecoration: "none",
               }}
             >
-              Apply now and join our innovative team!
+              Apply Now
+              <ArrowUpRight size={20} />
+            </motion.a>
+          ) : (
+            <p
+              style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "1rem" }}
+            >
+              Contact us at careers@krastysoft.com
             </p>
-
-            {job.applyLink ? (
-              <motion.a
-                href={job.applyLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.75rem",
-                  padding: "1rem 2.5rem",
-                  backgroundColor: "white",
-                  color: "var(--brand-red)",
-                  borderRadius: "var(--radius-full)",
-                  fontSize: "1.125rem",
-                  fontWeight: 700,
-                  border: "none",
-                  cursor: "pointer",
-                  textDecoration: "none",
-                }}
-              >
-                Apply Now
-                <ArrowUpRight size={20} />
-              </motion.a>
-            ) : (
-              <p
-                style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "1rem" }}
-              >
-                Contact us at careers@krastysoft.com
-              </p>
-            )}
-          </div>
-        </motion.div>
+          )}
+        </CTABanner>
       </Section>
 
       {/* Other Opportunities */}

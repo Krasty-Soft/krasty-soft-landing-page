@@ -24,10 +24,14 @@ export async function generateMetadata({
         }
     }
 
+    const descriptionText = typeof job.description === 'string' 
+        ? job.description.replace(/<[^>]*>/g, '') 
+        : '';
+    
     return generateSEO({
         title: `${job.title} - Join Krasty Soft`,
         description: truncateDescription(
-            job.description?.replace(/<[^>]*>/g, '') ||
+            descriptionText ||
                 `${job.title} position at Krasty Soft. ${job.location || 'Remote'} - ${job.type || 'Full-time'}`
         ),
         path: `/careers/${slug}`,
@@ -56,9 +60,13 @@ export default async function VacancyPage({
     }
 
     // Generate Job Posting structured data
+    const cleanDescription = typeof job.description === 'string' 
+        ? job.description.replace(/<[^>]*>/g, '') 
+        : '';
+    
     const jobSchema = generateJobSchema({
         title: job.title || 'Position',
-        description: job.description?.replace(/<[^>]*>/g, '') || '',
+        description: cleanDescription || '',
         location: job.location || 'Remote',
         employmentType: (job.type?.toUpperCase().replace('-', '_') as any) || 'FULL_TIME',
         datePosted: job.datePosted || new Date().toISOString(),
