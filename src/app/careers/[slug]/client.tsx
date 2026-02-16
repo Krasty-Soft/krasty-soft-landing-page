@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, MapPin, Clock, Briefcase } from "lucide-react";
 import { Section, TypingText, CTABanner } from "@/components/ui";
 import { Opportunities } from "@/components/blocks";
+import { JobApplicationForm } from "@/components/job-application-form";
 import Link from "next/link";
 
 interface JobPageClientProps {
@@ -135,6 +136,11 @@ export default function JobPageClient({ job }: JobPageClientProps) {
         </motion.div>
       </Section>
 
+      {/* Application Form */}
+      <Section variant="secondary" animate={false}>
+        <JobApplicationForm position={job.title || "Position"} />
+      </Section>
+
       {/* CTA Section */}
       <Section variant="primary" animate={false}>
         <CTABanner>
@@ -152,7 +158,7 @@ export default function JobPageClient({ job }: JobPageClientProps) {
               margin: "0 auto 2rem",
             }}
           >
-            Apply now and join our innovative team!
+            Submit your CV using the form and our team will get back to you.
           </p>
 
           {job.applyLink ? (
@@ -181,17 +187,12 @@ export default function JobPageClient({ job }: JobPageClientProps) {
               <ArrowUpRight size={20} />
             </motion.a>
           ) : (
-            <p
-              style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "1rem" }}
-            >
-              Contact us at careers@krastysoft.com
+            <p style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "1rem" }}>
+              Or contact us at careers@krastysoft.com
             </p>
           )}
         </CTABanner>
       </Section>
-
-      {/* Other Opportunities */}
-      <Opportunities isEmpty={true} />
     </>
   );
 }
