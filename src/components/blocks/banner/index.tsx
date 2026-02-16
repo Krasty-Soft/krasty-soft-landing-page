@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 import { StatusBadge, AchievementCard, Modal } from "@/components/ui";
 import { StaggerWrapper } from "@/components/ui/scroll-reveal";
-import Script from "next/script";
+import { ClutchBadges } from "@/components/clutch-badges";
 
 // Stagger item variant for children
 const staggerItem = {
@@ -278,44 +278,7 @@ export const Banner = () => {
         </motion.div>
 
         <motion.div variants={staggerItem} className="w-full max-w-5xl">
-          <Script
-            src="https://widget.clutch.co/static/js/widget.js"
-            strategy="afterInteractive"
-          />
-          <div
-            className="clutch-widget"
-            data-url="https://widget.clutch.co"
-            data-widget-type="2"
-            data-height="45"
-            data-nofollow="false"
-            data-expandifr="true"
-            data-scale="100"
-            data-clutchcompany-id="2343082"
-          />
-          <div
-            style={{
-              marginTop: "1rem",
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "1rem",
-              justifyContent: "center",
-            }}
-          >
-            <iframe
-              width="120"
-              height="120"
-              src="https://clutch.co/share/badges/2343082/77869?utm_source=clutch_top_company_badge&utm_medium=image_embed"
-              title="Top Clutch Rest Api Company Ukraine 2026"
-              style={{ border: 0, maxWidth: "100%" }}
-            />
-            <iframe
-              width="120"
-              height="120"
-              src="https://clutch.co/share/badges/2343082/81323?utm_source=clutch_top_company_badge&utm_medium=image_embed"
-              title="Top Clutch Api Development Company Ukraine 2026"
-              style={{ border: 0, maxWidth: "100%" }}
-            />
-          </div>
+          <ClutchBadges />
         </motion.div>
       </StaggerWrapper>
 
