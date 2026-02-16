@@ -4,7 +4,7 @@ import { useState } from "react";
 import Logo from "@/assets/krastysoft-black.svg";
 import { BookOpen } from "lucide-react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { MobileMenu } from "./mobile-menu";
 
 export const Header = () => {
@@ -237,15 +237,12 @@ export const Header = () => {
       {/* Spacer to prevent content from hiding under fixed header */}
       <div style={{ height: "80px" }} />
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <MobileMenu
-            onClose={() => setMobileMenuOpen(false)}
-            onContactClick={scrollToContact}
-          />
-        )}
-      </AnimatePresence>
+      {/* Mobile Menu - Always in DOM for SEO, visibility controlled by CSS */}
+      <MobileMenu
+        isOpen={mobileMenuOpen}
+        onClose={() => setMobileMenuOpen(false)}
+        onContactClick={scrollToContact}
+      />
     </>
   );
 };

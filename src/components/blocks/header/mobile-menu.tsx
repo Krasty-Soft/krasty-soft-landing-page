@@ -7,6 +7,7 @@ import { Button } from '@/components/ui'
 import PAGES from '@/lib/navigation'
 
 interface MobileMenuProps {
+    isOpen: boolean
     onClose: () => void
     onContactClick: () => void
 }
@@ -45,7 +46,7 @@ const itemVariants = {
     }),
 }
 
-export const MobileMenu = ({ onClose, onContactClick }: MobileMenuProps) => {
+export const MobileMenu = ({ isOpen, onClose, onContactClick }: MobileMenuProps) => {
     const navigationItems = [
         { label: 'Case Studies', href: '/case-studies' },
         { label: 'Blog', href: '/blog' },
@@ -55,30 +56,30 @@ export const MobileMenu = ({ onClose, onContactClick }: MobileMenuProps) => {
 
     return (
         <>
-            {/* Backdrop */}
+            {/* Backdrop - Always in DOM for SEO */}
             <motion.div
                 variants={backdropVariants}
                 initial="closed"
-                animate="open"
-                exit="closed"
+                animate={isOpen ? "open" : "closed"}
                 onClick={onClose}
                 className="fixed inset-0 z-40"
                 style={{
                     backgroundColor: 'rgba(0, 0, 0, 0.6)',
                     backdropFilter: 'blur(4px)',
+                    pointerEvents: isOpen ? 'auto' : 'none',
                 }}
             />
 
-            {/* Menu Panel */}
+            {/* Menu Panel - Always in DOM for SEO */}
             <motion.div
                 variants={menuVariants}
                 initial="closed"
-                animate="open"
-                exit="closed"
+                animate={isOpen ? "open" : "closed"}
                 className="fixed top-0 right-0 bottom-0 w-full sm:w-96 z-50 flex flex-col"
                 style={{
                     backgroundColor: 'var(--bg-secondary)',
                     borderLeft: '1px solid var(--border-default)',
+                    pointerEvents: isOpen ? 'auto' : 'none',
                 }}
             >
                 {/* Header */}
