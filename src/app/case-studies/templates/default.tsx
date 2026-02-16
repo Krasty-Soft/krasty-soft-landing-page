@@ -131,12 +131,7 @@ export function TemplateDefault({ caseData }: TemplateProps) {
     alt: media.description || media.title || "Case study image",
   }));
 
-  const bannerImage = caseData.media.find((media) =>
-    media.title?.includes("banner"),
-  );
-  const galleryImages = caseData.media.filter(
-    (media) => !media.title?.includes("banner"),
-  );
+  const galleryImages = caseData.media;
 
   const openLightbox = (imageIndex: number) => {
     setCurrentImageIndex(imageIndex);
@@ -169,7 +164,7 @@ export function TemplateDefault({ caseData }: TemplateProps) {
 
       {/* Hero Section */}
       <Section variant="primary" animate={false}>
-        <div style={{ paddingTop: "3rem", paddingBottom: "5rem" }}>
+        <div style={{ paddingTop: "3rem", paddingBottom: "0.5rem" }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -201,11 +196,11 @@ export function TemplateDefault({ caseData }: TemplateProps) {
               style={{
                 textAlign: "center",
                 maxWidth: "1000px",
-                margin: "0 auto 3rem",
+                margin: "0 auto",
               }}
             >
               <h1
-                className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6"
+                className="text-2xl md:text-3xl lg:text-4xl font-bold mb-6"
                 style={{
                   color: "var(--text-primary)",
                   lineHeight: "1.2",
@@ -214,22 +209,6 @@ export function TemplateDefault({ caseData }: TemplateProps) {
                 <span style={{ color: "var(--brand-red)" }}>&gt; </span>
                 <TypingText text={caseData.title} speed={50} delay={300} />
               </h1>
-
-              {caseData.cardDescription && (
-                <motion.p
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.6, delay: 0.8 }}
-                  style={{
-                    fontSize: "1.25rem",
-                    lineHeight: "1.8",
-                    color: "var(--text-secondary)",
-                    marginBottom: "2rem",
-                  }}
-                >
-                  {caseData.cardDescription}
-                </motion.p>
-              )}
 
               {caseData.tags && caseData.tags.length > 0 && (
                 <motion.div
@@ -262,16 +241,6 @@ export function TemplateDefault({ caseData }: TemplateProps) {
                 </motion.div>
               )}
             </div>
-
-            {/* Hero Image */}
-            {bannerImage && (
-              <ImageCard
-                src={bannerImage.url}
-                alt={caseData.title || "Case study banner"}
-                index={0}
-                onClick={() => openLightbox(0)}
-              />
-            )}
           </motion.div>
         </div>
       </Section>
