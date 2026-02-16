@@ -39,6 +39,7 @@ export const ClutchBadges = () => {
           data-clutchcompany-id="2343082"
           style={{
             maxWidth: "100%",
+            marginLeft: "120px",
           }}
         />
       </div>
