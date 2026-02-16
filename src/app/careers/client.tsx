@@ -92,7 +92,13 @@ const PerkCard = ({ perk, index }: { perk: typeof perks[number], index: number }
   )
 }
 
-export default function CareersClient() {
+export default function CareersClient({ 
+  jobs = [], 
+  isEmpty = true 
+}: { 
+  jobs?: any[]
+  isEmpty?: boolean 
+}) {
   return (
     <>
       {/* Hero Section */}
@@ -242,7 +248,7 @@ export default function CareersClient() {
       </Section>
 
       {/* Open Positions */}
-      <Opportunities isEmpty={true} />
+      <Opportunities isEmpty={isEmpty} jobs={jobs} />
     </>
   )
 }

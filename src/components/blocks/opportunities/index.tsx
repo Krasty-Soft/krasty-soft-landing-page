@@ -6,7 +6,15 @@ import { Section, TypingText } from "@/components/ui";
 import { jobs } from "@/lib/jobs";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
 
-export const Opportunities = ({ isEmpty = false }: { isEmpty?: boolean }) => {
+export const Opportunities = ({ 
+  isEmpty = false, 
+  jobs: providedJobs 
+}: { 
+  isEmpty?: boolean
+  jobs?: any[]
+}) => {
+  // Use provided jobs or fallback to imported jobs
+  const jobsList = providedJobs && providedJobs.length > 0 ? providedJobs : jobs
   return (
     <Section variant="primary" animate={false}>
       {/* Custom Title with Typing Effect */}
@@ -57,7 +65,7 @@ export const Opportunities = ({ isEmpty = false }: { isEmpty?: boolean }) => {
             </h2>
           </div>
         ) : (
-          <Jobs jobs={jobs} />
+          <Jobs jobs={jobsList} />
         )}
       </SectionWrapper>
     </Section>

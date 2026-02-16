@@ -1,4 +1,5 @@
 import { generateSEO } from '@/lib/seo'
+import { getAllJobs } from '@/lib/jobs'
 import { Metadata } from 'next'
 import CareersClient from './client'
 
@@ -17,6 +18,9 @@ export const metadata: Metadata = generateSEO({
     ],
 })
 
-export default function CareersPage() {
-    return <CareersClient />
+export default async function CareersPage() {
+    const jobs = await getAllJobs()
+    const isEmpty = jobs.length === 0
+
+    return <CareersClient jobs={jobs} isEmpty={isEmpty} />
 }
