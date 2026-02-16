@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import Link from "next/link";
 import technologies from "@/constants/technologies";
 import Icon1 from "@/assets/retool.svg";
 import Icon2 from "@/assets/react.svg";
@@ -26,6 +27,7 @@ const TechCard = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const Icon = icons[tech.key];
+  const techSlug = tech.key.toLowerCase();
 
   return (
     <motion.li
@@ -35,9 +37,10 @@ const TechCard = ({
       transition={{ delay: index * 0.1, duration: 0.5 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      style={{ listStyle: "none", minWidth: "326px" }}
+      style={{ listStyle: "none" }}
     >
-      <motion.div
+      <Link href={`/${techSlug}`} style={{ textDecoration: "none" }}>
+        <motion.div
         animate={{
           y: isHovered ? -12 : 0,
         }}
@@ -145,6 +148,7 @@ const TechCard = ({
           }}
         />
       </motion.div>
+      </Link>
     </motion.li>
   );
 };
