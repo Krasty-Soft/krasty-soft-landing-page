@@ -17,12 +17,14 @@ export const JobApplicationForm = ({ position }: JobApplicationFormProps) => {
   });
   const [file, setFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "success" | "error"
+  >("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData({
       ...formData,
@@ -96,7 +98,7 @@ export const JobApplicationForm = ({ position }: JobApplicationFormProps) => {
     } catch (error) {
       setSubmitStatus("error");
       setErrorMessage(
-        error instanceof Error ? error.message : "Failed to submit application"
+        error instanceof Error ? error.message : "Failed to submit application",
       );
     } finally {
       setIsSubmitting(false);
@@ -131,8 +133,8 @@ export const JobApplicationForm = ({ position }: JobApplicationFormProps) => {
           fontSize: "0.9375rem",
         }}
       >
-        Fill out the form below and attach your CV/Resume. We&apos;ll get back to you
-        soon.
+        Fill out the form below and attach your CV/Resume. We&apos;ll get back
+        to you soon.
       </p>
 
       <form onSubmit={handleSubmit}>
@@ -330,7 +332,8 @@ export const JobApplicationForm = ({ position }: JobApplicationFormProps) => {
               }}
               onMouseEnter={(e) => {
                 e.currentTarget.style.borderColor = "var(--brand-red)";
-                e.currentTarget.style.backgroundColor = "rgba(220, 38, 38, 0.05)";
+                e.currentTarget.style.backgroundColor =
+                  "rgba(220, 38, 38, 0.05)";
               }}
               onMouseLeave={(e) => {
                 e.currentTarget.style.borderColor = "var(--border-default)";
@@ -345,7 +348,9 @@ export const JobApplicationForm = ({ position }: JobApplicationFormProps) => {
               <p style={{ color: "var(--text-primary)", fontWeight: 600 }}>
                 Click to upload your CV
               </p>
-              <p style={{ color: "var(--text-secondary)", fontSize: "0.875rem" }}>
+              <p
+                style={{ color: "var(--text-secondary)", fontSize: "0.875rem" }}
+              >
                 PDF or Word document
               </p>
             </div>
@@ -361,7 +366,13 @@ export const JobApplicationForm = ({ position }: JobApplicationFormProps) => {
                 justifyContent: "space-between",
               }}
             >
-              <div style={{ display: "flex", alignItems: "center", gap: "0.75rem" }}>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.75rem",
+                }}
+              >
                 <FileText size={24} color="#10b981" />
                 <div>
                   <p
@@ -373,7 +384,12 @@ export const JobApplicationForm = ({ position }: JobApplicationFormProps) => {
                   >
                     {file.name}
                   </p>
-                  <p style={{ color: "var(--text-secondary)", fontSize: "0.75rem" }}>
+                  <p
+                    style={{
+                      color: "var(--text-secondary)",
+                      fontSize: "0.75rem",
+                    }}
+                  >
                     {(file.size / 1024 / 1024).toFixed(2)} MB
                   </p>
                 </div>
@@ -444,8 +460,8 @@ export const JobApplicationForm = ({ position }: JobApplicationFormProps) => {
             }}
           >
             <CheckCircle2 size={20} />
-            Application submitted successfully! We&apos;ll review your application and get
-            back to you soon.
+            Application submitted successfully! We&apos;ll review your
+            application and get back to you soon.
           </motion.div>
         )}
 
@@ -455,15 +471,16 @@ export const JobApplicationForm = ({ position }: JobApplicationFormProps) => {
           disabled={isSubmitting || !file}
           whileHover={{ scale: isSubmitting || !file ? 1 : 1.02 }}
           whileTap={{ scale: isSubmitting || !file ? 1 : 0.98 }}
+          className="rounded-lg"
           style={{
             width: "100%",
             padding: "1rem",
             fontSize: "1rem",
             fontWeight: 700,
             color: "white",
-            backgroundColor: isSubmitting || !file ? "#6b7280" : "var(--brand-red)",
+            backgroundColor:
+              isSubmitting || !file ? "#6b7280" : "var(--brand-red)",
             border: "none",
-            borderRadius: "var(--radius-full)",
             cursor: isSubmitting || !file ? "not-allowed" : "pointer",
             display: "flex",
             alignItems: "center",
