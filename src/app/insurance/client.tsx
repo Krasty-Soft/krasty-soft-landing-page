@@ -270,7 +270,7 @@ export default function InsuranceClient({ cases }: { cases: Case[] }) {
       <Technologies />
 
       {/* Case Studies */}
-      {cases.length > 0 && <Cases cases={cases} />}
+      <Cases cases={cases} industry="insurance" />
 
       {/* CTA Section */}
       <Section variant="primary" animate={false}>

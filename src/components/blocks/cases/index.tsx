@@ -1,15 +1,20 @@
 "use client";
 
 import { Section, Slider, TypingText } from "@/components/ui";
-import { Case } from "@/lib/cases";
+import { Case, Industry } from "@/lib/cases";
 import { Slide } from "./slide";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
 
 interface CasesProps {
   cases: Case[];
+  industry?: Industry;
 }
 
-export const Cases = ({ cases }: CasesProps) => {
+export const Cases = ({ cases, industry }: CasesProps) => {
+  // Filter cases by industry if provided
+  const filteredCases = industry
+    ? cases.filter((c) => c.industries?.includes(industry))
+    : cases;
   return (
     <Section variant="secondary" animate={false}>
       {/* Custom Title with Typing Effect */}
@@ -34,11 +39,24 @@ export const Cases = ({ cases }: CasesProps) => {
         </div>
 
         <div className="w-full" style={{ maxWidth: "var(--max-width)" }}>
-          <Slider>
-            {cases?.map((item, i) => (
-              <Slide slide={item} key={i} />
-            ))}
-          </Slider>
+          {filteredCases.length > 0 ? (
+            <Slider>
+              {filteredCases.map((item, i) => (
+                <Slide slide={item} key={i} />
+              ))}
+            </Slider>
+          ) : (
+            <p
+              style={{
+                textAlign: "center",
+                color: "var(--text-secondary)",
+                padding: "2rem",
+                fontSize: "1rem",
+              }}
+            >
+              No case studies available for this industry yet.
+            </p>
+          )}
         </div>
       </SectionWrapper>
     </Section>

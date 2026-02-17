@@ -233,7 +233,7 @@ export default function MaritimeTransportationClient({ cases }: { cases: Case[] 
       <Technologies />
 
       {/* Case Studies */}
-      {cases.length > 0 && <Cases cases={cases} />}
+      <Cases cases={cases} industry="maritime" />
 
       {/* CTA Section */}
       <Section variant="primary" animate={false}>

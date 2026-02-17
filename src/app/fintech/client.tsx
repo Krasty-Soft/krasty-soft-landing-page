@@ -233,7 +233,7 @@ export default function FintechClient({ cases }: { cases: Case[] }) {
       <Technologies />
 
       {/* Case Studies */}
-      {cases.length > 0 && <Cases cases={cases} />}
+      <Cases cases={cases} industry="fintech" />
 
       {/* CTA Section */}
       <Section variant="primary" animate={false}>
