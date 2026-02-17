@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import Logo from "@/assets/krastysoft-black.svg";
-import { BookOpen } from "lucide-react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { MobileMenu } from "./mobile-menu";
+import { DesktopMenu } from "./desktop-menu";
 
 export const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -34,6 +34,7 @@ export const Header = () => {
           backdropFilter: "blur(12px)",
           backgroundColor: "rgba(10, 10, 10, 0.8)",
           borderBottom: "1px solid rgba(42, 42, 42, 0.5)",
+          overflow: "visible",
         }}
       >
         <div
@@ -82,27 +83,11 @@ export const Header = () => {
               </Link>
             </motion.div>
 
+            {/* Desktop Navigation Menu */}
+            <DesktopMenu />
+
             {/* Right side - Desktop */}
             <div className="flex items-center gap-3">
-              {/* Blog button - desktop only */}
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="hidden lg:block"
-              >
-                <Link
-                  href="/blog"
-                  className="flex items-center gap-2 px-4 py-2 rounded-lg border transition-all duration-200 hover:border-red-600 hover:bg-red-600/10"
-                  style={{
-                    borderColor: "var(--border-default)",
-                    color: "var(--text-primary)",
-                  }}
-                >
-                  <BookOpen className="w-4 h-4" />
-                  <span className="font-medium">Blog</span>
-                </Link>
-              </motion.div>
-
               {/* Let's talk button - enhanced */}
               <motion.button
                 onClick={scrollToContact}
@@ -137,10 +122,10 @@ export const Header = () => {
                 Let&apos;s talk
               </motion.button>
 
-              {/* Hamburger menu button - animated */}
+              {/* Hamburger menu button - animated (mobile only) */}
               <motion.button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="p-3 rounded-lg border transition-colors duration-200 relative overflow-hidden"
+                className="lg:hidden p-3 rounded-lg border transition-colors duration-200 relative overflow-hidden"
                 style={{
                   borderColor: mobileMenuOpen
                     ? "var(--brand-red)"
