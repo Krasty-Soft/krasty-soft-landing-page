@@ -45,10 +45,10 @@ const ImageCard = ({
         cursor: "pointer",
       }}
     >
-      {/* Red tint overlay - fades on hover */}
+      {/* Red tint overlay - shows on hover */}
       <motion.div
         animate={{
-          opacity: isHovered ? 0 : 0.3,
+          opacity: isHovered ? 0.3 : 0,
         }}
         transition={{ duration: 0.4 }}
         style={{

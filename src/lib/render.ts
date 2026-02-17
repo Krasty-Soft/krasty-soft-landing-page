@@ -148,24 +148,12 @@ function renderRichTextNode(
                         { 
                             key: `${key}-niche`, 
                             style: { 
-                                marginBottom: '2rem',
-                                padding: '1.5rem',
-                                backgroundColor: 'rgba(220, 38, 38, 0.05)',
-                                border: '1px solid rgba(220, 38, 38, 0.2)',
-                                borderRadius: '0.75rem'
+                                marginBottom: '2rem'
                             } 
                         },
                         React.createElement(
                             'strong',
-                            { 
-                                style: { 
-                                    fontSize: '1.125rem',
-                                    marginBottom: '0.75rem',
-                                    fontWeight: 600,
-                                    display: 'block',
-                                    color: 'var(--brand-red)'
-                                } 
-                            },
+                            { className: 'text-xl mb-3 font-medium block' },
                             'Niche',
                         ),
                         React.createElement(
@@ -184,24 +172,12 @@ function renderRichTextNode(
                         { 
                             key: `${key}-problematic`, 
                             style: { 
-                                marginBottom: '2rem',
-                                padding: '1.5rem',
-                                backgroundColor: 'rgba(220, 38, 38, 0.05)',
-                                border: '1px solid rgba(220, 38, 38, 0.2)',
-                                borderRadius: '0.75rem'
+                                marginBottom: '2rem'
                             } 
                         },
                         React.createElement(
                             'strong',
-                            { 
-                                style: { 
-                                    fontSize: '1.125rem',
-                                    marginBottom: '0.75rem',
-                                    fontWeight: 600,
-                                    display: 'block',
-                                    color: 'var(--brand-red)'
-                                } 
-                            },
+                            { className: 'text-xl mb-3 font-medium block' },
                             'Problematic',
                         ),
                         fields.problematic.content.map(
@@ -237,24 +213,12 @@ function renderRichTextNode(
                         { 
                             key: `${key}-tech`, 
                             style: { 
-                                marginBottom: '2rem',
-                                padding: '1.5rem',
-                                backgroundColor: 'rgba(220, 38, 38, 0.05)',
-                                border: '1px solid rgba(220, 38, 38, 0.2)',
-                                borderRadius: '0.75rem'
+                                marginBottom: '2rem'
                             } 
                         },
                         React.createElement(
                             'strong',
-                            { 
-                                style: { 
-                                    fontSize: '1.125rem',
-                                    marginBottom: '0.75rem',
-                                    fontWeight: 600,
-                                    display: 'block',
-                                    color: 'var(--brand-red)'
-                                } 
-                            },
+                            { className: 'text-xl mb-3 font-medium block' },
                             'Technologies',
                         ),
                         React.createElement(

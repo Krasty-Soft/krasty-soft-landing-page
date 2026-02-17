@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion'
 import { Heart, Shield, Database, Activity, Users, FileCheck, Smartphone, Cloud } from 'lucide-react'
-import { Section, TypingText } from '@/components/ui'
+import { Section, TypingText, CTABanner } from '@/components/ui'
 import { Cases, Technologies } from '@/components/blocks'
 import { Case } from '@/lib/cases'
 import { useState } from 'react'
@@ -237,50 +237,18 @@ export default function HealthcareClient({ cases }: { cases: Case[] }) {
 
       {/* CTA Section */}
       <Section variant="primary" animate={false}>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          style={{
-            padding: '4rem 2rem',
-            textAlign: 'center',
-            backgroundColor: 'var(--brand-red)',
-            borderRadius: 'var(--radius-xl)',
-            position: 'relative',
-            overflow: 'hidden',
-          }}
-        >
-          <motion.div
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.3, 0.6, 0.3],
-            }}
-            transition={{
-              duration: 3,
-              repeat: Infinity,
-              ease: 'easeInOut',
-            }}
-            style={{
-              position: 'absolute',
-              inset: 0,
-              background: 'radial-gradient(circle at center, rgba(255, 255, 255, 0.2), transparent 70%)',
-              pointerEvents: 'none',
-            }}
-          />
-          
-          <div style={{ position: 'relative', zIndex: 1 }}>
-            <Activity size={48} color="white" style={{ margin: '0 auto 1.5rem', display: 'block' }} />
-            <h2
-              className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
-              style={{ color: 'white' }}
-            >
-              Ready to transform healthcare delivery?
-            </h2>
-            <p style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '1.125rem', maxWidth: '700px', margin: '0 auto' }}>
-              Let&apos;s build secure, compliant healthcare solutions that make a difference.
-            </p>
-          </div>
-        </motion.div>
+        <CTABanner>
+          <Activity size={48} color="white" style={{ margin: '0 auto 1.5rem', display: 'block' }} />
+          <h2
+            className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
+            style={{ color: 'white' }}
+          >
+            Ready to transform healthcare delivery?
+          </h2>
+          <p style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '1.125rem', maxWidth: '700px', margin: '0 auto' }}>
+            Let&apos;s build secure, compliant healthcare solutions that make a difference.
+          </p>
+        </CTABanner>
       </Section>
     </>
   )

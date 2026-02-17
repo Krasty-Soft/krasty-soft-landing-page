@@ -239,44 +239,6 @@ export const Banner = () => {
           </motion.button>
         </motion.div>
 
-        {/* Social Proof Grid */}
-        <motion.div
-          variants={staggerItem}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-16 w-full max-w-5xl"
-        >
-          <AchievementCard
-            variant="rating"
-            rating={5}
-            maxRating={5}
-            label="Rating"
-            onClick={() => setReviewsModalOpen(true)}
-            animateStars
-          />
-
-          <AchievementCard
-            variant="award"
-            emoji="🏆"
-            title="Top API Dev"
-            subtitle="Ukraine 2026"
-            onClick={() => setAwardsModalOpen(true)}
-          />
-
-          <AchievementCard
-            variant="stat"
-            number={11}
-            label="Client Reviews"
-            onClick={() => setReviewsModalOpen(true)}
-          />
-
-          <AchievementCard
-            variant="award"
-            emoji="🏆"
-            title="Top REST API"
-            subtitle="Ukraine 2026"
-            onClick={() => setAwardsModalOpen(true)}
-          />
-        </motion.div>
-
         <motion.div variants={staggerItem} className="w-full max-w-5xl">
           <ClutchBadges />
         </motion.div>

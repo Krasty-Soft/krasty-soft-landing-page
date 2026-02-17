@@ -22,7 +22,8 @@ function formatPhoneTel(phone: string): string {
   return `tel:${digits}`;
 }
 
-const CALENDLY_URL = "https://calendly.com/aleks-krasty/meeting-with-krasty-manager";
+const CALENDLY_URL =
+  "https://calendly.com/aleks-krasty/meeting-with-krasty-manager";
 
 interface ContactCardProps {
   icon: React.ReactNode;
@@ -243,7 +244,7 @@ export const Footer = () => {
         src="https://assets.calendly.com/assets/external/widget.js"
         strategy="afterInteractive"
       />
-      <Section variant="primary" animate={false}>
+      <Section variant="primary" animate={false} containerCls="pbottom-0">
         <SectionWrapper>
           {/* Title Section */}
           <div
@@ -297,15 +298,6 @@ export const Footer = () => {
                   value="sales@krasty.me"
                   href="mailto:sales@krasty.me"
                   gradient="linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(220, 38, 38, 0.05))"
-                />
-
-                {/* Phone Card */}
-                <ContactCard
-                  icon={<Phone size={22} />}
-                  label="Call us"
-                  value={formatPhoneDisplay(CONTACT_PHONE)}
-                  href={formatPhoneTel(CONTACT_PHONE)}
-                  gradient="linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(139, 92, 246, 0.05))"
                 />
 
                 <motion.button

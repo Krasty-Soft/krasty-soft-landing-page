@@ -92,11 +92,11 @@ export const CaseCard = ({ data }: { data: Case }) => {
                         />
                     </motion.div>
 
-                    {/* Red Tint Overlay - "Sleeping" state that fades on hover */}
+                    {/* Red Tint Overlay - shows on hover */}
                     <motion.div
                         initial={false}
                         animate={{
-                            opacity: isHovered ? 0 : 0.6,
+                            opacity: isHovered ? 0.6 : 0,
                         }}
                         transition={{ duration: 0.5 }}
                         style={{
@@ -105,7 +105,6 @@ export const CaseCard = ({ data }: { data: Case }) => {
                             background: 'linear-gradient(135deg, rgba(220, 38, 38, 0.5), rgba(0, 0, 0, 0.7))',
                             mixBlendMode: 'multiply',
                             zIndex: 1,
-                            opacity: 0.6,
                         }}
                     />
 
