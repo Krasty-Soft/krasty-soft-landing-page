@@ -134,15 +134,7 @@ export default async function BlogPostPage({
                             color: 'var(--text-primary)',
                         }}
                     >
-                        {renderRichTextAsHtml(post.richContent || { content: [] })}
-                        
-                        {/* Fallback if no rich content */}
-                        {!post.richContent && (
-                            <div 
-                                dangerouslySetInnerHTML={{ __html: post.content }}
-                                style={{ whiteSpace: 'pre-wrap' }}
-                            />
-                        )}
+                        {renderRichTextAsHtml(post.richContent?.content || [])}
                     </div>
                 </article>
             </Section>
