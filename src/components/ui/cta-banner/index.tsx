@@ -13,6 +13,7 @@ export const CTABanner = ({ children }: CTABannerProps) => {
       initial={{ opacity: 0, scale: 0.95 }}
       whileInView={{ opacity: 1, scale: 1 }}
       viewport={{ once: true }}
+      className="md:w-4/5 md:mx-auto"
       style={{
         padding: "4rem 2rem",
         textAlign: "center",

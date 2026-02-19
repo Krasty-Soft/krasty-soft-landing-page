@@ -162,7 +162,7 @@ export default function FintechClient({ cases }: { cases: Case[] }) {
             </div>
 
             <h1
-              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6"
+              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-18"
               style={{
                 color: 'var(--text-primary)',
                 lineHeight: '1.2',

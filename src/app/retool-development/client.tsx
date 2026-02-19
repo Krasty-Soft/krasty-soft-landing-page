@@ -1,538 +1,281 @@
-"use client";
+'use client'
 
-import React from "react";
-import { motion } from "framer-motion";
-import { Wrench, Zap } from "lucide-react";
-import { Section, TypingText } from "@/components/ui";
-import { Technologies, Cases, UseCases } from "@/components/blocks";
-import { CTABanner } from "@/components/ui/cta-banner";
-import { SectionWrapper } from "@/components/ui/section-wrapper";
+import { motion } from 'framer-motion'
+import { Wrench, Zap, Database, Layout, Workflow, Shield, Clock, RefreshCw } from 'lucide-react'
+import { Section, TypingText } from '@/components/ui'
+import { Technologies, Cases, UseCases } from '@/components/blocks'
+import { CTABanner } from '@/components/ui/cta-banner'
+import { useState } from 'react'
 
-const problemsWesolve = [
+const benefits = [
   {
-    problem: "Unclear app structure and tangled logic.",
-    solution: "Refactor priorities, reusable patterns, and safer changes.",
+    icon: Zap,
+    title: 'Rapid Development',
+    description: 'Build internal tools 10x faster with Retool\'s drag-and-drop interface and pre-built components.',
   },
   {
-    problem: "Slow performance and unstable queries.",
-    solution: "Fix data flows, caching/queries, and UI bottlenecks.",
+    icon: Database,
+    title: 'Any Data Source',
+    description: 'Connect to databases, APIs, and services instantly - PostgreSQL, MongoDB, REST APIs, and more.',
   },
   {
-    problem: "Access control is hard to reason about.",
-    solution: "Role-based permissions and predictable review steps.",
+    icon: Layout,
+    title: 'Custom UI Components',
+    description: 'Design beautiful interfaces with tables, charts, forms, and custom React components.',
   },
-];
+  {
+    icon: Workflow,
+    title: 'Automation & Workflows',
+    description: 'Automate business processes with scheduled jobs, webhooks, and event-driven workflows.',
+  },
+  {
+    icon: Shield,
+    title: 'Enterprise Security',
+    description: 'Built-in authentication, SSO, RBAC, and audit logs for enterprise-grade security.',
+  },
+  {
+    icon: RefreshCw,
+    title: 'Easy Maintenance',
+    description: 'Update tools quickly without deployments - changes go live instantly.',
+  },
+]
 
-const whenIsRightChoice = [
-  "Your Retool app works, but breaks after small process changes.",
-  "Data sources are inconsistent, and teams don't trust the numbers.",
-  "Permissions, auditability, or environments became a blocker.",
-  'Delivery slowed down due to unclear ownership or "quick fixes."',
-  "You need a plan before scaling or handing work to a vendor.",
-  "Documentation is missing, so changes are risky and knowledge is siloed.",
-];
+const useCases = [
+  'Admin Panels & Dashboards',
+  'Customer Support Tools',
+  'Data Management Interfaces',
+  'Internal CRM Systems',
+  'Approval Workflows',
+  'Reporting & Analytics Tools',
+]
 
-const whatWeCovers = [
-  "Audit of existing Retool apps and architecture.",
-  "Recommendations with a delivery roadmap and quick wins.",
-  "UX cleanup for operational screens and daily workflows.",
-  "Integration review (APIs, databases, data consistency).",
-  <>
-    Handover package for your team or a{" "}
-    <strong>Retool development agency</strong>.
-  </>,
-  "Performance and reliability review (queries, load, UI bottlenecks).",
-];
+const BenefitCard = ({ benefit, index }: { benefit: typeof benefits[number], index: number }) => {
+  const [isHovered, setIsHovered] = useState(false)
+  const Icon = benefit.icon
 
-const howWeWork = [
-  "Short discovery call and access setup.",
-  "Audit + findings mapped to business impact.",
-  "Action plan with scope and priorities.",
-  "Implementation support or clean handoff.",
-];
-
-const whyKrasty = [
-  <>
-    <strong>Retool experts</strong> who focus on business workflows.
-  </>,
-  "Clear, practical recommendations that teams can execute.",
-  <>
-    A predictable <strong>Retool consultancy</strong> format with measurable
-    outputs.
-  </>,
-  "Experience across FinTech, healthcare, E-commerce, and logistics.",
-];
-
-const ContentBlock = ({
-  heading,
-  children,
-}: {
-  heading: string;
-  children: React.ReactNode;
-}) => (
-  <div
-    style={{}}
-  >
-    <h2
-      className="text-xl md:text-2xl lg:text-3xl font-bold"
-      style={{
-        color: "var(--text-primary)",
-        lineHeight: "1.3",
-        textAlign: "center",
-        marginBottom: "1.5rem",
-      }}
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ delay: index * 0.1, duration: 0.5 }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
     >
-      <span style={{ color: "var(--brand-red)" }}>&gt; </span>
-      {heading}
-    </h2>
-    <div>{children}</div>
-  </div>
-);
+      <motion.div
+        animate={{ y: isHovered ? -8 : 0 }}
+        transition={{ duration: 0.3 }}
+        style={{
+          position: 'relative',
+          padding: '2rem',
+          backgroundColor: 'var(--surface-primary)',
+          border: '1px solid var(--border-default)',
+          borderRadius: 'var(--radius-lg)',
+          overflow: 'hidden',
+          height: '100%',
+        }}
+      >
+        <motion.div
+          animate={{
+            opacity: isHovered ? 0.1 : 0,
+            scale: isHovered ? 1.5 : 1,
+          }}
+          transition={{ duration: 0.5 }}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'radial-gradient(circle at top, var(--brand-red), transparent 70%)',
+            pointerEvents: 'none',
+          }}
+        />
 
-const bodyTextStyle = {
-  fontSize: "1.0625rem",
-  lineHeight: "1.8",
-  color: "var(--text-secondary)",
-  marginBottom: "1rem",
-};
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <motion.div
+            animate={{
+              scale: isHovered ? 1.1 : 1,
+              rotate: isHovered ? 5 : 0,
+            }}
+            transition={{ duration: 0.3 }}
+            style={{
+              width: '3.5rem',
+              height: '3.5rem',
+              borderRadius: '50%',
+              backgroundColor: 'rgba(220, 38, 38, 0.1)',
+              border: '1px solid rgba(220, 38, 38, 0.3)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginBottom: '1.5rem',
+            }}
+          >
+            <Icon size={28} color="var(--brand-red)" />
+          </motion.div>
 
-interface RetoolDevelopmentClientProps {
-  cases: any[];
+          <motion.h3
+            animate={{ color: isHovered ? 'var(--brand-red)' : 'var(--text-primary)' }}
+            transition={{ duration: 0.3 }}
+            style={{
+              fontSize: '1.25rem',
+              fontWeight: 700,
+              marginBottom: '0.75rem',
+            }}
+          >
+            {benefit.title}
+          </motion.h3>
+
+          <p style={{
+            fontSize: '0.9375rem',
+            lineHeight: '1.7',
+            color: 'var(--text-secondary)',
+          }}>
+            {benefit.description}
+          </p>
+        </div>
+      </motion.div>
+    </motion.div>
+  )
 }
 
-export default function RetoolDevelopmentClient({
-  cases,
-}: RetoolDevelopmentClientProps) {
+interface RetoolDevelopmentClientProps {
+  cases: any[]
+}
+
+export default function RetoolDevelopmentClient({ cases }: RetoolDevelopmentClientProps) {
   return (
     <>
       {/* Hero Section */}
       <Section variant="primary" animate={false}>
-        <div style={{ paddingTop: "4rem", paddingBottom: "5rem" }}>
+        <div style={{ paddingTop: '4rem', paddingBottom: '5rem' }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            style={{ textAlign: "center" }}
+            style={{ textAlign: 'center' }}
           >
-            <div style={{ marginBottom: "1.5rem" }}>
+            <div style={{ marginBottom: '1.5rem' }}>
               <motion.div
                 animate={{ scale: [1, 1.05, 1] }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
+                transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
                 style={{
-                  display: "inline-block",
-                  padding: "0.75rem 1.5rem",
-                  backgroundColor: "rgba(220, 38, 38, 0.1)",
-                  border: "1px solid rgba(220, 38, 38, 0.3)",
-                  borderRadius: "var(--radius-full)",
+                  display: 'inline-block',
+                  padding: '0.75rem 1.5rem',
+                  backgroundColor: 'rgba(220, 38, 38, 0.1)',
+                  border: '1px solid rgba(220, 38, 38, 0.3)',
+                  borderRadius: 'var(--radius-full)',
                 }}
               >
-                <Wrench
-                  size={32}
-                  color="var(--brand-red)"
-                  style={{ display: "inline" }}
-                />
+                <Wrench size={32} color="var(--brand-red)" style={{ display: 'inline' }} />
               </motion.div>
             </div>
 
             <h1
-              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-6"
-              style={{ color: "var(--text-primary)", lineHeight: "1.2" }}
+              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-18"
+              style={{ color: 'var(--text-primary)', lineHeight: '1.2' }}
             >
-              <span style={{ color: "var(--brand-red)" }}>&gt; </span>
+              <span style={{ color: 'var(--brand-red)' }}>&gt; </span>
               <TypingText
-                text="Retool Consulting"
+                text="Retool Development Services"
                 speed={50}
                 delay={300}
-                highlightWords={["Retool"]}
+                highlightWords={['Retool', 'Services']}
               />
             </h1>
 
-            <motion.div
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              style={{ maxWidth: "900px", margin: "0 auto", textAlign: "left" }}
+              style={{
+                fontSize: '1.25rem',
+                lineHeight: '1.8',
+                color: 'var(--text-secondary)',
+                maxWidth: '900px',
+                margin: '0 auto',
+              }}
             >
-              <p style={bodyTextStyle}>
-                Krasty Soft provides <strong>Retool consulting</strong> to help
-                teams address fragmented internal workflows, improve data
-                visibility, and keep Retool apps stable as requirements change.
-                You get practical guidance, clear priorities, and changes that
-                can be shipped fast without rebuilding everything from scratch.
-              </p>
-              <p style={bodyTextStyle}>
-                This format fits product teams, ops teams, and SMBs that need
-                reliable internal tooling and{" "}
-                <strong>low code development</strong>.
-              </p>
-            </motion.div>
+              Build <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>powerful internal tools</span> in hours,
+              not months. We help teams leverage Retool to create{' '}
+              <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>admin panels, dashboards, and workflows</span>{' '}
+              that connect to any data source and automate business processes.
+            </motion.p>
           </motion.div>
         </div>
       </Section>
 
-      {/* When Is the Right Choice */}
+      {/* Benefits Section */}
       <Section variant="secondary" animate={false}>
-        <SectionWrapper>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            style={{ maxWidth: "900px" }}
+        <div className="mb-12 md:mb-16">
+          <h2
+            className="text-3xl md:text-4xl lg:text-5xl font-bold"
+            style={{ color: 'var(--text-primary)', lineHeight: '1.4' }}
           >
-            <ContentBlock heading="When Retool Consulting Is the Right Choice">
-              <p style={bodyTextStyle}>
-                A focused <strong>Retool consultancy</strong> helps when:
-              </p>
-              <ul
-                className="grid grid-cols-1 md:grid-cols-2 gap-x-8"
-                style={{
-                  ...bodyTextStyle,
-                  paddingLeft: "1.5rem",
-                  listStyleType: "disc",
-                }}
-              >
-                {whenIsRightChoice.map((item, i) => (
-                  <li key={i} style={{ marginBottom: "0.5rem" }}>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </ContentBlock>
-          </motion.div>
-        </SectionWrapper>
+            <span style={{ color: 'var(--brand-red)' }}>&gt; </span>
+            <TypingText
+              text="Why choose Retool?"
+              speed={50}
+              delay={300}
+              highlightWords={['Retool']}
+            />
+          </h2>
+        </div>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
+          gap: '1.5rem',
+        }}>
+          {benefits.map((benefit, index) => (
+            <BenefitCard key={index} benefit={benefit} index={index} />
+          ))}
+        </div>
       </Section>
 
-      {/* What Problems We Solve */}
+      {/* Use Cases Section */}
       <Section variant="primary" animate={false}>
-        <SectionWrapper>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            style={{ maxWidth: "900px" }}
+        <div className="mb-12 md:mb-16">
+          <h2
+            className="text-3xl md:text-4xl lg:text-5xl font-bold"
+            style={{ color: 'var(--text-primary)', lineHeight: '1.4' }}
           >
-            <ContentBlock heading="What Problems We Solve">
-              {/* Desktop: table with 2 columns. Mobile: stacked cards */}
-              <div
-                className="hidden md:grid"
-                style={{
-                  gridTemplateColumns: "1fr 1fr",
-                  border: "1px solid var(--border-default)",
-                  borderRadius: "var(--radius-lg)",
-                  overflow: "hidden",
-                }}
-              >
-                {/* Header row */}
-                <div
-                  style={{
-                    padding: "0.75rem 1.25rem",
-                    backgroundColor: "rgba(220, 38, 38, 0.08)",
-                    borderBottom: "1px solid var(--border-default)",
-                    borderRight: "1px solid var(--border-default)",
-                    fontWeight: 700,
-                    color: "var(--text-primary)",
-                    fontSize: "0.875rem",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.05em",
-                  }}
-                >
-                  Problem
-                </div>
-                <div
-                  style={{
-                    padding: "0.75rem 1.25rem",
-                    backgroundColor: "rgba(220, 38, 38, 0.08)",
-                    borderBottom: "1px solid var(--border-default)",
-                    fontWeight: 700,
-                    color: "var(--text-primary)",
-                    fontSize: "0.875rem",
-                    textTransform: "uppercase",
-                    letterSpacing: "0.05em",
-                  }}
-                >
-                  Solution
-                </div>
-                {/* Data rows */}
-                {problemsWesolve.map((item, i) => (
-                  <>
-                    <div
-                      key={`p-${i}`}
-                      style={{
-                        padding: "1rem 1.25rem",
-                        borderBottom:
-                          i < problemsWesolve.length - 1
-                            ? "1px solid var(--border-default)"
-                            : "none",
-                        borderRight: "1px solid var(--border-default)",
-                        color: "var(--text-secondary)",
-                        fontSize: "0.9375rem",
-                        lineHeight: "1.7",
-                      }}
-                    >
-                      {item.problem}
-                    </div>
-                    <div
-                      key={`s-${i}`}
-                      style={{
-                        padding: "1rem 1.25rem",
-                        borderBottom:
-                          i < problemsWesolve.length - 1
-                            ? "1px solid var(--border-default)"
-                            : "none",
-                        color: "var(--text-secondary)",
-                        fontSize: "0.9375rem",
-                        lineHeight: "1.7",
-                      }}
-                    >
-                      {item.solution}
-                    </div>
-                  </>
-                ))}
-              </div>
+            <span style={{ color: 'var(--brand-red)' }}>&gt; </span>
+            <TypingText
+              text="What can you build?"
+              speed={50}
+              delay={300}
+              highlightWords={['build']}
+            />
+          </h2>
+        </div>
 
-              {/* Mobile: stacked cards */}
-              <div className="flex flex-col gap-3 md:hidden">
-                {problemsWesolve.map((item, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      border: "1px solid var(--border-default)",
-                      borderRadius: "var(--radius-lg)",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <div
-                      style={{
-                        padding: "0.75rem 1rem",
-                        backgroundColor: "rgba(220, 38, 38, 0.08)",
-                        borderBottom: "1px solid var(--border-default)",
-                      }}
-                    >
-                      <span
-                        style={{
-                          fontSize: "0.75rem",
-                          fontWeight: 700,
-                          textTransform: "uppercase",
-                          letterSpacing: "0.05em",
-                          color: "var(--brand-red)",
-                        }}
-                      >
-                        Problem
-                      </span>
-                      <p
-                        style={{
-                          ...bodyTextStyle,
-                          marginBottom: 0,
-                          marginTop: "0.25rem",
-                        }}
-                      >
-                        {item.problem}
-                      </p>
-                    </div>
-                    <div style={{ padding: "0.75rem 1rem" }}>
-                      <span
-                        style={{
-                          fontSize: "0.75rem",
-                          fontWeight: 700,
-                          textTransform: "uppercase",
-                          letterSpacing: "0.05em",
-                          color: "var(--text-secondary)",
-                        }}
-                      >
-                        Solution
-                      </span>
-                      <p
-                        style={{
-                          ...bodyTextStyle,
-                          marginBottom: 0,
-                          marginTop: "0.25rem",
-                        }}
-                      >
-                        {item.solution}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </ContentBlock>
-          </motion.div>
-        </SectionWrapper>
-      </Section>
-
-      {/* What Our Retool Consultancy Covers */}
-      <Section variant="secondary" animate={false}>
-        <SectionWrapper>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            style={{ maxWidth: "900px" }}
-          >
-            <ContentBlock heading="What Our Retool Consultancy Covers">
-              <p style={bodyTextStyle}>
-                Our <strong>Retool consulting</strong> typically covers:
-              </p>
-              <ol
-                style={{
-                  ...bodyTextStyle,
-                  paddingLeft: "1.5rem",
-                  listStyleType: "decimal",
-                }}
-              >
-                {whatWeCovers.map((item, i) => (
-                  <li key={i} style={{ marginBottom: "0.5rem" }}>
-                    {item}
-                  </li>
-                ))}
-              </ol>
-              <p style={bodyTextStyle}>
-                If needed, we can stay involved through targeted{" "}
-                <strong>Retool development services</strong> after the
-                consulting phase.
-              </p>
-            </ContentBlock>
-          </motion.div>
-        </SectionWrapper>
-      </Section>
-
-      {/* How We Work */}
-      <Section variant="primary" animate={false}>
-        <SectionWrapper>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <ContentBlock heading="How We Work">
-              {/* Desktop: horizontal step flow */}
-              <div className="hidden md:flex items-start gap-0">
-                {howWeWork.map((item, i) => (
-                  <div key={i} className="flex items-start flex-1">
-                    <div className="flex flex-col items-center flex-1">
-                      <div
-                        style={{
-                          width: "2.5rem",
-                          height: "2.5rem",
-                          borderRadius: "50%",
-                          backgroundColor: "rgba(220, 38, 38, 0.15)",
-                          border: "1px solid rgba(220, 38, 38, 0.4)",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          fontWeight: 700,
-                          fontSize: "1rem",
-                          color: "var(--brand-red)",
-                          flexShrink: 0,
-                          marginBottom: "0.75rem",
-                        }}
-                      >
-                        {i + 1}
-                      </div>
-                      <p
-                        style={{
-                          ...bodyTextStyle,
-                          textAlign: "center",
-                          marginBottom: 0,
-                          fontSize: "0.9375rem",
-                        }}
-                      >
-                        {item}
-                      </p>
-                    </div>
-                    {i < howWeWork.length - 1 && (
-                      <div
-                        style={{
-                          marginTop: "1.15rem",
-                          height: "1px",
-                          width: "2rem",
-                          flexShrink: 0,
-                          backgroundColor: "rgba(220, 38, 38, 0.3)",
-                        }}
-                      />
-                    )}
-                  </div>
-                ))}
-              </div>
-
-              {/* Mobile: vertical steps */}
-              <div className="flex flex-col gap-4 md:hidden">
-                {howWeWork.map((item, i) => (
-                  <div key={i} className="flex items-start gap-4">
-                    <div
-                      style={{
-                        width: "2.25rem",
-                        height: "2.25rem",
-                        borderRadius: "50%",
-                        backgroundColor: "rgba(220, 38, 38, 0.15)",
-                        border: "1px solid rgba(220, 38, 38, 0.4)",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                        fontWeight: 700,
-                        fontSize: "0.9375rem",
-                        color: "var(--brand-red)",
-                        flexShrink: 0,
-                      }}
-                    >
-                      {i + 1}
-                    </div>
-                    <p style={{ ...bodyTextStyle, marginBottom: 0, paddingTop: "0.25rem" }}>
-                      {item}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </ContentBlock>
-          </motion.div>
-        </SectionWrapper>
-      </Section>
-
-      {/* Why Krasty Soft */}
-      <Section variant="secondary" animate={false}>
-        <SectionWrapper>
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            style={{ maxWidth: "900px" }}
-          >
-            <ContentBlock heading="Why Krasty Soft">
-              <p style={{ ...bodyTextStyle, textAlign: "left" }}>
-                Our strengths in <strong>Retool consultancy</strong> include:
-              </p>
-              <ul
-                style={{
-                  ...bodyTextStyle,
-                  paddingLeft: "1.5rem",
-                  listStyleType: "disc",
-                  textAlign: "left",
-                }}
-              >
-                {whyKrasty.map((item, i) => (
-                  <li key={i} style={{ marginBottom: "0.5rem" }}>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <p style={{ ...bodyTextStyle, marginTop: "1.5rem", textAlign: "left" }}>
-                We translate operational goals into changes teams can trust.
-              </p>
-              <p style={{ ...bodyTextStyle, textAlign: "left" }}>
-                Let&apos;s review your Retool setup now: our team is ready to
-                help you.
-              </p>
-            </ContentBlock>
-          </motion.div>
-        </SectionWrapper>
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+          gap: '1rem',
+        }}>
+          {useCases.map((useCase, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, scale: 0.95 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ delay: index * 0.08, duration: 0.4 }}
+              whileHover={{ scale: 1.02 }}
+              style={{
+                padding: '1.5rem',
+                backgroundColor: 'var(--surface-primary)',
+                border: '1px solid var(--border-default)',
+                borderRadius: 'var(--radius-lg)',
+                textAlign: 'center',
+                fontSize: '1.125rem',
+                fontWeight: 600,
+                color: 'var(--text-primary)',
+              }}
+            >
+              <Clock size={24} color="var(--brand-red)" style={{ margin: '0 auto 0.75rem', display: 'block' }} />
+              {useCase}
+            </motion.div>
+          ))}
+        </div>
       </Section>
 
       {/* Use Cases Block */}
@@ -547,30 +290,18 @@ export default function RetoolDevelopmentClient({
       {/* CTA Section */}
       <Section variant="primary" animate={false}>
         <CTABanner>
-          <Zap
-            size={48}
-            color="white"
-            style={{ margin: "0 auto 1.5rem", display: "block" }}
-          />
+          <Zap size={48} color="white" style={{ margin: '0 auto 1.5rem', display: 'block' }} />
           <h2
             className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
-            style={{ color: "white" }}
+            style={{ color: 'white' }}
           >
             Ready to build internal tools faster?
           </h2>
-          <p
-            style={{
-              color: "rgba(255, 255, 255, 0.9)",
-              fontSize: "1.125rem",
-              maxWidth: "700px",
-              margin: "0 auto",
-            }}
-          >
-            Let&apos;s discuss how Retool can accelerate your internal tool
-            development.
+          <p style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '1.125rem', maxWidth: '700px', margin: '0 auto' }}>
+            Let&apos;s discuss how Retool can accelerate your internal tool development.
           </p>
         </CTABanner>
       </Section>
     </>
-  );
+  )
 }

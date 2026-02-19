@@ -361,6 +361,7 @@ export const Footer = () => {
           </div>
 
           <SocialNetworks />
+          <div className="-mb-22.5 w-full"></div>
         </SectionWrapper>
       </Section>
     </footer>

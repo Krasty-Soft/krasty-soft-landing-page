@@ -1,4 +1,4 @@
-import {ArrowLink, Section} from "@/components/ui";
+import { Section } from "@/components/ui";
 import Icon1 from "@/assets/test-idea.svg";
 import Icon2 from "@/assets/create-custom-tool.svg";
 import Icon3 from "@/assets/flexibility-in-deployment.svg";
@@ -8,7 +8,6 @@ import Icon6 from "@/assets/maximize-cloud-resources.svg";
 import Icon7 from "@/assets/elevate-marketing.svg";
 import Icon8 from "@/assets/automate-reporting-analytics.svg";
 import React from "react";
-import Arrow from "@/assets/arrow-right-up.svg";
 import Link from "next/link";
 
 
@@ -37,32 +36,54 @@ const useCases = [
 export const UseCases = () => {
   return (
     <Section variant={'secondary'} subtitle={'Retool No-Code'} title={'What do you need today?'}>
-      <ul className="grid grid-cols-1 gap-2 md:grid-cols-2 md:gap-5 lg:grid-cols-4 xl:gap-10">
-        {
-          useCases.map((item, i) => {
-            const Icon = icons[item.icon]
-            return (
-              <li
-                key={i}
+      <ul className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:gap-5">
+        {useCases.map((item, i) => {
+          const Icon = icons[item.icon]
+          return (
+            <li key={i}>
+              <Link
+                href={item.link}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '1.25rem',
+                  padding: '1.25rem 1.5rem',
+                  backgroundColor: 'var(--surface-primary)',
+                  border: '1px solid var(--border-default)',
+                  borderRadius: '999px',
+                  textDecoration: 'none',
+                  transition: 'border-color 0.2s',
+                }}
+                onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(220,38,38,0.4)')}
+                onMouseLeave={e => (e.currentTarget.style.borderColor = 'var(--border-default)')}
               >
-                <Link
-                  href={item.link}
-                  className="h-28 md:h-[120px] lg:h-[170px] xl:h-[250] p-4 flex flex-col justify-between border border-light-grey rounded-20"
-                >
-                  <div className="flex items-center justify-between">
-                    <div className="h-8 w-8 lg:h-10 lg:w-10 xl:h-c-60 xl:w-c-60 bg-black rounded-full center">
-                      <Icon />
-                    </div>
-                    <Arrow />
-                  </div>
-                  <div className="font-semibold xl:text-xl">
-                    {item.title}
-                  </div>
-                </Link>
-              </li>
-            )
-          })
-        }
+                {/* Red circle icon */}
+                <div style={{
+                  width: '3.25rem',
+                  height: '3.25rem',
+                  flexShrink: 0,
+                  borderRadius: '50%',
+                  backgroundColor: 'var(--brand-red)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}>
+                  <Icon />
+                </div>
+
+                {/* Title */}
+                <span style={{
+                  fontWeight: 700,
+                  fontSize: '1rem',
+                  color: 'var(--text-primary)',
+                  lineHeight: '1.4',
+                }}>
+                  {item.title}
+                </span>
+              </Link>
+            </li>
+          )
+        })}
       </ul>
     </Section>
   )

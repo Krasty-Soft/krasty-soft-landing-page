@@ -211,7 +211,11 @@ const TeamMemberCard = ({
                 minHeight: "4rem",
               }}
             >
-              {member.name}
+              {member.name.split(" ").map((part, i) => (
+                <span key={i} style={{ display: "block" }}>
+                  {part}
+                </span>
+              ))}
             </h3>
 
             {/* Position */}
