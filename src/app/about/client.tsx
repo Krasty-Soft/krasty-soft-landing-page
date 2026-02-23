@@ -589,18 +589,6 @@ export default function AboutClient() {
           call, a virtual coffee, or a detailed technical consultation.
         </motion.p>
       </Section>
-
-      {/* CTA Banner */}
-      <Section variant="primary" animate={false}>
-        <CTABanner>
-          <h2
-            className="text-3xl md:text-4xl lg:text-5xl font-bold"
-            style={{ color: "#d0d0d0" }}
-          >
-            Let&apos;s build something great together.
-          </h2>
-        </CTABanner>
-      </Section>
     </>
   );
 }

@@ -77,9 +77,10 @@ export const Section = ({
     <section id={id} className={`${getSectionStyles(variant)} ${sectionCls}`}>
       <MotionDiv
         className={`
-                    container px-8 py-12 md:px-16 md:py-16 lg:px-22 lg:py-20 xl:px-36 xl:py-24
+                    w-full mx-auto px-8 py-12 md:px-16 md:py-16 lg:px-22 lg:py-20 xl:px-36 xl:py-24
                     ${containerCls}
                 `}
+        style={{ maxWidth: 'var(--max-width)' }}
         {...animationProps}
       >
         {(subtitle || title || description) && (

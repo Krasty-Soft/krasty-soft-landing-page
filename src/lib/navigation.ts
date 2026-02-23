@@ -33,26 +33,26 @@ const PAGES: NavigationConfig = {
     {
       slug: "healthcare",
       label: "Healthcare",
-      description:
-        "Telemedicine platforms, patient management systems, EHR solutions, and medical data security.",
+      description: "",
+      // "Telemedicine platforms, patient management systems, EHR solutions, and medical data security.",
     },
     {
       slug: "fintech",
       label: "FinTech",
-      description:
-        "Crypto solutions, payment gateways, investments app, SaaS etc. Bring your fintech idea into life!",
+      description: "",
+      // "Crypto solutions, payment gateways, investments app, SaaS etc. Bring your fintech idea into life!",
     },
     {
       slug: "maritime-transportation",
       label: "Maritime Transportation",
-      description:
-        "Ship tracking, fleet optimization, cargo management, and port logistics solutions.",
+      description: "",
+      // "Ship tracking, fleet optimization, cargo management, and port logistics solutions.",
     },
     {
       slug: "insurance",
       label: "Insurance",
-      description:
-        "Claims automation, risk assessment tools, policy management systems, and fraud detection solutions.",
+      description: "",
+      // "Claims automation, risk assessment tools, policy management systems, and fraud detection solutions.",
     },
   ],
   services: [

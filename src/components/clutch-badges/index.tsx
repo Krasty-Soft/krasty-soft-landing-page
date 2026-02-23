@@ -1,8 +1,29 @@
 "use client";
 
-import Script from "next/script";
+import { useEffect } from "react";
 
 export const ClutchBadges = () => {
+  useEffect(() => {
+    // Remove any cached instance so Clutch re-scans the DOM on every mount
+    // (next/script won't re-execute on client-side navigation; manual injection does)
+    const existing = document.querySelector(
+      'script[src="https://widget.clutch.co/static/js/widget.js"]',
+    );
+    if (existing) existing.remove();
+
+    const script = document.createElement("script");
+    script.src = "https://widget.clutch.co/static/js/widget.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      const s = document.querySelector(
+        'script[src="https://widget.clutch.co/static/js/widget.js"]',
+      );
+      if (s) s.remove();
+    };
+  }, []);
+
   return (
     <div
       style={{
@@ -13,19 +34,15 @@ export const ClutchBadges = () => {
         width: "100%",
       }}
     >
-      <Script
-        src="https://widget.clutch.co/static/js/widget.js"
-        strategy="afterInteractive"
-      />
-
       {/* Main Clutch Widget - Top Row */}
       <div
         style={{
-          maxWidth: "100%",
-          overflow: "hidden",
-          width: "100%",
-          display: "flex",
+          display: "inline-flex",
           justifyContent: "center",
+          backgroundColor: "#f2f2f2",
+          borderRadius: "9999px",
+          padding: "0.5rem 1.5rem",
+          overflow: "hidden",
         }}
       >
         <div
