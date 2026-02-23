@@ -2,31 +2,17 @@
 
 import { useEffect } from "react";
 
+type ClutchWindow = Window & { CLUTCHCO?: { init?: () => void } };
+
 export const ClutchBadges = () => {
   useEffect(() => {
+    // Script is loaded once in RootLayout. On navigation back the component
+    // remounts but the script won't re-run, so call init() to re-scan the DOM.
     const timer = setTimeout(() => {
-      // CLUTCHCO global persists across client-side navigation and causes the
-      // re-injected script to skip initialization — delete it first
-      delete (window as { CLUTCHCO?: unknown }).CLUTCHCO;
-
-      const existing = document.querySelector(
-        'script[src="https://widget.clutch.co/static/js/widget.js"]',
-      );
-      if (existing) existing.remove();
-
-      const script = document.createElement("script");
-      script.src = "https://widget.clutch.co/static/js/widget.js";
-      script.async = true;
-      document.body.appendChild(script);
+      (window as ClutchWindow).CLUTCHCO?.init?.();
     }, 50);
 
-    return () => {
-      clearTimeout(timer);
-      const s = document.querySelector(
-        'script[src="https://widget.clutch.co/static/js/widget.js"]',
-      );
-      if (s) s.remove();
-    };
+    return () => clearTimeout(timer);
   }, []);
 
   return (

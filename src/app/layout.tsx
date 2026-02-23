@@ -79,6 +79,12 @@ export default function RootLayout({
         </div>
         <ScrollTop />
 
+        {/* Clutch widget — loaded once globally; ClutchBadges calls CLUTCHCO.init() on each mount */}
+        <Script
+          src="https://widget.clutch.co/static/js/widget.js"
+          strategy="afterInteractive"
+        />
+
         {/* Web Vitals Tracking (console.log in dev, GA in production) */}
         <WebVitalsReporter />
 
