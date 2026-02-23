@@ -4,19 +4,24 @@ import { useEffect } from "react";
 
 export const ClutchBadges = () => {
   useEffect(() => {
-    // Remove any cached instance so Clutch re-scans the DOM on every mount
-    // (next/script won't re-execute on client-side navigation; manual injection does)
-    const existing = document.querySelector(
-      'script[src="https://widget.clutch.co/static/js/widget.js"]',
-    );
-    if (existing) existing.remove();
+    const timer = setTimeout(() => {
+      // CLUTCHCO global persists across client-side navigation and causes the
+      // re-injected script to skip initialization — delete it first
+      delete (window as { CLUTCHCO?: unknown }).CLUTCHCO;
 
-    const script = document.createElement("script");
-    script.src = "https://widget.clutch.co/static/js/widget.js";
-    script.async = true;
-    document.body.appendChild(script);
+      const existing = document.querySelector(
+        'script[src="https://widget.clutch.co/static/js/widget.js"]',
+      );
+      if (existing) existing.remove();
+
+      const script = document.createElement("script");
+      script.src = "https://widget.clutch.co/static/js/widget.js";
+      script.async = true;
+      document.body.appendChild(script);
+    }, 50);
 
     return () => {
+      clearTimeout(timer);
       const s = document.querySelector(
         'script[src="https://widget.clutch.co/static/js/widget.js"]',
       );
