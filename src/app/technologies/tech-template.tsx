@@ -85,14 +85,13 @@ export default function TechTemplate({ tech }: TechTemplateProps) {
       {/* What We Build Section */}
       <Section variant="secondary" animate={false}>
         <SectionWrapper>
-          <div className="mb-12 md:mb-16">
+          <div className="mb-12 md:mb-16" style={{ alignSelf: "flex-start" }}>
             <h2
               className="text-3xl md:text-4xl lg:text-5xl font-bold"
               style={{
                 color: "var(--text-primary)",
                 lineHeight: "1.4",
                 maxWidth: "var(--max-width)",
-                alignSelf: "flex-start",
               }}
             >
               <span style={{ color: "var(--brand-red)" }}>&gt; </span>
@@ -159,14 +158,13 @@ export default function TechTemplate({ tech }: TechTemplateProps) {
       {/* Why Choose Section */}
       <Section variant="primary" animate={false}>
         <SectionWrapper>
-          <div className="mb-12 md:mb-16">
+          <div className="mb-12 md:mb-16" style={{ alignSelf: "flex-start" }}>
             <h2
               className="text-3xl md:text-4xl lg:text-5xl font-bold"
               style={{
                 color: "var(--text-primary)",
                 lineHeight: "1.4",
                 maxWidth: "var(--max-width)",
-                alignSelf: "flex-start",
               }}
             >
               <span style={{ color: "var(--brand-red)" }}>&gt; </span>
