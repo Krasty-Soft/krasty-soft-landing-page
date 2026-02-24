@@ -188,7 +188,10 @@ export default function JobPageClient({ job }: JobPageClientProps) {
             </motion.a>
           ) : (
             <p style={{ color: "rgba(255, 255, 255, 0.8)", fontSize: "1rem" }}>
-              Or contact us at careers@krastysoft.com
+              Or contact us at{" "}
+              <span style={{ color: "white", fontWeight: 600 }}>
+                careers@krastysoft.com
+              </span>
             </p>
           )}
         </CTABanner>
