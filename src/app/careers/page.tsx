@@ -3,6 +3,8 @@ import { getAllJobs } from '@/lib/jobs'
 import { Metadata } from 'next'
 import CareersClient from './client'
 
+export const revalidate = 3600
+
 export const metadata: Metadata = generateSEO({
     title: 'Careers - Join Our Team',
     description:

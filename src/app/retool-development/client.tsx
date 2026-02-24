@@ -1,5 +1,6 @@
 "use client";
 
+import { Fragment } from "react";
 import { motion } from "framer-motion";
 import {
   Wrench,
@@ -10,10 +11,16 @@ import {
   Code2,
   Database,
   Users,
-  Clock,
 } from "lucide-react";
 import { Section, TypingText } from "@/components/ui";
-import { Technologies, Cases, ProblemSolutionTable, ProcessStep, PlatformCard } from "@/components/blocks";
+import {
+  Technologies,
+  Cases,
+  ProblemSolutionTable,
+  ProcessStep,
+  PlatformCard,
+  ItemsGrid,
+} from "@/components/blocks";
 import { CTABanner } from "@/components/ui/cta-banner";
 const problemsWeSolve = [
   {
@@ -106,18 +113,18 @@ const howWeWork = [
 ];
 
 const whyKrasty = [
-  <>
+  <Fragment key="industries">
     Experience delivering internal systems across Healthcare, FinTech, MedTech,
     Marketing &amp; Advertising, ECommerce, Crypto, Web3, and Maritime
     Transportation.
-  </>,
+  </Fragment>,
   "Deep understanding of operational tooling beyond interface design.",
-  <>
+  <Fragment key="low-code">
     <strong>
       Ability to balance speed and control through thoughtful{" "}
       <em>low code development</em>.
     </strong>
-  </>,
+  </Fragment>,
   "Clear planning, realistic timelines, and structured collaboration.",
 ];
 
@@ -128,8 +135,6 @@ const bodyTextStyle = {
   marginBottom: "1rem",
   textIndent: "1rem",
 };
-
-
 
 interface RetoolDevelopmentClientProps {
   cases: any[];
@@ -142,7 +147,7 @@ export default function RetoolDevelopmentClient({
     <>
       {/* Hero Section */}
       <Section variant="primary" animate={false}>
-        <div style={{ paddingTop: "4rem", paddingBottom: "5rem" }}>
+        <div style={{ paddingTop: "4rem" }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -307,41 +312,7 @@ export default function RetoolDevelopmentClient({
           </p>
         </div>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: "1rem",
-          }}
-        >
-          {ourServices.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: index * 0.08, duration: 0.4 }}
-              whileHover={{ scale: 1.02 }}
-              style={{
-                padding: "1.5rem",
-                backgroundColor: "var(--surface-primary)",
-                border: "1px solid var(--border-default)",
-                borderRadius: "var(--radius-lg)",
-                textAlign: "center",
-                fontSize: "1.125rem",
-                fontWeight: 600,
-                color: "var(--text-primary)",
-              }}
-            >
-              <Clock
-                size={24}
-                color="var(--brand-red)"
-                style={{ margin: "0 auto 0.75rem", display: "block" }}
-              />
-              {service}
-            </motion.div>
-          ))}
-        </div>
+        <ItemsGrid items={ourServices} />
 
         <p style={{ ...bodyTextStyle, marginTop: "1.5rem" }}>
           Each <strong>low code development</strong> solution is structured to

@@ -1,3 +1,5 @@
+import { Fragment } from 'react'
+
 export interface ProblemSolutionItem {
   problem: string
   solution: string
@@ -30,10 +32,10 @@ export function ProblemSolutionTable({ items }: ProblemSolutionTableProps) {
         <div style={{ padding: '0.75rem 1.25rem', backgroundColor: 'rgba(220, 38, 38, 0.08)', borderBottom: '1px solid var(--border-default)', borderRight: '1px solid var(--border-default)', fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Problem</div>
         <div style={{ padding: '0.75rem 1.25rem', backgroundColor: 'rgba(220, 38, 38, 0.08)', borderBottom: '1px solid var(--border-default)', fontWeight: 700, color: 'var(--text-primary)', fontSize: '0.875rem', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Solution</div>
         {items.map((item, i) => (
-          <>
-            <div key={`p-${i}`} style={{ padding: '1rem 1.25rem', borderBottom: i < items.length - 1 ? '1px solid var(--border-default)' : 'none', borderRight: '1px solid var(--border-default)', color: 'var(--text-secondary)', fontSize: '0.9375rem', lineHeight: '1.7' }}>{item.problem}</div>
-            <div key={`s-${i}`} style={{ padding: '1rem 1.25rem', borderBottom: i < items.length - 1 ? '1px solid var(--border-default)' : 'none', color: 'var(--text-secondary)', fontSize: '0.9375rem', lineHeight: '1.7' }}>{item.solution}</div>
-          </>
+          <Fragment key={i}>
+            <div style={{ padding: '1rem 1.25rem', borderBottom: i < items.length - 1 ? '1px solid var(--border-default)' : 'none', borderRight: '1px solid var(--border-default)', color: 'var(--text-secondary)', fontSize: '0.9375rem', lineHeight: '1.7' }}>{item.problem}</div>
+            <div style={{ padding: '1rem 1.25rem', borderBottom: i < items.length - 1 ? '1px solid var(--border-default)' : 'none', color: 'var(--text-secondary)', fontSize: '0.9375rem', lineHeight: '1.7' }}>{item.solution}</div>
+          </Fragment>
         ))}
       </div>
 

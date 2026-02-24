@@ -103,7 +103,7 @@ export default function RetoolConsultingClient({
     <>
       {/* Hero Section */}
       <Section variant="primary" animate={false}>
-        <div style={{ paddingTop: "4rem", paddingBottom: "5rem" }}>
+        <div style={{ paddingTop: "4rem" }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
@@ -151,7 +151,11 @@ export default function RetoolConsultingClient({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
-              style={{ maxWidth: "900px", margin: "0 auto", textAlign: "left" }}
+              style={{
+                maxWidth: "var(--max-width)",
+                margin: "0 auto",
+                textAlign: "left",
+              }}
             >
               <p style={bodyTextStyle}>
                 Krasty Soft provides <strong>Retool consulting</strong> to help

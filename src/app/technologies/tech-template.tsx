@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Section, TypingText, CTABanner } from "@/components/ui";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
+import { ItemsGrid } from "@/components/blocks";
 import { TechDetail } from "@/lib/techs";
 import { CheckCircle2 } from "lucide-react";
 
@@ -10,25 +11,12 @@ interface TechTemplateProps {
   tech: TechDetail;
 }
 
-// Helper to render text with <strong> tags styled with yellow background
 const renderTextWithHighlight = (text: string) => {
   const parts = text.split(/(<strong>.*?<\/strong>)/g);
   return parts.map((part, index) => {
     if (part.startsWith("<strong>") && part.endsWith("</strong>")) {
       const content = part.replace(/<\/?strong>/g, "");
-      return (
-        <strong
-          key={index}
-          style={{
-            backgroundColor: "rgba(234, 179, 8, 0.25)",
-            padding: "0.125rem 0.25rem",
-            borderRadius: "0.25rem",
-            fontWeight: 600,
-          }}
-        >
-          {content}
-        </strong>
-      );
+      return <strong key={index}>{content}</strong>;
     }
     return <span key={index}>{part}</span>;
   });
@@ -40,12 +28,11 @@ export default function TechTemplate({ tech }: TechTemplateProps) {
       {/* Hero Section */}
       <Section variant="primary" animate={false}>
         <SectionWrapper>
-          <div style={{ paddingTop: "4rem", paddingBottom: "5rem" }}>
+          <div style={{ paddingTop: "4rem" }}>
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              style={{ textAlign: "center" }}
             >
               <h1
                 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-12 md:mb-16"
@@ -66,8 +53,7 @@ export default function TechTemplate({ tech }: TechTemplateProps) {
               {/* Intro Paragraphs */}
               <div
                 style={{
-                  maxWidth: "900px",
-                  margin: "0 auto",
+                  maxWidth: "var(--max-width)",
                   display: "flex",
                   flexDirection: "column",
                   gap: "1.5rem",
@@ -84,6 +70,7 @@ export default function TechTemplate({ tech }: TechTemplateProps) {
                       lineHeight: "1.8",
                       color: "var(--text-secondary)",
                       textAlign: "justify",
+                      textIndent: "1rem",
                     }}
                   >
                     {renderTextWithHighlight(para)}
@@ -192,7 +179,7 @@ export default function TechTemplate({ tech }: TechTemplateProps) {
 
           <div
             style={{
-              maxWidth: "900px",
+              maxWidth: "var(--max-width)",
               margin: "0 auto",
               display: "flex",
               flexDirection: "column",
@@ -211,6 +198,7 @@ export default function TechTemplate({ tech }: TechTemplateProps) {
                   lineHeight: "1.8",
                   color: "var(--text-secondary)",
                   textAlign: "justify",
+                  textIndent: "1rem",
                 }}
               >
                 {renderTextWithHighlight(para)}
@@ -222,37 +210,25 @@ export default function TechTemplate({ tech }: TechTemplateProps) {
 
       {/* Industries Section */}
       <Section variant="secondary" animate={false}>
-        <SectionWrapper>
-          <div className="mb-8">
-            <h2
-              className="text-2xl md:text-3xl lg:text-4xl font-bold"
-              style={{
-                color: "var(--text-primary)",
-                lineHeight: "1.4",
-                maxWidth: "var(--max-width)",
-              }}
-            >
-              <span style={{ color: "var(--brand-red)" }}>&gt; </span>
-              {tech.industries.title}
-            </h2>
-          </div>
-
-          <ul
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-24 gap-y-2"
+        <div className="mb-12 md:mb-16">
+          <h2
+            className="text-3xl md:text-4xl lg:text-5xl font-bold"
             style={{
-              fontSize: "1.0625rem",
-              lineHeight: "1.8",
-              color: "var(--text-secondary)",
-              maxWidth: "900px",
-              listStyleType: "disc",
-              paddingLeft: "1.5rem",
+              color: "var(--text-primary)",
+              lineHeight: "1.4",
             }}
           >
-            {tech.industries.list.map((industry, index) => (
-              <li key={index}>{industry}</li>
-            ))}
-          </ul>
-        </SectionWrapper>
+            <span style={{ color: "var(--brand-red)" }}>&gt; </span>
+            <TypingText
+              text={tech.industries.title}
+              speed={40}
+              delay={300}
+              highlightWords={[tech.title]}
+            />
+          </h2>
+        </div>
+
+        <ItemsGrid items={tech.industries.list} />
       </Section>
 
       {/* CTA Section */}
@@ -268,7 +244,7 @@ export default function TechTemplate({ tech }: TechTemplateProps) {
             style={{
               color: "rgba(255, 255, 255, 0.9)",
               fontSize: "1.125rem",
-              maxWidth: "700px",
+              maxWidth: "var(--max-width)",
               margin: "0 auto 2rem",
             }}
           >

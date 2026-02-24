@@ -9,6 +9,7 @@ import { EXPERTISE_ITEMS } from "@/lib/expertise";
 import WorldMapImage from "@/assets/world-map-ukraine.jpg";
 import Image from "next/image";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
+import Link from "next/link";
 
 // Expertise Card Component
 const ExpertiseCard = ({
@@ -17,6 +18,7 @@ const ExpertiseCard = ({
 }: {
   item: (typeof EXPERTISE_ITEMS)[number];
   index: number;
+  link?: string;
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const IconComponent = item.icon;
@@ -518,9 +520,19 @@ export default function AboutClient() {
               gap: "1.5rem",
             }}
           >
-            {EXPERTISE_ITEMS.map((item, index) => (
-              <ExpertiseCard key={index} item={item} index={index} />
-            ))}
+            {EXPERTISE_ITEMS.map((item, index) =>
+              item.link ? (
+                <Link
+                  href={item.link}
+                  key={index}
+                  style={{ display: "contents" }}
+                >
+                  <ExpertiseCard item={item} index={index} />
+                </Link>
+              ) : (
+                <ExpertiseCard key={index} item={item} index={index} />
+              ),
+            )}
           </div>
         </SectionWrapper>
       </Section>

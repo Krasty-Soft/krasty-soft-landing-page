@@ -59,28 +59,28 @@ const PAGES: NavigationConfig = {
     {
       slug: "retool-development",
       label: "Retool Development",
-      description:
-        "Optimize your business processes with powerful, no-code Retool solutions tailored to your needs.",
+      description: "",
+      //"Optimize your business processes with powerful, no-code Retool solutions tailored to your needs.",
     },
     {
       slug: "custom-software-development",
       label: "Custom Software Development",
-      description:
-        "Design, develop, and deploy custom software solutions tailored to your specific business needs.",
+      description: "",
+      //  "Design, develop, and deploy custom software solutions tailored to your specific business needs.",
     },
     {
       slug: "retool-consulting",
       label: "Retool Consulting",
-      description:
-        "Get expert guidance to develop a Retool strategy that aligns with your business goals.",
+      description: "",
+      // "Get expert guidance to develop a Retool strategy that aligns with your business goals.",
     },
   ],
   technologies: [
     {
       slug: "retool",
       label: "Retool",
-      description:
-        "Retool is a platform for building internal tools and workflows without the need for coding.",
+      description: "",
+      //"Retool is a platform for building internal tools and workflows without the need for coding.",
     },
     {
       slug: "react",

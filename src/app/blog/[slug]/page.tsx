@@ -1,4 +1,7 @@
 import { getAllSlugs, getPostBySlug } from '@/lib/posts'
+
+export const revalidate = 3600
+export const dynamicParams = true
 import { generateSEO, StructuredData, generateBlogSchema } from '@/lib/seo'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'

@@ -1,4 +1,7 @@
 import { getAllSlugs, getJobBySlug } from '@/lib/jobs'
+
+export const revalidate = 3600
+export const dynamicParams = true
 import { generateSEO, truncateDescription, generateJobSchema, StructuredData } from '@/lib/seo'
 import { Metadata } from 'next'
 import { notFound } from 'next/navigation'
