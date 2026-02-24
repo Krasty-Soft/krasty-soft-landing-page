@@ -92,6 +92,7 @@ export default function TechTemplate({ tech }: TechTemplateProps) {
                 color: "var(--text-primary)",
                 lineHeight: "1.4",
                 maxWidth: "var(--max-width)",
+                alignSelf: "flex-start",
               }}
             >
               <span style={{ color: "var(--brand-red)" }}>&gt; </span>
@@ -165,6 +166,7 @@ export default function TechTemplate({ tech }: TechTemplateProps) {
                 color: "var(--text-primary)",
                 lineHeight: "1.4",
                 maxWidth: "var(--max-width)",
+                alignSelf: "flex-start",
               }}
             >
               <span style={{ color: "var(--brand-red)" }}>&gt; </span>
