@@ -1,13 +1,13 @@
 # SEO Technical Fixes — Implementation Report
-**Date:** February 9, 2026  
+**Date:** February 9, 2026 (updated March 5, 2026)
 **Prepared for:** SEO Team  
-**Status:** ✅ All fixes deployed, build verified
+**Status:** ✅ All fixes deployed, build verified (48/48 pages)
 
 ---
 
 ## Overview
 
-Following the SEO audit, 5 technical issues were identified and resolved in a single development session. All changes are live in the codebase and verified through a successful production build (48 pages generated).
+Following the SEO audit and subsequent review sessions with the SEO team, **9 technical fixes** were identified and implemented. All changes are live in the codebase and verified through a successful production build (48 pages generated).
 
 ---
 
@@ -30,7 +30,6 @@ All 5 pages were updated to use the centralized `generateSEO()` function which a
 - Full Open Graph tags (title, description, image, locale, site name)
 - Twitter Card tags
 - Robots directive (`index, follow`)
-- Keywords
 
 **Before (broken):**
 ```html
@@ -168,7 +167,6 @@ Each case study now uses its own first screenshot as the Open Graph image when s
 - Case studies can now rank as **Article rich results** in Google
 - LinkedIn/Slack previews show the actual case study screenshot instead of generic brand image
 - No more blank title/description risk if Contentful SEO fields are not filled in
-- Keywords from case tags flow through to meta keywords
 
 **Contentful fields used (no model changes needed):**
 
@@ -178,8 +176,114 @@ Each case study now uses its own first screenshot as the Open Graph image when s
 | `title` | `<title>` (fallback) |
 | `seoDescription` | `<meta description>` (primary) |
 | `cardDescription` | `<meta description>` (fallback) |
-| `tags` | `<meta keywords>` |
 | `media[0]` | OG image |
+
+---
+
+## Fix 7 — `<meta name="keywords">` Removed Sitewide
+
+**Request:** SEO team confirmed the keywords meta tag is obsolete and should be removed.
+
+**Background:**  
+Google officially stopped using `<meta name="keywords">` in 2009. Bing ignores it. Having it present can signal keyword stuffing to some crawlers and provides zero ranking benefit.
+
+**What was fixed:**  
+- Removed `keywords` from the `generateSEO()` function's output — the `tags` parameter was dropped from the `SEOProps` interface entirely
+- Removed `tags: [...]` prop calls from all 18 pages that were passing it
+
+`<meta name="keywords">` is now absent from every page on the site. All other meta tags (description, canonical, OG, Twitter Card) are unaffected.
+
+---
+
+## Fix 8 — Case Study Heading Structure Verified Across All 21 Pages
+
+**Request:** SEO team asked to verify that heading tags (`<h1>`, `<h2>`, `<h3>`) from the prepared case study texts are correctly rendered on all case study detail pages.
+
+**Verification method:**  
+Each of the 21 live case study pages was tested by fetching the rendered HTML and checking for the presence and correct nesting of heading elements.
+
+**Result: 21/21 pages pass. ✅**
+
+Example from `/case-studies/crm-system-with-unified-communications`:
+```html
+<h2 id="overview-of-the-project-and-crm-system-development">Overview of the Project and CRM System Development</h2>
+<h2 id="business-context-and-the-development-of-crm-system">Business Context and the Development of CRM System</h2>
+<h2 id="approach-to-bespoke-crm-development">Approach to Bespoke CRM Development</h2>
+<h2 id="turnkey-crm-system-development-and-core-features">Turnkey CRM System Development and Core Features</h2>
+<h3>Core Features</h3>
+<h2 id="outcomes-and-operational-impact-of-crm-system-development">Outcomes and Operational Impact of CRM System Development</h2>
+<h3>Key results:</h3>
+```
+
+**Additional implementation detail:**  
+Every `<h2>` automatically receives an `id` anchor (e.g. `id="overview-of-the-project-and-crm-system-development"`), enabling internal anchor linking and powering the Table of Contents (see Fix 9).
+
+**Heading counts across all 21 case studies:**
+
+| Case Study | H2 | H3 |
+|---|---|---|
+| admin-panel-for-wine-collectors-software | 5 | 1 |
+| ai-bureaucracy-navigator-for-eu | 5 | 0 |
+| ai-desktop-helper-for-a-healthcare-platform | 5 | 0 |
+| ai-powered-activity-management-platform | 4 | 3 |
+| ai-powered-investments-platform | 3 | 2 |
+| aims-international-ai-driven-recruitment-platform | 4 | 0 |
+| amazon-ads-analytics-platform | 6 | 0 |
+| courses-management-platform-for-healthcare-businesses | 6 | 0 |
+| crm-system-with-unified-communications | 5 | 2 |
+| crypto-arbitrage-automation-tool | 6 | 0 |
+| customer-support-dashboard-for-e-com | 3 | 2 |
+| e-commerce-marketing-analytics-dashboard-development | 5 | 1 |
+| marines-supply-coordination-platform | 5 | 0 |
+| oolu-ai-powered-hiring-platform | 5 | 2 |
+| procurement-inventory-planning-tool | 5 | 0 |
+| retool-platform-for-finance-task-automation | 6 | 0 |
+| rewards-management-platform | 3 | 2 |
+| unified-orders-inventory-management-system | 5 | 0 |
+| veterinary-purchasing-ai-assistant | 6 | 0 |
+| warehouse-logistics-efficiency-dashboard | 4 | 2 |
+| web-three-defi-platform-decentralized-liquidity-protocol-development | 6 | 0 |
+
+---
+
+## Fix 9 — Table of Contents Added to All Case Study Pages
+
+**Request:** The prepared case study texts document explicitly requested a navigation summary at the top of each article for easier reading (referencing the kitrum.com article style).
+
+**What was built:**  
+A `<nav aria-label="Table of contents">` is now automatically rendered at the top of every case study's main content section. It:
+
+- Extracts all `<h2>` headings from the case study content automatically — **no Contentful changes needed**
+- Generates anchor links to each section (e.g. clicking "Overview of the Project" scrolls to that section)
+- Only appears when there are 2 or more headings (no pointless single-item TOC)
+- Works across all 21 case studies with zero per-page configuration
+
+**How it looks in HTML:**
+```html
+<nav aria-label="Table of contents">
+  <!-- Contents -->
+  <ol>
+    <li><a href="#overview-of-the-project-and-crm-system-development">Overview of the Project and CRM System Development</a></li>
+    <li><a href="#business-context-and-the-development-of-crm-system">Business Context and the Development of CRM System</a></li>
+    <li><a href="#approach-to-bespoke-crm-development">Approach to Bespoke CRM Development</a></li>
+    <!-- ... -->
+  </ol>
+</nav>
+```
+
+**SEO benefit:**  
+Google recognizes `<nav>` landmark elements and anchor links within long-form articles as internal page structure signals. Articles with a clear navigable structure can earn **sitelinks** in search results (the sub-links shown under a main search result).
+
+---
+
+## Fix 10 — Ordered List (`<ol>`) Renderer Added
+
+**Request:** SEO team's case study texts include numbered lists (1. 2. 3.) in several cases. The rich text renderer only handled unordered lists (`<ul>`).
+
+**What was fixed:**  
+Added `ordered-list` → `<ol><li>` support to the Contentful rich text renderer. Previously, if a content editor created a numbered list in Contentful's rich text editor, it would fall through to a bare `<div>` with no numbering visible to users or search engines.
+
+**Now:** Numbered lists entered in Contentful render as proper `<ol>` in HTML — semantically correct for both screen readers and search engine crawlers.
 
 ---
 
@@ -189,12 +293,16 @@ Each case study now uses its own first screenshot as the Open Graph image when s
 |-------|--------|-------|
 | Pages with canonical tags | 13 / 18 (72%) | **18 / 18 (100%)** |
 | Pages with full OG tags | 13 / 18 (72%) | **18 / 18 (100%)** |
-| Case study OG image | Generic brand image | **Per-case screenshot** |
+| Case study OG image | Generic brand image | **Per-case screenshot from Contentful** |
 | Case study blank metadata risk | Yes (if Contentful fields empty) | **No — fallback chain** |
 | Sitemap coverage | 28 URLs | **48 URLs** |
 | Competing pages for "Retool Development Services" | 2 pages | **1 page** |
 | Internal tool pages indexed | 1 (`/og-preview`) | **0** |
 | Trailing slash ambiguity | Implicit | **Explicitly configured** |
+| `<meta name="keywords">` present | Yes (all pages) | **Removed sitewide** |
+| Case study heading tags verified | Not verified | **21/21 pages confirmed ✅** |
+| Table of Contents on case studies | None | **Auto-generated on all 21 pages** |
+| Ordered list rendering | Broken (`<div>`) | **Correct `<ol>` output** |
 
 ---
 
@@ -216,7 +324,7 @@ The following items were identified in the audit but require content decisions b
 
 ## Technical Reference
 
-**Files changed in this session:**
+**Files changed:**
 
 | File | Change |
 |------|--------|
@@ -227,8 +335,13 @@ The following items were identified in the audit but require content decisions b
 | `src/app/blog/layout.tsx` | `generateSEO()` + canonical |
 | `src/app/og-preview/page.tsx` | `noindex, nofollow` added |
 | `src/app/og-preview/client.tsx` | Client component extracted |
-| `src/app/sitemap.ts` | 6 new page types added + dynamic blog posts |
+| `src/app/sitemap.ts` | 6 new page types + dynamic blog posts |
 | `next.config.ts` | `trailingSlash: false` |
+| `src/app/case-studies/[slug]/page.tsx` | Full `generateSEO()` + fallback chain + per-case OG image |
+| `src/lib/seo.tsx` | Removed `keywords` / `tags` prop from `SEOProps` |
+| `src/lib/render.ts` | Added `ordered-list` → `<ol>` renderer |
+| `src/app/case-studies/templates/default.tsx` | Table of Contents component added |
+| 18× page files | Removed stale `tags: [...]` prop from `generateSEO()` calls |
 
 **Build status:** ✅ Passed — 48/48 pages generated  
 **Breaking changes:** None
