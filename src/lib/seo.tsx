@@ -20,7 +20,6 @@ interface SEOProps {
     publishedTime?: string
     modifiedTime?: string
     authors?: string[]
-    tags?: string[]
 }
 
 /**
@@ -36,7 +35,6 @@ export function generateSEO({
     publishedTime,
     modifiedTime,
     authors,
-    tags,
 }: SEOProps): Metadata {
     const url = `${BASE_URL}${path}`
     const ogImage = image || `${BASE_URL}/og-image.png`
@@ -44,7 +42,6 @@ export function generateSEO({
     const metadata: Metadata = {
         title: `${title} | ${SITE_NAME}`,
         description,
-        keywords: tags,
         authors: authors?.map((name) => ({ name })),
         creator: SITE_NAME,
         publisher: SITE_NAME,

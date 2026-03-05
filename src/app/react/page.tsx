@@ -8,7 +8,6 @@ export const metadata = generateSEO({
     description:
         "Building modern frontends for SaaS platforms, dashboards, and internal tools. Expert React.js development services.",
     path: "/react",
-    tags: ["react development", "react.js", "frontend development", "SaaS frontend", "dashboard development", "react components"],
 });
 
 export default function ReactPage() {

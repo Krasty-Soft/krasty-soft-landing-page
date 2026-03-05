@@ -39,14 +39,6 @@ export async function generateMetadata({
         ),
         path: `/careers/${slug}`,
         type: 'article',
-        tags: [
-            'job opening',
-            job.title?.toLowerCase(),
-            job.type?.toLowerCase(),
-            job.location?.toLowerCase(),
-            'career opportunity',
-            'software development job',
-        ].filter(Boolean) as string[],
     })
 }
 

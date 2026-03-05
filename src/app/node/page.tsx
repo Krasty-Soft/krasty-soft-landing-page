@@ -8,7 +8,6 @@ export const metadata = generateSEO({
     description:
         "Fast, integration-heavy backends and real-time features. Expert Node.js development services.",
     path: "/node",
-    tags: ["node.js development", "nodejs", "backend development", "real-time apps", "API development", "javascript backend"],
 });
 
 export default function NodePage() {

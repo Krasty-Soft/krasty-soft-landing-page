@@ -8,15 +8,6 @@ export const metadata: Metadata = generateSEO({
     description:
         'Custom insurance software development for policy management, claims processing, and underwriting. Scalable InsurTech solutions for modern insurance companies.',
     path: '/insurance',
-    tags: [
-        'insurance software',
-        'insurtech development',
-        'policy management systems',
-        'claims processing',
-        'underwriting software',
-        'insurance technology',
-        'insurance applications',
-    ],
 })
 
 export default async function InsurancePage() {

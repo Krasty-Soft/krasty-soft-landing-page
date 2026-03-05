@@ -19,14 +19,6 @@ export const metadata: Metadata = generateSEO({
   description:
     "Progressive B2B software development company specializing in custom solutions, Retool development, and enterprise applications. Trusted partner for tech innovation.",
   path: "/",
-  tags: [
-    "software development",
-    "custom software",
-    "B2B software",
-    "enterprise solutions",
-    "Retool development",
-    "tech consulting",
-  ],
 });
 
 // Viewport configuration for responsive design

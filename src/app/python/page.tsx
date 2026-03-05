@@ -8,7 +8,6 @@ export const metadata = generateSEO({
     description:
         "Backend logic, data-heavy workflows, and API-first platforms. Expert Python web development services.",
     path: "/python",
-    tags: ["python development", "python web development", "django", "fastapi", "data workflows", "python backend"],
 });
 
 export default function PythonPage() {

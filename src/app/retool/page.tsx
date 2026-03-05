@@ -8,7 +8,6 @@ export const metadata = generateSEO({
     description:
         "Low-code platform for building internal apps fast: dashboards, admin panels, and workflow tools. Expert Retool development company.",
     path: "/retool",
-    tags: ["retool", "low-code", "internal tools", "retool platform", "admin panels", "dashboards"],
 });
 
 export default function RetoolPage() {

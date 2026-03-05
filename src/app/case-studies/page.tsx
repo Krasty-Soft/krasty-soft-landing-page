@@ -10,14 +10,6 @@ export const metadata: Metadata = generateSEO({
   description:
     "Explore our portfolio of successful software development projects. Real-world case studies showcasing custom software, Retool applications, and enterprise solutions.",
   path: "/case-studies",
-  tags: [
-    "software development portfolio",
-    "case studies",
-    "project examples",
-    "success stories",
-    "client projects",
-    "software solutions",
-  ],
 });
 
 export default async function CaseStudiesPage() {

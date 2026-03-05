@@ -8,15 +8,6 @@ export const metadata: Metadata = generateSEO({
     description:
         'Expert Retool development services. Build custom internal tools 10x faster with professional Retool developers. Connect to any data source, create custom UIs, and automate workflows.',
     path: '/retool-development',
-    tags: [
-        'retool development',
-        'retool developer',
-        'internal tools',
-        'admin panels',
-        'retool apps',
-        'low code development',
-        'rapid development',
-    ],
 })
 
 export default async function RetoolDevelopmentPage() {

@@ -40,7 +40,6 @@ export async function generateMetadata({
     path: `/case-studies/${slug}`,
     image: ogImage,
     type: "article",
-    tags: caseData.tags,
     authors: ["Krasty Soft Team"],
   });
 }

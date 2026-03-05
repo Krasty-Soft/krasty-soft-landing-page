@@ -8,15 +8,6 @@ export const metadata: Metadata = generateSEO({
     description:
         'Expert custom software development company building tailored solutions for your business. From web applications to enterprise systems - scalable, secure, and maintainable software.',
     path: '/custom-software-development',
-    tags: [
-        'custom software development',
-        'bespoke software',
-        'software development services',
-        'enterprise software',
-        'web application development',
-        'custom web development',
-        'software engineering',
-    ],
 })
 
 export default async function CustomSoftwarePage() {

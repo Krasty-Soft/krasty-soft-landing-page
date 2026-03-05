@@ -36,7 +36,6 @@ export async function generateMetadata({
         description: post.content.substring(0, 160),
         path: `/blog/${slug}`,
         type: 'article',
-        tags: post.tags,
     })
 }
 

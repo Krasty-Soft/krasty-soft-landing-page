@@ -8,15 +8,6 @@ export const metadata: Metadata = generateSEO({
     description:
         'Professional Retool consulting services. Strategy development, architecture review, team training, and implementation support from certified Retool experts.',
     path: '/retool-consulting',
-    tags: [
-        'retool consulting',
-        'retool strategy',
-        'retool architecture',
-        'retool training',
-        'retool expert',
-        'retool implementation',
-        'retool services',
-    ],
 })
 
 export default async function RetoolConsultingPage() {
