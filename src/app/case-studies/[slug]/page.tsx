@@ -2,7 +2,7 @@ import { getAllSlugs, getCaseBySlug } from "@/lib/cases";
 
 export const revalidate = 3600;
 export const dynamicParams = true;
-import { generateArticleSchema, StructuredData } from "@/lib/seo";
+import { generateSEO, generateArticleSchema, StructuredData } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CaseTemplateRenderer } from "../templates";
@@ -21,16 +21,28 @@ export async function generateMetadata({
   const caseData = await getCaseBySlug(slug);
 
   if (!caseData) {
-    return {
+    return generateSEO({
       title: "Case Study",
-      description: "Case study page",
-    };
+      description: "Software development case study by Krasty Soft.",
+      path: `/case-studies/${slug}`,
+    });
   }
 
-  return {
-    title: caseData.seoTitle || "",
-    description: caseData.seoDescription || "",
-  };
+  // Prefer explicit SEO fields, fall back to display fields
+  const title = caseData.seoTitle || caseData.title
+  const description = caseData.seoDescription || caseData.cardDescription || ""
+  // Use case study's own first image as OG image, fall back to default
+  const ogImage = caseData.media?.[0]?.url || undefined
+
+  return generateSEO({
+    title,
+    description,
+    path: `/case-studies/${slug}`,
+    image: ogImage,
+    type: "article",
+    tags: caseData.tags,
+    authors: ["Krasty Soft Team"],
+  });
 }
 
 export default async function CasePage({

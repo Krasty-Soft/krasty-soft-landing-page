@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next'
 import { getAllSlugs as getAllCaseSlugs } from '@/lib/cases'
 import { getAllSlugs as getAllJobSlugs } from '@/lib/jobs'
+import { getAllSlugs as getAllPostSlugs } from '@/lib/posts'
 
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || 'https://krastysoft.com'
 
@@ -75,6 +76,38 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
             changeFrequency: 'monthly',
             priority: 0.8,
         },
+        // Technology pages
+        {
+            url: `${BASE_URL}/retool`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
+            url: `${BASE_URL}/react`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
+            url: `${BASE_URL}/python`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        {
+            url: `${BASE_URL}/node`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly',
+            priority: 0.7,
+        },
+        // Blog listing
+        {
+            url: `${BASE_URL}/blog`,
+            lastModified: new Date(),
+            changeFrequency: 'weekly',
+            priority: 0.8,
+        },
     ]
 
     // Dynamic case study pages
@@ -105,5 +138,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         console.error('Error fetching job slugs for sitemap:', error)
     }
 
-    return [...staticPages, ...caseStudyPages, ...careerPages]
+    // Dynamic blog post pages
+    let blogPages: MetadataRoute.Sitemap = []
+    try {
+        const postSlugs = await getAllPostSlugs()
+        blogPages = postSlugs.map((item: { slug: string }) => ({
+            url: `${BASE_URL}/blog/${item.slug}`,
+            lastModified: new Date(),
+            changeFrequency: 'monthly' as const,
+            priority: 0.6,
+        }))
+    } catch (error) {
+        console.error('Error fetching post slugs for sitemap:', error)
+    }
+
+    return [...staticPages, ...caseStudyPages, ...careerPages, ...blogPages]
 }

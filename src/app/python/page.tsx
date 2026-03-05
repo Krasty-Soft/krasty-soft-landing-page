@@ -1,17 +1,19 @@
 import { getTechBySlug } from "@/lib/techs";
+import { generateSEO } from "@/lib/seo";
 import { notFound } from "next/navigation";
 import TechTemplate from "../technologies/tech-template";
-import type { Metadata } from "next";
 
-export const metadata: Metadata = {
-  title: "Python Web Development Services | Krasty Soft",
-  description:
-    "Backend logic, data-heavy workflows, and API-first platforms. Expert Python web development services.",
-};
+export const metadata = generateSEO({
+    title: "Python Development Services",
+    description:
+        "Backend logic, data-heavy workflows, and API-first platforms. Expert Python web development services.",
+    path: "/python",
+    tags: ["python development", "python web development", "django", "fastapi", "data workflows", "python backend"],
+});
 
 export default function PythonPage() {
-  const tech = getTechBySlug("python");
-  if (!tech) return notFound();
+    const tech = getTechBySlug("python");
+    if (!tech) return notFound();
 
-  return <TechTemplate tech={tech} />;
+    return <TechTemplate tech={tech} />;
 }

@@ -2,6 +2,7 @@ import type { NextConfig } from 'next'
 
 const nextConfig: NextConfig = {
     //output: 'export',
+    trailingSlash: false,
     allowedDevOrigins: ['local-origin.dev', '*.local-origin.dev'],
     images: {
         // Image optimization enabled for better Core Web Vitals
