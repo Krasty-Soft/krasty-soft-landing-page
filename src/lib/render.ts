@@ -117,6 +117,17 @@ function renderRichTextNode(
         )
     }
 
+    // Ordered list
+    if (nodeType === 'ordered-list') {
+        return React.createElement(
+            'ol',
+            { key },
+            content?.map((child, i) =>
+                renderRichTextNode(child, `${key}-${i}`),
+            ),
+        )
+    }
+
     // List item
     if (nodeType === 'list-item') {
         const children = content?.map((child, i) => {

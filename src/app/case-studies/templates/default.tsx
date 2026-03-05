@@ -8,7 +8,8 @@ import { Section, TypingText, ImageLightbox, CTABanner } from "@/components/ui";
 import { Technologies } from "@/components/blocks";
 import Image from "next/image";
 import { Case } from "@/lib/cases";
-import { renderRichTextAsHtml } from "@/lib/render";
+import { renderRichTextAsHtml, extractHeadingsForTOC } from "@/lib/render";
+import { createSlug } from "@/lib/util";
 
 interface TemplateProps {
   caseData: Case;
@@ -121,9 +122,66 @@ const ImageCard = ({
   );
 };
 
+function TableOfContents({ headings }: { headings: string[] }) {
+  if (headings.length < 2) return null;
+
+  return (
+    <nav
+      aria-label="Table of contents"
+      style={{
+        borderLeft: "2px solid var(--brand-red)",
+        paddingLeft: "1.25rem",
+        marginBottom: "2.5rem",
+      }}
+    >
+      <p
+        style={{
+          fontSize: "0.75rem",
+          textTransform: "uppercase",
+          letterSpacing: "0.1em",
+          fontWeight: 700,
+          color: "var(--text-muted)",
+          marginBottom: "0.75rem",
+        }}
+      >
+        Contents
+      </p>
+      <ol style={{ listStyle: "none", padding: 0, margin: 0, display: "flex", flexDirection: "column", gap: "0.375rem" }}>
+        {headings.map((heading, i) => (
+          <li key={i}>
+            <a
+              href={`#${createSlug(heading)}`}
+              style={{
+                fontSize: "0.9375rem",
+                color: "var(--text-secondary)",
+                textDecoration: "none",
+                lineHeight: "1.4",
+                transition: "color 0.15s",
+              }}
+              onMouseEnter={(e) =>
+                (e.currentTarget.style.color = "var(--brand-red)")
+              }
+              onMouseLeave={(e) =>
+                (e.currentTarget.style.color = "var(--text-secondary)")
+              }
+            >
+              {heading}
+            </a>
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
+}
+
 export function TemplateDefault({ caseData }: TemplateProps) {
   const [lightboxOpen, setLightboxOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Collect all H2 headings for the Table of Contents
+  const tocHeadings = [
+    ...extractHeadingsForTOC(caseData.content?.content || []),
+  ];
 
   // Prepare all images (including banner) for the lightbox
   const allImages = caseData.media.map((media) => ({
@@ -262,7 +320,7 @@ export function TemplateDefault({ caseData }: TemplateProps) {
         </Section>
       )}
 
-      {/* Main Content with Images */}
+      {/* Main Content with Table of Contents */}
       {caseData.content?.content && (
         <Section variant="primary" animate={false}>
           <motion.div
@@ -272,6 +330,7 @@ export function TemplateDefault({ caseData }: TemplateProps) {
             transition={{ duration: 0.6 }}
             style={{ maxWidth: "900px", margin: "0 auto" }}
           >
+            <TableOfContents headings={tocHeadings} />
             <div className="prose prose-invert max-w-none">
               {renderRichTextAsHtml(caseData.content.content || [])}
             </div>
