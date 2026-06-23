@@ -74,7 +74,7 @@ export default function RootLayout({
         {/* Clutch widget — loaded once globally; ClutchBadges calls CLUTCHCO.init() on each mount */}
         <Script
           src="https://widget.clutch.co/static/js/widget.js"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
         />
 
         {/* Web Vitals Tracking (console.log in dev, GA in production) */}
@@ -85,9 +85,9 @@ export default function RootLayout({
           <>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
-              strategy="afterInteractive"
+              strategy="lazyOnload"
             />
-            <Script id="google-analytics" strategy="afterInteractive">
+            <Script id="google-analytics" strategy="lazyOnload">
               {`
                                 window.dataLayer = window.dataLayer || [];
                                 function gtag(){dataLayer.push(arguments);}

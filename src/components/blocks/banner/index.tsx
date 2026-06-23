@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
-import { StatusBadge, AchievementCard, Modal } from "@/components/ui";
+import { StatusBadge, Modal } from "@/components/ui";
 import { StaggerWrapper } from "@/components/ui/scroll-reveal";
 import { ClutchBadges } from "@/components/clutch-badges";
 
@@ -142,21 +142,13 @@ export const Banner = () => {
 
         {/* CTA Button */}
         <motion.div variants={staggerItem} className="mb-16 relative">
-          {/* Base glow (always visible) */}
-          <motion.div
+          {/* Pulsing glow - CSS animation instead of framer-motion */}
+          <div
             className="absolute inset-0 rounded-full blur-3xl -z-10"
             style={{
               background:
                 "radial-gradient(circle, rgba(229, 6, 6, 0.6), rgba(229, 6, 6, 0.3) 50%, transparent 70%)",
-            }}
-            initial={false}
-            animate={{
-              scale: isHovered ? 1.4 : 1.1,
-              opacity: isHovered ? 1 : 0.8,
-            }}
-            transition={{
-              duration: 0.5,
-              ease: [0.4, 0, 0.2, 1],
+              animation: "pulse-glow 2s ease-in-out infinite",
             }}
           />
 
@@ -183,58 +175,15 @@ export const Banner = () => {
             }}
             whileTap={{ scale: 0.98 }}
           >
-            {/* Animated gradient background */}
-            <motion.div
-              className="absolute inset-0 rounded-full"
-              style={{
-                background:
-                  "linear-gradient(45deg, #FF0000, #E50606, #FF0000, #E50606)",
-                backgroundSize: "300% 300%",
-              }}
-              animate={{
-                backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "linear",
-              }}
-            />
-
-            {/* Shimmer sweep */}
-            <motion.div
-              className="absolute inset-0 rounded-full"
-              style={{
-                background:
-                  "linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.5) 50%, transparent 100%)",
-                backgroundSize: "200% 100%",
-              }}
-              animate={{
-                backgroundPosition: ["-200% 0%", "200% 0%"],
-              }}
-              transition={{
-                duration: 2,
-                repeat: Infinity,
-                repeatDelay: 1,
-                ease: "easeInOut",
-              }}
-            />
-
             {/* Text with arrow */}
             <span className="relative z-10 flex items-center justify-center gap-3">
               <span>Get started today</span>
-              <motion.span
-                animate={{
-                  x: [0, 6, 0],
-                }}
-                transition={{
-                  duration: 1.2,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
+              <span
+                className="inline-block"
+                style={{ animation: "bounce-arrow 1.2s ease-in-out infinite" }}
               >
                 →
-              </motion.span>
+              </span>
             </span>
           </motion.button>
         </motion.div>
@@ -244,36 +193,24 @@ export const Banner = () => {
         </motion.div>
       </StaggerWrapper>
 
-      {/* Scroll indicator */}
-      <motion.div
+      {/* Scroll indicator - CSS animations instead of framer-motion */}
+      <div
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        animate={{
-          y: [0, 10, 0],
-        }}
-        transition={{
-          duration: 2,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
+        style={{ animation: "bounce-y 2s ease-in-out infinite" }}
       >
         <div
           className="w-6 h-10 rounded-full border-2 flex items-start justify-center p-2"
           style={{ borderColor: "var(--border-default)" }}
         >
-          <motion.div
+          <div
             className="w-1.5 h-1.5 rounded-full"
-            style={{ backgroundColor: "var(--brand-red)" }}
-            animate={{
-              y: [0, 12, 0],
-            }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut",
+            style={{
+              backgroundColor: "var(--brand-red)",
+              animation: "scroll-dot 2s ease-in-out infinite",
             }}
           />
         </div>
-      </motion.div>
+      </div>
 
       {/* Reviews Modal */}
       <Modal

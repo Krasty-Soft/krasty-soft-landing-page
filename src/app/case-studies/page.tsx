@@ -1,5 +1,9 @@
 import { getAllCases } from "@/lib/cases";
-import { generateSEO } from "@/lib/seo";
+import {
+  generateSEO,
+  generateBreadcrumbSchema,
+  StructuredData,
+} from "@/lib/seo";
 import { Metadata } from "next";
 import CaseStudiesClient from "./client";
 
@@ -15,5 +19,15 @@ export const metadata: Metadata = generateSEO({
 export default async function CaseStudiesPage() {
   const cases = await getAllCases();
 
-  return <CaseStudiesClient cases={cases} />;
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Case Studies", path: "/case-studies" },
+  ]);
+
+  return (
+    <>
+      <StructuredData data={[breadcrumbSchema]} />
+      <CaseStudiesClient cases={cases} />
+    </>
+  );
 }

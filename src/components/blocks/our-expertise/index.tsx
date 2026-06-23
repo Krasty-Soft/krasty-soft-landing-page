@@ -18,9 +18,9 @@ const OurExpertise = () => {
                       <IconComponent />
                     </div>
                   )}
-                  <h3 className="text-xl md:text-2xl font-semibold">
+                  <div className="text-xl md:text-2xl font-semibold">
                     {item.title}
-                  </h3>
+                  </div>
                 </div>
                 <p className="text-sm md:text-base text-gray-700 leading-relaxed">
                   {item.description}

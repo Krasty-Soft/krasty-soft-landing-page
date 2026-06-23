@@ -1,18 +1,32 @@
 import { getTechBySlug } from "@/lib/techs";
-import { generateSEO } from "@/lib/seo";
+import {
+  generateSEO,
+  generateBreadcrumbSchema,
+  StructuredData,
+} from "@/lib/seo";
 import { notFound } from "next/navigation";
 import TechTemplate from "../technologies/tech-template";
 
 export const metadata = generateSEO({
-    title: "Node.js Development Services",
-    description:
-        "Fast, integration-heavy backends and real-time features. Expert Node.js development services.",
-    path: "/node",
+  title: "Node.js Development Services",
+  description:
+    "Fast, integration-heavy backends and real-time features. Expert Node.js development services.",
+  path: "/node",
 });
 
 export default function NodePage() {
-    const tech = getTechBySlug("node");
-    if (!tech) return notFound();
+  const tech = getTechBySlug("node");
+  if (!tech) return notFound();
 
-    return <TechTemplate tech={tech} />;
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Node.js", path: "/node" },
+  ]);
+
+  return (
+    <>
+      <StructuredData data={[breadcrumbSchema]} />
+      <TechTemplate tech={tech} />
+    </>
+  );
 }

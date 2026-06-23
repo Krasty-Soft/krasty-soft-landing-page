@@ -2,7 +2,12 @@ import { getAllSlugs, getCaseBySlug } from "@/lib/cases";
 
 export const revalidate = 3600;
 export const dynamicParams = true;
-import { generateSEO, generateArticleSchema, StructuredData } from "@/lib/seo";
+import {
+  generateSEO,
+  generateArticleSchema,
+  generateBreadcrumbSchema,
+  StructuredData,
+} from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CaseTemplateRenderer } from "../templates";
@@ -29,10 +34,10 @@ export async function generateMetadata({
   }
 
   // Prefer explicit SEO fields, fall back to display fields
-  const title = caseData.seoTitle || caseData.title
-  const description = caseData.seoDescription || caseData.cardDescription || ""
+  const title = caseData.seoTitle || caseData.title;
+  const description = caseData.seoDescription || caseData.cardDescription || "";
   // Use case study's own first image as OG image, fall back to default
-  const ogImage = caseData.media?.[0]?.url || undefined
+  const ogImage = caseData.media?.[0]?.url || undefined;
 
   return generateSEO({
     title,
@@ -66,9 +71,16 @@ export default async function CasePage({
     authors: ["Krasty Soft Team"],
   });
 
+  // Generate BreadcrumbList structured data
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "Case Studies", path: "/case-studies" },
+    { name: caseData.title || "Case Study", path: `/case-studies/${slug}` },
+  ]);
+
   return (
     <>
-      <StructuredData data={articleSchema} />
+      <StructuredData data={[articleSchema, breadcrumbSchema]} />
       <CaseTemplateRenderer caseData={caseData} template={template} />
     </>
   );
