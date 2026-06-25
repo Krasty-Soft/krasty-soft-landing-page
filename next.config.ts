@@ -1,9 +1,18 @@
 import type { NextConfig } from 'next'
 
+import { REDIRECTS } from './src/constants/redirects'
+
 const nextConfig: NextConfig = {
     //output: 'export',
     trailingSlash: false,
     allowedDevOrigins: ['local-origin.dev', '*.local-origin.dev'],
+    async redirects() {
+        return REDIRECTS.map(({ source, destination }) => ({
+            source,
+            destination,
+            statusCode: 301,
+        }))
+    },
     images: {
         // Image optimization enabled for better Core Web Vitals
         remotePatterns: [

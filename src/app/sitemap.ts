@@ -49,18 +49,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    {
-      url: `${BASE_URL}/insurance`,
-      lastModified: STATIC_LASTMOD,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${BASE_URL}/maritime-transportation`,
-      lastModified: STATIC_LASTMOD,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
     // Service pages
     {
       url: `${BASE_URL}/custom-software-development`,
@@ -68,25 +56,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    {
-      url: `${BASE_URL}/retool-consulting`,
-      lastModified: STATIC_LASTMOD,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
-      url: `${BASE_URL}/retool-development`,
-      lastModified: STATIC_LASTMOD,
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
     // Technology pages
-    {
-      url: `${BASE_URL}/retool`,
-      lastModified: STATIC_LASTMOD,
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
     {
       url: `${BASE_URL}/react`,
       lastModified: STATIC_LASTMOD,
