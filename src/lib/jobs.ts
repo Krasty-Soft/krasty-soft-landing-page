@@ -27,21 +27,21 @@ type JobFields = {
 
 // Helper to extract text from Contentful rich text or return string
 function extractText(field: any): string {
-  if (typeof field === 'string') return field;
-  if (!field) return '';
+  if (typeof field === "string") return field;
+  if (!field) return "";
   // If it's a Contentful Document object, extract text from paragraphs
   if (field.nodeType && field.content) {
     return field.content
       .map((node: any) => {
-        if (node.nodeType === 'paragraph' && node.content) {
+        if (node.nodeType === "paragraph" && node.content) {
           return node.content
-            .map((textNode: any) => textNode.value || '')
-            .join('');
+            .map((textNode: any) => textNode.value || "")
+            .join("");
         }
-        return '';
+        return "";
       })
       .filter(Boolean)
-      .join('\n');
+      .join("\n");
   }
   return String(field);
 }
@@ -116,12 +116,16 @@ export async function getAllSlugs() {
     limit: 1000,
   });
   if (res) {
-    return (res.items as Array<{ fields: JobFields }>)
-      .map((i: { fields: JobFields }) => i.fields.slug)
-      .filter((s: string | undefined): s is string => Boolean(s))
-      .map((slug: string) => ({ slug }));
+    return (
+      res.items as Array<{ fields: JobFields; sys?: { updatedAt?: string } }>
+    )
+      .filter((i) => Boolean(i.fields?.slug))
+      .map((i) => ({
+        slug: i.fields.slug as string,
+        updatedAt: i.sys?.updatedAt ? new Date(i.sys.updatedAt) : new Date(),
+      }));
   }
-  return jobs.map((job) => ({ slug: job.slug }));
+  return jobs.map((job) => ({ slug: job.slug, updatedAt: new Date() }));
 }
 
 export async function getAllJobs(): Promise<Job[]> {

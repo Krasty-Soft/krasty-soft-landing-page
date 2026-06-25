@@ -279,7 +279,7 @@ export const Footer = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h3
+              <div
                 style={{
                   fontSize: "1.5rem",
                   fontWeight: 700,
@@ -288,7 +288,7 @@ export const Footer = () => {
                 }}
               >
                 For job seekers & clients
-              </h3>
+              </div>
 
               <div className="flex flex-col gap-5">
                 {/* Email Card */}
@@ -345,7 +345,7 @@ export const Footer = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
             >
-              <h3
+              <div
                 style={{
                   fontSize: "1.5rem",
                   fontWeight: 700,
@@ -354,7 +354,7 @@ export const Footer = () => {
                 }}
               >
                 Chat with us
-              </h3>
+              </div>
 
               <ChatForm />
             </motion.div>

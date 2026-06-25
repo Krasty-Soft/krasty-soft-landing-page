@@ -2,6 +2,7 @@ import { getTechBySlug } from "@/lib/techs";
 import {
   generateSEO,
   generateBreadcrumbSchema,
+  generateServiceSchema,
   StructuredData,
 } from "@/lib/seo";
 import { notFound } from "next/navigation";
@@ -23,9 +24,15 @@ export default function NodePage() {
     { name: "Node.js", path: "/node" },
   ]);
 
+  const serviceSchema = generateServiceSchema({
+    name: "Node.js Development Services",
+    description:
+      "Fast, integration-heavy backends and real-time features. Expert Node.js development services.",
+  });
+
   return (
     <>
-      <StructuredData data={[breadcrumbSchema]} />
+      <StructuredData data={[breadcrumbSchema, serviceSchema]} />
       <TechTemplate tech={tech} />
     </>
   );

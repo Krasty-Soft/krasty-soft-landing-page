@@ -37,7 +37,7 @@ export function generateSEO({
   authors,
 }: SEOProps): Metadata {
   const url = `${BASE_URL}${path}`;
-  const ogImage = image || `${BASE_URL}/opengraph-image`;
+  const ogImage = image || `${BASE_URL}/og-image.png`;
 
   const metadata: Metadata = {
     title: `${title} | ${SITE_NAME}`,
@@ -128,7 +128,7 @@ export function generateArticleSchema({
     "@type": "Article",
     headline: title,
     description,
-    image: image || `${BASE_URL}/opengraph-image`,
+    image: image || `${BASE_URL}/og-image.png`,
     datePublished: publishedTime,
     dateModified: modifiedTime || publishedTime,
     author: authors?.map((name) => ({
@@ -379,10 +379,82 @@ export function generateBlogSchema({
         url: `${BASE_URL}/logo.svg`,
       },
     },
-    image: image || `${BASE_URL}/opengraph-image`,
+    image: image || `${BASE_URL}/og-image.png`,
     mainEntityOfPage: {
       "@type": "WebPage",
       "@id": BASE_URL,
+    },
+  };
+}
+
+/**
+ * Generate JSON-LD structured data for AboutPage with team Person entries
+ */
+export function generateAboutPageSchema({
+  teamMembers,
+}: {
+  teamMembers: Array<{
+    name: string;
+    position: string;
+    email?: string;
+    linkedin?: string;
+  }>;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    name: `About ${SITE_NAME}`,
+    url: `${BASE_URL}/about`,
+    mainEntity: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: BASE_URL,
+      employee: teamMembers.map((member) => ({
+        "@type": "Person",
+        name: member.name,
+        jobTitle: member.position,
+        ...(member.email && { email: member.email }),
+        ...(member.linkedin && { sameAs: member.linkedin }),
+      })),
+    },
+  };
+}
+
+/**
+ * Generate JSON-LD structured data for SoftwareApplication (case studies)
+ * Used alongside Article schema on case study detail pages
+ */
+export function generateSoftwareApplicationSchema({
+  name,
+  description,
+  applicationCategory = "BusinessApplication",
+  url,
+  image,
+}: {
+  name: string;
+  description: string;
+  applicationCategory?: string;
+  url?: string;
+  image?: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name,
+    description,
+    applicationCategory,
+    ...(url && { url }),
+    ...(image && { screenshot: image }),
+    author: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: BASE_URL,
+    },
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+      availability: "https://schema.org/InStock",
     },
   };
 }

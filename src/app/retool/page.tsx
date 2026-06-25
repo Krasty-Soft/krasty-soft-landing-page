@@ -2,6 +2,7 @@ import { getTechBySlug } from "@/lib/techs";
 import {
   generateSEO,
   generateBreadcrumbSchema,
+  generateServiceSchema,
   StructuredData,
 } from "@/lib/seo";
 import { notFound } from "next/navigation";
@@ -23,9 +24,15 @@ export default function RetoolPage() {
     { name: "Retool", path: "/retool" },
   ]);
 
+  const serviceSchema = generateServiceSchema({
+    name: "Retool Development Services",
+    description:
+      "Low-code platform for building internal apps fast: dashboards, admin panels, and workflow tools. Expert Retool development company.",
+  });
+
   return (
     <>
-      <StructuredData data={[breadcrumbSchema]} />
+      <StructuredData data={[breadcrumbSchema, serviceSchema]} />
       <TechTemplate tech={tech} />
     </>
   );

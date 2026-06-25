@@ -107,9 +107,11 @@ export async function getAllSlugs() {
   });
   if (res) {
     return res.items
-      .map((i: any) => i.fields.slug)
-      .filter(Boolean)
-      .map((slug: string) => ({ slug }));
+      .filter((i: any) => i.fields?.slug)
+      .map((i: any) => ({
+        slug: i.fields.slug as string,
+        updatedAt: i.sys?.updatedAt ? new Date(i.sys.updatedAt) : new Date(),
+      }));
   }
   return [];
 }

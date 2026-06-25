@@ -1,8 +1,10 @@
 import {
   generateSEO,
   generateBreadcrumbSchema,
+  generateAboutPageSchema,
   StructuredData,
 } from "@/lib/seo";
+import { TEAM_MEMBERS } from "@/lib/team";
 import { Metadata } from "next";
 import AboutClient from "./client";
 
@@ -19,9 +21,18 @@ export default function AboutPage() {
     { name: "About Us", path: "/about" },
   ]);
 
+  const aboutPageSchema = generateAboutPageSchema({
+    teamMembers: TEAM_MEMBERS.map((member) => ({
+      name: member.name,
+      position: member.position,
+      email: member.email,
+      linkedin: member.linkedin,
+    })),
+  });
+
   return (
     <>
-      <StructuredData data={[breadcrumbSchema]} />
+      <StructuredData data={[breadcrumbSchema, aboutPageSchema]} />
       <AboutClient />
     </>
   );

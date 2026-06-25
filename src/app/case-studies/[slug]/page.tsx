@@ -6,6 +6,7 @@ import {
   generateSEO,
   generateArticleSchema,
   generateBreadcrumbSchema,
+  generateSoftwareApplicationSchema,
   StructuredData,
 } from "@/lib/seo";
 import type { Metadata } from "next";
@@ -78,9 +79,18 @@ export default async function CasePage({
     { name: caseData.title || "Case Study", path: `/case-studies/${slug}` },
   ]);
 
+  // Generate SoftwareApplication schema (describes the product built in the case study)
+  const softwareSchema = generateSoftwareApplicationSchema({
+    name: caseData.title || "Case Study",
+    description: caseData.seoDescription || caseData.cardDescription || "",
+    image: caseData.media?.[0]?.url,
+  });
+
   return (
     <>
-      <StructuredData data={[articleSchema, breadcrumbSchema]} />
+      <StructuredData
+        data={[articleSchema, breadcrumbSchema, softwareSchema]}
+      />
       <CaseTemplateRenderer caseData={caseData} template={template} />
     </>
   );

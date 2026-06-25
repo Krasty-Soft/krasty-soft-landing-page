@@ -2,6 +2,7 @@ import { getTechBySlug } from "@/lib/techs";
 import {
   generateSEO,
   generateBreadcrumbSchema,
+  generateServiceSchema,
   StructuredData,
 } from "@/lib/seo";
 import { notFound } from "next/navigation";
@@ -23,9 +24,15 @@ export default function PythonPage() {
     { name: "Python", path: "/python" },
   ]);
 
+  const serviceSchema = generateServiceSchema({
+    name: "Python Development Services",
+    description:
+      "Backend logic, data-heavy workflows, and API-first platforms. Expert Python web development services.",
+  });
+
   return (
     <>
-      <StructuredData data={[breadcrumbSchema]} />
+      <StructuredData data={[breadcrumbSchema, serviceSchema]} />
       <TechTemplate tech={tech} />
     </>
   );
