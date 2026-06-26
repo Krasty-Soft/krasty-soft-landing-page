@@ -1,9 +1,8 @@
 import { MetadataRoute } from "next";
+import { BASE_URL } from "@/lib/site-url";
 import { getAllSlugs as getAllCaseSlugs } from "@/lib/cases";
 import { getAllSlugs as getAllJobSlugs } from "@/lib/jobs";
 import { getAllSlugs as getAllPostSlugs } from "@/lib/posts";
-
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://krastysoft.com";
 
 // Last known content update date for static pages.
 // Update this when static page content changes meaningfully.

@@ -3,10 +3,9 @@
  * Helpers for managing metadata, structured data, and SEO optimization
  */
 
+import { BASE_URL } from "@/lib/site-url";
 import { Metadata } from "next";
 
-// Base URL - update this for production
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://krastysoft.com";
 const SITE_NAME = "Krasty Soft";
 const DEFAULT_LOCALE = "en";
 

@@ -1,4 +1,5 @@
 import { safeGetEntries } from "@/lib/cms";
+import { REMOVED_JOB_SLUGS } from "@/constants/redirects";
 import type { EntrySkeletonType } from "contentful";
 
 export type Job = {
@@ -120,12 +121,15 @@ export async function getAllSlugs() {
       res.items as Array<{ fields: JobFields; sys?: { updatedAt?: string } }>
     )
       .filter((i) => Boolean(i.fields?.slug))
+      .filter((i) => !REMOVED_JOB_SLUGS.has(i.fields.slug))
       .map((i) => ({
         slug: i.fields.slug as string,
         updatedAt: i.sys?.updatedAt ? new Date(i.sys.updatedAt) : new Date(),
       }));
   }
-  return jobs.map((job) => ({ slug: job.slug, updatedAt: new Date() }));
+  return jobs
+    .filter((job) => !REMOVED_JOB_SLUGS.has(job.slug))
+    .map((job) => ({ slug: job.slug, updatedAt: new Date() }));
 }
 
 export async function getAllJobs(): Promise<Job[]> {
@@ -134,20 +138,25 @@ export async function getAllJobs(): Promise<Job[]> {
     limit: 1000,
   });
   if (res && res.items.length > 0) {
-    return res.items.map((item: JobSkeleton) => {
-      const f = item.fields;
-      return {
-        slug: extractText(f.slug) || "",
-        title: extractText(f.title) || "",
-        description: extractText(f.description) || "",
-        tags: extractText(f.tags) || "",
-        link: extractText(f.link) || "/careers",
-        location: extractText(f.location) || "Remote",
-        type: extractText(f.type) || "Full-time",
-        datePosted: extractText(f.datePosted) || new Date().toISOString(),
-        validThrough: extractText(f.validThrough),
-      };
-    });
+    return res.items
+      .filter(
+        (item: JobSkeleton) =>
+          !REMOVED_JOB_SLUGS.has(extractText(item.fields.slug)),
+      )
+      .map((item: JobSkeleton) => {
+        const f = item.fields;
+        return {
+          slug: extractText(f.slug) || "",
+          title: extractText(f.title) || "",
+          description: extractText(f.description) || "",
+          tags: extractText(f.tags) || "",
+          link: extractText(f.link) || "/careers",
+          location: extractText(f.location) || "Remote",
+          type: extractText(f.type) || "Full-time",
+          datePosted: extractText(f.datePosted) || new Date().toISOString(),
+          validThrough: extractText(f.validThrough),
+        };
+      });
   }
   // Return empty array if no jobs in Contentful (don't fallback to hardcoded)
   return [];

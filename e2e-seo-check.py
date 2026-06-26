@@ -127,8 +127,31 @@ def get_heading_tags(html):
     return counts
 
 
+def detect_host():
+    """Detect the canonical host the build is emitting, by reading the homepage
+    canonical tag. Makes the suite host-agnostic so it works whether the build
+    uses apex or www (driven by NEXT_PUBLIC_SITE_URL)."""
+    html = curl("/")
+    canonical = get_canonical(html)
+    if canonical:
+        m = re.match(r"(https?://[^/]+)", canonical)
+        if m:
+            return m.group(1)
+    # Fall back to og:url if canonical is missing for some reason.
+    og_url = get_meta(html, "og:url")
+    if og_url:
+        m = re.match(r"(https?://[^/]+)", og_url)
+        if m:
+            return m.group(1)
+    raise RuntimeError("Could not detect canonical host from live server")
+
+
 print("=" * 70)
 print("  SEO AUDIT E2E VERIFICATION")
+print("=" * 70)
+
+HOST = detect_host()
+print(f"  Detected canonical host: {HOST}")
 print("=" * 70)
 
 # ============================================================
@@ -145,7 +168,7 @@ check("robots.txt disallows /search", "Disallow: /search" in robots)
 check("robots.txt disallows /og-preview", "Disallow: /og-preview" in robots)
 check(
     "robots.txt references sitemap",
-    "Sitemap: https://krastysoft.com/sitemap.xml" in robots,
+    f"Sitemap: {HOST}/sitemap.xml" in robots,
 )
 
 # ============================================================
@@ -167,8 +190,10 @@ check("sitemap does NOT include /api/", not any("/api/" in u for u in sitemap_ur
 # Check lastmod dates are not all "today" (i.e., not all the same as build time)
 check("sitemap has lastmod dates", len(sitemap_lastmods) > 0)
 # Static pages should have fixed date, dynamic should have real dates
-static_lastmods = sitemap_lastmods[:16]  # first 16 are static
-dynamic_lastmods = sitemap_lastmods[16:]  # rest are dynamic
+# 11 static pages currently (home, about, careers, case-studies, fintech,
+# healthcare, custom-software-development, react, python, node, blog)
+static_lastmods = sitemap_lastmods[:11]
+dynamic_lastmods = sitemap_lastmods[11:]
 check(
     "static pages have fixed lastmod",
     len(set(static_lastmods)) <= 2,
@@ -183,14 +208,120 @@ expected_pages = [
     "/fintech",
     "/healthcare",
     "/custom-software-development",
-    "/retool-development",
-    "/retool",
     "/react",
     "/python",
     "/node",
 ]
 for page in expected_pages:
     check(f"sitemap includes {page}", any(page in u for u in sitemap_urls))
+
+# Verify removed pages are NOT in sitemap (sheet 3)
+removed_from_sitemap = [
+    "/retool",
+    "/retool-development",
+    "/retool-consulting",
+    "/insurance",
+    "/maritime-transportation",
+    "/careers/senior-rabbit-hugger",
+    "/case-studies/aims-international-ai-driven-recruitment-platform",
+    "/case-studies/crypto-arbitrage-automation-tool",
+    "/case-studies/warehouse-logistics-efficiency-dashboard",
+    "/case-studies/procurement-inventory-planning-tool",
+    "/case-studies/ai-powered-activity-management-platform",
+    "/case-studies/admin-panel-for-wine-collectors-software",
+    "/case-studies/customer-support-dashboard-for-e-com",
+    "/case-studies/unified-orders-inventory-management-system",
+    "/case-studies/ai-powered-investments-platform",
+]
+for page in removed_from_sitemap:
+    full_url = f"{HOST}{page}"
+    check(
+        f"sitemap excludes removed {page}",
+        full_url not in sitemap_urls,
+    )
+
+# ============================================================
+print("\n■ ITEM 2: 301 redirects (SEO team ODS — sheets 1 & 3)")
+# ============================================================
+# Sheet 1: legacy URLs that should 301 to their new homes
+sheet1_redirects = [
+    ("/loyalty-app-case-study", "/case-studies"),
+    ("/payment-project-case-study", "/case-studies"),
+    ("/crypto-trading-bot-case-study", "/case-studies"),
+    ("/retail-project-case-study", "/case-studies"),
+    ("/booking-app-case-study", "/case-studies"),
+    ("/request-a-demo", "/"),
+    ("/old-home-2", "/"),
+    ("/blog/medlearn-pro-transforming-healthcare-training-with-ai", "/blog"),
+    ("/blog/krasty-soft-boosts-order-processing-by-60", "/blog"),
+    ("/blog/costcare-pro-revolutionizing-healthcare-training-on-a-budget", "/blog"),
+]
+for source, dest in sheet1_redirects:
+    r = curl_status(source)
+    code = r.split("|")[0]
+    check(f"sheet1 {source} 301s", code == "301", f"got {code}")
+    if code == "301":
+        full = subprocess.run(
+            [
+                "curl",
+                "-s",
+                "-o",
+                "/dev/null",
+                "-w",
+                "%{redirect_url}",
+                f"{BASE}{source}",
+            ],
+            capture_output=True,
+            text=True,
+            timeout=15,
+        ).stdout.strip()
+        check(f"sheet1 {source} -> {dest}", full.endswith(dest), f"got {full}")
+
+# Sheet 3: removed-from-sitemap URLs that should 301
+sheet3_redirects = [
+    ("/retool", "/"),
+    ("/retool-development", "/"),
+    ("/retool-consulting", "/"),
+    ("/insurance", "/"),
+    ("/maritime-transportation", "/"),
+    ("/careers/senior-rabbit-hugger", "/careers"),
+    (
+        "/case-studies/aims-international-ai-driven-recruitment-platform",
+        "/case-studies",
+    ),
+    ("/case-studies/crypto-arbitrage-automation-tool", "/case-studies"),
+    ("/case-studies/warehouse-logistics-efficiency-dashboard", "/case-studies"),
+    ("/case-studies/procurement-inventory-planning-tool", "/case-studies"),
+    ("/case-studies/ai-powered-activity-management-platform", "/case-studies"),
+    ("/case-studies/admin-panel-for-wine-collectors-software", "/case-studies"),
+    ("/case-studies/customer-support-dashboard-for-e-com", "/case-studies"),
+    ("/case-studies/unified-orders-inventory-management-system", "/case-studies"),
+    ("/case-studies/ai-powered-investments-platform", "/case-studies"),
+]
+for source, dest in sheet3_redirects:
+    r = curl_status(source)
+    code = r.split("|")[0]
+    check(f"sheet3 {source} 301s", code == "301", f"got {code}")
+
+# ============================================================
+print("\n■ NEW PAGES: placeholder pages must be noindex + correct canonical")
+# ============================================================
+new_pages = ["/ai-automation", "/ai-development", "/e-commerce", "/saas"]
+for page in new_pages:
+    html = curl(page)
+    robots = get_meta_name(html, "robots")
+    check(f"{page} is noindex", robots and "noindex" in robots, f"robots={robots}")
+    canonical = get_canonical(html)
+    check(
+        f"{page} canonical is own URL",
+        canonical == f"{HOST}{page}",
+        f"got {canonical}",
+    )
+    # noindex pages should NOT be in the sitemap
+    check(
+        f"{page} not in sitemap",
+        f"{HOST}{page}" not in sitemap_urls,
+    )
 
 # ============================================================
 print("\n■ ITEM 4: Test blog posts hidden")
@@ -251,13 +382,8 @@ pages_to_check_headings = [
     "/",
     "/about",
     "/custom-software-development",
-    "/retool-development",
-    "/retool-consulting",
     "/fintech",
     "/healthcare",
-    "/insurance",
-    "/maritime-transportation",
-    "/retool",
     "/react",
     "/python",
     "/node",
@@ -302,11 +428,7 @@ person_count = sum(
 check("/about has 4 Person entries", person_count == 4, f"found {person_count}")
 
 # Service pages: Service + BreadcrumbList
-service_pages = [
-    "/custom-software-development",
-    "/retool-development",
-    "/retool-consulting",
-]
+service_pages = ["/custom-software-development"]
 for page in service_pages:
     html = curl(page)
     types = get_schema_types(html)
@@ -314,7 +436,7 @@ for page in service_pages:
     check(f"{page} has BreadcrumbList", "BreadcrumbList" in types)
 
 # Industry pages: Service + BreadcrumbList
-industry_pages = ["/fintech", "/healthcare", "/insurance", "/maritime-transportation"]
+industry_pages = ["/fintech", "/healthcare"]
 for page in industry_pages:
     html = curl(page)
     types = get_schema_types(html)
@@ -322,7 +444,7 @@ for page in industry_pages:
     check(f"{page} has BreadcrumbList", "BreadcrumbList" in types)
 
 # Technology pages: Service + BreadcrumbList
-tech_pages = ["/retool", "/react", "/python", "/node"]
+tech_pages = ["/react", "/python", "/node"]
 for page in tech_pages:
     html = curl(page)
     types = get_schema_types(html)
@@ -365,12 +487,7 @@ all_inner = [
     "/blog",
     "/fintech",
     "/healthcare",
-    "/insurance",
-    "/maritime-transportation",
     "/custom-software-development",
-    "/retool-development",
-    "/retool-consulting",
-    "/retool",
     "/react",
     "/python",
     "/node",
@@ -404,14 +521,9 @@ og_pages = [
     "/about",
     "/fintech",
     "/custom-software-development",
-    "/retool",
     "/blog",
     "/case-studies",
     "/healthcare",
-    "/insurance",
-    "/maritime-transportation",
-    "/retool-development",
-    "/retool-consulting",
     "/react",
     "/python",
     "/node",
@@ -448,12 +560,7 @@ canonical_pages = [
     "/blog",
     "/fintech",
     "/healthcare",
-    "/insurance",
-    "/maritime-transportation",
     "/custom-software-development",
-    "/retool-development",
-    "/retool-consulting",
-    "/retool",
     "/react",
     "/python",
     "/node",
@@ -463,11 +570,7 @@ for page in canonical_pages:
     canonical = get_canonical(html)
     check(f"{page} has canonical", canonical is not None)
     if canonical:
-        expected = (
-            f"https://krastysoft.com{page}"
-            if page != "/"
-            else "https://krastysoft.com/"
-        )
+        expected = f"{HOST}{page}" if page != "/" else f"{HOST}/"
         check(f"{page} canonical correct", canonical == expected, f"got {canonical}")
 
 # ============================================================

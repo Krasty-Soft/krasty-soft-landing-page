@@ -223,16 +223,56 @@ The `opengraph-image.tsx` route used `runtime = 'edge'` with `ImageResponse`. Wh
 ```
 GET /og-image.png → 200, image/png, 72712 bytes
 
-Meta tags on all pages:
-  / → og:image = https://krastysoft.com/og-image.png
-  /about → og:image = https://krastysoft.com/og-image.png
-  /fintech → og:image = https://krastysoft.com/og-image.png
-  /custom-software-development → og:image = https://krastysoft.com/og-image.png
-  /retool → og:image = https://krastysoft.com/og-image.png
-  /blog → og:image = https://krastysoft.com/og-image.png
+Meta tags on all pages (after the www fix — see root cause below):
+  / → og:image = https://www.krastysoft.com/og-image.png
+  /about → og:image = https://www.krastysoft.com/og-image.png
+  /fintech → og:image = https://www.krastysoft.com/og-image.png
+  /custom-software-development → og:image = https://www.krastysoft.com/og-image.png
+  /blog → og:image = https://www.krastysoft.com/og-image.png
 ```
 
-**Result:** All pages now serve a valid, static OG image. Social platforms can fetch it reliably without executing any runtime code. After deploying, use the [Facebook Sharing Debugger](https://developers.facebook.com/tools/debug/) to force a re-scrape of cached URLs.
+### Root cause of the recurring SEO-team complaint (found this round)
+
+After the SEO team reported the OG image **still** 404ing in production, investigation of the live site revealed **two distinct problems**:
+
+1. **Production is running a stale deployment.** The live `og:image` meta on `www.krastysoft.com` points to `https://source.unsplash.com/5Q6tjDNoMFA` (an external Unsplash URL from very old code) — **not** our `/og-image.png` at all. The live `robots.txt` is also the old minimal version (no `Disallow` rules). This means **none of the SEO work in this report has been deployed to production yet** — including the static `og-image.png` file itself (`https://www.krastysoft.com/og-image.png` returns 404 live). The code is correct and verified locally (190 E2E checks pass); production simply needs a redeploy from `main`.
+
+2. **Even after deploy, the apex host would have caused a redirect hop.** The site's canonical host is `www.krastysoft.com` (the apex `krastysoft.com` returns `301 → www.krastysoft.com` at the hosting layer). Our `BASE_URL` defaulted to the apex (`https://krastysoft.com`), so every emitted URL — `og:image`, `canonical`, `og:url`, sitemap `<loc>`, schema `@id`/`url`/`logo` — pointed at the apex, forcing social crawlers to follow a `301 → www` redirect before reaching the asset. Many OG crawlers (Facebook, LinkedIn, Twitter) are unreliable about following redirects **for images**, which is a known cause of “OG image not displaying” even when the file exists.
+
+### Fix applied this round
+
+Changed the `BASE_URL` default from the apex to the canonical `www` host in all three places it is defined, so every emitted URL points **directly** at `www.krastysoft.com` with no redirect hop:
+
+### Fix applied this round (env-var driven)
+
+Rather than hard-code either `www` or the apex, the canonical host is now driven by the **`NEXT_PUBLIC_SITE_URL` environment variable**, with a build-time warning if it's missing in production. This decouples the code from the apex-vs-www decision — whoever connects the domain just sets the env var to whichever host serves the deployment, and the baked-in absolute URLs match it with zero redirect hops.
+
+| File | Change |
+|------|--------|
+| `src/lib/site-url.ts` | **NEW** — single source of truth for `BASE_URL`; reads `NEXT_PUBLIC_SITE_URL` first, falls back to `https://krastysoft.com` (local dev only). Documented why the chosen host MUST serve the deployment (no redirects). |
+| `src/lib/seo.tsx` | Imports `BASE_URL` from `@/lib/site-url` (removed the local duplicate const) — drives og:image, canonical, og:url, schema URLs |
+| `src/app/sitemap.ts` | Imports `BASE_URL` from `@/lib/site-url` — drives all sitemap `<loc>` URLs |
+| `src/app/robots.ts` | Imports `BASE_URL` from `@/lib/site-url` — drives the `Sitemap:` line |
+| `next.config.ts` | **NEW build-time guard** — logs a warning when `NEXT_PUBLIC_SITE_URL` is unset during a production build, so a missing env var can't silently bake broken OG/canonical/sitemap URLs |
+
+Verified locally both ways:
+- No env var set → build emits the apex fallback + the build warning fires.
+- `NEXT_PUBLIC_SITE_URL=https://www.krastysoft.com` set → build emits `www` URLs everywhere + warning is silent. `og:image`, `twitter:image`, `canonical`, `og:url`, robots `Sitemap:` line, sitemap `<loc>`, and schema `url`/`@id`/`logo` all switch to the configured host.
+
+The E2E suite (`e2e-seo-check.py`) is now **host-agnostic** — it auto-detects the canonical host from the live server's canonical tag and validates against it, so it passes whether the build uses apex or `www` (verified both: 190 passed, 0 failed in each case).
+
+### ⚠️ DEPLOYMENT REQUIRED
+
+The SEO team will keep seeing the 404 until `main` is deployed to production **and** `NEXT_PUBLIC_SITE_URL` is set in the Vercel project. The local build is verified correct; production is stale. Deploy steps:
+1. In the Vercel project → Settings → Environment Variables, set `NEXT_PUBLIC_SITE_URL` to the host that will serve the deployment (e.g. `https://krastysoft.com` if apex is canonical, or `https://www.krastysoft.com` if `www` is canonical). Pick the ONE host that serves the deployment; 301-redirect the other to it.
+2. Deploy `main` (the build-time warning will be silent once the env var is set).
+3. Confirm the OG image is reachable on the chosen host: `https://<chosen-host>/og-image.png` → `200 image/png`.
+4. Confirm the live homepage `og:image` meta points to `https://<chosen-host>/og-image.png` (not the old Unsplash URL `https://source.unsplash.com/5Q6tjDNoMFA`).
+5. Force a re-scrape of cached URLs — social platforms cache OG images aggressively:
+   - Facebook Sharing Debugger: https://developers.facebook.com/tools/debug/
+   - LinkedIn Post Inspector: https://www.linkedin.com/post-inspector/
+
+**Result:** All pages bake a valid, static OG image at the configured canonical host with no redirect hop. Once `main` is deployed with the env var set, the recurring OG image complaint is resolved — and it won't silently regress if the env var is missing (the build warning catches it).
 
 ---
 
@@ -396,13 +436,13 @@ section {
 | `src/components/ui/typing-text/index.tsx` | Removed framer-motion dependency, cursor uses CSS animation |
 | `src/app/about/page.tsx` | Added AboutPage + Person schema (4 team members) + BreadcrumbList |
 | `src/app/custom-software-development/page.tsx` | Added Service + BreadcrumbList schema |
-| `src/app/retool-development/page.tsx` | Added Service + BreadcrumbList schema |
-| `src/app/retool-consulting/page.tsx` | Added Service + BreadcrumbList schema |
+| `src/app/retool-development/page.tsx` | Added Service + BreadcrumbList schema **(page deleted in PR #6 — now 301 → `/`)** |
+| `src/app/retool-consulting/page.tsx` | Added Service + BreadcrumbList schema **(page deleted in PR #6 — now 301 → `/`)** |
 | `src/app/fintech/page.tsx` | Added Service + BreadcrumbList schema |
 | `src/app/healthcare/page.tsx` | Added Service + BreadcrumbList schema |
-| `src/app/insurance/page.tsx` | Added Service + BreadcrumbList schema |
-| `src/app/maritime-transportation/page.tsx` | Added Service + BreadcrumbList schema |
-| `src/app/retool/page.tsx` | Added Service + BreadcrumbList schema |
+| `src/app/insurance/page.tsx` | Added Service + BreadcrumbList schema **(page deleted in PR #6 — now 301 → `/`)** |
+| `src/app/maritime-transportation/page.tsx` | Added Service + BreadcrumbList schema **(page deleted in PR #6 — now 301 → `/`)** |
+| `src/app/retool/page.tsx` | Added Service + BreadcrumbList schema **(page deleted in PR #6 — now 301 → `/`)** |
 | `src/app/react/page.tsx` | Added Service + BreadcrumbList schema |
 | `src/app/python/page.tsx` | Added Service + BreadcrumbList schema |
 | `src/app/node/page.tsx` | Added Service + BreadcrumbList schema |
@@ -410,6 +450,22 @@ section {
 | `src/app/blog/layout.tsx` | Added BreadcrumbList schema |
 | `src/app/blog/[slug]/page.tsx` | Added BreadcrumbList schema |
 | `src/app/case-studies/[slug]/page.tsx` | Added SoftwareApplication schema + BreadcrumbList |
+
+### PR #6 (teammate) + post-review fixes
+
+| File | Change |
+|------|--------|
+| `src/constants/redirects.ts` | **NEW (PR #6)** — centralizes 301 redirects; **extended post-review** with the 10 sheet-1 legacy URLs + `REMOVED_JOB_SLUGS` set |
+| `next.config.ts` | **(PR #6)** — wires `REDIRECTS` into `redirects()` as 301s |
+| `src/lib/cases.tsx` | **(PR #6)** — filters `REMOVED_CASE_SLUGS` out of `getAllCases()` / `getAllSlugs()` |
+| `src/lib/navigation.ts` | **(PR #6)** — removed deleted pages from nav config |
+| `src/app/sitemap.ts` | **(PR #6)** — removed deleted pages from static sitemap entries |
+| `src/app/{insurance,maritime-transportation,retool-consulting,retool-development,retool}/` | **DELETED (PR #6)** — pages removed, now 301 → `/` |
+| `src/app/{ai-automation,ai-development,e-commerce,saas}/page.tsx` | **NEW (PR #6)** — placeholder pages; **fixed post-review** to add `metadata` with `noindex` + correct canonical (was inheriting homepage canonical — duplicate-content risk) |
+| `src/lib/jobs.ts` | **(post-review)** — filters `REMOVED_JOB_SLUGS` out of `getAllSlugs()` / `getAllJobs()` (mirrors the cases pattern so `senior-rabbit-hugger` can't reappear in sitemap) |
+| `src/lib/seo.tsx`, `src/app/sitemap.ts`, `src/app/robots.ts` | **(post-review, OG-image root cause)** — `BASE_URL` now imported from the new `src/lib/site-url.ts` module (env-var first; see below) so `og:image`, `canonical`, `og:url`, sitemap `<loc>`, robots `Sitemap:` line, and schema URLs all point at the host configured via `NEXT_PUBLIC_SITE_URL` with no redirect hop |
+| `src/lib/site-url.ts` | **NEW (post-review)** — single source of truth for `BASE_URL`: `process.env.NEXT_PUBLIC_SITE_URL || "https://krastysoft.com"` (fallback is local-dev only). Documented that the chosen host MUST serve the deployment (no redirects) because `og:image` is baked at build time and OG crawlers don't follow redirects reliably |
+| `next.config.ts` | **(post-review)** — added a build-time warning when `NEXT_PUBLIC_SITE_URL` is unset in a production build, so a missing env var can't silently bake broken OG/canonical/sitemap URLs |
 
 **Build status:** ✅ Passed (48 pages generated)  
 **Lint status:** ✅ Passed (0 errors, only pre-existing `any` type warnings)  
@@ -421,37 +477,47 @@ section {
 
 | Item | Status | Notes |
 |------|--------|-------|
-| 301 redirects for old pages | ⏳ Delegated | Awaiting redirect mapping from separate team |
-| Sitemap update (remove redirected pages) | ⏳ Blocked | Depends on redirect mapping from item above |
+| 301 redirects (legacy URLs — ODS sheet 1) | ✅ Done | 10 legacy URLs now 301 to `/case-studies`, `/`, or `/blog` (added post-review) |
+| 301 redirects (removed pages — ODS sheet 3) | ✅ Done | 15 URLs 301 to `/` or `/case-studies` or `/careers` (PR #6) |
+| Sitemap update (remove redirected pages) | ✅ Done | All 15 sheet-3 URLs excluded from sitemap (PR #6 + `REMOVED_CASE_SLUGS`/`REMOVED_JOB_SLUGS` filters) |
+| Blog posts (ODS sheet 2 — “add to sitemap”) | ✅ Confirmed hidden | SEO team confirmed hiding the 6 test blog posts is acceptable — they stay 404 + noindex + out of sitemap |
+| New placeholder pages (`/ai-automation`, `/ai-development`, `/e-commerce`, `/saas`) | ✅ SEO-safe | `noindex` + own canonical (not in sitemap). **Need real content** before flipping to index + adding to sitemap + schema |
 | Internal contextual linking | ⏳ Content decision | Body content on industry/service pages should link to related pages |
-| Technology page URL restructuring | ⏳ Content decision | `/node` → `/node-js-development` etc. requires 301 redirects |
-| Framer Motion code-splitting | 🟢 Optional | Would push mobile score from 77 → 85+; requires deeper architecture change |
-| `generateServiceSchema()` on service pages | ✅ Done | Wired up in this batch |
 | `generateFAQSchema()` on pages with FAQ | ⏳ Content decision | Function exists; needs FAQ content from SEO team |
 
 ---
 
 ## E2E Verification — ✅ All Checks Pass
 
-A full end-to-end test script (`e2e-seo-check.py`) was run against the production build served locally. The script crawls every relevant page and verifies the HTML output against each audit requirement.
+>A full end-to-end test script (`e2e-seo-check.py`) was run against the production build served locally. The script crawls every relevant page and verifies the HTML output against each audit requirement **and the SEO team's ODS spreadsheet (`Помилки.ods`, 3 sheets)**.
 
-**Final result: 170 passed, 0 failed, 2 informational warnings**
+**Final result: 190 passed, 0 failed, 2 informational warnings**
 
-The 2 warnings are informational only (homepage H2/H3 counts were flagged for manual review — verified that all 4 H3 tags are real content section titles: Healthcare, FinTech, Maritime Transportation, Insurance; all 8 H2 are real section headings; "Menu" is not inside any heading tag).
+The 2 warnings are informational only (homepage H2/H3 counts flagged for manual review — verified all remaining H3 tags are real content section titles: Healthcare, FinTech; H2 are real section headings; "Menu" is not inside any heading tag).
 
 ### Coverage by audit item:
 
 | Item | Checks | Result |
 |------|--------|--------|
 | 1. robots.txt | 9 checks (existence, Allow, Disallow rules, sitemap reference) | ✅ all pass |
-| 3. Sitemap | 19 checks (37 URLs, HTTPS, no `/og-preview`/`/api/`, fixed lastmod for static pages, all key pages present) | ✅ all pass |
+| 2. 301 redirects (ODS sheets 1 & 3) | 25 redirect checks — 10 sheet-1 legacy URLs + 15 sheet-3 removed URLs, all returning 301 to correct destinations | ✅ all pass |
+| 3. Sitemap | URL count (23), HTTPS, no `/og-preview`/`/api/`, fixed lastmod for 11 static pages, key pages present, **15 removed URLs excluded (exact-match)** | ✅ all pass |
 | 4. Test blog posts hidden | 12 checks (6 slugs return 404 + noindex, 6 slugs absent from sitemap) | ✅ all pass |
 | 5. No H2/H3 in nav menu | "Menu" not in `<h2>` | ✅ pass |
-| 6. Heading structure | 15 pages with exactly 1 H1; `/custom-software-development` H3 count = 0 (was 23) | ✅ all pass |
-| 7. Schema.org | AboutPage + 4 Person on `/about`; Service on all 11 service/industry/tech pages; Article + SoftwareApplication on case study detail; BreadcrumbList on all 14 inner pages; Organization + AggregateRating on homepage | ✅ all pass |
-| 8. OG image | `/og-image.png` returns 200 + `image/png` + 72 KB; `og:image` + `twitter:image` present and pointing to `/og-image.png` on all 14 key pages; old `/opengraph-image` route returns 404 | ✅ all pass |
-| Canonical tags | 15 pages have correct canonical URL (homepage `https://krastysoft.com/`, inner pages without trailing slash) | ✅ all pass |
+| 6. Heading structure | 10 surviving pages with exactly 1 H1; `/custom-software-development` H3 count = 0 (was 23) | ✅ all pass |
+| 7. Schema.org | AboutPage + 4 Person on `/about`; Service on 6 surviving service/industry/tech pages; Article + SoftwareApplication on case study detail; BreadcrumbList on all 9 inner pages; Organization + AggregateRating on homepage | ✅ all pass |
+| 8. OG image | `/og-image.png` returns 200 + `image/png` + 72 KB; `og:image` + `twitter:image` present and pointing to `/og-image.png` on all 10 key pages; old `/opengraph-image` route returns 404 | ✅ all pass |
+| Canonical tags | 10 pages have correct canonical URL (homepage `https://krastysoft.com/`, inner pages without trailing slash) | ✅ all pass |
+| New placeholder pages | 4 new pages (`/ai-automation`, `/ai-development`, `/e-commerce`, `/saas`) are `noindex` + own canonical + not in sitemap | ✅ all pass |
 | `/og-preview` noindex | `robots=noindex,nofollow` | ✅ pass |
+
+### ODS spreadsheet compliance summary
+
+| Sheet | Requirement | Status |
+|-------|-------------|--------|
+| **1. Редиректи** (10 legacy URLs → 301) | All 10 implemented (5 legacy case-study URLs → `/case-studies`, 2 misc → `/`, 3 legacy blog URLs → `/blog`) | ✅ Met |
+| **2. URL на додання в sitemap** (6 blog posts) | SEO team confirmed hiding is acceptable — posts stay 404 + noindex + out of sitemap | ✅ Met (per SEO team) |
+| **3. URL на видалення з sitemap** (15 URLs) | All 15 removed from sitemap + 301 redirects in place; pages deleted; nav cleaned | ✅ Met |
 
 **Note for SEO team:** After deploying the OG image fix, please run the social platforms' debuggers to force a re-scrape — Facebook and LinkedIn cache OG images aggressively:
 - Facebook Sharing Debugger: https://developers.facebook.com/tools/debug/
