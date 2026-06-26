@@ -1,4 +1,5 @@
 import { safeGetEntries } from "@/lib/cms";
+import { REMOVED_CASE_SLUGS } from "@/constants/redirects";
 import type { EntrySkeletonType } from "contentful";
 
 export type CaseTemplate = "default" | "srm";
@@ -101,7 +102,9 @@ export async function getAllCases() {
   });
 
   if (res && res.items.length > 0) {
-    return res.items.map((item: CaseSkeleton) => {
+    return res.items
+      .filter((item: CaseSkeleton) => !REMOVED_CASE_SLUGS.has(item.fields.slug))
+      .map((item: CaseSkeleton) => {
       const fields = item.fields;
       const previewUrl = (fields as any).preview?.fields?.file?.url;
 
@@ -164,7 +167,8 @@ export async function getAllCases() {
       } as Case;
     });
   }
-  return cases; // Fallback to hardcoded data
+  // Fallback to hardcoded data
+  return cases.filter((item) => !REMOVED_CASE_SLUGS.has(item.slug));
 }
 
 export async function getCaseBySlug(slug: string) {
@@ -246,10 +250,13 @@ export async function getAllSlugs() {
   if (res) {
     return res.items
       .filter((i: any) => i.fields?.slug)
+      .filter((i: any) => !REMOVED_CASE_SLUGS.has(i.fields.slug))
       .map((i: any) => ({
         slug: i.fields.slug as string,
         updatedAt: i.sys?.updatedAt ? new Date(i.sys.updatedAt) : new Date(),
       }));
   }
-  return cases.map((item) => ({ slug: item.slug, updatedAt: new Date() }));
+  return cases
+    .filter((item) => !REMOVED_CASE_SLUGS.has(item.slug))
+    .map((item) => ({ slug: item.slug, updatedAt: new Date() }));
 }
