@@ -134,7 +134,7 @@ export default function OGPreviewPage() {
               fontWeight: 700,
               color: "#E50606",
               lineHeight: 1,
-              fontFamily: "var(--font-tt-runs)",
+              fontFamily: "var(--font-sora)",
               textShadow: "0 0 40px rgba(229, 6, 6, 0.8)",
               display: "flex",
               justifyContent: "center",
@@ -156,7 +156,7 @@ export default function OGPreviewPage() {
               color: "#ffffff",
               lineHeight: 1.1,
               margin: 0,
-              fontFamily: "var(--font-tt-runs)",
+              fontFamily: "var(--font-sora)",
               letterSpacing: "-0.02em",
               textTransform: "uppercase",
             }}
@@ -171,7 +171,7 @@ export default function OGPreviewPage() {
               fontWeight: 500,
               color: "#cccccc",
               margin: 0,
-              fontFamily: "var(--font-tt-runs)",
+              fontFamily: "var(--font-sora)",
               letterSpacing: "0.02em",
             }}
           >
@@ -196,7 +196,7 @@ export default function OGPreviewPage() {
               fontWeight: 400,
               color: "#999999",
               margin: 0,
-              fontFamily: "var(--font-tt-runs)",
+              fontFamily: "var(--font-sora)",
             }}
           >
             Custom Software · Retool Development · Enterprise Solutions
@@ -212,7 +212,7 @@ export default function OGPreviewPage() {
             fontSize: "24px",
             fontWeight: 600,
             color: "#E50606",
-            fontFamily: "var(--font-tt-runs)",
+            fontFamily: "var(--font-sora)",
             letterSpacing: "0.05em",
           }}
         >

@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 :root {
-    --font-tt-runs: TTRuns, sans-serif;
+    --font-sora: Sora, sans-serif;
 
     /* Dark Theme - Backgrounds */
     --bg-primary: #0a0a0a;
@@ -282,7 +282,7 @@ html {
 
 body {
     height: 100%;
-    font-family: var(--font-tt-runs);
+    font-family: var(--font-sora);
     background-color: var(--bg-primary);
     color: var(--text-primary);
     /* Improve font rendering on dark backgrounds */

@@ -2,7 +2,7 @@ import { WebVitalsReporter } from "@/components/analytics/web-vitals-reporter";
 import { Footer, Header } from "@/components/blocks";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { ScrollTop } from "@/components/ui";
-import { ttRuns } from "@/lib/fonts";
+import { sora } from "@/lib/fonts";
 import {
   generateSEO,
   generateOrganizationSchema,
@@ -56,7 +56,7 @@ export default function RootLayout({
         className={`
                     font-sans antialiased
                     flex flex-col min-h-screen
-                    ${ttRuns.variable}
+                    ${sora.variable}
                 `}
         style={{
           backgroundColor: "var(--bg-primary)",

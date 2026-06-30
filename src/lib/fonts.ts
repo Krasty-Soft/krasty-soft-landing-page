@@ -1,28 +1,12 @@
 import localFont from "next/font/local";
 
-export const ttRuns = localFont({
-  src: [
-    {
-      path: "../fonts/TT Runs Trial Regular.ttf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../fonts/TT Runs Trial Medium.ttf",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../fonts/TT Runs Trial DemiBold.ttf",
-      weight: "600",
-      style: "normal",
-    },
-    {
-      path: "../fonts/TT Runs Trial Bold.ttf",
-      weight: "700",
-      style: "normal",
-    },
-  ],
-  variable: "--font-tt-runs",
+// Sora — variable font (weight axis 100–800), licensed under the SIL Open Font
+// License (see src/fonts/OFL.txt). Self-hosted via next/font/local for
+// performance (no external request). Covers every weight the design uses
+// (400 / 500 / 600 / 700) from a single 110KB file.
+export const sora = localFont({
+  src: "../fonts/Sora-VariableFont_wght.ttf",
+  variable: "--font-sora",
   display: "swap",
+  weight: "100 800",
 });
