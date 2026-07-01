@@ -60,7 +60,7 @@ export async function POST(req: Request) {
 
     // Send email via Resend
     const resendApiKey = process.env.RESEND_API_KEY;
-    const toEmail = process.env.CONTACT_EMAIL_TO || "careers@krasty.me";
+    const toEmail = process.env.CONTACT_EMAIL_TO || "careers@krastysoft.com";
     const fromEmail = process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev";
 
     if (resendApiKey) {
