@@ -335,15 +335,18 @@ test_slugs = [
     "the-importance-of-multi-factor-authentication-in-cybersecurity",
 ]
 for slug in test_slugs:
-    html = curl(f"/blog/{slug}")
     status = curl_status(f"/blog/{slug}")
-    # Should 404 (data removed) OR have noindex
-    is_404 = "404" in html or status.startswith("404")
+    # Hidden = 301 redirect away (current approach — redirects to /blog),
+    # 404 (data removed), or noindex. A 301 away is a valid hide: the URL
+    # doesn't serve the post content.
+    is_301 = status.startswith("301")
+    is_404 = status.startswith("404")
+    html = curl(f"/blog/{slug}")
     has_noindex = "noindex" in html
     check(
         f"/blog/{slug} hidden",
-        is_404 or has_noindex,
-        f"404={is_404}, noindex={has_noindex}",
+        is_301 or is_404 or has_noindex,
+        f"301={is_301}, 404={is_404}, noindex={has_noindex}",
     )
 
 # Verify test slugs are NOT in sitemap

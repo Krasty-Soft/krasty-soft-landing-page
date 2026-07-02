@@ -21,6 +21,8 @@ export interface Case {
   slug: string;
   title: string;
   tags: string[];
+  /** Category labels shown as the card's uppercase meta line (e.g. "Ad Analytics" • "Marketing Reporting"). Optional. */
+  categories?: string[];
   cardDescription: string;
   preview: string;
   media: Media[];
@@ -36,6 +38,7 @@ export interface ContentfulCaseFields {
   slug: string;
   title: string;
   tags: string; // Contentful stores it as comma-separated string
+  categories?: string; // comma-separated category labels for the card meta line
   cardDescription: string;
   preview: { fields: { file: { url: string } } }; // Contentful asset
   media: Array<{ fields: { file: { url: string } } }>; // Contentful assets array
@@ -147,10 +150,20 @@ export async function getAllCases() {
         industries = [fields.industry as Industry];
       }
 
+      // Category labels for the card meta line (comma-separated, like tags)
+      let categories: string[] = [];
+      if (typeof fields.categories === "string" && fields.categories.trim()) {
+        categories = fields.categories
+          .split(",")
+          .map((c: string) => c.trim())
+          .filter(Boolean);
+      }
+
       return {
         slug: fields.slug,
         title: fields.title,
         tags,
+        categories,
         cardDescription: fields.cardDescription || "",
         preview: previewUrl
           ? previewUrl.startsWith("http")

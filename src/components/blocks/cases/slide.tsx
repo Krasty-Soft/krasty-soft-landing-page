@@ -13,8 +13,10 @@ export const Slide = ({ slide }: { slide: any }) => {
 
   return (
     // Slide must have min-w-full flex-[0_0_100%] classes
-    <div className="min-w-full flex-[0_0_100%]">
-      <CaseCard data={slide} />
+    <div className="min-w-full flex-[0_0_100%] flex justify-center px-2">
+      <div className="w-full max-w-[420px]">
+        <CaseCard data={slide} />
+      </div>
     </div>
   )
 }

@@ -165,11 +165,12 @@ export default function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
             {/* Cases Grid */}
             <Section variant="secondary" animate={false}>
                 {filteredCases.length > 0 ? (
-                    <ul className="grid grid-cols-1 gap-7 md:gap-6 lg:gap-8 xl:gap-10">
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
                         {filteredCases.map((item: Case, i: number) => {
                             return (
                                 <motion.li
                                     key={i}
+                                    className="h-full"
                                     initial={{ opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true, margin: "-50px" }}
