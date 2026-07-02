@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Mail, Phone, Copy, Check } from "lucide-react";
+import { Phone, Copy, Check } from "lucide-react";
 import { motion } from "framer-motion";
 import { SocialNetworks } from "@/components/blocks";
 import { ChatForm } from "./chat-form";
@@ -291,14 +291,7 @@ export const Footer = () => {
               </div>
 
               <div className="flex flex-col gap-5">
-                {/* Email Card */}
-                <ContactCard
-                  icon={<Mail size={22} />}
-                  label="Email us"
-                  value="sales@krasty.me"
-                  href="mailto:sales@krasty.me"
-                  gradient="linear-gradient(135deg, rgba(220, 38, 38, 0.1), rgba(220, 38, 38, 0.05))"
-                />
+                {/* TODO: re-add email ContactCard once a @krastysoft.com inbox exists */}
 
                 <motion.button
                   type="button"

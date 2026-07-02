@@ -68,6 +68,33 @@ export const REDIRECTS: Redirect[] = [
       "/blog/costcare-pro-revolutionizing-healthcare-training-on-a-budget",
     destination: "/blog",
   },
+  // --- Sheet 2: retired test/filler blog posts ---
+  {
+    source: "/blog/end-inventory-headache-with-krasty-soft",
+    destination: "/blog",
+  },
+  {
+    source: "/blog/med-learn-pro-transforming-healthcare",
+    destination: "/blog",
+  },
+  {
+    source:
+      "/blog/the-importance-of-multi-factor-authentication-in-cybersecurity",
+    destination: "/blog",
+  },
+  {
+    source: "/blog/transforming-healthcare-software-development-with-retool",
+    destination: "/blog",
+  },
+  {
+    source:
+      "/blog/cost-care-pro-revolutionizing-healthcare-training-on-a-budget",
+    destination: "/blog",
+  },
+  {
+    source: "/blog/dark-mode-vs-light-mode-which-one-improves-user-experience",
+    destination: "/blog",
+  },
   // --- Sheet 3: removed top-level pages ---
   { source: "/retool-development", destination: "/" },
   { source: "/retool-consulting", destination: "/" },
