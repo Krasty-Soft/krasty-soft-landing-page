@@ -67,7 +67,7 @@ export const CaseCard = ({ data }: { data: Case }) => {
         <div
           style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}
         >
-          {/* Cover image with hover zoom + scrim */}
+          {/* Cover image: grayscale at rest → full color on hover, slight zoom */}
           <div
             style={{
               position: "relative",
@@ -79,7 +79,11 @@ export const CaseCard = ({ data }: { data: Case }) => {
             }}
           >
             <motion.div
-              animate={{ scale: isHovered ? 1.05 : 1 }}
+              initial={false}
+              animate={{
+                scale: isHovered ? 1.05 : 1,
+                filter: isHovered ? "grayscale(0)" : "grayscale(1)",
+              }}
               transition={{ duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
               style={{ position: "absolute", inset: 0 }}
             >
@@ -95,10 +99,10 @@ export const CaseCard = ({ data }: { data: Case }) => {
                 }}
               />
             </motion.div>
-            {/* Dark scrim — heavy at rest, clears on hover so the shot pops */}
+            {/* Subtle dim over the grayscale rest state; clears fully on hover */}
             <motion.div
               initial={false}
-              animate={{ opacity: isHovered ? 0.1 : 0.5 }}
+              animate={{ opacity: isHovered ? 0 : 0.18 }}
               transition={{ duration: 0.4 }}
               style={{
                 position: "absolute",
