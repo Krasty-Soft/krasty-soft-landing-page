@@ -2,7 +2,7 @@ import type { StaticImageData } from "next/image";
 import AleksandrImage from "@/assets/a-tynianov.webp";
 import MarinaImage from "@/assets/m-krsnikova.webp";
 import VolodymyrImage from "@/assets/v-shvedov.webp";
-import RamiImage from "@/assets/r-dawi.jpeg";
+import VadimImage from "@/assets/v-lysenko.webp";
 export type TeamMember = {
   name: string;
   position: string;
@@ -31,9 +31,9 @@ export const TEAM_MEMBERS: TeamMember[] = [
     linkedin: "https://www.linkedin.com/in/shvedr/",
   },
   {
-    name: "Rami Dawi",
-    position: "Business Development Consultant",
-    picture: RamiImage,
-    linkedin: "https://www.linkedin.com/in/ramidawi/",
+    name: "Vadim Lysenko",
+    position: "Lead Software Engineer",
+    picture: VadimImage,
+    linkedin: "https://www.linkedin.com/in/vadim-lysenko-06b03122a/",
   },
 ] as const;

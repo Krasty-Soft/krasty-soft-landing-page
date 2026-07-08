@@ -17,4 +17,4 @@
  * only that one at the deployment; 301-redirect the other to it.
  */
 export const BASE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL || "https://krastysoft.com";
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.krastysoft.com";

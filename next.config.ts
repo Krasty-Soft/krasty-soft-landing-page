@@ -12,7 +12,7 @@ if (
 ) {
   console.warn(
     "⚠️  NEXT_PUBLIC_SITE_URL is not set. Absolute URLs (og:image, canonical, " +
-      'sitemap, Schema.org) will fall back to "https://krastysoft.com". Set ' +
+      'sitemap, Schema.org) will fall back to "https://www.krastysoft.com". Set ' +
       "NEXT_PUBLIC_SITE_URL in the Vercel project env to the host that actually " +
       "serves this deployment (e.g. https://krastysoft.com or " +
       "https://www.krastysoft.com). Do NOT use a host that 301-redirects to " +
