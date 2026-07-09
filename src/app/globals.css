@@ -493,11 +493,11 @@ body {
     }
 }
 
-/* Performance: Contain and defer off-screen sections */
-section {
-    content-visibility: auto;
-    contain-intrinsic-size: auto 800px;
-}
+/* NOTE: `content-visibility: auto` on every <section> was removed — inside the
+   custom #app-scroll container it made scroll height jump (its 800px intrinsic
+   estimate vs real height) and forced each section to render + animate the
+   instant it entered the viewport, causing fast-scroll stutter. Rendering all
+   sections up front trades a little initial work for smooth scrolling. */
 
 /* Keep browser autofill on-theme (dark inputs, light text) instead of the
    default white/yellow autofill background that breaks the dark forms. */

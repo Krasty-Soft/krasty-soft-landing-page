@@ -2,7 +2,15 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FileCode, Folder, ChevronRight, ChevronDown, X } from "lucide-react";
+import {
+  FileCode,
+  Folder,
+  ChevronRight,
+  ChevronDown,
+  X,
+  PanelLeftClose,
+  PanelLeftOpen,
+} from "lucide-react";
 import { ServiceType } from "@/types";
 
 interface CodeEditorProps {
@@ -71,6 +79,31 @@ export const CodeEditor = ({ services }: CodeEditorProps) => {
         >
           services.tsx - KrastySoft
         </span>
+
+        {/* Always-visible sidebar toggle (so a collapsed Explorer can reopen) */}
+        <button
+          type="button"
+          onClick={() => setIsExplorerOpen((v) => !v)}
+          aria-label={isExplorerOpen ? "Collapse Explorer" : "Expand Explorer"}
+          title={isExplorerOpen ? "Collapse Explorer" : "Expand Explorer"}
+          className="hidden lg:flex"
+          style={{
+            marginLeft: "auto",
+            alignItems: "center",
+            justifyContent: "center",
+            background: "none",
+            border: "none",
+            cursor: "pointer",
+            padding: "0.25rem",
+            color: "var(--text-tertiary)",
+          }}
+        >
+          {isExplorerOpen ? (
+            <PanelLeftClose size={16} />
+          ) : (
+            <PanelLeftOpen size={16} />
+          )}
+        </button>
       </div>
 
       {/* Mobile Pills - Show only on mobile */}
