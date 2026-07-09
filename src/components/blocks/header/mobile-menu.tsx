@@ -209,11 +209,44 @@ export const MobileMenu = ({
               )}
             </div>
           </motion.div>
+
+          {/* Technologies Section */}
+          <motion.div
+            custom={navigationItems.length + 2}
+            variants={itemVariants}
+            initial="closed"
+            animate="open"
+            className="mt-8"
+          >
+            <div
+              className="text-xs uppercase tracking-wider font-semibold mb-4 px-4"
+              style={{ color: "var(--text-muted)" }}
+            >
+              Technologies
+            </div>
+            <div className="space-y-2">
+              {(Array.isArray(PAGES.technologies) ? PAGES.technologies : []).map(
+                (tech: any) => (
+                  <Link
+                    key={tech.slug}
+                    href={`/${tech.slug}`}
+                    onClick={onClose}
+                    className="block p-3 px-4 rounded-lg transition-colors duration-200"
+                    style={{
+                      color: "var(--text-secondary)",
+                    }}
+                  >
+                    {tech.label}
+                  </Link>
+                ),
+              )}
+            </div>
+          </motion.div>
         </nav>
 
         {/* Footer CTA */}
         <motion.div
-          custom={navigationItems.length + 2}
+          custom={navigationItems.length + 3}
           variants={itemVariants}
           initial="closed"
           animate="open"

@@ -15,6 +15,7 @@ export const DesktopMenu = () => {
     { label: "Blog", href: "/blog", hasDropdown: false },
     { label: "Services", key: "services", hasDropdown: true },
     { label: "Industries", key: "industries", hasDropdown: true },
+    { label: "Technologies", key: "technologies", hasDropdown: true },
   ];
 
   const getDropdownItems = (key: string) => {

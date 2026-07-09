@@ -31,27 +31,60 @@ const PAGES: NavigationConfig = {
   },
   industries: [
     {
-      slug: "healthcare",
-      label: "Healthcare",
-      description: "",
-      // "Telemedicine platforms, patient management systems, EHR solutions, and medical data security.",
-    },
-    {
       slug: "fintech",
       label: "FinTech",
       description: "",
-      // "Crypto solutions, payment gateways, investments app, SaaS etc. Bring your fintech idea into life!",
+    },
+    {
+      slug: "healthcare",
+      label: "Healthcare",
+      description: "",
+    },
+    {
+      slug: "e-commerce",
+      label: "E-commerce",
+      description: "",
+    },
+    {
+      slug: "saas",
+      label: "SaaS",
+      description: "",
     },
   ],
   services: [
     {
+      slug: "ai-development",
+      label: "AI Development",
+      description: "",
+    },
+    {
+      slug: "ai-automation",
+      label: "AI Automation",
+      description: "",
+    },
+    {
       slug: "custom-software-development",
       label: "Custom Software Development",
       description: "",
-      //  "Design, develop, and deploy custom software solutions tailored to your specific business needs.",
+    },
+    {
+      slug: "backend-development",
+      label: "Backend Development",
+      description: "",
+    },
+    {
+      slug: "frontend-development",
+      label: "Frontend Development",
+      description: "",
     },
   ],
   technologies: [
+    {
+      slug: "ai-development",
+      label: "AI Development",
+      description:
+        "AI agents, LLM integrations, and RAG systems built into your products.",
+    },
     {
       slug: "react",
       label: "React.js",

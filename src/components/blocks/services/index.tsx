@@ -48,7 +48,7 @@ const mock: ServiceType[] = [
     title: "Frontend Development",
     description:
       "Create responsive, high-performance web applications with seamless user experiences.",
-    link: "/case-studies",
+    link: "/frontend-development",
     content: [
       "Custom Web Application Development",
       "UI/UX Design Implementation",
