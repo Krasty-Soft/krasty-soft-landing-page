@@ -17,7 +17,7 @@ import "./globals.css";
 export const metadata: Metadata = generateSEO({
   title: "Krasty Soft - Software Development Company",
   description:
-    "Progressive B2B software development company specializing in custom solutions, Retool development, and enterprise applications. Trusted partner for tech innovation.",
+    "Progressive B2B software development company specializing in custom solutions, AI development, and enterprise applications. Trusted partner for tech innovation.",
   path: "/",
 });
 
@@ -51,6 +51,12 @@ export default function RootLayout({
           href="https://images.ctfassets.net"
           crossOrigin="anonymous"
         />
+        {/* Third-party widgets (Clutch, Calendly) — preconnect to shave the
+            connection setup that Lighthouse flagged (~328ms on mobile). */}
+        <link rel="preconnect" href="https://widget.clutch.co" />
+        <link rel="dns-prefetch" href="https://widget.clutch.co" />
+        <link rel="preconnect" href="https://assets.calendly.com" />
+        <link rel="dns-prefetch" href="https://assets.calendly.com" />
       </head>
       <body
         className={`

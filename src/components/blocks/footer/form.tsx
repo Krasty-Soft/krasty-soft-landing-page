@@ -27,6 +27,7 @@ type FieldErrors = {
   name?: string;
   email?: string;
   message?: string;
+  phone?: string;
   file?: string;
 };
 
@@ -42,6 +43,12 @@ const inputCls = (hasError?: string) =>
   `${inputBase} ${hasError ? "border-[var(--brand-red)]" : "border-white/10"}`;
 
 const Req = () => <span className="text-[var(--brand-red)]">*</span>;
+
+// Phone is optional, but if provided it must look like a real number.
+const isValidPhone = (v: string) => {
+  const digits = v.replace(/\D/g, "");
+  return /^[+\d\s().-]+$/.test(v) && digits.length >= 7 && digits.length <= 15;
+};
 
 export const FooterForm = () => {
   const [submitting, setSubmitting] = useState(false);
@@ -65,6 +72,7 @@ export const FooterForm = () => {
       ).trim();
     const name = val("name");
     const email = val("email");
+    const phone = val("phone");
     const subject = val("subject");
     const message = val("message");
 
@@ -73,6 +81,8 @@ export const FooterForm = () => {
       next.name = "Please enter your name (at least 2 characters).";
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
       next.email = "Please enter a valid email address.";
+    if (phone && !isValidPhone(phone))
+      next.phone = "Please enter a valid phone number.";
     if (message.length < 10)
       next.message = "Tell us a little more — at least 10 characters.";
     if (Object.keys(next).length) {
@@ -253,9 +263,13 @@ export const FooterForm = () => {
               type="tel"
               name="phone"
               autoComplete="tel"
+              inputMode="tel"
               placeholder="+1 555 000 0000"
-              className={inputCls()}
+              aria-invalid={!!errors.phone}
+              onChange={() => clearFieldError("phone")}
+              className={inputCls(errors.phone)}
             />
+            {errors.phone && <p className={errText}>{errors.phone}</p>}
           </div>
         </div>
 

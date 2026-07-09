@@ -1,15 +1,40 @@
-import { generateSEO } from "@/lib/seo";
+import { getTechBySlug } from "@/lib/techs";
+import {
+  generateSEO,
+  generateBreadcrumbSchema,
+  generateServiceSchema,
+  StructuredData,
+} from "@/lib/seo";
+import { notFound } from "next/navigation";
+import TechTemplate from "../technologies/tech-template";
 import { Metadata } from "next";
 
-// Placeholder page — noindex until full content is published.
-// Correct canonical (own URL, not the homepage default) prevents duplicate-content harm.
 export const metadata: Metadata = generateSEO({
-  title: "AI Development",
-  description: "AI development services from Krasty Soft. Content coming soon.",
+  title: "AI Development Services",
+  description:
+    "AI agents, LLM integrations, RAG systems, and automation built into your products. Expert AI development services from Krasty Soft.",
   path: "/ai-development",
-  noIndex: true,
 });
 
 export default function AiDevelopmentPage() {
-  return <h1>AI Development</h1>;
+  const tech = getTechBySlug("ai-development");
+  if (!tech) return notFound();
+
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", path: "/" },
+    { name: "AI Development", path: "/ai-development" },
+  ]);
+
+  const serviceSchema = generateServiceSchema({
+    name: "AI Development Services",
+    description:
+      "AI agents, LLM integrations, RAG systems, and automation built into your products. Expert AI development services from Krasty Soft.",
+  });
+
+  return (
+    <>
+      <StructuredData data={[breadcrumbSchema, serviceSchema]} />
+      <TechTemplate tech={tech} />
+    </>
+  );
 }

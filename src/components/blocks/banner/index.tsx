@@ -4,14 +4,16 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Star, Quote } from "lucide-react";
 import { StatusBadge, Modal } from "@/components/ui";
-import { StaggerWrapper } from "@/components/ui/scroll-reveal";
 import { ClutchBadges } from "@/components/clutch-badges";
 
-// Stagger item variant for children
-const staggerItem = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0 },
-};
+// Above-the-fold hero entrance. The heading renders visible immediately (no
+// opacity gate) so it's not held back for LCP; supporting elements fade up.
+const EASE = [0.32, 0.72, 0, 1] as const;
+const fadeUp = (delay: number) => ({
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.5, delay, ease: EASE },
+});
 
 const goToContact = () => {
   const container = document.getElementById("app-scroll");
@@ -103,9 +105,9 @@ export const Banner = () => {
         }}
       />
 
-      <StaggerWrapper className="relative z-10 max-w-6xl mx-auto flex flex-col items-center">
+      <div className="relative z-10 max-w-6xl mx-auto flex flex-col items-center">
         {/* Status badge */}
-        <motion.div variants={staggerItem} className="mb-8">
+        <motion.div {...fadeUp(0.05)} className="mb-8">
           <StatusBadge
             status="Open for work"
             subtitle="Building the future"
@@ -114,9 +116,11 @@ export const Banner = () => {
           />
         </motion.div>
 
-        {/* Main heading */}
+        {/* Main heading — LCP element: visible immediately (slide only, no fade) */}
         <motion.h1
-          variants={staggerItem}
+          initial={{ y: 20 }}
+          animate={{ y: 0 }}
+          transition={{ duration: 0.5, ease: EASE }}
           className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center mb-6 tracking-tight"
           style={{
             color: "var(--text-primary)",
@@ -129,7 +133,7 @@ export const Banner = () => {
 
         {/* Subtitle */}
         <motion.p
-          variants={staggerItem}
+          {...fadeUp(0.15)}
           className="text-lg md:text-xl lg:text-2xl text-center mb-12 max-w-3xl"
           style={{
             color: "var(--text-muted)",
@@ -141,7 +145,7 @@ export const Banner = () => {
         </motion.p>
 
         {/* CTA Button */}
-        <motion.div variants={staggerItem} className="mb-16 relative">
+        <motion.div {...fadeUp(0.25)} className="mb-16 relative">
           {/* Pulsing glow - CSS animation instead of framer-motion */}
           <div
             className="absolute inset-0 rounded-full blur-3xl -z-10"
@@ -188,10 +192,10 @@ export const Banner = () => {
           </motion.button>
         </motion.div>
 
-        <motion.div variants={staggerItem} className="w-full max-w-5xl">
+        <motion.div {...fadeUp(0.35)} className="w-full max-w-5xl">
           <ClutchBadges />
         </motion.div>
-      </StaggerWrapper>
+      </div>
 
       {/* Scroll indicator - CSS animations instead of framer-motion */}
       <div

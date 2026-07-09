@@ -1,4 +1,4 @@
-import RetoolIcon from "@/assets/retool.svg";
+import AiIcon from "@/assets/ai.svg";
 import ReactIcon from "@/assets/react.svg";
 import PythonIcon from "@/assets/python.svg";
 import NodeJsIcon from "@/assets/node.svg";
@@ -13,11 +13,11 @@ export type ExpertiseItem = {
 
 export const EXPERTISE_ITEMS: ExpertiseItem[] = [
   {
-    title: "Retool",
+    title: "AI Development",
     description:
-      "We are Certified Retool Partner. We deliver complex internal applications, admin panels, and dashboards in days, not months, maximizing your operational efficiency with validated best practices.",
-    icon: RetoolIcon,
-    link: "/retool",
+      "We ship production AI — agents, LLM integrations, RAG systems, and copilots wired into your data and workflows with guardrails and evaluation. We build for measurable outcomes, not demos.",
+    icon: AiIcon,
+    link: "/ai-development",
   },
   {
     title: "React",
@@ -45,6 +45,6 @@ export const EXPERTISE_ITEMS: ExpertiseItem[] = [
     description:
       "We provide expert Technical Consultation and architecture strategy, ensuring your project is built on solid, future-proof decisions that align directly with your business goals.",
     icon: ConsultancyIcon,
-    link: undefined,
+    link: "/#contacts",
   },
 ] as const;

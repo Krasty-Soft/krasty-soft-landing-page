@@ -9,27 +9,15 @@ import { SectionWrapper } from "@/components/ui/section-wrapper";
 
 const mock: ServiceType[] = [
   {
-    title: "Retool Development",
+    title: "AI Development",
     description:
-      "Optimize your business processes with powerful, no-code Retool solutions tailored to your needs.",
-    link: "/retool-development",
+      "Ship production AI — agents, LLM integrations, RAG, and copilots wired into your products and workflows with guardrails and evaluation.",
+    link: "/ai-development",
     content: [
-      "Custom Retool Apps",
-      "Retool Dashboard Development",
-      "Database & API Integrations",
-      "Retool UI/UX Customization",
-    ],
-  },
-  {
-    title: "Retool Consultancy",
-    description:
-      "Get expert guidance to develop a Retool strategy that aligns with your business goals.",
-    link: "/retool-development",
-    content: [
-      "Retool Strategy Planning",
-      "App Architecture Review",
-      "Retool Best Practices Training",
-      "Migration to Retool",
+      "AI Agents & Automation",
+      "LLM & Chatbot Integration",
+      "RAG & Knowledge Systems",
+      "AI Analytics & Search",
     ],
   },
   {

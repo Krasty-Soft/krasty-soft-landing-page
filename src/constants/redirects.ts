@@ -96,11 +96,11 @@ export const REDIRECTS: Redirect[] = [
     destination: "/blog",
   },
   // --- Sheet 3: removed top-level pages ---
-  { source: "/retool-development", destination: "/" },
-  { source: "/retool-consulting", destination: "/" },
+  { source: "/retool-development", destination: "/ai-development" },
+  { source: "/retool-consulting", destination: "/ai-development" },
   { source: "/insurance", destination: "/" },
   { source: "/maritime-transportation", destination: "/" },
-  { source: "/retool", destination: "/" },
+  { source: "/retool", destination: "/ai-development" },
   // --- Sheet 3: removed career slug ---
   { source: `${CAREERS_PREFIX}senior-rabbit-hugger`, destination: "/careers" },
 ];

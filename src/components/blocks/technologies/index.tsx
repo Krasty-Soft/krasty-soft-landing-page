@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import technologies from "@/constants/technologies";
-import Icon1 from "@/assets/retool.svg";
+import AiIcon from "@/assets/ai.svg";
 import Icon2 from "@/assets/react.svg";
 import Icon3 from "@/assets/python.svg";
 import Icon4 from "@/assets/node.svg";
@@ -12,7 +12,7 @@ import { Section, TypingText } from "@/components/ui";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
 
 const icons = {
-  Retool: Icon1,
+  AI: AiIcon,
   React: Icon2,
   Python: Icon3,
   Node: Icon4,
@@ -27,7 +27,6 @@ const TechCard = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const Icon = icons[tech.key];
-  const techSlug = tech.key.toLowerCase();
 
   return (
     <motion.li
@@ -39,7 +38,7 @@ const TechCard = ({
       onHoverEnd={() => setIsHovered(false)}
       style={{ listStyle: "none" }}
     >
-      <Link href={`/${techSlug}`} style={{ textDecoration: "none" }}>
+      <Link href={tech.link} style={{ textDecoration: "none" }}>
         <motion.div
         animate={{
           y: isHovered ? -12 : 0,

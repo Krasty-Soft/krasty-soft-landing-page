@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Phone,
   Copy,
@@ -14,7 +14,6 @@ import { SocialNetworks } from "@/components/blocks";
 import { FooterForm } from "./form";
 import { Section, TypingText } from "@/components/ui";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
-import Script from "next/script";
 
 const CONTACT_PHONE = "+380990000000";
 
@@ -31,6 +30,29 @@ function formatPhoneTel(phone: string): string {
 
 const CALENDLY_URL =
   "https://calendly.com/aleks-krasty/meeting-with-krasty-manager";
+const CALENDLY_CSS = "https://assets.calendly.com/assets/external/widget.css";
+const CALENDLY_JS = "https://assets.calendly.com/assets/external/widget.js";
+
+// Inject Calendly's CSS + JS once, on demand (idempotent). Keeping these off the
+// initial HTML removes a render-blocking stylesheet that cost ~800ms of mobile LCP.
+function ensureCalendlyAssets(): HTMLScriptElement {
+  if (!document.getElementById("calendly-css")) {
+    const link = document.createElement("link");
+    link.id = "calendly-css";
+    link.rel = "stylesheet";
+    link.href = CALENDLY_CSS;
+    document.head.appendChild(link);
+  }
+  let script = document.getElementById("calendly-js") as HTMLScriptElement | null;
+  if (!script) {
+    script = document.createElement("script");
+    script.id = "calendly-js";
+    script.src = CALENDLY_JS;
+    script.async = true;
+    document.body.appendChild(script);
+  }
+  return script;
+}
 
 interface ContactCardProps {
   icon: React.ReactNode;
@@ -216,20 +238,43 @@ const ContactCard = ({
 };
 
 export const Footer = () => {
+  // Preload Calendly's assets off the critical path, once the page is idle, so
+  // the popup is ready by the time users reach the "Book a call" button.
+  useEffect(() => {
+    const preload = () => ensureCalendlyAssets();
+    if (typeof window.requestIdleCallback === "function") {
+      const id = window.requestIdleCallback(preload);
+      return () => {
+        if (typeof window.cancelIdleCallback === "function")
+          window.cancelIdleCallback(id);
+      };
+    }
+    const id = window.setTimeout(preload, 2000);
+    return () => clearTimeout(id);
+  }, []);
+
   const openCalendly = () => {
     if (typeof window === "undefined") return;
-
-    const calendly = (
-      window as Window & {
-        Calendly?: { initPopupWidget: (options: { url: string }) => void };
-      }
-    ).Calendly;
-    if (calendly?.initPopupWidget) {
-      calendly.initPopupWidget({ url: CALENDLY_URL });
+    const w = window as Window & {
+      Calendly?: { initPopupWidget: (options: { url: string }) => void };
+    };
+    if (w.Calendly?.initPopupWidget) {
+      w.Calendly.initPopupWidget({ url: CALENDLY_URL });
       return;
     }
-
-    window.open(CALENDLY_URL, "_blank", "noopener,noreferrer");
+    // Rare: clicked before the idle preload finished — load now, open on ready.
+    const openPopup = () => {
+      if (w.Calendly?.initPopupWidget)
+        w.Calendly.initPopupWidget({ url: CALENDLY_URL });
+      else window.open(CALENDLY_URL, "_blank", "noopener,noreferrer");
+    };
+    const script = ensureCalendlyAssets();
+    script.addEventListener("load", openPopup, { once: true });
+    script.addEventListener(
+      "error",
+      () => window.open(CALENDLY_URL, "_blank", "noopener,noreferrer"),
+      { once: true },
+    );
   };
 
   return (
@@ -243,14 +288,6 @@ export const Footer = () => {
         overflowX: "hidden",
       }}
     >
-      <link
-        href="https://assets.calendly.com/assets/external/widget.css"
-        rel="stylesheet"
-      />
-      <Script
-        src="https://assets.calendly.com/assets/external/widget.js"
-        strategy="afterInteractive"
-      />
       <Section variant="primary" animate={false} containerCls="pbottom-0">
         <SectionWrapper>
           {/* Title Section */}

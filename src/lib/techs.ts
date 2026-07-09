@@ -20,30 +20,30 @@ export interface TechDetail {
 
 export const TECH_DETAILS: TechDetail[] = [
   {
-    slug: "retool",
-    title: "Retool",
-    subtitle: "Retool Development Services",
-    brandColor: "#3D4592",
+    slug: "ai-development",
+    title: "AI Development",
+    subtitle: "AI Development Services",
+    brandColor: "#8B5CF6",
     introParagraphs: [
-      "<strong>Retool development services</strong> use a low-code platform to build internal apps fast: dashboards, admin panels, and workflow tools that run on top of your databases and APIs. These apps can read, validate, and update data without forcing teams to jump between systems.",
-      "As a <strong>Retool development company</strong>, Krasty Soft helps teams turn scattered operational data into one working interface. We align screens, permissions, and actions to the way work happens across ops, support, and finance. In practice, <strong>Retool development</strong> cuts manual steps. It makes reporting and action available in a single place."
+      "<strong>AI development services</strong> turn large language models, agents, and machine learning into working products — chat assistants, copilots, document and data pipelines, and automations that plug into your existing systems. We build features that read, reason over, and act on your data, not demos that stop at a prompt.",
+      "As an <strong>AI development company</strong>, Krasty Soft ships production AI that teams actually rely on. We wire models to your databases, APIs, and workflows with guardrails, evaluation, and human-in-the-loop where it matters. In practice, <strong>AI development</strong> removes manual steps and surfaces answers and actions in one place."
     ],
     whatWeBuild: {
-      title: "What We Build with Retool",
+      title: "What We Build with AI",
       items: [
-        "Internal dashboards for ops and leadership.",
-        "Admin panels for products and back offices.",
-        "Support and Customer 360 workspaces.",
-        "Inventory, logistics, and returns control centers.",
-        "Approval flows and task management tools.",
-        "Data QA, audits, and exception monitoring screens."
+        "AI chat assistants and customer-support copilots.",
+        "RAG systems over your docs, tickets, and databases.",
+        "Autonomous agents that run multi-step workflows.",
+        "Document extraction, classification, and enrichment.",
+        "AI-powered analytics, search, and recommendations.",
+        "LLM integrations (OpenAI, Claude) into existing apps."
       ]
     },
     whyChoose: {
-      title: "Why Retool for Your Business",
+      title: "Why AI Development for Your Business",
       paragraphs: [
-        "<strong>Retool development</strong> is a strong fit when you need speed, but still want predictable control over logic and permissions. It works best when internal tools must stay consistent across teams and environments. With <strong>low code development</strong>, you can iterate on internal tools without long release cycles. Changes ship in days, not weeks, while keeping business rules visible and reviewable.",
-        "Our <strong>Retool development company</strong> approach keeps apps maintainable as workflows evolve. We standardize components and patterns so new screens don't turn into one-off fixes. If you need a <strong>Retool development agency</strong> for full delivery, we can implement and support the system end-to-end."
+        "<strong>AI development</strong> is the right fit when repetitive knowledge work slows your team down, or when your data holds answers no one has time to find. We focus on measurable outcomes — deflected tickets, faster processing, fewer manual steps — not novelty. Every build ships with evaluation and guardrails so results stay reliable as inputs change.",
+        "Our <strong>AI development company</strong> approach keeps systems maintainable and safe as models and workflows evolve. We standardize prompts, retrieval, and tooling so new capabilities don't turn into one-off hacks. If you need an <strong>AI development agency</strong> for full delivery, we implement, evaluate, and support the system end-to-end."
       ]
     },
     industries: {
@@ -54,9 +54,9 @@ export const TECH_DETAILS: TechDetail[] = [
         "Healthcare",
         "Marketing & Advertising",
         "Logistics",
-        "Crypto",
-        "Web3",
-        "Maritime Transportation"
+        "Customer Support",
+        "SaaS",
+        "Recruitment & HR"
       ]
     }
   },

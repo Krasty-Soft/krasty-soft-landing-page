@@ -21,11 +21,23 @@ export const TypingText = ({
   onComplete,
   highlightWords = [],
 }: TypingTextProps) => {
-  const [displayedText, setDisplayedText] = useState("");
+  // Start with the FULL text so it exists in the server-rendered HTML — search
+  // engines and AI crawlers that don't run JS get the complete heading. On the
+  // client we reset and type it out as a progressive enhancement (all these
+  // headings are below the fold, so the reset isn't visible to users).
+  const [displayedText, setDisplayedText] = useState(text);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isComplete, setIsComplete] = useState(false);
+  const [animating, setAnimating] = useState(false);
+
+  // Client-only: switch from the full SSR text to the typing animation.
+  useEffect(() => {
+    setDisplayedText("");
+    setAnimating(true);
+  }, []);
 
   useEffect(() => {
+    if (!animating) return;
     if (delay > 0) {
       const delayTimeout = setTimeout(() => {
         setCurrentIndex(1);
@@ -34,10 +46,10 @@ export const TypingText = ({
     } else {
       setCurrentIndex(1);
     }
-  }, [delay]);
+  }, [animating, delay]);
 
   useEffect(() => {
-    if (currentIndex === 0) return;
+    if (!animating || currentIndex === 0) return;
 
     if (currentIndex <= text.length) {
       const timeout = setTimeout(() => {
@@ -50,7 +62,7 @@ export const TypingText = ({
       setIsComplete(true);
       onComplete?.();
     }
-  }, [currentIndex, text, speed, isComplete, onComplete]);
+  }, [animating, currentIndex, text, speed, isComplete, onComplete]);
 
   // Parse text and apply highlighting
   const renderedText = useMemo(() => {
