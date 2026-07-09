@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Phone, Copy, Check } from "lucide-react";
 import { motion } from "framer-motion";
 import { SocialNetworks } from "@/components/blocks";
-import { ChatForm } from "./chat-form";
+import { FooterForm } from "./form";
 import { Section, TypingText } from "@/components/ui";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
 import Script from "next/script";
@@ -346,10 +346,10 @@ export const Footer = () => {
                   color: "var(--text-primary)",
                 }}
               >
-                Chat with us
+                Send us a message
               </div>
 
-              <ChatForm />
+              <FooterForm />
             </motion.div>
           </div>
 
