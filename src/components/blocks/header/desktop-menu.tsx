@@ -24,7 +24,7 @@ export const DesktopMenu = () => {
   };
 
   return (
-    <nav className="hidden lg:flex items-center gap-1 xl:gap-2">
+    <nav className="hidden lg:flex items-center gap-0.5 xl:gap-1">
       {menuItems.map((item) => {
         if (!item.hasDropdown) {
           return (
@@ -32,7 +32,7 @@ export const DesktopMenu = () => {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="px-4 py-2 rounded-lg transition-colors duration-200"
+                className="px-3 py-2 rounded-lg transition-colors duration-200"
                 style={{
                   color: "var(--text-primary)",
                   cursor: "pointer",
@@ -58,13 +58,13 @@ export const DesktopMenu = () => {
           >
             <motion.div
               whileHover={{ scale: 1.05 }}
-              className="px-4 py-2 rounded-lg transition-colors duration-200 flex items-center gap-1"
+              className="px-3 py-2 rounded-lg transition-colors duration-200 flex items-center gap-1"
               style={{
                 color: "var(--text-primary)",
                 cursor: "pointer",
               }}
             >
-              <span className="font-medium text-sm xl:text-base">
+              <span className="font-medium text-sm xl:text-base whitespace-nowrap">
                 {item.label}
               </span>
               <motion.div

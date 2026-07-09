@@ -93,7 +93,7 @@ export const Header = () => {
                 onClick={scrollToContact}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="hidden md:flex items-center gap-2 px-5 py-2.5 rounded-lg font-semibold transition-all duration-200"
+                className="hidden md:flex items-center gap-2 px-4 py-2.5 rounded-lg font-semibold whitespace-nowrap shrink-0 transition-all duration-200"
                 style={{
                   background:
                     "linear-gradient(135deg, var(--brand-red), #c92a2a)",
