@@ -1,7 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { Phone, Copy, Check } from "lucide-react";
+import {
+  Phone,
+  Copy,
+  Check,
+  CalendarCheck,
+  Clock,
+  ShieldCheck,
+} from "lucide-react";
 import { motion } from "framer-motion";
 import { SocialNetworks } from "@/components/blocks";
 import { FooterForm } from "./form";
@@ -283,51 +290,93 @@ export const Footer = () => {
                 style={{
                   fontSize: "1.5rem",
                   fontWeight: 700,
-                  marginBottom: "2rem",
+                  marginBottom: "1rem",
                   color: "var(--text-primary)",
                 }}
               >
                 For job seekers & clients
               </div>
 
-              <div className="flex flex-col gap-5">
-                {/* TODO: re-add email ContactCard once a @krastysoft.com inbox exists */}
+              <p
+                style={{
+                  color: "var(--text-secondary)",
+                  fontSize: "1rem",
+                  lineHeight: 1.7,
+                  marginBottom: "2rem",
+                  maxWidth: "30rem",
+                }}
+              >
+                Have a project in mind, or thinking about joining the team? Book
+                a free intro call to talk it through — or send us a message and
+                we&apos;ll get back to you within one business day.
+              </p>
 
-                <motion.button
-                  type="button"
-                  onClick={openCalendly}
-                  whileHover={{ scale: 1.03 }}
-                  whileTap={{ scale: 0.98 }}
-                  transition={{ duration: 0.2 }}
-                  className="flex items-center justify-center gap-2 px-5 py-3 rounded-lg font-semibold w-full"
-                  style={{
-                    background:
-                      "linear-gradient(135deg, var(--brand-red), #c92a2a)",
-                    color: "white",
-                    boxShadow: "0 0 20px rgba(220, 38, 38, 0.3)",
-                    cursor: "pointer",
-                    border: "none",
+              <motion.button
+                type="button"
+                onClick={openCalendly}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                transition={{ duration: 0.2 }}
+                className="flex items-center justify-center gap-2 px-6 py-3.5 rounded-lg font-semibold w-full sm:w-auto"
+                style={{
+                  background:
+                    "linear-gradient(135deg, var(--brand-red), #c92a2a)",
+                  color: "white",
+                  boxShadow: "0 8px 24px rgba(229, 6, 6, 0.28)",
+                  cursor: "pointer",
+                  border: "none",
+                }}
+              >
+                <motion.span
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
                   }}
-                >
-                  <motion.span
-                    animate={{
-                      scale: [1, 1.2, 1],
-                    }}
-                    transition={{
-                      duration: 2,
-                      repeat: Infinity,
-                      ease: "easeInOut",
-                    }}
-                    style={{
-                      display: "inline-block",
-                      width: "8px",
-                      height: "8px",
-                      borderRadius: "50%",
-                      backgroundColor: "#fff",
-                    }}
-                  />
-                  Book a call
-                </motion.button>
+                  style={{
+                    display: "inline-block",
+                    width: "8px",
+                    height: "8px",
+                    borderRadius: "50%",
+                    backgroundColor: "#fff",
+                  }}
+                />
+                Book a call
+              </motion.button>
+
+              <div className="mt-10 flex flex-col gap-4">
+                {[
+                  { Icon: CalendarCheck, text: "Free 30-minute intro call" },
+                  { Icon: Clock, text: "We reply within one business day" },
+                  { Icon: ShieldCheck, text: "NDA available on request" },
+                ].map(({ Icon, text }) => (
+                  <div key={text} className="flex items-center gap-3">
+                    <span
+                      style={{
+                        width: "2.5rem",
+                        height: "2.5rem",
+                        borderRadius: "var(--radius-md)",
+                        backgroundColor: "rgba(229, 6, 6, 0.12)",
+                        color: "var(--brand-red)",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        flexShrink: 0,
+                      }}
+                    >
+                      <Icon size={18} />
+                    </span>
+                    <span
+                      style={{
+                        color: "var(--text-secondary)",
+                        fontSize: "0.9375rem",
+                      }}
+                    >
+                      {text}
+                    </span>
+                  </div>
+                ))}
               </div>
             </motion.div>
 
