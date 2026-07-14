@@ -1,7 +1,5 @@
 import type { NextConfig } from "next";
 
-import { REDIRECTS } from "./src/constants/redirects";
-
 // Warn at build time if the canonical site URL isn't configured. Without it,
 // absolute URLs baked into the HTML (og:image, canonical, sitemap, schema)
 // fall back to a hardcoded default that may not serve this deployment — and
@@ -25,13 +23,10 @@ const nextConfig: NextConfig = {
   //output: 'export',
   trailingSlash: false,
   allowedDevOrigins: ["local-origin.dev", "*.local-origin.dev"],
-  async redirects() {
-    return REDIRECTS.map(({ source, destination }) => ({
-      source,
-      destination,
-      statusCode: 301,
-    }));
-  },
+  // NOTE: Legacy URL redirects (REDIRECTS) and host canonicalization are now
+  // handled together in src/middleware.ts so that host + path corrections
+  // collapse into a SINGLE hop. Do not re-add a redirects() here — it runs as a
+  // separate layer and would reintroduce the 308→301 chains the SEO audit flagged.
   images: {
     // Image optimization enabled for better Core Web Vitals
     remotePatterns: [
