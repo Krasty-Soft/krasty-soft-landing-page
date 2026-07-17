@@ -26,7 +26,7 @@ export const TECH_DETAILS: TechDetail[] = [
     brandColor: "#8B5CF6",
     introParagraphs: [
       "<strong>AI development services</strong> turn large language models, agents, and machine learning into working products — chat assistants, copilots, document and data pipelines, and automations that plug into your existing systems. We build features that read, reason over, and act on your data, not demos that stop at a prompt.",
-      "As an <strong>AI development company</strong>, Krasty Soft ships production AI that teams actually rely on. We wire models to your databases, APIs, and workflows with guardrails, evaluation, and human-in-the-loop where it matters. In practice, <strong>AI development</strong> removes manual steps and surfaces answers and actions in one place."
+      "As a <strong>generative AI development company</strong>, Krasty Soft ships production AI that teams actually rely on. We wire models to your databases, APIs, and workflows with guardrails, evaluation, and human-in-the-loop where it matters. In practice, <strong>AI development</strong> removes manual steps and surfaces answers and actions in one place."
     ],
     whatWeBuild: {
       title: "What We Build with AI",
@@ -70,7 +70,7 @@ export const TECH_DETAILS: TechDetail[] = [
       "For teams that need flexible UI logic, <strong>custom React development</strong> keeps the product easy to extend without redesigning the whole frontend."
     ],
     whatWeBuild: {
-      title: "What We Build with React.js",
+      title: "Custom React Projects We Build",
       items: [
         "Web app frontends for SaaS platforms.",
         "Dashboards with filters, tables, and real-time views.",
@@ -81,7 +81,7 @@ export const TECH_DETAILS: TechDetail[] = [
       ]
     },
     whyChoose: {
-      title: "Why React.js for Your Business",
+      title: "How React Development Services Benefit Your Business",
       paragraphs: [
         "React helps teams ship consistent interfaces and iterate quickly as requirements evolve. It supports a predictable UI layer even when backend logic and data sources change. With <strong>custom React development</strong>, UI changes don't turn into full rewrites. Reusable components and clear state patterns reduce regression risk.",
         "We also provide <strong>React web application development</strong> when the frontend needs to scale with product complexity and user load."

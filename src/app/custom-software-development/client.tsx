@@ -18,8 +18,10 @@ import {
   ProblemSolutionTable,
   ProcessStep,
   PlatformCard,
+  Faq,
 } from "@/components/blocks";
 import { CTABanner } from "@/components/ui/cta-banner";
+import { SERVICE_FAQ } from "@/lib/faq";
 
 const whenRightChoice = [
   {
@@ -416,6 +418,13 @@ export default function CustomSoftwareClient({
           </p>
         </div>
       </Section>
+
+      {/* FAQ Section (also emits FAQPage structured data from the server page) */}
+      <Faq
+        items={SERVICE_FAQ["custom-software-development"]}
+        title="Custom Software Development — FAQ"
+        variant="secondary"
+      />
 
       {/* Technologies Section */}
       <Technologies />

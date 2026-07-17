@@ -12,7 +12,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = generateSEO({
   title: "AI Development Services",
   description:
-    "AI agents, LLM integrations, RAG systems, and automation built into your products. Expert AI development services from Krasty Soft.",
+    "A generative AI development company building production AI — agents, LLM integrations, RAG, and copilots wired into your products with guardrails and evaluation.",
   path: "/ai-development",
 });
 

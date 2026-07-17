@@ -11,7 +11,7 @@ import TechTemplate from "../technologies/tech-template";
 export const metadata = generateSEO({
   title: "React.js Development Services",
   description:
-    "Building modern frontends for SaaS platforms, dashboards, and internal tools. Expert React.js development services.",
+    "React.js development services from Krasty Soft — fast, scalable frontends and custom React projects for web apps and SaaS. Senior React developers, worldwide.",
   path: "/react",
 });
 

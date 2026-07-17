@@ -152,4 +152,43 @@ export const SERVICE_FAQ: Record<string, FAQItem[]> = {
         "Yes. We modernize legacy SaaS, add features, improve performance and reliability, and provide ongoing maintenance and support.",
     },
   ],
+  react: [
+    {
+      question: "What do React.js development services include?",
+      answer:
+        "Frontend architecture, component development, API integration, performance optimization, and — with Next.js — SEO-friendly server rendering, from a single feature to a full application.",
+    },
+    {
+      question: "Do you use React with Next.js?",
+      answer:
+        "Yes. Most of our React work uses Next.js for server-side rendering, better Core Web Vitals, and SEO, with TypeScript throughout.",
+    },
+    {
+      question: "Can you improve or take over an existing React app?",
+      answer:
+        "Yes. We audit and optimize existing React codebases — performance, bundle size, and maintainability — and can take ownership of ongoing development.",
+    },
+  ],
+  "custom-software-development": [
+    {
+      question: "How much does custom software development cost?",
+      answer:
+        "It depends on scope, complexity, and timeline. We work in fixed-scope or dedicated-team models and give a transparent estimate after a short discovery — no black-box pricing.",
+    },
+    {
+      question: "How long does it take to build custom software?",
+      answer:
+        "An MVP is typically a few months; larger platforms are delivered in iterative releases so you see working software early and often, rather than waiting for one final handover.",
+    },
+    {
+      question: "Do you work with startups?",
+      answer:
+        "Yes. We build MVPs that ship fast without painting you into a corner — a clean architecture you can scale as you add users and features.",
+    },
+    {
+      question: "Will we own the source code?",
+      answer:
+        "Yes — you own 100% of the code and intellectual property we build for you.",
+    },
+  ],
 };
