@@ -77,7 +77,7 @@ export const CodeEditor = ({ services }: CodeEditorProps) => {
             marginLeft: "1rem",
           }}
         >
-          services.tsx - KrastySoft
+          services.tsx - Krasty Soft
         </span>
 
         {/* Always-visible sidebar toggle (so a collapsed Explorer can reopen) */}

@@ -140,8 +140,21 @@ export const Banner = () => {
             lineHeight: "1.6",
           }}
         >
-          At Krasty Soft we build software products which solve your business
-          problems and challenges.
+          Krasty Soft is a B2B software development company — we build custom
+          software, AI products, and web and backend systems for fintech,
+          healthcare, e-commerce, and SaaS.
+        </motion.p>
+
+        {/* Proof line — keeps the Clutch rating, review count, and award in
+            readable text (not only inside the Clutch iframe) so LLMs and
+            crawlers can extract and cite it. */}
+        <motion.p
+          {...fadeUp(0.2)}
+          className="text-sm md:text-base text-center mb-10"
+          style={{ color: "var(--text-muted)" }}
+        >
+          Rated 5.0 on Clutch from 11 verified client reviews · Top API
+          Development Company, Ukraine.
         </motion.p>
 
         {/* CTA Button */}

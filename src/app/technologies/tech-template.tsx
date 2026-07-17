@@ -3,8 +3,10 @@
 import { motion } from "framer-motion";
 import { Section, TypingText, CTABanner } from "@/components/ui";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
-import { ItemsGrid } from "@/components/blocks";
+import { ItemsGrid, Faq } from "@/components/blocks";
 import { TechDetail } from "@/lib/techs";
+import { SERVICE_FAQ } from "@/lib/faq";
+import { generateFAQSchema, StructuredData } from "@/lib/seo";
 import { CheckCircle2 } from "lucide-react";
 
 interface TechTemplateProps {
@@ -23,8 +25,13 @@ const renderTextWithHighlight = (text: string) => {
 };
 
 export default function TechTemplate({ tech }: TechTemplateProps) {
+  const faqs = SERVICE_FAQ[tech.slug];
+
   return (
     <>
+      {faqs?.length ? (
+        <StructuredData data={generateFAQSchema(faqs)} />
+      ) : null}
       {/* Hero Section */}
       <Section variant="primary" animate={false}>
         <SectionWrapper>
@@ -230,6 +237,11 @@ export default function TechTemplate({ tech }: TechTemplateProps) {
 
         <ItemsGrid items={tech.industries.list} />
       </Section>
+
+      {/* FAQ Section (per-service; also emits FAQPage structured data above) */}
+      {faqs?.length ? (
+        <Faq items={faqs} title={`${tech.title} — FAQ`} variant="primary" />
+      ) : null}
 
       {/* CTA Section */}
       <Section variant="primary" animate={false}>

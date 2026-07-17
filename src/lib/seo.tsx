@@ -90,14 +90,60 @@ export function generateOrganizationSchema() {
     name: SITE_NAME,
     url: BASE_URL,
     logo: `${BASE_URL}/logo.svg`,
+    description:
+      "Krasty Soft is a B2B software development company building custom software, AI products, and web and backend systems for fintech, healthcare, e-commerce, and SaaS businesses.",
+    areaServed: "Worldwide",
+    knowsAbout: [
+      "AI development",
+      "AI automation",
+      "Custom software development",
+      "Backend development",
+      "Frontend development",
+      "React",
+      "Next.js",
+      "Node.js",
+      "Python",
+      "Fintech software",
+      "Healthcare software",
+      "E-commerce development",
+      "SaaS development",
+    ],
+    address: {
+      "@type": "PostalAddress",
+      addressCountry: "UA",
+    },
     sameAs: [
       "https://www.linkedin.com/company/krastysoft",
-      // Add other social profiles
+      "https://clutch.co/profile/krasty-soft",
+      "https://github.com/Krasty-Soft",
     ],
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "Customer Service",
       email: "contact@krastysoft.com",
+      areaServed: "Worldwide",
+      availableLanguage: ["English", "Ukrainian"],
+    },
+  };
+}
+
+/**
+ * Generate JSON-LD structured data for WebSite. Helps search engines and LLMs
+ * anchor the site's identity and name. No SearchAction is included because the
+ * site has no on-site search endpoint (add one only if that changes).
+ */
+export function generateWebSiteSchema() {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE_NAME,
+    alternateName: "Krasty Soft Software Development",
+    url: BASE_URL,
+    inLanguage: "en",
+    publisher: {
+      "@type": "Organization",
+      name: SITE_NAME,
+      url: BASE_URL,
     },
   };
 }

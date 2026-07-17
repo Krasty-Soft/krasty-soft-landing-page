@@ -2,6 +2,7 @@ import {
   Banner,
   Cases,
   Difference,
+  Faq,
   Industries,
   Opportunities,
   Services,
@@ -9,7 +10,12 @@ import {
 } from "@/components/blocks";
 import { getAllCases } from "@/lib/cases";
 import { getAllJobs } from "@/lib/jobs";
-import { generateAggregateRatingSchema, StructuredData } from "@/lib/seo";
+import { COMPANY_FAQ } from "@/lib/faq";
+import {
+  generateAggregateRatingSchema,
+  generateFAQSchema,
+  StructuredData,
+} from "@/lib/seo";
 
 export default async function Home() {
   const cases = await getAllCases();
@@ -26,13 +32,14 @@ export default async function Home() {
 
   return (
     <>
-      <StructuredData data={ratingSchema} />
+      <StructuredData data={[ratingSchema, generateFAQSchema(COMPANY_FAQ)]} />
       <Banner />
       <Services />
       <Difference />
       <Industries />
       <Technologies />
       <Cases cases={cases} />
+      <Faq items={COMPANY_FAQ} />
       <Opportunities isEmpty={isEmpty} jobs={jobs} />
     </>
   );

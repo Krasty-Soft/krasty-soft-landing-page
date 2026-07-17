@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import {
-  Phone,
   Copy,
   Check,
   CalendarCheck,
@@ -14,19 +13,6 @@ import { SocialNetworks } from "@/components/blocks";
 import { FooterForm } from "./form";
 import { Section, TypingText } from "@/components/ui";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
-
-const CONTACT_PHONE = "+380990000000";
-
-function formatPhoneDisplay(phone: string): string {
-  const digits = phone.replace(/\D/g, "");
-  if (digits.length < 12) return phone;
-  return `+${digits.slice(0, 2)} (${digits.slice(2, 5)}) ${digits.slice(5, 8)} ${digits.slice(8, 10)} ${digits.slice(10, 12)}`;
-}
-
-function formatPhoneTel(phone: string): string {
-  const digits = phone.replace(/\D/g, "");
-  return `tel:${digits}`;
-}
 
 const CALENDLY_URL =
   "https://calendly.com/aleks-krasty/meeting-with-krasty-manager";

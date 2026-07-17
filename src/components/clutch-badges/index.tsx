@@ -6,13 +6,24 @@ type ClutchWindow = Window & { CLUTCHCO?: { init?: () => void } };
 
 export const ClutchBadges = () => {
   useEffect(() => {
-    // Script is loaded once in RootLayout. On navigation back the component
-    // remounts but the script won't re-run, so call init() to re-scan the DOM.
-    const timer = setTimeout(() => {
-      (window as ClutchWindow).CLUTCHCO?.init?.();
-    }, 50);
+    // Load the Clutch widget script on demand (kept out of the root layout so
+    // the layout stays free of next/script, which injected stray hidden divs
+    // and duplicated markers). Guarded by id so it loads only once globally.
+    const SCRIPT_ID = "clutch-widget-script";
+    const init = () => (window as ClutchWindow).CLUTCHCO?.init?.();
 
-    return () => clearTimeout(timer);
+    if (document.getElementById(SCRIPT_ID)) {
+      // Already loaded (e.g. client-side navigation back) — re-scan the DOM.
+      const timer = setTimeout(init, 50);
+      return () => clearTimeout(timer);
+    }
+
+    const script = document.createElement("script");
+    script.id = SCRIPT_ID;
+    script.src = "https://widget.clutch.co/static/js/widget.js";
+    script.async = true;
+    script.onload = init;
+    document.body.appendChild(script);
   }, []);
 
   return (
