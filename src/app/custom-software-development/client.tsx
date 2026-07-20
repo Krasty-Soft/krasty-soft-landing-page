@@ -221,7 +221,7 @@ export default function CustomSoftwareClient({
           >
             <span style={{ color: "var(--brand-red)" }}>&gt; </span>
             <TypingText
-              text="When Custom Software Development Is the Right Choice"
+              text="When Your Business Needs Custom Software Development Services"
               speed={30}
               delay={300}
               highlightWords={["Custom"]}
@@ -333,14 +333,15 @@ export default function CustomSoftwareClient({
           >
             <span style={{ color: "var(--brand-red)" }}>&gt; </span>
             <TypingText
-              text="How We Work"
+              text="Stages of Developing Custom Software"
               speed={50}
               delay={300}
-              highlightWords={["Work"]}
+              highlightWords={["Custom"]}
             />
           </h2>
           <p style={{ ...bodyTextStyle, marginTop: "1rem" }}>
-            We use a simple, transparent approach:
+            We follow a simple, transparent approach to delivering software
+            development solutions:
           </p>
         </div>
 
@@ -407,9 +408,13 @@ export default function CustomSoftwareClient({
             ))}
           </ul>
           <p style={{ ...bodyTextStyle, marginTop: "1.5rem" }}>
-            Our small, focused team combines technical expertise with a deep
-            understanding of operational workflows. This makes Krasty Soft a
-            trusted <strong>custom software development agency</strong>.
+            Our small, focused team combines strong engineering and architecture
+            with a deep understanding of operational workflows. From{" "}
+            <strong>custom application development</strong> to technical
+            consultancy, this makes Krasty Soft a trusted{" "}
+            <strong>custom software development company</strong> — one that keeps
+            delivery cost and long-term maintainability in view, not just the
+            initial build.
           </p>
           <p style={bodyTextStyle}>
             If you are looking for{" "}
@@ -457,6 +462,39 @@ export default function CustomSoftwareClient({
             Let&apos;s discuss your project and create software that perfectly
             fits your needs.
           </p>
+          <motion.button
+            type="button"
+            onClick={() => {
+              const container = document.getElementById("app-scroll");
+              const section = document.getElementById("contacts");
+              if (container && section) {
+                const containerRect = container.getBoundingClientRect();
+                const sectionRect = section.getBoundingClientRect();
+                const offsetTop =
+                  sectionRect.top - containerRect.top + container.scrollTop;
+                container.scrollTo({ top: offsetTop, behavior: "smooth" });
+              }
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            style={{
+              marginTop: "2rem",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              padding: "0.875rem 1.75rem",
+              fontSize: "1rem",
+              fontWeight: 600,
+              color: "#7f1d1d",
+              backgroundColor: "white",
+              border: "none",
+              borderRadius: "var(--radius-lg)",
+              cursor: "pointer",
+              boxShadow: "0 4px 14px rgba(0, 0, 0, 0.15)",
+            }}
+          >
+            Get in touch
+          </motion.button>
         </CTABanner>
       </Section>
     </>

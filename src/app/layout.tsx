@@ -14,12 +14,22 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 // SEO Metadata
-export const metadata: Metadata = generateSEO({
-  title: "Krasty Soft - Software Development Company",
-  description:
-    "Progressive B2B software development company specializing in custom solutions, AI development, and enterprise applications. Trusted partner for tech innovation.",
-  path: "/",
-});
+export const metadata: Metadata = {
+  ...generateSEO({
+    title: "Krasty Soft - Software Development Company",
+    description:
+      "Progressive B2B software development company specializing in custom solutions, AI development, and enterprise applications. Trusted partner for tech innovation.",
+    path: "/",
+  }),
+  // Google Search Console verification via HTML meta tag — the reliable method
+  // in Next.js. GSC's "Google Tag Manager" verification method cannot be
+  // satisfied here because the App Router injects its own framework scripts at
+  // the very top of <head>, so the GTM snippet can never be the first element.
+  // Set the code from GSC's "HTML tag" option in NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION.
+  verification: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION }
+    : undefined,
+};
 
 // Viewport configuration for responsive design
 export const viewport: Viewport = {

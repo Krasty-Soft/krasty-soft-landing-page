@@ -3,6 +3,8 @@ export interface TechDetail {
   title: string;
   subtitle: string;
   brandColor: string;
+  /** Optional override for the closing CTA heading (defaults to "Ready to build with <title>?"). */
+  ctaHeading?: string;
   introParagraphs: string[];
   whatWeBuild: {
     title: string;
@@ -22,7 +24,7 @@ export const TECH_DETAILS: TechDetail[] = [
   {
     slug: "ai-development",
     title: "AI Development",
-    subtitle: "AI Development Services",
+    subtitle: "Custom AI Development Services",
     brandColor: "#8B5CF6",
     introParagraphs: [
       "<strong>AI development services</strong> turn large language models, agents, and machine learning into working products — chat assistants, copilots, document and data pipelines, and automations that plug into your existing systems. We build features that read, reason over, and act on your data, not demos that stop at a prompt.",
@@ -47,7 +49,7 @@ export const TECH_DETAILS: TechDetail[] = [
       ]
     },
     industries: {
-      title: "Industries & Use Cases",
+      title: "Industries That Benefit from End-to-End AI Solutions",
       list: [
         "E-commerce",
         "FinTech",
@@ -63,11 +65,11 @@ export const TECH_DETAILS: TechDetail[] = [
   {
     slug: "react",
     title: "React.js",
-    subtitle: "React.js Development Services",
+    subtitle: "React JS Development Services",
     brandColor: "#61DAFB",
     introParagraphs: [
       "<strong>React.js development services</strong> cover building modern frontends for products that need speed and predictable UX. They are suited for interfaces that must remain responsive as usage and complexity increase. We provide <strong>React.js development services</strong> to deliver interfaces for platforms, dashboards, and internal tools where performance and component reuse matter. Our focus is clean component architecture and stable UI behavior under real usage.",
-      "For teams that need flexible UI logic, <strong>custom React development</strong> keeps the product easy to extend without redesigning the whole frontend."
+      "For teams that need flexible UI logic, a focused <strong>react js development company</strong> keeps the product easy to extend without redesigning the whole frontend."
     ],
     whatWeBuild: {
       title: "Custom React Projects We Build",
@@ -84,7 +86,7 @@ export const TECH_DETAILS: TechDetail[] = [
       title: "How React Development Services Benefit Your Business",
       paragraphs: [
         "React helps teams ship consistent interfaces and iterate quickly as requirements evolve. It supports a predictable UI layer even when backend logic and data sources change. With <strong>custom React development</strong>, UI changes don't turn into full rewrites. Reusable components and clear state patterns reduce regression risk.",
-        "We also provide <strong>React web application development</strong> when the frontend needs to scale with product complexity and user load."
+        "Our <strong>reactjs development services</strong> also cover <strong>react js web development services</strong> for frontends that need to scale with product complexity and user load."
       ]
     },
     industries: {
@@ -188,6 +190,7 @@ export const TECH_DETAILS: TechDetail[] = [
     title: "AI Automation",
     subtitle: "AI Automation Services",
     brandColor: "#8B5CF6",
+    ctaHeading: "Ready to Improve Your Business with AI Automation?",
     introParagraphs: [
       "<strong>AI automation services</strong> put language models and agents to work on the repetitive tasks that slow teams down — triaging tickets, extracting data from documents, drafting replies, and running multi-step workflows end to end. We connect these agents to your real systems, so they don't just suggest — they act.",
       "As an <strong>AI automation company</strong>, Krasty Soft builds automations that are reliable in production, not brittle demos. We add guardrails, human review where it matters, and clear logging so you can trust the output. In practice, <strong>AI automation</strong> removes hours of manual work each week and keeps data flowing between tools without copy-paste."

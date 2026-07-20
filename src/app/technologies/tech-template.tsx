@@ -250,7 +250,7 @@ export default function TechTemplate({ tech }: TechTemplateProps) {
             className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
             style={{ color: "white" }}
           >
-            Ready to build with {tech.title}?
+            {tech.ctaHeading ?? `Ready to build with ${tech.title}?`}
           </h2>
           <p
             style={{
