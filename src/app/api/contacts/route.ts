@@ -2,6 +2,56 @@ export const runtime = 'nodejs'
 import { Buffer } from 'buffer'
 
 /**
+ * Anti-spam layers (no CAPTCHA, so real users see zero friction):
+ *  1. Honeypot  — a hidden `company_website` field only bots fill in.
+ *  2. Time trap — submissions faster than a human could type are dropped.
+ *  3. Rate limit — per-IP cap on submissions within a rolling window.
+ *  4. Heuristics — link-stuffed messages are dropped.
+ * Bot submissions get a normal-looking success response so the sender can't
+ * probe which rule caught them, but no email is sent.
+ */
+const MIN_FILL_MS = 3000 // humans need at least a few seconds to fill the form
+const RATE_LIMIT_MAX = 3 // submissions...
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000 // ...per IP per 10 minutes
+const MAX_LINKS_IN_MESSAGE = 2
+
+// In-memory per-instance store. Serverless instances are ephemeral, so this
+// blunts bursts rather than guaranteeing a global limit — good enough here, and
+// it adds no external dependency.
+const recentSubmissions = new Map<string, number[]>()
+
+function isRateLimited(ip: string): boolean {
+    const now = Date.now()
+    const hits = (recentSubmissions.get(ip) || []).filter(
+        (t) => now - t < RATE_LIMIT_WINDOW_MS
+    )
+    hits.push(now)
+    recentSubmissions.set(ip, hits)
+
+    // Opportunistic cleanup so the map can't grow unbounded.
+    if (recentSubmissions.size > 5000) {
+        for (const [key, times] of recentSubmissions) {
+            if (!times.some((t) => now - t < RATE_LIMIT_WINDOW_MS)) {
+                recentSubmissions.delete(key)
+            }
+        }
+    }
+    return hits.length > RATE_LIMIT_MAX
+}
+
+function countLinks(text: string): number {
+    return (text.match(/https?:\/\/|www\.|\[url=|<a\s/gi) || []).length
+}
+
+// Looks like a success to the caller; nothing is actually sent.
+function silentlyAccepted() {
+    return new Response(
+        JSON.stringify({ success: true, message: 'Message sent successfully!' }),
+        { status: 200, headers: { 'content-type': 'application/json' } }
+    )
+}
+
+/**
  * Contact form API endpoint
  *
  * To enable email sending, add to your .env:
@@ -21,6 +71,38 @@ export async function POST(req: Request) {
         const phone = String(formData.get('phone') || '').trim()
         const message = String(formData.get('message') || '').trim()
         const attach = formData.get('attach') as File | null
+
+        // --- Anti-spam gate (runs before any validation or sending) ---------
+        const honeypot = String(formData.get('company_website') || '').trim()
+        if (honeypot) {
+            console.warn('[contacts] blocked: honeypot filled')
+            return silentlyAccepted()
+        }
+
+        const loadedAt = Number(formData.get('form_loaded_at') || 0)
+        if (loadedAt > 0 && Date.now() - loadedAt < MIN_FILL_MS) {
+            console.warn('[contacts] blocked: submitted too fast')
+            return silentlyAccepted()
+        }
+
+        if (countLinks(message) > MAX_LINKS_IN_MESSAGE) {
+            console.warn('[contacts] blocked: link-stuffed message')
+            return silentlyAccepted()
+        }
+
+        const ip =
+            req.headers.get('x-forwarded-for')?.split(',')[0].trim() ||
+            req.headers.get('x-real-ip') ||
+            'unknown'
+        if (ip !== 'unknown' && isRateLimited(ip)) {
+            console.warn('[contacts] blocked: rate limit')
+            return new Response(
+                JSON.stringify({
+                    error: 'Too many submissions. Please try again later.',
+                }),
+                { status: 429, headers: { 'content-type': 'application/json' } }
+            )
+        }
 
         // Validation
         if (!name || name.length < 2) {

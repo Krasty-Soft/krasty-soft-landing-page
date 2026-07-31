@@ -7,7 +7,7 @@ collapsible HTML. Reusable template for any audit deliverable.
 
 Usage:  python3 scripts/audit_to_html.py <input.md> <output.html> ["Report Title"]
 
-Design tokens are lifted from ../../src/app/globals.css (this repo):
+Design tokens lifted from krasty-soft-landing-page/src/app/globals.css:
   dark theme, brand red #e50606, Sora font, red-glow accents, elevated cards.
 Findings render as <details> collapsed by default so the reader isn't buried in
 a wall of text; each summary row shows ID · title · severity · hours.
@@ -97,9 +97,13 @@ def blocks_to_html(lines):
         # h4 (#### )
         if s.startswith('#### '):
             out.append(f'<h4>{inline(s[5:])}</h4>'); i += 1; continue
+        # h3 (### ) — only reaches here for non-finding sub-headings
+        # ("### Security", "### Option 1 — Beta-Ready", "### Must fix before beta")
+        if s.startswith('### '):
+            out.append(f'<h3>{inline(s[4:])}</h3>'); i += 1; continue
         # paragraph (gather until blank / block start)
         para = []
-        while i < n and lines[i].strip() and not re.match(r'^([-*] |\d+\. |> |\||#### |```|---)', lines[i].strip()):
+        while i < n and lines[i].strip() and not re.match(r'^([-*] |\d+\. |> |\||### |#### |```|---)', lines[i].strip()):
             para.append(lines[i].strip()); i += 1
         out.append(f'<p>{inline(" ".join(para))}</p>')
     return '\n'.join(out)
@@ -175,6 +179,19 @@ def parse(md):
                     fbody.append(sl[idx]); idx += 1
                 hd['body_html'] = blocks_to_html(fbody)
                 findings.append(hd)
+            elif sl[idx].startswith('### '):
+                # A sub-heading inside a findings section that is NOT a finding
+                # ("### Technical debt inventory", "### Wave 2 & 3 additions — …").
+                # Keep it and its body as prose, in place: silently dropping it
+                # loses the whole block, which is invisible in the output.
+                ptitle = sl[idx][4:].strip()
+                pbody = []
+                idx += 1
+                while idx < len(sl) and not sl[idx].startswith('### '):
+                    pbody.append(sl[idx]); idx += 1
+                findings.append({'prose': True, 'title': ptitle, 'id': '',
+                                 'sev': '', 'hours': '',
+                                 'body_html': blocks_to_html(pbody)})
             else:
                 idx += 1
         parsed.append({'name': sec['name'], 'intro': blocks_to_html(intro), 'findings': findings, 'static': None})
@@ -211,6 +228,11 @@ def render(title, meta, sections, report_title, internal=False):
             body_html.append(f'<section class="scope"><h2>{inline(s["name"])}</h2>')
             if s.get('intro'): body_html.append(f'<div class="intro">{s["intro"]}</div>')
             for f in s['findings']:
+                if f.get('prose'):   # non-finding sub-heading — render as plain prose
+                    body_html.append(f'<h3>{inline(f["title"])}</h3>')
+                    if f['body_html']:
+                        body_html.append(f'<div class="intro">{f["body_html"]}</div>')
+                    continue
                 cls, _ = SEV_MAP.get(f['sev'], ('low','#8a8a8a'))
                 hours = f'<span class="hours">{inline(f["hours"])}</span>' if f['hours'] else ''
                 body_html.append(
@@ -318,6 +340,7 @@ header.top{{position:sticky;top:0;z-index:20;background:rgba(10,10,10,.86);
 section{{margin:40px 0}}
 h2{{font-size:1.35rem;color:var(--tx);font-weight:600;margin:0 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--bd)}}
+h3{{color:var(--tx);font-size:1.08rem;font-weight:600;margin:26px 0 8px}}
 h4{{color:var(--tx);font-size:.98rem;font-weight:600;margin:16px 0 6px}}
 .intro{{color:var(--tx2);margin-bottom:14px}}
 .static p,.intro p{{margin:.5em 0}}
@@ -415,7 +438,7 @@ def main():
     title, meta, sections = parse(md)
     out = render(title, meta, sections, args[2] if len(args) > 2 else None, internal=internal)
     open(args[1], 'w').write(out)
-    nf = sum(len(s.get('findings',[])) for s in sections)
+    nf = sum(1 for s in sections for f in s.get('findings', []) if not f.get('prose'))
     tag = ' [INTERNAL]' if internal else ''
     print(f"wrote {args[1]}{tag} — {len(sections)} sections, {nf} collapsible findings")
 

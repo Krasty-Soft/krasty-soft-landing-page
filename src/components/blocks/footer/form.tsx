@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Paperclip, X, Send, Check, ArrowLeft } from "lucide-react";
 
@@ -57,6 +57,14 @@ export const FooterForm = () => {
   const [fileName, setFileName] = useState<string | null>(null);
   const [errors, setErrors] = useState<FieldErrors>({});
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const loadedAtRef = useRef<HTMLInputElement | null>(null);
+
+  // Stamp when the form became interactive. Set on the client (not during
+  // render) to avoid an SSR/hydration mismatch. The API rejects submissions
+  // that arrive implausibly fast — a reliable bot signal.
+  useEffect(() => {
+    if (loadedAtRef.current) loadedAtRef.current.value = String(Date.now());
+  }, []);
 
   const clearFieldError = (key: keyof FieldErrors) =>
     setErrors((prev) => ({ ...prev, [key]: undefined }));
@@ -217,6 +225,30 @@ export const FooterForm = () => {
   // ---- Form ------------------------------------------------------------
   return (
     <form onSubmit={handleSubmit} noValidate className={cardClass}>
+      {/* Anti-spam: honeypot + load timestamp. Both are invisible to humans;
+          automated submitters fill the honeypot and/or post too fast, and the
+          API silently drops those. No CAPTCHA, so real users see no friction. */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          left: "-9999px",
+          width: "1px",
+          height: "1px",
+          overflow: "hidden",
+        }}
+      >
+        <label htmlFor="cf-company-website">Company website</label>
+        <input
+          id="cf-company-website"
+          type="text"
+          name="company_website"
+          tabIndex={-1}
+          autoComplete="off"
+        />
+      </div>
+      <input type="hidden" name="form_loaded_at" ref={loadedAtRef} />
+
       <div className="flex flex-col gap-5">
         {/* Name */}
         <div>

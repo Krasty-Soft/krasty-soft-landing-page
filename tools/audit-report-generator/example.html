@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ExampleCorp — Detailed Audit Report — Krasty Soft</title>
+<title>Example Audit Report — Krasty Soft</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -23,6 +23,11 @@ code{font-family:'SFMono-Regular',ui-monospace,Menlo,monospace;font-size:.86em;
 strong{color:var(--tx);font-weight:600}
 em{color:var(--tx2)}
 hr{border:0;border-top:1px solid var(--bd);margin:22px 0}
+
+/* internal banner */
+.internal-banner{position:sticky;top:0;z-index:30;background:var(--red);color:#fff;
+  text-align:center;font-weight:700;font-size:12px;letter-spacing:.06em;padding:7px 16px;
+  text-transform:uppercase;box-shadow:0 0 22px var(--red-glow)}
 
 /* header */
 header.top{position:sticky;top:0;z-index:20;background:rgba(10,10,10,.86);
@@ -62,6 +67,7 @@ header.top{position:sticky;top:0;z-index:20;background:rgba(10,10,10,.86);
 section{margin:40px 0}
 h2{font-size:1.35rem;color:var(--tx);font-weight:600;margin:0 0 16px;padding-bottom:10px;
   border-bottom:1px solid var(--bd)}
+h3{color:var(--tx);font-size:1.08rem;font-weight:600;margin:26px 0 8px}
 h4{color:var(--tx);font-size:.98rem;font-weight:600;margin:16px 0 6px}
 .intro{color:var(--tx2);margin-bottom:14px}
 .static p,.intro p{margin:.5em 0}
@@ -120,8 +126,10 @@ footer{border-top:1px solid var(--bd);margin-top:60px;padding:28px 0;color:var(-
   details{}
   body{background:#fff;color:#111}
 }
+.internal-banner + header.top{top:30px}
 </style></head>
 <body>
+
 <header class="top"><div class="topbar">
   <span class="brand"><svg viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" width="34" height="34" aria-hidden="true"><rect width="36" height="36" rx="6" fill="black"/><path d="M33 27L33 8L21 18.0198L33 27Z" fill="#F30000"/><path fill-rule="evenodd" clip-rule="evenodd" d="M4 30V6H8.64516V16.8293V30H4Z" fill="#F0F0F0"/><path fill-rule="evenodd" clip-rule="evenodd" d="M23.1613 30C17.4924 24.8565 14.3141 21.9728 8.64516 16.8293L23.1613 6H29.632L15.6129 18L31 30H23.1613Z" fill="#F0F0F0"/><path d="M8.64516 16.8293V6H4V30H8.64516V16.8293ZM8.64516 16.8293C14.3141 21.9728 17.4924 24.8565 23.1613 30H31L15.6129 18L29.632 6H23.1613L8.64516 16.8293Z" stroke="#F0F0F0"/></svg><span class="wm">KRASTY<b>SOFT</b></span></span>
   <span class="spacer"></span>
