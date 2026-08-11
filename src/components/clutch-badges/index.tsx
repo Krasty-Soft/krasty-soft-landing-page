@@ -116,14 +116,15 @@ export const ClutchBadges = () => {
         data-scale="100"
         data-darkbg="1"
         data-clutchcompany-id="2343082"
-        // The iframe is rendered with width="100%", so the wrapper must be
-        // pinned to the widget's natural width — otherwise it stretches to the
-        // full column and Clutch's left-aligned content looks off-centre.
-        // `margin: 0 auto` keeps it centred regardless of the flex context.
+        // Clutch renders the iframe at width="100%" and left-aligns its content
+        // inside it, so a 300px frame leaves dead space on the right and the
+        // widget reads as off-centre. We can't restyle across origins, so the
+        // frame is pinned to roughly the content's own width — then "left
+        // aligned" is visually centred. `margin: 0 auto` centres the frame.
         style={
           showFallback
             ? { display: "none" }
-            : { width: "300px", maxWidth: "100%", margin: "0 auto" }
+            : { width: "205px", maxWidth: "100%", margin: "0 auto" }
         }
       />
 
