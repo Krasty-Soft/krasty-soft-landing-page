@@ -153,8 +153,8 @@ export const Banner = () => {
           className="text-sm md:text-base text-center mb-10"
           style={{ color: "var(--text-muted)" }}
         >
-          Rated 5.0 on Clutch from 11 verified client reviews · Top API
-          Development Company, Ukraine.
+          Rated 5.0 on Clutch from 11 verified client reviews · Top REST API
+          Company, Ukraine 2026.
         </motion.p>
 
         {/* CTA Button */}

@@ -76,10 +76,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           href="https://images.ctfassets.net"
           crossOrigin="anonymous"
         />
-        {/* Third-party widgets (Clutch, Calendly) — preconnect to shave the
-            connection setup that Lighthouse flagged (~328ms on mobile). */}
-        <link rel="preconnect" href="https://widget.clutch.co" />
-        <link rel="dns-prefetch" href="https://widget.clutch.co" />
+        {/* Third-party widgets (Calendly) — preconnect to shave the connection
+            setup that Lighthouse flagged (~328ms on mobile). Clutch hints were
+            removed: its embeds are blocked for this domain and no longer loaded. */}
         <link rel="preconnect" href="https://assets.calendly.com" />
         <link rel="dns-prefetch" href="https://assets.calendly.com" />
       </head>
