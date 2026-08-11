@@ -1,29 +1,32 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Star } from "lucide-react";
 import RestApiBadge from "@/assets/clutch-top-rest-api-2026.png";
 import WebhookApiBadge from "@/assets/clutch-top-webhook-api-2026.png";
 
-// TEMPORARY TRIAL: attempt the official Clutch rating widget again.
-// Set to false to instantly fall back to the self-hosted rating block below
-// (which is kept intact, not deleted).
-const USE_OFFICIAL_WIDGET = true;
+// How long to give Clutch's script to paint the live widget before falling
+// back to our own rating block.
+const WIDGET_RENDER_TIMEOUT_MS = 3000;
 
 /**
- * Clutch social proof.
+ * Clutch social proof — live widget with a self-hosted fallback.
  *
- * Clutch's own embeds (widget.js and the /share/badges/ iframes) are served
- * with HTTP 403 + `x-frame-options: SAMEORIGIN` to this domain, so they render
- * as broken placeholders. Per Clutch's documentation a badge is simply "an
- * image ... that links back to your profile", and Clutch provides downloadable
- * badge files for self-hosting — so we present the same facts ourselves and
- * link back to the profile, with no dependency on their blocked embeds.
+ * The official rating widget is attempted first (it auto-updates as reviews
+ * come in). It can silently fail to render for reasons outside our control:
+ *  - Clutch's script validates the referring domain against the company
+ *    profile, so it renders nothing while the profile still points at the old
+ *    domain;
+ *  - privacy browsers and ad blockers (Brave, uBlock) block widget.clutch.co,
+ *    which is common in a developer/B2B audience.
+ * When the widget hasn't painted within WIDGET_RENDER_TIMEOUT_MS we swap in an
+ * equivalent self-hosted block, so the social proof is never missing.
  *
- * To use the official artwork: download the PNGs from the Clutch vendor
- * dashboard ("Download Your Badges"), drop them in src/assets, and render them
- * inside the same <a> wrappers below (the profile link must be kept).
+ * The award badges are always self-hosted: Clutch serves /share/badges/ with
+ * HTTP 403 + `x-frame-options: SAMEORIGIN`, so those iframes cannot work here.
+ * Clutch documents a badge as "an image ... that links back to your profile"
+ * and provides downloadable badge files, which is exactly what we render.
  */
 
 const CLUTCH_PROFILE = "https://clutch.co/profile/krasty-soft";
@@ -42,26 +45,41 @@ const AWARDS = [
 ];
 
 export const ClutchBadges = () => {
-  // TEMPORARY TRIAL: load Clutch's widget script on demand and let it render
-  // the live rating widget. Remove this block (and flip USE_OFFICIAL_WIDGET to
-  // false) if their embed proves unreliable again.
+  const widgetRef = useRef<HTMLDivElement | null>(null);
+  const [widgetRendered, setWidgetRendered] = useState(false);
+  const [widgetChecked, setWidgetChecked] = useState(false);
+
   useEffect(() => {
-    if (!USE_OFFICIAL_WIDGET) return;
     const SCRIPT_ID = "clutch-widget-script";
     type ClutchWindow = Window & { CLUTCHCO?: { init?: () => void } };
     const init = () => (window as ClutchWindow).CLUTCHCO?.init?.();
 
     if (document.getElementById(SCRIPT_ID)) {
-      const timer = setTimeout(init, 50);
-      return () => clearTimeout(timer);
+      setTimeout(init, 50);
+    } else {
+      const script = document.createElement("script");
+      script.id = SCRIPT_ID;
+      script.src = "https://widget.clutch.co/static/js/widget.js";
+      script.async = true;
+      script.onload = init;
+      // If the script is blocked outright, onerror fires and the timeout below
+      // still reveals the fallback.
+      document.body.appendChild(script);
     }
-    const script = document.createElement("script");
-    script.id = SCRIPT_ID;
-    script.src = "https://widget.clutch.co/static/js/widget.js";
-    script.async = true;
-    script.onload = init;
-    document.body.appendChild(script);
+
+    // Decide which version to show once Clutch has had time to paint.
+    const timer = setTimeout(() => {
+      const el = widgetRef.current;
+      const painted = !!el && el.getBoundingClientRect().height > 0;
+      setWidgetRendered(painted);
+      setWidgetChecked(true);
+    }, WIDGET_RENDER_TIMEOUT_MS);
+
+    return () => clearTimeout(timer);
   }, []);
+
+  // Show the fallback only after the check, so the two never flash together.
+  const showFallback = widgetChecked && !widgetRendered;
 
   return (
     <div
@@ -75,24 +93,26 @@ export const ClutchBadges = () => {
     >
       {/* Official Clutch rating widget — live, auto-updating. Widget type 2
           with data-darkbg renders the logo and text in white on a transparent
-          background, so it sits on the dark hero without a light pill. */}
-      {USE_OFFICIAL_WIDGET && (
-        <div
-          className="clutch-widget"
-          data-url="https://widget.clutch.co"
-          data-widget-type="2"
-          data-height="45"
-          data-nofollow="false"
-          data-expandifr="true"
-          data-scale="100"
-          data-darkbg="1"
-          data-clutchcompany-id="2343082"
-        />
-      )}
+          background, so it sits on the dark hero without a light pill. Hidden
+          if it never paints, so it can't leave an empty gap. */}
+      <div
+        ref={widgetRef}
+        className="clutch-widget"
+        data-url="https://widget.clutch.co"
+        data-widget-type="2"
+        data-height="45"
+        data-nofollow="false"
+        data-expandifr="true"
+        data-scale="100"
+        data-darkbg="1"
+        data-clutchcompany-id="2343082"
+        style={showFallback ? { display: "none" } : undefined}
+      />
 
-      {/* Self-hosted rating fallback — kept intact; shown when the official
-          widget is disabled. Links back to the Clutch profile, as required. */}
-      {!USE_OFFICIAL_WIDGET && (
+      {/* Self-hosted rating fallback — shown only when the official widget
+          didn't render (blocked, or profile domain mismatch). Links back to
+          the Clutch profile, as Clutch requires. */}
+      {showFallback && (
         <a
           href={CLUTCH_PROFILE}
         target="_blank"
@@ -137,7 +157,7 @@ export const ClutchBadges = () => {
             whiteSpace: "nowrap",
           }}
         >
-          {REVIEW_COUNT} verified reviews on Clutch
+          {` from ${REVIEW_COUNT} verified reviews on Clutch`}
         </span>
         </a>
       )}
