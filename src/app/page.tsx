@@ -24,7 +24,7 @@ export default async function Home() {
 
   // Generate aggregate rating schema for reviews/testimonials
   const ratingSchema = generateAggregateRatingSchema({
-    ratingValue: 5,
+    ratingValue: 4.9,
     reviewCount: 11, // Based on "11 Client Reviews" in banner
     bestRating: 5,
     worstRating: 1,

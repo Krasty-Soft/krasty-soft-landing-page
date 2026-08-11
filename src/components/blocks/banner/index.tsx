@@ -2,8 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Star, Quote } from "lucide-react";
-import { StatusBadge, Modal } from "@/components/ui";
+import { StatusBadge } from "@/components/ui";
 import { ClutchBadges } from "@/components/clutch-badges";
 
 // Above-the-fold hero entrance. The heading renders visible immediately (no
@@ -27,67 +26,8 @@ const goToContact = () => {
   container.scrollTo({ top: offsetTop, behavior: "smooth" });
 };
 
-const mockReviews = [
-  {
-    id: "1",
-    name: "Amanda Doe",
-    position: "VP Marketing",
-    company: "Google",
-    review:
-      "Everybody who&apos;s seen the app tells me how much they like it. I&apos;m very pleased with the app.",
-    rating: 5,
-  },
-  {
-    id: "2",
-    name: "Marc Brunet",
-    position: "CEO",
-    company: "Cubebrush",
-    review:
-      "It&apos;s been a very, very cool casual partnership that we&apos;ve had. It&apos;s almost like they&apos;re my employees.",
-    rating: 5,
-  },
-  {
-    id: "3",
-    name: "Michael Roberts",
-    position: "CEO",
-    company: "BrightTech",
-    review:
-      "The collaboration has been absolutely fantastic! It feels like they are part of my team, always ready to support and assist with anything.",
-    rating: 5,
-  },
-];
-
-const mockAwards = [
-  {
-    emoji: "🏆",
-    title: "Top API Development Company",
-    location: "Ukraine 2026",
-    platform: "Clutch",
-  },
-  {
-    emoji: "🥇",
-    title: "Top REST API Developers",
-    location: "Ukraine 2026",
-    platform: "Clutch",
-  },
-  {
-    emoji: "⭐",
-    title: "Top Software Developers",
-    location: "Eastern Europe 2025",
-    platform: "GoodFirms",
-  },
-  {
-    emoji: "💎",
-    title: "Best Custom Software Company",
-    location: "Ukraine 2025",
-    platform: "TechReviewer",
-  },
-];
-
 export const Banner = () => {
   const [isHovered, setIsHovered] = useState(false);
-  const [reviewsModalOpen, setReviewsModalOpen] = useState(false);
-  const [awardsModalOpen, setAwardsModalOpen] = useState(false);
 
   return (
     <section
@@ -153,7 +93,7 @@ export const Banner = () => {
           className="text-sm md:text-base text-center mb-10"
           style={{ color: "var(--text-muted)" }}
         >
-          Rated 5.0 on Clutch from 11 verified client reviews · Top REST API
+          Rated 4.9 on Clutch from 11 verified client reviews · Top REST API
           Company, Ukraine 2026.
         </motion.p>
 
@@ -229,219 +169,6 @@ export const Banner = () => {
         </div>
       </div>
 
-      {/* Reviews Modal */}
-      <Modal
-        isOpen={reviewsModalOpen}
-        onClose={() => setReviewsModalOpen(false)}
-        title="Client Reviews"
-      >
-        <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-          {mockReviews.map((review, index) => (
-            <motion.div
-              key={review.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
-              style={{
-                padding: "2rem",
-                backgroundColor: "rgba(255, 255, 255, 0.03)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                borderRadius: "var(--radius-lg)",
-                position: "relative",
-              }}
-            >
-              {/* Quote Icon */}
-              <div
-                style={{
-                  position: "absolute",
-                  top: "1rem",
-                  right: "1rem",
-                  opacity: 0.2,
-                }}
-              >
-                <Quote size={32} color="var(--brand-red)" />
-              </div>
-
-              {/* Stars */}
-              <div
-                style={{
-                  display: "flex",
-                  gap: "0.25rem",
-                  marginBottom: "1rem",
-                }}
-              >
-                {[...Array(review.rating)].map((_, i) => (
-                  <Star
-                    key={i}
-                    size={16}
-                    fill="var(--brand-red)"
-                    color="var(--brand-red)"
-                  />
-                ))}
-              </div>
-
-              {/* Review Text */}
-              <p
-                style={{
-                  fontSize: "1.125rem",
-                  lineHeight: "1.7",
-                  color: "var(--text-primary)",
-                  marginBottom: "1.5rem",
-                  fontStyle: "italic",
-                }}
-              >
-                &quot;{review.review}&quot;
-              </p>
-
-              {/* Author */}
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "1rem",
-                }}
-              >
-                <div
-                  style={{
-                    width: "3rem",
-                    height: "3rem",
-                    borderRadius: "50%",
-                    backgroundColor: "rgba(220, 38, 38, 0.1)",
-                    border: "1px solid rgba(220, 38, 38, 0.3)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "1.25rem",
-                    fontWeight: 700,
-                    color: "var(--brand-red)",
-                  }}
-                >
-                  {review.name.charAt(0)}
-                </div>
-                <div>
-                  <div
-                    style={{ fontWeight: 600, color: "var(--text-primary)" }}
-                  >
-                    {review.name}
-                  </div>
-                  <div
-                    style={{
-                      fontSize: "0.875rem",
-                      color: "var(--text-secondary)",
-                    }}
-                  >
-                    {review.position}, {review.company}
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </Modal>
-
-      {/* Awards Modal */}
-      <Modal
-        isOpen={awardsModalOpen}
-        onClose={() => setAwardsModalOpen(false)}
-        title="Awards & Recognition"
-      >
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-            gap: "1.5rem",
-          }}
-        >
-          {mockAwards.map((award, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -4 }}
-              style={{
-                padding: "2rem",
-                backgroundColor: "rgba(255, 255, 255, 0.03)",
-                border: "1px solid rgba(255, 255, 255, 0.1)",
-                borderRadius: "var(--radius-lg)",
-                textAlign: "center",
-                cursor: "default",
-                position: "relative",
-                overflow: "hidden",
-              }}
-            >
-              {/* Background glow */}
-              <div
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  background:
-                    "radial-gradient(circle at center, rgba(220, 38, 38, 0.05), transparent)",
-                  pointerEvents: "none",
-                }}
-              />
-
-              {/* Trophy */}
-              <div
-                style={{
-                  fontSize: "3.5rem",
-                  marginBottom: "1.5rem",
-                  position: "relative",
-                  zIndex: 1,
-                }}
-              >
-                {award.emoji}
-              </div>
-
-              {/* Title */}
-              <h3
-                style={{
-                  fontSize: "1.125rem",
-                  fontWeight: 700,
-                  color: "var(--text-primary)",
-                  marginBottom: "0.75rem",
-                  lineHeight: "1.3",
-                  position: "relative",
-                  zIndex: 1,
-                }}
-              >
-                {award.title}
-              </h3>
-
-              {/* Location */}
-              <p
-                style={{
-                  fontSize: "0.875rem",
-                  color: "var(--text-secondary)",
-                  marginBottom: "0.75rem",
-                  position: "relative",
-                  zIndex: 1,
-                }}
-              >
-                {award.location}
-              </p>
-
-              {/* Platform */}
-              <div
-                style={{
-                  display: "inline-block",
-                  padding: "0.375rem 1rem",
-                  borderRadius: "9999px",
-                  backgroundColor: "rgba(220, 38, 38, 0.1)",
-                  border: "1px solid rgba(220, 38, 38, 0.3)",
-                  fontSize: "0.8125rem",
-                  color: "var(--brand-red)",
-                  fontWeight: 600,
-                  position: "relative",
-                  zIndex: 1,
-                }}
-              >
-                {award.platform}
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </Modal>
     </section>
   );
 };

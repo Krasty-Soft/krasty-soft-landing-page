@@ -42,7 +42,7 @@ export const COMPANY_FAQ: FAQItem[] = [
   {
     question: "Is Krasty Soft reviewed by clients?",
     answer:
-      "Yes. Krasty Soft holds a 5-star rating on Clutch from verified client reviews and is recognized among top B2B software and API development companies.",
+      "Yes. Krasty Soft holds a 4.9 out of 5 rating on Clutch from 11 verified client reviews, and is recognized as a Top REST API Company and Top Webhook API Company in Ukraine for 2026.",
   },
 ];
 

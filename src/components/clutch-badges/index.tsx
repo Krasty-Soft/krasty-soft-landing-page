@@ -1,9 +1,15 @@
 "use client";
 
+import { useEffect } from "react";
 import Image from "next/image";
 import { Star } from "lucide-react";
 import RestApiBadge from "@/assets/clutch-top-rest-api-2026.png";
 import WebhookApiBadge from "@/assets/clutch-top-webhook-api-2026.png";
+
+// TEMPORARY TRIAL: attempt the official Clutch rating widget again.
+// Set to false to instantly fall back to the self-hosted rating block below
+// (which is kept intact, not deleted).
+const USE_OFFICIAL_WIDGET = true;
 
 /**
  * Clutch social proof.
@@ -21,7 +27,7 @@ import WebhookApiBadge from "@/assets/clutch-top-webhook-api-2026.png";
  */
 
 const CLUTCH_PROFILE = "https://clutch.co/profile/krasty-soft";
-const RATING = "5.0";
+const RATING = "4.9";
 const REVIEW_COUNT = 11;
 
 // Official Clutch award artwork, downloaded from the Clutch vendor dashboard
@@ -36,6 +42,27 @@ const AWARDS = [
 ];
 
 export const ClutchBadges = () => {
+  // TEMPORARY TRIAL: load Clutch's widget script on demand and let it render
+  // the live rating widget. Remove this block (and flip USE_OFFICIAL_WIDGET to
+  // false) if their embed proves unreliable again.
+  useEffect(() => {
+    if (!USE_OFFICIAL_WIDGET) return;
+    const SCRIPT_ID = "clutch-widget-script";
+    type ClutchWindow = Window & { CLUTCHCO?: { init?: () => void } };
+    const init = () => (window as ClutchWindow).CLUTCHCO?.init?.();
+
+    if (document.getElementById(SCRIPT_ID)) {
+      const timer = setTimeout(init, 50);
+      return () => clearTimeout(timer);
+    }
+    const script = document.createElement("script");
+    script.id = SCRIPT_ID;
+    script.src = "https://widget.clutch.co/static/js/widget.js";
+    script.async = true;
+    script.onload = init;
+    document.body.appendChild(script);
+  }, []);
+
   return (
     <div
       style={{
@@ -46,9 +73,28 @@ export const ClutchBadges = () => {
         width: "100%",
       }}
     >
-      {/* Rating — links back to the Clutch profile, as Clutch requires. */}
-      <a
-        href={CLUTCH_PROFILE}
+      {/* Official Clutch rating widget — live, auto-updating. Widget type 2
+          with data-darkbg renders the logo and text in white on a transparent
+          background, so it sits on the dark hero without a light pill. */}
+      {USE_OFFICIAL_WIDGET && (
+        <div
+          className="clutch-widget"
+          data-url="https://widget.clutch.co"
+          data-widget-type="2"
+          data-height="45"
+          data-nofollow="false"
+          data-expandifr="true"
+          data-scale="100"
+          data-darkbg="1"
+          data-clutchcompany-id="2343082"
+        />
+      )}
+
+      {/* Self-hosted rating fallback — kept intact; shown when the official
+          widget is disabled. Links back to the Clutch profile, as required. */}
+      {!USE_OFFICIAL_WIDGET && (
+        <a
+          href={CLUTCH_PROFILE}
         target="_blank"
         rel="noopener noreferrer"
         aria-label={`Krasty Soft is rated ${RATING} out of 5 on Clutch from ${REVIEW_COUNT} verified reviews`}
@@ -93,7 +139,8 @@ export const ClutchBadges = () => {
         >
           {REVIEW_COUNT} verified reviews on Clutch
         </span>
-      </a>
+        </a>
+      )}
 
       {/* Official Clutch award badges (transparent PNGs, self-hosted). */}
       <div
