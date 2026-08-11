@@ -68,8 +68,12 @@ export const ClutchBadges = () => {
       script.src = "https://widget.clutch.co/static/js/widget.js";
       script.async = true;
       script.onload = init;
-      // If the script is blocked outright, onerror fires and the timeout below
-      // still reveals the fallback.
+      // Blocked by a privacy browser / ad blocker: reveal the fallback at once
+      // instead of waiting out the timeout.
+      script.onerror = () => {
+        setWidgetRendered(false);
+        setWidgetChecked(true);
+      };
       document.body.appendChild(script);
     }
 
@@ -112,7 +116,15 @@ export const ClutchBadges = () => {
         data-scale="100"
         data-darkbg="1"
         data-clutchcompany-id="2343082"
-        style={showFallback ? { display: "none" } : undefined}
+        // The iframe is rendered with width="100%", so the wrapper must be
+        // pinned to the widget's natural width — otherwise it stretches to the
+        // full column and Clutch's left-aligned content looks off-centre.
+        // `margin: 0 auto` keeps it centred regardless of the flex context.
+        style={
+          showFallback
+            ? { display: "none" }
+            : { width: "300px", maxWidth: "100%", margin: "0 auto" }
+        }
       />
 
       {/* Self-hosted rating fallback — shown only when the official widget
