@@ -51,8 +51,14 @@ export const ClutchBadges = () => {
 
   useEffect(() => {
     const SCRIPT_ID = "clutch-widget-script";
-    type ClutchWindow = Window & { CLUTCHCO?: { init?: () => void } };
-    const init = () => (window as ClutchWindow).CLUTCHCO?.init?.();
+    // NOTE: Clutch exposes `CLUTCHCO.Init` with a capital I — a lowercase
+    // `init` does not exist, so calling it was a silent no-op. Their script
+    // otherwise only self-initializes on a `readystatechange` event, which
+    // never fires again once we append the script after hydration.
+    type ClutchWindow = Window & {
+      CLUTCHCO?: { Init?: () => void; loaded?: boolean };
+    };
+    const init = () => (window as ClutchWindow).CLUTCHCO?.Init?.();
 
     if (document.getElementById(SCRIPT_ID)) {
       setTimeout(init, 50);
