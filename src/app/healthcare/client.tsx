@@ -170,7 +170,7 @@ export default function HealthcareClient({ cases }: { cases: Case[] }) {
             >
               <span style={{ color: 'var(--brand-red)' }}>&gt; </span>
               <TypingText
-                text="Healthcare Software Development"
+                text="Healthcare Software Development Services"
                 speed={50}
                 delay={300}
                 highlightWords={['Healthcare', 'Development']}

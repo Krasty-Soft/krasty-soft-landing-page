@@ -9,9 +9,9 @@ import { Metadata } from "next";
 import FintechClient from "./client";
 
 export const metadata: Metadata = generateSEO({
-  title: "FinTech Software Development Services",
+  title: "Fintech Software Development Services for Secure Financial Solutions",
   description:
-    "Expert FinTech software development company delivering secure, scalable financial technology solutions. Custom banking apps, payment systems, and trading platforms.",
+    "We build custom fintech software solutions, including payment platforms, digital wallets, lending systems, and secure financial applications for growing businesses.",
   path: "/fintech",
 });
 

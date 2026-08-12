@@ -30,12 +30,20 @@ export const Cases = ({ cases, industry }: CasesProps) => {
           >
             <span style={{ color: "var(--brand-red)" }}>&gt; </span>
             <TypingText
-              text="Real-world insights and success stories."
+              text="Featured Client Products and Success Stories."
               speed={50}
               delay={300}
-              highlightWords={["Real-world", "success"]}
+              highlightWords={["Client", "Success"]}
             />
           </h2>
+          <p
+            className="text-base md:text-lg leading-relaxed mt-6"
+            style={{ color: "var(--text-secondary)", maxWidth: "60rem" }}
+          >
+            As a custom application development company, we help startups and
+            growing businesses turn ideas into scalable digital products that
+            solve real business challenges.
+          </p>
         </div>
 
         <div className="w-full" style={{ maxWidth: "var(--max-width)" }}>

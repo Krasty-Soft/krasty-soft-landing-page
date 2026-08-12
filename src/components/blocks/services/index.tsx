@@ -75,10 +75,10 @@ export const Services = () => {
           >
             <span style={{ color: "var(--brand-red)" }}>&gt; </span>
             <TypingText
-              text="Digital products and five-star services."
+              text="Our Digital Products and Services."
               speed={50}
               delay={500}
-              highlightWords={["products", "services"]}
+              highlightWords={["Products", "Services"]}
             />
           </h2>
         </div>

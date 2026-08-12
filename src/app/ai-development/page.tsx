@@ -10,9 +10,9 @@ import TechTemplate from "../technologies/tech-template";
 import { Metadata } from "next";
 
 export const metadata: Metadata = generateSEO({
-  title: "AI Development Services",
+  title: "Custom Generative AI Development Services & End-to-End AI Solutions",
   description:
-    "A generative AI development company building production AI — agents, LLM integrations, RAG, and copilots wired into your products with guardrails and evaluation.",
+    "AI development services for startups and growing businesses. We build custom AI applications, intelligent assistants, automation tools, and machine learning solutions.",
   path: "/ai-development",
 });
 

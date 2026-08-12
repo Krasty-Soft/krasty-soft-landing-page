@@ -170,7 +170,7 @@ export default function FintechClient({ cases }: { cases: Case[] }) {
             >
               <span style={{ color: 'var(--brand-red)' }}>&gt; </span>
               <TypingText
-                text="Fintech Software Development"
+                text="Fintech Software Development Services"
                 speed={50}
                 delay={300}
                 highlightWords={['Fintech', 'Development']}

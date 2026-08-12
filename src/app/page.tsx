@@ -1,4 +1,5 @@
 import {
+  AboutTeaser,
   Banner,
   Cases,
   Difference,
@@ -7,6 +8,7 @@ import {
   Opportunities,
   Services,
   Technologies,
+  TrustStats,
 } from "@/components/blocks";
 import { getAllCases } from "@/lib/cases";
 import { getAllJobs } from "@/lib/jobs";
@@ -35,10 +37,12 @@ export default async function Home() {
       <StructuredData data={[ratingSchema, generateFAQSchema(COMPANY_FAQ)]} />
       <Banner />
       <Services />
+      <TrustStats />
       <Difference />
       <Industries />
       <Technologies />
       <Cases cases={cases} />
+      <AboutTeaser />
       <Faq items={COMPANY_FAQ} />
       <Opportunities isEmpty={isEmpty} jobs={jobs} />
     </>

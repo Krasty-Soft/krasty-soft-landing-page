@@ -254,10 +254,10 @@ export const Difference = ({ isDark = true }: { isDark?: boolean }) => {
           >
             <span style={{ color: "var(--brand-red)" }}>&gt; </span>
             <TypingText
-              text="Development that sets you apart."
+              text="What Sets Us Apart."
               speed={50}
               delay={300}
-              highlightWords={["Development", "apart"]}
+              highlightWords={["Sets", "Apart"]}
             />
           </h2>
         </div>

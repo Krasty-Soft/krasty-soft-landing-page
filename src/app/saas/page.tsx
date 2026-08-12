@@ -10,9 +10,9 @@ import TechTemplate from "../technologies/tech-template";
 import { Metadata } from "next";
 
 export const metadata: Metadata = generateSEO({
-  title: "SaaS Development Services",
+  title: "SaaS Development Services for Scalable Software Solutions",
   description:
-    "Multi-tenant SaaS products with billing, auth, dashboards, and integrations — from MVP to scale. Expert SaaS development services from Krasty Soft.",
+    "SaaS product development services for multi-tenant platforms, subscription-based applications, and scalable software products tailored to your business needs.",
   path: "/saas",
 });
 

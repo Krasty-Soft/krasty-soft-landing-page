@@ -312,7 +312,7 @@ export const TECH_DETAILS: TechDetail[] = [
   {
     slug: "e-commerce",
     title: "E-commerce",
-    subtitle: "E-commerce Development Services",
+    subtitle: "Ecommerce Software Development Services",
     brandColor: "#F97316",
     introParagraphs: [
       "<strong>E-commerce development services</strong> build storefronts and commerce systems that convert and scale — fast product pages, smooth checkout, reliable inventory, and the integrations that keep orders, payments, and fulfillment in sync. We build for revenue, not just for launch.",

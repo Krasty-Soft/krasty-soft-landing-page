@@ -10,9 +10,9 @@ import TechTemplate from "../technologies/tech-template";
 import { Metadata } from "next";
 
 export const metadata: Metadata = generateSEO({
-  title: "Frontend Development Services",
+  title: "Front End Development Company for Custom Digital Products",
   description:
-    "Fast, responsive, accessible web apps, dashboards, and design systems. Expert frontend development services from Krasty Soft.",
+    "We provide frontend development services for responsive interfaces, interactive web applications, and high-performance digital experiences.",
   path: "/frontend-development",
 });
 

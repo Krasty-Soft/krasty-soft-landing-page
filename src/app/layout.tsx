@@ -16,9 +16,9 @@ import "./globals.css";
 // SEO Metadata
 export const metadata: Metadata = {
   ...generateSEO({
-    title: "Krasty Soft - Software Development Company",
+    title: "Custom Software Company | AI & Digital Solutions",
     description:
-      "Progressive B2B software development company specializing in custom solutions, AI development, and enterprise applications. Trusted partner for tech innovation.",
+      "Krasty Soft is a software company delivering custom digital products, AI solutions, and enterprise software for startups and growing businesses.",
     path: "/",
   }),
   // Google Search Console verification via HTML meta tag — the reliable method

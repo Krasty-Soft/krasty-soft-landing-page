@@ -180,10 +180,10 @@ export const Industries = () => {
           >
             <span style={{ color: "var(--brand-red)" }}>&gt; </span>
             <TypingText
-              text="Tailored solutions for leading industries."
+              text="Industries Krasty Soft Serves."
               speed={50}
               delay={300}
-              highlightWords={["Tailored", "industries"]}
+              highlightWords={["Industries", "Serves"]}
             />
           </h2>
         </div>

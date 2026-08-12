@@ -9,9 +9,9 @@ import { notFound } from "next/navigation";
 import TechTemplate from "../technologies/tech-template";
 
 export const metadata = generateSEO({
-  title: "Node.js Development Services",
+  title: "Node.js Development Company for Scalable Web Applications",
   description:
-    "Fast, integration-heavy backends and real-time features. Expert Node.js development services.",
+    "Node.js development services for scalable web applications, APIs, and backend systems. Senior Node.js developers building secure, high-performance software.",
   path: "/node",
 });
 

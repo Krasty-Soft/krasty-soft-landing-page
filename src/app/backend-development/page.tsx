@@ -10,9 +10,9 @@ import TechTemplate from "../technologies/tech-template";
 import { Metadata } from "next";
 
 export const metadata: Metadata = generateSEO({
-  title: "Backend Development Services",
+  title: "Backend Development Services for Scalable Software Solutions",
   description:
-    "Robust, scalable APIs, database architecture, auth, and integrations. Expert backend development services from Krasty Soft.",
+    "We build scalable backend solutions, APIs, microservices, and cloud infrastructure that power reliable, high-performance software and seamlessly connect your systems.",
   path: "/backend-development",
 });
 

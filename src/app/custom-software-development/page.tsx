@@ -13,7 +13,7 @@ import CustomSoftwareClient from "./client";
 export const metadata: Metadata = generateSEO({
   title: "Custom Software Development Services",
   description:
-    "Krasty Soft is a custom software development company building bespoke web, backend, and AI-powered software for startups and enterprises worldwide.",
+    "Software development solutions for startups and scaling companies. We build secure, high-performance software tailored to your business goals.",
   path: "/custom-software-development",
 });
 

@@ -9,9 +9,9 @@ import { notFound } from "next/navigation";
 import TechTemplate from "../technologies/tech-template";
 
 export const metadata = generateSEO({
-  title: "React.js Development Services",
+  title: "React JS Development Services for Scalable Web Applications",
   description:
-    "React.js development services from Krasty Soft — fast, scalable frontends and custom React projects for web apps and SaaS. Senior React developers, worldwide.",
+    "React development services for startups and growing businesses. Build fast, scalable web applications with experienced React developers focused on performance and usability.",
   path: "/react",
 });
 

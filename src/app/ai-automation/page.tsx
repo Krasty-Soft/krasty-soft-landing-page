@@ -10,9 +10,9 @@ import TechTemplate from "../technologies/tech-template";
 import { Metadata } from "next";
 
 export const metadata: Metadata = generateSEO({
-  title: "AI Automation Services",
+  title: "AI Automation Services for Intelligent Business Workflows",
   description:
-    "AI automation services from Krasty Soft — automate document processing, support, and multi-step workflows with AI agents that adapt where rigid scripts break.",
+    "Custom AI automation services to streamline business processes, optimize workflows, and implement intelligent AI agents tailored to your operational needs.",
   path: "/ai-automation",
 });
 

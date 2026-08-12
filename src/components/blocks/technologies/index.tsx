@@ -168,10 +168,10 @@ export const Technologies = () => {
           >
             <span style={{ color: "var(--brand-red)" }}>&gt; </span>
             <TypingText
-              text="Innovative technologies and premium solutions."
+              text="Technologies and Solutions That Drive Results."
               speed={50}
               delay={300}
-              highlightWords={["Innovative", "premium"]}
+              highlightWords={["Technologies", "Results"]}
             />
           </h2>
         </div>

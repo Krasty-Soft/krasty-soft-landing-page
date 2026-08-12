@@ -9,9 +9,9 @@ import { Metadata } from "next";
 import HealthcareClient from "./client";
 
 export const metadata: Metadata = generateSEO({
-  title: "Healthcare Software Development Services",
+  title: "Custom Healthcare Software Development Company",
   description:
-    "HIPAA-compliant healthcare software development. Custom EHR/EMR systems, telemedicine platforms, and medical practice management solutions.",
+    "We build custom healthcare software solutions, patient portals, management systems, and secure medical applications for growing organizations.",
   path: "/healthcare",
 });
 

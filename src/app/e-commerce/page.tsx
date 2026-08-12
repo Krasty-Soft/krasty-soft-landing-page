@@ -10,9 +10,9 @@ import TechTemplate from "../technologies/tech-template";
 import { Metadata } from "next";
 
 export const metadata: Metadata = generateSEO({
-  title: "E-commerce Development Services",
+  title: "Custom eCommerce Development Services for B2B & B2C Solutions",
   description:
-    "Custom and headless storefronts, checkout, inventory, and integrations that convert and scale. Expert e-commerce development services from Krasty Soft.",
+    "We deliver scalable ecommerce development solutions for B2B and B2C platforms, marketplaces, and custom digital commerce experiences designed to support business growth.",
   path: "/e-commerce",
 });
 

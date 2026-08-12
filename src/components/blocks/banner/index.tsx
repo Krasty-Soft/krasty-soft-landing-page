@@ -67,8 +67,9 @@ export const Banner = () => {
             lineHeight: "1.1",
           }}
         >
-          Software company <br className="hidden md:block" />
-          you can trust
+          Software Company Focused on{" "}
+          <br className="hidden md:block" />
+          AI and Software Engineering
         </motion.h1>
 
         {/* Subtitle */}

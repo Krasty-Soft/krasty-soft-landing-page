@@ -9,9 +9,9 @@ import { notFound } from "next/navigation";
 import TechTemplate from "../technologies/tech-template";
 
 export const metadata = generateSEO({
-  title: "Python Development Services",
+  title: "Python Development Services for AI, Web & Automation Solutions",
   description:
-    "Backend logic, data-heavy workflows, and API-first platforms. Expert Python web development services.",
+    "Python software development services for web platforms, AI solutions, automation, and backend systems. Build scalable software with experienced Python developers.",
   path: "/python",
 });
 
