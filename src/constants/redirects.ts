@@ -103,6 +103,10 @@ export const REDIRECTS: Redirect[] = [
   { source: "/retool", destination: "/ai-development" },
   // --- Sheet 3: removed career slug ---
   { source: `${CAREERS_PREFIX}senior-rabbit-hugger`, destination: "/careers" },
+  // --- Tech audit p.10: legacy URLs that returned 404. Nothing on the site
+  // links to them, so these exist purely to preserve any external backlinks.
+  { source: "/team", destination: "/about" },
+  { source: "/blog/order-management-software", destination: "/blog" },
 ];
 
 // Derived from REDIRECTS so the two can't drift.

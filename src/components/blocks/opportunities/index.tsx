@@ -15,6 +15,11 @@ export const Opportunities = ({
 }) => {
   // Use provided jobs or fallback to imported jobs
   const jobsList = providedJobs && providedJobs.length > 0 ? providedJobs : jobs
+
+  // With no open roles the section is an empty placeholder that just adds
+  // scroll length, so it's hidden until there are vacancies to show.
+  if (isEmpty) return null
+
   return (
     <Section variant="primary" animate={false}>
       {/* Custom Title with Typing Effect */}

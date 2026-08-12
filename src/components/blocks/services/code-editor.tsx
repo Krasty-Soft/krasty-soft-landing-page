@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   FileCode,
@@ -415,6 +416,27 @@ export const CodeEditor = ({ services }: CodeEditorProps) => {
                   <CodeLine number={11 + activeService.content.length}>
                     <span style={{ color: "#89DDFF" }}>{"}"}</span>
                   </CodeLine>
+
+                  {/* Real CTA. The editor previously rendered `link` as code
+                      text only, so there was no way to reach the service page
+                      from this block — a dead end for interested visitors. */}
+                  <div style={{ padding: "1.5rem 0 0.5rem" }}>
+                    <Link
+                      href={activeService.link}
+                      className="inline-flex items-center gap-2 font-semibold transition-colors duration-200"
+                      style={{
+                        padding: "0.625rem 1.25rem",
+                        borderRadius: "var(--radius-md)",
+                        backgroundColor: "var(--brand-red)",
+                        color: "#fff",
+                        fontSize: "0.875rem",
+                        textDecoration: "none",
+                      }}
+                    >
+                      Explore {activeService.title}
+                      <ChevronRight size={16} />
+                    </Link>
+                  </div>
                 </div>
               </motion.div>
             </AnimatePresence>
