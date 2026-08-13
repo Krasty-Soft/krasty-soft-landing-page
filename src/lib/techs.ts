@@ -5,6 +5,8 @@ export interface TechDetail {
   brandColor: string;
   /** Optional override for the closing CTA heading (defaults to "Ready to build with <title>?"). */
   ctaHeading?: string;
+  /** Optional override for the FAQ heading (defaults to "<title> — FAQ"). */
+  faqTitle?: string;
   introParagraphs: string[];
   whatWeBuild: {
     title: string;
@@ -16,6 +18,8 @@ export interface TechDetail {
   };
   industries: {
     title: string;
+    /** Optional lead paragraph rendered under the industries heading. */
+    intro?: string;
     list: string[];
   };
 }
@@ -109,11 +113,11 @@ export const TECH_DETAILS: TechDetail[] = [
     subtitle: "Python Web Development Services",
     brandColor: "#3776AB",
     introParagraphs: [
-      "<strong>Python web development services</strong> are a strong fit for backend logic, data-heavy workflows, and API-first platforms. We use Python to build reliable services connecting business rules with databases, integrations, and analytics. This makes complex workflows easier to automate and extend over time.",
-      "As a <strong>Python development company</strong>, Krasty Soft focuses on maintainable architecture and clear interfaces between services. The result is backend logic that stays readable for your team and stable in production."
+      "<strong>Python web development services</strong> are a strong fit for backend logic, data-heavy workflows, and API-first platforms. We use Python to build reliable services that connect business rules with databases, integrations, and analytics — and, increasingly, with AI and machine-learning components that need the same data close at hand.",
+      "As a <strong>python development company</strong>, Krasty Soft focuses on maintainable architecture and clear interfaces between services. Our <strong>python software development services</strong> cover REST and GraphQL APIs, data pipelines, automation, and <strong>custom</strong> back-office <strong>software</strong> built around how your business actually operates. We favour explicit modules, typed interfaces, and thorough tests, so backend logic stays readable for your team and predictable in production as requirements change."
     ],
     whatWeBuild: {
-      title: "What We Build with Python",
+      title: "Custom Python Development Solutions We Deliver",
       items: [
         "Backend APIs for web and internal systems.",
         "Data processing and automation pipelines.",
@@ -124,14 +128,16 @@ export const TECH_DETAILS: TechDetail[] = [
       ]
     },
     whyChoose: {
-      title: "Why Python for Your Business",
+      title: "How Python Development Services Benefit Your Business",
       paragraphs: [
         "Python is efficient for building systems that handle structured data and automation with predictable behavior. It's a practical choice when reliability matters more than flashy frameworks. With <strong>Python web development services</strong>, teams get a backend that stays readable and easy to extend. Clear modules and clean APIs reduce the cost of change as requirements shift. Our <strong>Python web development services</strong> approach prioritizes stability, observability, and long-term support.",
-        "As a <strong>Python development company</strong>, Krasty Soft focuses on predictable delivery and production-grade quality. This approach makes ongoing iteration safer for internal teams."
+        "As a <strong>python software development agency</strong>, Krasty Soft focuses on predictable delivery and production-grade quality: code review, automated tests, monitoring, and clear release process. This makes ongoing iteration safer for internal teams — you can add features and integrations without the fear that a change in one service quietly breaks another."
       ]
     },
     industries: {
       title: "Industries & Use Cases",
+      intro:
+        "Our <strong>python development team</strong> works where data and business logic meet. Fintech clients use Python for transaction processing, risk scoring, and reporting; healthcare for records integration and clinical data pipelines; e-commerce and marketing for analytics, pricing, and campaign automation. It is also the natural choice when a product needs AI features — recommendations, document processing, or forecasting — served from the same backend that already owns the data.",
       list: [
         "E-commerce",
         "FinTech",
@@ -150,11 +156,11 @@ export const TECH_DETAILS: TechDetail[] = [
     subtitle: "Node.js Development Services",
     brandColor: "#339933",
     introParagraphs: [
-      "<strong>Node.js development services</strong> help teams build fast, integration-heavy backends and real-time features. It's a strong fit when your product relies on many external services and data exchanges.",
-      "We use <strong>Node.js development</strong> for APIs, workflow automation, and systems that benefit from event-driven architecture. This approach keeps integrations responsive. It simplifies handling of webhooks, queues, and background jobs. When platform needs grow, <strong>custom Node.js application development</strong> keeps the logic easy to scale."
+      "<strong>Node.js development services</strong> help teams build fast, integration-heavy backends and real-time features. Node.js is a strong fit when your product depends on many external services, high concurrency, and constant data exchange — chat and notifications, live dashboards, payment and CRM integrations, or APIs serving both web and mobile clients.",
+      "As a <strong>node.js development company</strong>, Krasty Soft designs services around clear contracts and predictable behaviour under load. We use event-driven architecture where it earns its place — webhooks, queues, and background jobs — so integrations stay responsive instead of blocking each other. Our <strong>node.js development solutions</strong> cover the full backend: API design, database access, authentication, third-party integrations, observability, and deployment. The result is a codebase your team can extend without rewriting the core as traffic and feature scope grow."
     ],
     whatWeBuild: {
-      title: "What We Build with Node.js",
+      title: "Custom Node.js Development Solutions We Deliver",
       items: [
         "API backends for web platforms and internal tools.",
         "Real-time updates, notifications, and messaging.",
@@ -165,7 +171,7 @@ export const TECH_DETAILS: TechDetail[] = [
       ]
     },
     whyChoose: {
-      title: "Why Node.js for Your Business",
+      title: "How Node js Development Services Benefit Your Business",
       paragraphs: [
         "Node.js is a practical choice when your product needs quick I/O or many integrations. It works especially well for API-first platforms and event-driven workflows. Our <strong>Node.js development</strong> approach keeps services consistent and easy to maintain. We standardize patterns for routing, validation, logging, and error handling. For complex products, <strong>custom Node.js application development</strong> helps avoid fragile script sprawl and supports clean scaling.",
         "Krasty Soft builds backends with a clear separation between business logic and integrations. You get services that are easier to evolve as the product grows."
@@ -173,6 +179,8 @@ export const TECH_DETAILS: TechDetail[] = [
     },
     industries: {
       title: "Industries & Use Cases",
+      intro:
+        "Working with a specialised <strong>node js development agency</strong> pays off wherever systems must talk to each other in real time. In e-commerce we build order, inventory, and payment integrations; in fintech, secure transaction APIs and reporting services; in logistics, tracking and dispatch backends that handle constant status updates. Healthcare and SaaS teams use Node.js for patient or customer portals, notifications, and the API layer that keeps web and mobile clients in sync — all built to stay stable as request volume grows.",
       list: [
         "E-commerce",
         "FinTech",
@@ -234,10 +242,10 @@ export const TECH_DETAILS: TechDetail[] = [
     brandColor: "#16A34A",
     introParagraphs: [
       "<strong>Backend development services</strong> build the reliable core your product runs on — APIs, databases, authentication, and integrations that stay fast and secure under load. We design systems that are simple to reason about and safe to change as your product grows.",
-      "As a <strong>backend development company</strong>, Krasty Soft delivers backends that scale without surprises. We model your data carefully, keep business rules explicit, and instrument everything so issues are caught early. In practice, solid <strong>backend development</strong> means fewer outages, predictable performance, and clean integrations with the services you depend on."
+      "As a <strong>backend development company</strong>, Krasty Soft delivers <strong>backend solutions</strong> that scale without surprises. We model your data carefully, keep business rules explicit, and instrument everything so issues surface early rather than during an incident. That covers API design, database architecture, authentication and authorisation, background processing, caching, and the integrations your product depends on. In practice it means fewer outages, predictable performance under load, and a system your team can extend safely."
     ],
     whatWeBuild: {
-      title: "What We Build on the Backend",
+      title: "Backend Development Solutions We Provide",
       items: [
         "REST and GraphQL APIs for web and mobile.",
         "Database architecture and query optimization.",
@@ -248,14 +256,18 @@ export const TECH_DETAILS: TechDetail[] = [
       ]
     },
     whyChoose: {
-      title: "Why Invest in Solid Backend Development",
+      title: "Business Benefits of Custom Backend Development",
       paragraphs: [
         "<strong>Backend development</strong> is where most reliability and cost problems are won or lost. We prioritize clear data models, explicit boundaries, and good observability, so the system stays maintainable as features and traffic grow. That keeps release velocity high and on-call quiet.",
-        "Our <strong>backend development company</strong> approach favors proven technology and strong tests over cleverness. We build APIs your frontend and partners can rely on, and support the system end-to-end — from schema design to monitoring in production."
+        "Our <strong>back end development services</strong> favour proven technology and strong tests over cleverness. As an engineering <strong>agency</strong> we build APIs your frontend and partners can rely on — versioned, documented, and covered by automated tests — and support the system end-to-end, from schema design to monitoring in production."
       ]
     },
+    faqTitle: "Custom Backend Solutions — FAQ",
+    ctaHeading: "Ready to Start Your Backend Development Project?",
     industries: {
       title: "Industries & Use Cases",
+      intro:
+        "A well-built <strong>backend app</strong> looks different in every sector, but the demands rhyme: fintech needs auditable transactions and strict access control; healthcare needs secure records handling and reliable integrations with clinical systems; e-commerce and logistics need accurate stock, order, and tracking data flowing between services in near real time. We design the data model and service boundaries around those realities first, then build the APIs on top.",
       list: [
         "FinTech",
         "Healthcare",
@@ -275,10 +287,10 @@ export const TECH_DETAILS: TechDetail[] = [
     brandColor: "#0EA5E9",
     introParagraphs: [
       "<strong>Frontend development services</strong> turn designs into fast, accessible, responsive web applications your users enjoy. We build interfaces that load quickly, work on every screen, and stay consistent as the product grows — from marketing sites to complex dashboards.",
-      "As a <strong>frontend development company</strong>, Krasty Soft ships polished UIs backed by clean, maintainable code. We care about performance (Core Web Vitals), accessibility, and a component system that scales. In practice, good <strong>frontend development</strong> means higher conversion, lower bounce, and a product that feels professional."
+      "As a <strong>frontend development company</strong>, Krasty Soft ships polished UIs backed by clean, maintainable code. Our <strong>frontend services</strong> cover design implementation, component libraries and design systems, state and data handling, accessibility, and performance work against Core Web Vitals. We build with React and Next.js in TypeScript, so screens stay consistent and quick to add. In practice that means higher conversion, lower bounce, and a product that feels professional on every device."
     ],
     whatWeBuild: {
-      title: "What We Build on the Frontend",
+      title: "Front-End Development Services We Provide",
       items: [
         "Custom web applications and SaaS interfaces.",
         "Pixel-accurate UI/UX design implementation.",
@@ -289,14 +301,18 @@ export const TECH_DETAILS: TechDetail[] = [
       ]
     },
     whyChoose: {
-      title: "Why Frontend Development Matters",
+      title: "Business Benefits of Custom Frontend Development",
       paragraphs: [
         "<strong>Frontend development</strong> is what your customers actually experience. A fast, clear interface builds trust and drives conversion; a slow or clumsy one costs you users no matter how good the backend is. We treat performance and accessibility as features, not afterthoughts.",
-        "Our <strong>frontend development company</strong> approach keeps UIs maintainable with a shared component system, so new screens stay consistent and quick to build. We implement designs faithfully and optimize until the experience is genuinely fast."
+        "Our <strong>front end web development solutions</strong> keep UIs maintainable through a shared component system, so new screens stay consistent and quick to build instead of drifting apart over time. We implement designs faithfully, test on real devices, and optimise until the experience is genuinely fast — not just fast on a developer's laptop."
       ]
     },
+    faqTitle: "Front-end services — FAQ",
+    ctaHeading: "Ready to Start Your Frontend Development Project?",
     industries: {
       title: "Industries & Use Cases",
+      intro:
+        "Teams hire a <strong>front end developer agency</strong> when the interface becomes the bottleneck — a SaaS dashboard that slows down as data grows, an e-commerce storefront losing conversions to slow pages, a fintech or healthcare portal that must be accessible and reliable under scrutiny. We work across those contexts, matching the interface to the data behind it and keeping the codebase easy for your own developers to pick up.",
       list: [
         "SaaS",
         "E-commerce",
@@ -315,11 +331,11 @@ export const TECH_DETAILS: TechDetail[] = [
     subtitle: "Ecommerce Software Development Services",
     brandColor: "#F97316",
     introParagraphs: [
-      "<strong>E-commerce development services</strong> build storefronts and commerce systems that convert and scale — fast product pages, smooth checkout, reliable inventory, and the integrations that keep orders, payments, and fulfillment in sync. We build for revenue, not just for launch.",
-      "As an <strong>e-commerce development company</strong>, Krasty Soft delivers custom and headless commerce tailored to how you actually sell. We connect storefronts to payment, ERP, and analytics, and keep the buying experience fast on every device. In practice, better <strong>e-commerce development</strong> means higher conversion and fewer operational headaches."
+      "<strong>Ecommerce software development services</strong> build storefronts and commerce systems that convert and scale — fast product pages, smooth checkout, reliable inventory, and the integrations that keep orders, payments, and fulfilment in sync. We build for revenue, not just for launch.",
+      "As an ecommerce development <strong>company</strong>, Krasty Soft delivers <strong>customized ecommerce solutions</strong> shaped around how you actually sell — B2C storefronts, B2B portals with account pricing, marketplaces, or headless frontends on top of an existing platform. We connect the storefront to payments, ERP, and analytics so stock levels, orders, and revenue reporting stay accurate without manual work. The result is a buying experience that stays fast on every device and an operation that doesn't break when volume spikes."
     ],
     whatWeBuild: {
-      title: "What We Build for E-commerce",
+      title: "Custom Ecommerce Solutions We Deliver",
       items: [
         "Custom and headless storefronts.",
         "Checkout, payments, and subscription flows.",
@@ -330,14 +346,17 @@ export const TECH_DETAILS: TechDetail[] = [
       ]
     },
     whyChoose: {
-      title: "Why Choose Us for E-commerce",
+      title: "Why Choose Us for Custom Ecommerce Development",
       paragraphs: [
         "<strong>E-commerce development</strong> lives or dies on speed and reliability — a slow page or a broken checkout costs sales immediately. We build storefronts that stay fast under traffic and keep the order-to-fulfillment pipeline accurate, so operations don't break as you grow.",
-        "Our <strong>e-commerce development company</strong> approach connects the whole stack — storefront, payments, inventory, and analytics — into one reliable system. We integrate with the platforms and marketplaces you already use, and support it end-to-end."
+        "Our approach connects the whole stack — storefront, payments, inventory, and analytics — into one reliable system. When an off-the-shelf theme starts limiting merchandising or margins, a <strong>bespoke ecommerce platform</strong> or a custom <strong>application</strong> layer gives you control over pricing rules, catalogue logic, and checkout. We integrate with the platforms and marketplaces you already use, and support the system end-to-end after launch."
       ]
     },
+    faqTitle: "E-commerce development services — FAQ",
     industries: {
-      title: "What We Build & Integrate",
+      title: "What We Build & Integrate for E-commerce",
+      intro:
+        "As an ecommerce <strong>agency</strong>, we deliver <strong>ecommerce solutions services</strong> across the whole commerce stack rather than a single storefront. That means headless and custom storefronts, payment and subscription billing, inventory and ERP synchronisation, marketplace and multi-vendor logic, and the analytics that show which channels actually earn. Each integration is built to be observable and recoverable, so a failed payment webhook or a delayed stock update surfaces immediately instead of quietly corrupting orders.",
       list: [
         "Shopify & Headless Commerce",
         "Custom Storefronts",
@@ -357,10 +376,10 @@ export const TECH_DETAILS: TechDetail[] = [
     brandColor: "#2563EB",
     introParagraphs: [
       "<strong>SaaS development services</strong> build multi-tenant products end to end — secure tenant isolation, subscription billing, admin and customer dashboards, and the integrations your users expect. We help you go from idea or MVP to a product that scales with your customer base.",
-      "As a <strong>SaaS development company</strong>, Krasty Soft ships SaaS that's reliable, secure, and ready to grow. We handle the hard parts — auth, roles, billing, usage metering — so you can focus on the product. In practice, solid <strong>SaaS development</strong> means faster onboarding, predictable revenue, and fewer support fires."
+      "As a SaaS development <strong>company</strong>, Krasty Soft ships <strong>software</strong> that is reliable, secure, and ready to grow. <strong>SaaS application development</strong> has a long tail of unglamorous requirements — authentication and roles, per-tenant data isolation, plans and proration, usage metering, audit logs — and getting them right early is what keeps the product cheap to run later. We build those foundations first, then layer product features on top, so onboarding a new customer is a configuration change rather than an engineering project."
     ],
     whatWeBuild: {
-      title: "What We Build for SaaS",
+      title: "SaaS Development Solutions We Deliver",
       items: [
         "Multi-tenant architecture and tenant isolation.",
         "Subscription billing and usage metering (Stripe).",
@@ -371,14 +390,17 @@ export const TECH_DETAILS: TechDetail[] = [
       ]
     },
     whyChoose: {
-      title: "Why Choose Us for SaaS",
+      title: "Why Choose Us for Custom SaaS Development",
       paragraphs: [
         "<strong>SaaS development</strong> has a long tail of hard requirements — tenancy, billing, permissions, and reliability — that make or break the product later. We get these foundations right early, so adding features and customers doesn't mean rewriting the core.",
-        "Our <strong>SaaS development company</strong> approach balances speed to market with an architecture that scales. We ship an MVP that's real, then grow it with metering, integrations, and analytics — supporting the system in production the whole way."
+        "Our approach balances speed to market with an architecture that scales. We ship an MVP that is genuinely usable, then grow it with metering, integrations, and analytics. Where a generic template would limit your pricing model or workflow, a <strong>bespoke saas application</strong> gives you control — and our <strong>solutions</strong> are supported in production the whole way, not handed over at launch."
       ]
     },
+    faqTitle: "SaaS product development services — FAQ",
     industries: {
-      title: "Industries & Use Cases",
+      title: "What We Build & Integrate for SaaS",
+      intro:
+        "Our <strong>saas platform development</strong> work covers the full product surface: the <strong>web</strong> application and customer dashboards, the admin and back-office tooling your team runs the business from, and the <strong>app</strong> integrations that connect billing, CRM, analytics, and support. As a product <strong>agency</strong> we also handle the parts founders often postpone — subscription and proration logic, usage metering, SSO and role management, and per-tenant reporting — so the platform is ready for enterprise customers when they arrive.",
       list: [
         "FinTech",
         "Healthcare",

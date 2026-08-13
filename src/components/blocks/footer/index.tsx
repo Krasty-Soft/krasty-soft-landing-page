@@ -11,6 +11,7 @@ import {
 import { motion } from "framer-motion";
 import { SocialNetworks } from "@/components/blocks";
 import { FooterForm } from "./form";
+import { FooterNav } from "./footer-nav";
 import { Section, TypingText } from "@/components/ui";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
 
@@ -424,6 +425,8 @@ export const Footer = () => {
               <FooterForm />
             </motion.div>
           </div>
+
+          <FooterNav />
 
           <SocialNetworks />
           <div className="-mb-22.5 w-full"></div>

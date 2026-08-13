@@ -33,49 +33,49 @@ const PAGES: NavigationConfig = {
     {
       slug: "fintech",
       label: "FinTech",
-      description: "",
+      description: "Secure payment platforms, digital wallets, lending and trading systems built for auditability and uptime.",
     },
     {
       slug: "healthcare",
       label: "Healthcare",
-      description: "",
+      description: "Patient portals, clinical tools, and telemedicine platforms designed around real care workflows and compliance.",
     },
     {
       slug: "e-commerce",
       label: "E-commerce",
-      description: "",
+      description: "Custom storefronts, checkout and subscription flows, and the ERP and analytics integrations behind them.",
     },
     {
       slug: "saas",
       label: "SaaS",
-      description: "",
+      description: "Multi-tenant platforms with subscription billing, role management, and dashboards ready to scale with your customers.",
     },
   ],
   services: [
     {
       slug: "ai-development",
       label: "AI Development",
-      description: "",
+      description: "Production AI — agents, LLM integrations, RAG, and copilots wired into your products.",
     },
     {
       slug: "ai-automation",
       label: "AI Automation",
-      description: "",
+      description: "Automate document processing, support triage, and multi-step workflows with AI agents.",
     },
     {
       slug: "custom-software-development",
       label: "Custom Software Development",
-      description: "",
+      description: "End-to-end custom software, MVPs, and legacy modernization built around your business.",
     },
     {
       slug: "backend-development",
       label: "Backend Development",
-      description: "",
+      description: "Scalable APIs, database architecture, authentication, and cloud infrastructure.",
     },
     {
       slug: "frontend-development",
       label: "Frontend Development",
-      description: "",
+      description: "Fast, accessible React and Next.js interfaces with strong Core Web Vitals.",
     },
   ],
   technologies: [

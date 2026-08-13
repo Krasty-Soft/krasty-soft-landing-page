@@ -215,7 +215,7 @@ const DifferenceCard = ({
                       opacity: showContent ? 1 : 0,
                     }}
                     transition={{ duration: 0.3 }}
-                    className="text-xs md:text-sm leading-relaxed"
+                    className="text-sm md:text-base leading-relaxed"
                     style={{
                       color: "var(--text-tertiary)",
                       position: "relative",

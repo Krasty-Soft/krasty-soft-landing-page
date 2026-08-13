@@ -77,7 +77,7 @@ export const Section = ({
     <section id={id} className={`${getSectionStyles(variant)} ${sectionCls}`}>
       <MotionDiv
         className={`
-                    w-full mx-auto px-8 py-12 md:px-16 md:py-16 lg:px-22 lg:py-20 xl:px-36 xl:py-24
+                    w-full mx-auto px-8 py-8 md:px-16 md:py-10 lg:px-22 lg:py-12 xl:px-36 xl:py-16
                     ${containerCls}
                 `}
         style={{ maxWidth: 'var(--max-width)' }}
@@ -92,7 +92,7 @@ export const Section = ({
           >
             {subtitle && (
               <p
-                className="text-xs md:text-sm uppercase tracking-wider font-medium mb-4"
+                className="text-sm uppercase tracking-wider font-medium mb-4"
                 style={{ color: "var(--brand-red)" }}
               >
                 {subtitle}

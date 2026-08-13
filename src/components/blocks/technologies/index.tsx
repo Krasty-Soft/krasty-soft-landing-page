@@ -152,7 +152,7 @@ const TechCard = ({
   );
 };
 
-export const Technologies = () => {
+export const Technologies = ({ title }: { title?: string } = {}) => {
   return (
     <Section variant={"primary"} animate={false}>
       {/* Custom Title with Typing Effect */}
@@ -168,7 +168,7 @@ export const Technologies = () => {
           >
             <span style={{ color: "var(--brand-red)" }}>&gt; </span>
             <TypingText
-              text="Technologies and Solutions That Drive Results."
+              text={title ?? "Technologies and Solutions That Drive Results."}
               speed={50}
               delay={300}
               highlightWords={["Technologies", "Results"]}

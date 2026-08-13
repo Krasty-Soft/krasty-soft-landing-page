@@ -235,12 +235,25 @@ export default function TechTemplate({ tech }: TechTemplateProps) {
           </h2>
         </div>
 
+        {tech.industries.intro ? (
+          <p
+            className="text-base md:text-lg leading-relaxed mb-10"
+            style={{ color: "var(--text-secondary)", maxWidth: "60rem" }}
+          >
+            {renderTextWithHighlight(tech.industries.intro)}
+          </p>
+        ) : null}
+
         <ItemsGrid items={tech.industries.list} />
       </Section>
 
       {/* FAQ Section (per-service; also emits FAQPage structured data above) */}
       {faqs?.length ? (
-        <Faq items={faqs} title={`${tech.title} — FAQ`} variant="primary" />
+        <Faq
+          items={faqs}
+          title={tech.faqTitle ?? `${tech.title} — FAQ`}
+          variant="primary"
+        />
       ) : null}
 
       {/* CTA Section */}

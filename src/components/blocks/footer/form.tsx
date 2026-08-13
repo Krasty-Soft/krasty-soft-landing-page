@@ -34,10 +34,10 @@ type FieldErrors = {
 const cardClass =
   "rounded-[var(--radius-lg)] border border-white/10 bg-white/[0.03] p-6 md:p-7";
 const labelClass =
-  "mb-2 block text-[0.8125rem] font-medium tracking-wide text-white/70";
+  "mb-2 block text-sm font-medium tracking-wide text-white/70";
 const inputBase =
   "w-full rounded-[var(--radius-md)] bg-white/[0.04] px-4 py-3 text-[0.9375rem] text-white placeholder:text-white/35 outline-none border transition-[border-color,box-shadow,background-color] duration-200 focus:bg-white/[0.06] focus:border-[var(--brand-red)] focus:shadow-[0_0_0_3px_rgba(229,6,6,0.15)]";
-const errText = "mt-1.5 text-[0.8125rem] text-[var(--brand-red)]";
+const errText = "mt-1.5 text-sm text-[var(--brand-red)]";
 
 const inputCls = (hasError?: string) =>
   `${inputBase} ${hasError ? "border-[var(--brand-red)]" : "border-white/10"}`;

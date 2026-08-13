@@ -189,10 +189,14 @@ export default function HealthcareClient({ cases }: { cases: Case[] }) {
                 margin: '0 auto',
               }}
             >
-              Developing secure, compliant, and innovative healthcare solutions.
-              From <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>telemedicine platforms</span> to{' '}
-              <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>patient management systems</span>,
-              we build technology that improves healthcare delivery and patient outcomes.
+              We build <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>software solutions for healthcare</span> that
+              are secure, compliant, and genuinely usable by clinical teams — from{' '}
+              <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>telemedicine platforms</span> and{' '}
+              <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>patient management systems</span> to
+              scheduling, billing, and analytics tools. Every <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>custom</span>{' '}
+              <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>application</span> we deliver is designed
+              around real clinical workflows and integrates with the systems you already run, so technology
+              improves care delivery and patient outcomes instead of adding administrative load.
             </motion.p>
           </motion.div>
         </div>
@@ -210,12 +214,24 @@ export default function HealthcareClient({ cases }: { cases: Case[] }) {
           >
             <span style={{ color: 'var(--brand-red)' }}>&gt; </span>
             <TypingText
-              text="Why choose us for healthcare?"
+              text="Why Choose Us for Healthcare Software Development"
               speed={50}
               delay={300}
-              highlightWords={['healthcare']}
+              highlightWords={['Healthcare', 'Development']}
             />
           </h2>
+          <p
+            className="text-base md:text-lg leading-relaxed mt-6"
+            style={{ color: 'var(--text-secondary)', maxWidth: '60rem' }}
+          >
+            Healthcare projects fail on the details: consent and access rules, audit trails, and
+            integration with systems that were never designed to share data. Our approach to{' '}
+            <strong>medical software development</strong> starts with those constraints rather than
+            treating them as a late-stage checklist. We handle{' '}
+            <strong>custom healthcare app development</strong> for patients and clinicians alike, and stay
+            through <strong>implementation</strong> — data migration, staff onboarding, and post-launch
+            support — so the system is actually adopted, not just delivered.
+          </p>
         </div>
 
         <div style={{
@@ -230,10 +246,15 @@ export default function HealthcareClient({ cases }: { cases: Case[] }) {
       </Section>
 
       {/* Technologies Section */}
-      <Technologies />
+      <Technologies title="Technologies Behind Software Development for Healthcare" />
 
       {/* Case Studies */}
-      <Cases cases={cases} industry="healthcare" />
+      <Cases
+        cases={cases}
+        industry="healthcare"
+        title="Healthcare Software Solutions: Client Success Stories"
+        intro="From courses management platforms to AI desktop assistants, our clinical software development work spans patient-facing products and internal medtech tooling. These projects show how we approach the healthcare industry in practice: strict handling of sensitive data, integration with existing clinical systems, and interfaces designed for staff who are already short on time."
+      />
 
       {/* CTA Section */}
       <Section variant="primary" animate={false}>
@@ -243,11 +264,33 @@ export default function HealthcareClient({ cases }: { cases: Case[] }) {
             className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4"
             style={{ color: 'white' }}
           >
-            Ready to transform healthcare delivery?
+            Ready to Start Your Healthcare Software Development Project?
           </h2>
           <p style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '1.125rem', maxWidth: '700px', margin: '0 auto' }}>
             Let&apos;s build secure, compliant healthcare solutions that make a difference.
           </p>
+          <motion.button
+            type="button"
+            onClick={() => {
+              const container = document.getElementById('app-scroll')
+              const section = document.getElementById('contacts')
+              if (container && section) {
+                const containerRect = container.getBoundingClientRect()
+                const sectionRect = section.getBoundingClientRect()
+                container.scrollTo({ top: sectionRect.top - containerRect.top + container.scrollTop, behavior: 'smooth' })
+              }
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            style={{
+              marginTop: '2rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+              padding: '0.875rem 1.75rem', fontSize: '1rem', fontWeight: 600, color: '#7f1d1d',
+              backgroundColor: 'white', border: 'none', borderRadius: 'var(--radius-lg)',
+              cursor: 'pointer', boxShadow: '0 4px 14px rgba(0, 0, 0, 0.15)',
+            }}
+          >
+            Get in touch
+          </motion.button>
         </CTABanner>
       </Section>
     </>

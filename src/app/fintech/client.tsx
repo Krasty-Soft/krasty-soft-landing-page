@@ -189,10 +189,14 @@ export default function FintechClient({ cases }: { cases: Case[] }) {
                 margin: '0 auto',
               }}
             >
-              Building secure, scalable, and innovative financial technology solutions.
-              From <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>payment systems</span> to{' '}
-              <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>digital banking</span>,
-              we deliver cutting-edge fintech products that transform how businesses handle money.
+              We deliver <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>fintech software development</span> for
+              products where security, accuracy, and uptime are non-negotiable — from{' '}
+              <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>payment systems</span> and{' '}
+              <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>digital banking</span> to lending
+              platforms, digital wallets, and trading and reporting tools. Each{' '}
+              <span style={{ color: 'var(--brand-red)', fontWeight: 600 }}>custom</span> build is designed around
+              auditable transactions, strict access control, and clean integration with the payment providers,
+              core banking systems, and data sources you already depend on.
             </motion.p>
           </motion.div>
         </div>
@@ -210,12 +214,23 @@ export default function FintechClient({ cases }: { cases: Case[] }) {
           >
             <span style={{ color: 'var(--brand-red)' }}>&gt; </span>
             <TypingText
-              text="Why choose us for fintech?"
+              text="Why Choose Us for Financial Software Development"
               speed={50}
               delay={300}
-              highlightWords={['fintech']}
+              highlightWords={['Financial', 'Development']}
             />
           </h2>
+          <p
+            className="text-base md:text-lg leading-relaxed mt-6"
+            style={{ color: 'var(--text-secondary)', maxWidth: '60rem' }}
+          >
+            In finance the hard part is rarely the interface — it is money movement that must reconcile
+            exactly, permissions that must hold up to audit, and integrations that cannot silently fail.
+            Our <strong>fintech application development</strong> work starts from those requirements:
+            explicit transaction logic, complete audit trails, and monitoring that surfaces problems before
+            customers notice. As an engineering <strong>agency</strong> we build the whole product — the{' '}
+            <strong>app</strong> your customers use and the services behind it — and support it in production.
+          </p>
         </div>
 
         <div style={{
@@ -230,10 +245,15 @@ export default function FintechClient({ cases }: { cases: Case[] }) {
       </Section>
 
       {/* Technologies Section */}
-      <Technologies />
+      <Technologies title="Technologies Behind Software Development for Fintech" />
 
       {/* Case Studies */}
-      <Cases cases={cases} industry="fintech" />
+      <Cases
+        cases={cases}
+        industry="fintech"
+        title="Custom Fintech Software Solutions: Client Success Stories"
+        intro="Our end to end fintech development services span trading and arbitrage tooling, payment and rewards platforms, and Web3 and DeFi products. These projects show how we handle the parts that matter in finance: precise transaction handling, secure access control, and integrations that stay reliable under real transaction volume."
+      />
 
       {/* CTA Section */}
       <Section variant="primary" animate={false}>
@@ -248,6 +268,28 @@ export default function FintechClient({ cases }: { cases: Case[] }) {
           <p style={{ color: 'rgba(255, 255, 255, 0.9)', fontSize: '1.125rem', maxWidth: '700px', margin: '0 auto' }}>
             Let&apos;s discuss how we can build secure, scalable financial solutions for your business.
           </p>
+          <motion.button
+            type="button"
+            onClick={() => {
+              const container = document.getElementById('app-scroll')
+              const section = document.getElementById('contacts')
+              if (container && section) {
+                const containerRect = container.getBoundingClientRect()
+                const sectionRect = section.getBoundingClientRect()
+                container.scrollTo({ top: sectionRect.top - containerRect.top + container.scrollTop, behavior: 'smooth' })
+              }
+            }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            style={{
+              marginTop: '2rem', display: 'inline-flex', alignItems: 'center', gap: '0.5rem',
+              padding: '0.875rem 1.75rem', fontSize: '1rem', fontWeight: 600, color: '#7f1d1d',
+              backgroundColor: 'white', border: 'none', borderRadius: 'var(--radius-lg)',
+              cursor: 'pointer', boxShadow: '0 4px 14px rgba(0, 0, 0, 0.15)',
+            }}
+          >
+            Get in touch
+          </motion.button>
         </CTABanner>
       </Section>
     </>
