@@ -272,7 +272,7 @@ export const Footer = () => {
         color: "white",
         scrollMarginTop: "80px",
         width: "100%",
-        overflowX: "hidden",
+        overflowX: "clip",
       }}
     >
       <Section variant="primary" animate={false} containerCls="pbottom-0">

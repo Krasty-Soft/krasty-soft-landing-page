@@ -102,13 +102,18 @@ body {
     position: relative;
 }
 
-/* Ensure all containers respect viewport width */
+/* Ensure all containers respect viewport width.
+   `clip` rather than `hidden`: per spec, `overflow-x: hidden` forces the other
+   axis to compute to `auto`, which turns every section into a vertical scroll
+   container — any section whose content exceeds its box then grows its own
+   scrollbar (this is what produced the stray scrollbar in the footer).
+   `clip` prevents horizontal overflow without creating a scroll container. */
 .container,
 section,
 footer,
 header {
     max-width: 100%;
-    overflow-x: hidden;
+    overflow-x: clip;
 }
 
 /* Fix for form inputs and buttons on mobile */
