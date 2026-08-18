@@ -124,6 +124,10 @@ contains findings.
     browser still strips them, enable its *Print backgrounds* option.
   - Turn **off** the browser's *Print headers and footers* option, or it stamps the source URL and
     the date across the top of every page.
+  - Safari does not extend the page background over the full height of every printed sheet, so a
+    page whose content stops short would show bare paper at the bottom. The stylesheet paints a
+    fixed-position backdrop, which the print engine repeats on every page. Chrome renders correctly
+    without it; the layer is harmless there.
 - **Findings are auto-expanded for print.** They are `<details>` elements collapsed by default, and
   a collapsed `<details>` prints *without its body* — so the generator opens them on `beforeprint`
   and restores your on-screen state on `afterprint`. This is bound to the event, not the button, so

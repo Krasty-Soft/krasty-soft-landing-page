@@ -130,6 +130,13 @@ footer{border-top:1px solid var(--bd);margin-top:60px;padding:28px 0;color:var(-
      floating as a dark panel inside a white border. */
   @page{ margin:0; }
   html,body{ background:var(--bg) !important; color:var(--tx2) !important; }
+  /* Safari does not extend the root background over the full height of every
+     printed page, so any page whose content stops short shows bare paper at
+     the bottom. A fixed-position layer is repeated on each sheet by the print
+     engine, which fills every page edge to edge. Chrome already paints this
+     correctly; the layer is harmless there. */
+  body::before{ content:""; position:fixed; top:0; left:0; right:0; bottom:0;
+    background:var(--bg); z-index:-1; }
   .wrap{ max-width:none; padding:0 14mm 16mm; }
   .topbar{ max-width:none; padding:12px 14mm; }
   header.top{ position:static; background:var(--bg) !important; backdrop-filter:none; }
