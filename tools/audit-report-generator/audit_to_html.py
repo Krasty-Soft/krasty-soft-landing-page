@@ -393,11 +393,31 @@ footer{{border-top:1px solid var(--bd);margin-top:60px;padding:28px 0;color:var(
   font-size:12px;display:flex;align-items:center;gap:10px}}
 
 @media print{{
-  header.top{{position:static}}
-  .actions{{display:none}}
-  .finding{{break-inside:avoid}}
-  details{{}}
-  body{{background:#fff;color:#111}}
+  /* This is a branded deliverable that gets sent as a PDF, not something
+     printed on paper — so keep the on-screen appearance instead of inverting
+     to white. Browsers drop background colours in print by default, so ask
+     for them explicitly; without this the whole document comes out white. */
+  *{{ -webkit-print-color-adjust:exact !important; print-color-adjust:exact !important; }}
+  /* Edge-to-edge dark: take the page margin to zero and give it back as
+     internal padding, so the background reaches the paper edge rather than
+     floating as a dark panel inside a white border. */
+  @page{{ margin:0; }}
+  html,body{{ background:var(--bg) !important; color:var(--tx2) !important; }}
+  .wrap{{ max-width:none; padding:0 14mm 16mm; }}
+  .topbar{{ max-width:none; padding:12px 14mm; }}
+  header.top{{ position:static; background:var(--bg) !important; backdrop-filter:none; }}
+  .internal-banner{{ position:static; }}
+  .actions{{ display:none !important; }}
+  .chev{{ display:none; }}
+  /* Findings are <details>; the beforeprint handler opens them so nothing is
+     dropped. Keep each card whole, and drop the screen-only glow. */
+  .finding{{ break-inside:avoid; page-break-inside:avoid; }}
+  .finding[open]{{ box-shadow:none !important; }}
+  h2,h3,h4{{ break-after:avoid; page-break-after:avoid; }}
+  tr,.tile{{ break-inside:avoid; }}
+  .twrap{{ overflow:visible; }}
+  pre{{ white-space:pre-wrap; word-wrap:break-word; }}
+  a{{ text-decoration:underline; }}
 }}
 .internal-banner + header.top{{top:30px}}
 </style></head>
@@ -410,6 +430,7 @@ footer{{border-top:1px solid var(--bd);margin-top:60px;padding:28px 0;color:var(
   <span class="actions">
     <button class="btn" onclick="document.querySelectorAll('details.finding').forEach(d=>d.open=true)">Expand all</button>
     <button class="btn" onclick="document.querySelectorAll('details.finding').forEach(d=>d.open=false)">Collapse all</button>
+    <button class="btn" onclick="window.print()" title="Opens the print dialog — choose &quot;Save as PDF&quot; as the destination">Save as PDF</button>
   </span>
 </div></header>
 
@@ -427,6 +448,25 @@ footer{{border-top:1px solid var(--bd);margin-top:60px;padding:28px 0;color:var(
 
   <footer>{icon}<span>Krasty Soft — Progressive B2B software development. This audit is confidential and prepared for the named client.</span></footer>
 </div>
+<script>
+// Findings are collapsed by default. Printing a collapsed <details> omits its
+// body, so open everything before the print dialog paints and put it back
+// afterwards. Bound to the event rather than the button so Ctrl/Cmd-P and
+// "Print to PDF" from the browser menu produce a complete document too.
+(function(){{
+  var saved = null;
+  window.addEventListener('beforeprint', function(){{
+    var ds = document.querySelectorAll('details.finding');
+    saved = [];
+    ds.forEach(function(d, i){{ saved[i] = d.open; d.open = true; }});
+  }});
+  window.addEventListener('afterprint', function(){{
+    if (!saved) return;
+    document.querySelectorAll('details.finding').forEach(function(d, i){{ d.open = saved[i]; }});
+    saved = null;
+  }});
+}})();
+</script>
 </body></html>'''
 
 def main():

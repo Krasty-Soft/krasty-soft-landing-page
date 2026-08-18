@@ -4,6 +4,9 @@ Turns a Markdown audit document into a **self-contained, Krasty-Soft-branded HTM
 dark theme, Sora, brand red, the logo mark, and **collapsible finding cards** so the reader gets a
 scannable list instead of a wall of text.
 
+Two scripts: `audit_to_html.py` (this document) and `anonymize_report.py` (see *Anonymizing a
+report for a prospect* below).
+
 Built for our security / architecture audit deliverables. One command, no build step, no
 dependencies beyond Python 3. Output is a single `.html` file that works offline and prints/exports
 to PDF cleanly.
@@ -110,7 +113,46 @@ contains findings.
   only).
 - **Collapsible finding cards**, collapsed by default: each row shows `ID · title · severity badge
   · hours`; click to reveal the full body. Left-edge accent colour matches severity.
-- **Print/PDF stylesheet** — white background, all findings expanded.
+- **Save as PDF** — a toolbar button next to Expand/Collapse. It opens the browser's print
+  dialog; choose *Save as PDF* as the destination. **The PDF keeps the dark branded appearance** —
+  this is a deliverable that gets sent as a file, not printed on paper, so the print stylesheet
+  preserves the on-screen design rather than inverting it. Page margins go to zero and are given
+  back as internal padding, so the background reaches the paper edge instead of sitting inside a
+  white border, and finding cards are kept whole across page breaks.
+  - Browsers strip background colours when printing, which would render the whole document white.
+    The stylesheet sets `print-color-adjust: exact`, which covers Chrome, Edge and Safari. If a
+    browser still strips them, enable its *Print backgrounds* option.
+  - Turn **off** the browser's *Print headers and footers* option, or it stamps the source URL and
+    the date across the top of every page.
+- **Findings are auto-expanded for print.** They are `<details>` elements collapsed by default, and
+  a collapsed `<details>` prints *without its body* — so the generator opens them on `beforeprint`
+  and restores your on-screen state on `afterprint`. This is bound to the event, not the button, so
+  Ctrl/Cmd-P and "Print" from the browser menu produce a complete PDF too.
+
+---
+
+## Anonymizing a report for a prospect
+
+`anonymize_report.py` turns a real client deliverable into a work sample you can show a third
+party. It removes the identifiers that point at the client and leaves the engineering substance —
+file/line references, severities, reasoning — intact, because that is the part worth showing.
+
+```bash
+python3 anonymize_report.py <input.md> <output.md> [--codename NAME]
+python3 audit_to_html.py   <output.md> sample.html "Detailed Audit Report — Anonymized Sample"
+```
+
+It replaces the product name with a codename (default `Northwind`), withholds deployment URLs,
+hosting project references and the reviewed commit hash, and swaps the engagement-status callout
+for an anonymized-sample + confidentiality notice. On every run it prints what it changed, plus:
+
+- **residual direct identifiers** — should always read `none`; if not, stop and look.
+- **domain tells still present (by design)** — terms that reveal the client's *sector* but not the
+  client. It does not remove these, because they usually carry the domain expertise that makes the
+  sample worth sending. If the sector must also be hidden, cut those sections by hand.
+
+> Deployment URLs are the important removal. An audit describes unfixed defects; a working URL
+> beside them is a roadmap. Send the file, and mark it confidential.
 
 ---
 
