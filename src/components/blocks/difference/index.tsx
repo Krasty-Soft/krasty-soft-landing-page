@@ -33,7 +33,7 @@ const features = [
     title: "Strategic",
     description: "Solutions that convert.",
     detail:
-      "Every decision is backed by data and aligned with your business objectives.",
+      "As a customized software company, every decision we make is backed by data and aligned with your business objectives.",
   },
   {
     title: "Global",
@@ -51,7 +51,7 @@ const features = [
     title: "Innovation",
     description: "Your vision, powered by technology.",
     detail:
-      "We transform ambitious ideas into reality with creative problem-solving.",
+      "As a bespoke development agency, we transform ambitious ideas into innovative digital products through creative problem-solving.",
   },
   {
     title: "Quality",

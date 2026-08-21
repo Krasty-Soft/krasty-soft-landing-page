@@ -54,15 +54,15 @@ export const SERVICE_FAQ: Record<string, FAQItem[]> = {
     {
       question: "What does an AI development company actually build?",
       answer:
-        "Production AI features: chat assistants and copilots, RAG systems over your documents and databases, autonomous agents that run multi-step workflows, document extraction, and LLM integrations (OpenAI, Anthropic Claude) into your existing apps.",
+        "Production features: chat assistants and copilots, RAG systems over your documents and databases, autonomous agents that run multi-step workflows, document extraction, and LLM integrations (OpenAI, Anthropic Claude) into your existing apps.",
     },
     {
-      question: "Which AI models and tools does Krasty Soft work with?",
+      question: "Which models and tools does Krasty Soft work with?",
       answer:
         "We work with leading LLMs including OpenAI's GPT models and Anthropic's Claude, plus retrieval-augmented generation (RAG), vector search, and evaluation frameworks. We select the model per use case for cost, quality, and latency.",
     },
     {
-      question: "How do you keep AI features reliable in production?",
+      question: "How do you keep these features reliable in production?",
       answer:
         "Every build ships with guardrails, evaluation, and human-in-the-loop where it matters, so results stay accurate as inputs and models change. We standardize prompts, retrieval, and tooling to keep the system maintainable.",
     },
@@ -71,7 +71,7 @@ export const SERVICE_FAQ: Record<string, FAQItem[]> = {
     {
       question: "What is AI automation?",
       answer:
-        "AI automation uses language models and agents to run repetitive knowledge work end-to-end — reading documents, extracting and classifying data, moving it between systems, and taking actions — with far less manual effort than hard-coded scripts.",
+        "It uses language models and agents to run repetitive knowledge work end-to-end — reading documents, extracting and classifying data, moving it between systems, and taking actions — with far less manual effort than hard-coded scripts.",
     },
     {
       question: "What processes can Krasty Soft automate?",
@@ -81,7 +81,7 @@ export const SERVICE_FAQ: Record<string, FAQItem[]> = {
     {
       question: "How is AI automation different from traditional RPA?",
       answer:
-        "Traditional RPA follows brittle, rule-based scripts. AI automation understands unstructured inputs like emails and PDFs, adapts to variation, and reasons over context — so it handles cases rigid scripts break on.",
+        "Traditional RPA follows brittle, rule-based scripts. Ours understands unstructured inputs like emails and PDFs, adapts to variation, and reasons over context — so it handles cases rigid scripts break on.",
     },
   ],
   "backend-development": [
@@ -139,7 +139,7 @@ export const SERVICE_FAQ: Record<string, FAQItem[]> = {
     {
       question: "What does Krasty Soft build for SaaS companies?",
       answer:
-        "End-to-end SaaS products: multi-tenant architecture, subscription billing, admin and customer dashboards, authentication, and the APIs and integrations your product needs.",
+        "End-to-end products: multi-tenant architecture, subscription billing, admin and customer dashboards, authentication, and the APIs and integrations your product needs.",
     },
     {
       question: "Can you build a SaaS MVP?",
@@ -149,7 +149,7 @@ export const SERVICE_FAQ: Record<string, FAQItem[]> = {
     {
       question: "Do you support existing SaaS products?",
       answer:
-        "Yes. We modernize legacy SaaS, add features, improve performance and reliability, and provide ongoing maintenance and support.",
+        "Yes. We modernize legacy platforms, add features, improve performance and reliability, and provide ongoing maintenance and support.",
     },
   ],
   react: [
@@ -178,7 +178,7 @@ export const SERVICE_FAQ: Record<string, FAQItem[]> = {
     {
       question: "How long does it take to build custom software?",
       answer:
-        "An MVP is typically a few months; larger platforms are delivered in iterative releases so you see working software early and often, rather than waiting for one final handover.",
+        "An MVP is typically a few months; larger platforms ship in iterative releases so you see working software early and often, rather than waiting for one final handover.",
     },
     {
       question: "Do you work with startups?",

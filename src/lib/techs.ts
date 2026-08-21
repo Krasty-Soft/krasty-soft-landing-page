@@ -30,18 +30,19 @@ export const TECH_DETAILS: TechDetail[] = [
     title: "AI Development",
     subtitle: "Custom AI Development Services",
     brandColor: "#8B5CF6",
+    ctaHeading: "Ready to Build AI Solutions That Scale?",
     introParagraphs: [
-      "<strong>AI development services</strong> turn large language models, agents, and machine learning into working products — chat assistants, copilots, document and data pipelines, and automations that plug into your existing systems. We build features that read, reason over, and act on your data, not demos that stop at a prompt.",
-      "As a <strong>generative AI development company</strong>, Krasty Soft ships production AI that teams actually rely on. We wire models to your databases, APIs, and workflows with guardrails, evaluation, and human-in-the-loop where it matters. In practice, <strong>AI development</strong> removes manual steps and surfaces answers and actions in one place."
+      "<strong>AI development services</strong> turn large language models, agents, and machine learning into working products — chat assistants, copilots, document and data pipelines, and automations that plug into your existing systems. We apply <strong>artificial intelligence</strong> where it produces a measurable result, building features that read, reason over, and act on your data rather than demos that stop at a prompt.",
+      "As a <strong>generative AI development company</strong>, Krasty Soft ships production systems that teams actually rely on. We wire models to your databases, APIs, and workflows with guardrails, evaluation, and human-in-the-loop where it matters. In practice, <strong>AI development</strong> removes manual steps and surfaces answers and actions in one place."
     ],
     whatWeBuild: {
       title: "What We Build with AI",
       items: [
-        "AI chat assistants and customer-support copilots.",
+        "Chat assistants and customer-support copilots.",
         "RAG systems over your docs, tickets, and databases.",
         "Autonomous agents that run multi-step workflows.",
         "Document extraction, classification, and enrichment.",
-        "AI-powered analytics, search, and recommendations.",
+        "Intelligent analytics, search, and recommendations.",
         "LLM integrations (OpenAI, Claude) into existing apps."
       ]
     },
@@ -49,7 +50,7 @@ export const TECH_DETAILS: TechDetail[] = [
       title: "Why AI Development for Your Business",
       paragraphs: [
         "<strong>AI development</strong> is the right fit when repetitive knowledge work slows your team down, or when your data holds answers no one has time to find. We focus on measurable outcomes — deflected tickets, faster processing, fewer manual steps — not novelty. Every build ships with evaluation and guardrails so results stay reliable as inputs change.",
-        "Our <strong>AI development company</strong> approach keeps systems maintainable and safe as models and workflows evolve. We standardize prompts, retrieval, and tooling so new capabilities don't turn into one-off hacks. If you need an <strong>AI development agency</strong> for full delivery, we implement, evaluate, and support the system end-to-end."
+        "Our approach keeps systems maintainable and safe as models and workflows evolve. We standardize prompts, retrieval, and tooling so new capabilities don't turn into one-off hacks. If you need an <strong>AI development agency</strong> for full delivery, we implement, evaluate, and support the system end-to-end."
       ]
     },
     industries: {
@@ -72,8 +73,8 @@ export const TECH_DETAILS: TechDetail[] = [
     subtitle: "React JS Development Services",
     brandColor: "#61DAFB",
     introParagraphs: [
-      "<strong>React.js development services</strong> cover building modern frontends for products that need speed and predictable UX. They are suited for interfaces that must remain responsive as usage and complexity increase. We provide <strong>React.js development services</strong> to deliver interfaces for platforms, dashboards, and internal tools where performance and component reuse matter. Our focus is clean component architecture and stable UI behavior under real usage.",
-      "For teams that need flexible UI logic, a focused <strong>react js development company</strong> keeps the product easy to extend without redesigning the whole frontend."
+      "<strong>React.js development services</strong> cover building modern frontends for products that need speed and predictable UX — interfaces that must stay responsive as usage and complexity increase. We deliver them for platforms, dashboards, and internal tools where performance and component reuse matter, focusing on clean component architecture and stable UI behaviour under real usage.",
+      "For teams that need flexible UI logic, <strong>custom react js development</strong> keeps the product easy to extend without redesigning the whole frontend. A focused <strong>react js development company</strong> also means fewer hand-offs between design and engineering."
     ],
     whatWeBuild: {
       title: "Custom React Projects We Build",
@@ -157,7 +158,7 @@ export const TECH_DETAILS: TechDetail[] = [
     brandColor: "#339933",
     introParagraphs: [
       "<strong>Node.js development services</strong> help teams build fast, integration-heavy backends and real-time features. Node.js is a strong fit when your product depends on many external services, high concurrency, and constant data exchange — chat and notifications, live dashboards, payment and CRM integrations, or APIs serving both web and mobile clients.",
-      "As a <strong>node.js development company</strong>, Krasty Soft designs services around clear contracts and predictable behaviour under load. We use event-driven architecture where it earns its place — webhooks, queues, and background jobs — so integrations stay responsive instead of blocking each other. Our <strong>node.js development solutions</strong> cover the full backend: API design, database access, authentication, third-party integrations, observability, and deployment. The result is a codebase your team can extend without rewriting the core as traffic and feature scope grow."
+      "As a <strong>node.js development company</strong>, Krasty Soft designs services around clear contracts and predictable behaviour under load. Our <strong>node js web development services</strong> cover the API layer end to end. We use event-driven architecture where it earns its place — webhooks, queues, and background jobs — so integrations stay responsive instead of blocking each other. Our <strong>node.js development solutions</strong> cover the full backend: API design, database access, authentication, third-party integrations, observability, and deployment. The result is a codebase your team can extend without rewriting the core as traffic and feature scope grow."
     ],
     whatWeBuild: {
       title: "Custom Node.js Development Solutions We Deliver",
@@ -201,7 +202,7 @@ export const TECH_DETAILS: TechDetail[] = [
     ctaHeading: "Ready to Improve Your Business with AI Automation?",
     introParagraphs: [
       "<strong>AI automation services</strong> put language models and agents to work on the repetitive tasks that slow teams down — triaging tickets, extracting data from documents, drafting replies, and running multi-step workflows end to end. We connect these agents to your real systems, so they don't just suggest — they act.",
-      "As an <strong>AI automation company</strong>, Krasty Soft builds automations that are reliable in production, not brittle demos. We add guardrails, human review where it matters, and clear logging so you can trust the output. In practice, <strong>AI automation</strong> removes hours of manual work each week and keeps data flowing between tools without copy-paste."
+      "As an <strong>AI automation company</strong>, Krasty Soft builds <strong>AI automation solutions</strong> that are reliable in production, not brittle demos. We add guardrails, human review where it matters, and clear logging so you can trust the output. Applied well, <strong>artificial intelligence</strong> removes hours of manual work each week and keeps data flowing between tools without copy-paste."
     ],
     whatWeBuild: {
       title: "What We Automate with AI",
@@ -222,7 +223,7 @@ export const TECH_DETAILS: TechDetail[] = [
       ]
     },
     industries: {
-      title: "Industries & Use Cases",
+      title: "AI-Powered Solutions Across Industries",
       list: [
         "Customer Support",
         "E-commerce",
@@ -392,7 +393,7 @@ export const TECH_DETAILS: TechDetail[] = [
     whyChoose: {
       title: "Why Choose Us for Custom SaaS Development",
       paragraphs: [
-        "<strong>SaaS development</strong> has a long tail of hard requirements — tenancy, billing, permissions, and reliability — that make or break the product later. We get these foundations right early, so adding features and customers doesn't mean rewriting the core.",
+        "Building this kind of product has a long tail of hard requirements — tenancy, billing, permissions, and reliability — that make or break it later. We get these foundations right early, so adding features and customers doesn't mean rewriting the core.",
         "Our approach balances speed to market with an architecture that scales. We ship an MVP that is genuinely usable, then grow it with metering, integrations, and analytics. Where a generic template would limit your pricing model or workflow, a <strong>bespoke saas application</strong> gives you control — and our <strong>solutions</strong> are supported in production the whole way, not handed over at launch."
       ]
     },
