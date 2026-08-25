@@ -1,3 +1,5 @@
+import { CLUTCH, CLUTCH_RATING } from "@/lib/clutch";
+
 export type FAQItem = { question: string; answer: string };
 
 // Company-level FAQ shown on the homepage. Written in plain, factual language so
@@ -42,7 +44,7 @@ export const COMPANY_FAQ: FAQItem[] = [
   {
     question: "Is Krasty Soft reviewed by clients?",
     answer:
-      "Yes. Krasty Soft holds a 4.9 out of 5 rating on Clutch from 11 verified client reviews, and is recognized as a Top REST API Company and Top Webhook API Company in Ukraine for 2026.",
+      `Yes. Krasty Soft holds a ${CLUTCH_RATING} out of 5 rating on Clutch from ${CLUTCH.reviewCount} verified client reviews, and is recognized as a Top REST API Company and Top Webhook API Company in Ukraine for 2026.`,
   },
 ];
 

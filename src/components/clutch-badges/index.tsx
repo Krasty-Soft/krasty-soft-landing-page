@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Star } from "lucide-react";
 import RestApiBadge from "@/assets/clutch-top-rest-api-2026.png";
 import WebhookApiBadge from "@/assets/clutch-top-webhook-api-2026.png";
+import { CLUTCH, CLUTCH_RATING } from "@/lib/clutch";
 
 // How long to give Clutch's script to paint the live widget before falling
 // back to our own rating block.
@@ -29,9 +30,9 @@ const WIDGET_RENDER_TIMEOUT_MS = 3000;
  * and provides downloadable badge files, which is exactly what we render.
  */
 
-const CLUTCH_PROFILE = "https://clutch.co/profile/krasty-soft";
-const RATING = "4.9";
-const REVIEW_COUNT = 11;
+const CLUTCH_PROFILE = CLUTCH.profileUrl;
+const RATING = CLUTCH_RATING;
+const REVIEW_COUNT = CLUTCH.reviewCount;
 
 // Official Clutch award artwork, downloaded from the Clutch vendor dashboard
 // ("Download Your Badges") and self-hosted — the use Clutch documents for

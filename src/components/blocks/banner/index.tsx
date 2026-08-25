@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { StatusBadge } from "@/components/ui";
 import { ClutchBadges } from "@/components/clutch-badges";
+import { CLUTCH, CLUTCH_RATING } from "@/lib/clutch";
 
 // Above-the-fold hero entrance. The heading renders visible immediately (no
 // opacity gate) so it's not held back for LCP; supporting elements fade up.
@@ -94,8 +95,8 @@ export const Banner = () => {
           className="text-sm md:text-base text-center mb-10"
           style={{ color: "var(--text-muted)" }}
         >
-          Rated 4.9 on Clutch from 11 verified client reviews · Top REST API
-          Company, Ukraine 2026.
+          {`Rated ${CLUTCH_RATING} on Clutch from ${CLUTCH.reviewCount} verified client reviews`} ·
+          Top REST API Company, Ukraine 2026.
         </motion.p>
 
         {/* CTA Button */}

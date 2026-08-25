@@ -4,13 +4,14 @@ import { motion } from "framer-motion";
 import { CalendarDays, Rocket, Star } from "lucide-react";
 import { Section } from "@/components/ui";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
+import { CLUTCH_RATING_OUT_OF_5 } from "@/lib/clutch";
 
 // Key company figures, shown directly under the hero. Required by the SEO
 // brief as a trust block on the homepage.
 const STATS = [
   { icon: CalendarDays, value: "3+", label: "Years of expertise" },
   { icon: Rocket, value: "50+", label: "Delivered projects" },
-  { icon: Star, value: "4.9/5", label: "Average rating on Clutch" },
+  { icon: Star, value: CLUTCH_RATING_OUT_OF_5, label: "Average rating on Clutch" },
 ];
 
 export const TrustStats = () => {

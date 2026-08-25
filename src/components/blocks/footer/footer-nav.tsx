@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { Mail, MapPin, Star } from "lucide-react";
 import PAGES from "@/lib/navigation";
+import { CLUTCH, CLUTCH_RATING_OUT_OF_5 } from "@/lib/clutch";
 
 // Expanded footer navigation required by the usability audit: column links to
 // the main sections, contact details, and the trust signals repeated from the
@@ -14,7 +15,7 @@ type NavItem = { slug: string; label: string };
 const asArray = (v: unknown): NavItem[] => (Array.isArray(v) ? (v as NavItem[]) : []);
 
 const CONTACT_EMAIL = "contact@krastysoft.com";
-const CLUTCH_PROFILE = "https://clutch.co/profile/krasty-soft";
+const CLUTCH_PROFILE = CLUTCH.profileUrl;
 
 const COMPANY_LINKS: NavItem[] = [
   { slug: "about", label: "About Us" },
@@ -94,7 +95,7 @@ export const FooterNav = () => {
             style={{ color: "var(--text-secondary)" }}
           >
             <Star size={14} fill="var(--brand-red)" color="var(--brand-red)" />
-            4.9/5 on Clutch · 11 reviews
+            {`${CLUTCH_RATING_OUT_OF_5} on Clutch · ${CLUTCH.reviewCount} reviews`}
           </a>
         </div>
       </div>

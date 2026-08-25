@@ -13,6 +13,7 @@ import {
 import { getAllCases } from "@/lib/cases";
 import { getAllJobs } from "@/lib/jobs";
 import { COMPANY_FAQ } from "@/lib/faq";
+import { CLUTCH } from "@/lib/clutch";
 import {
   generateAggregateRatingSchema,
   generateFAQSchema,
@@ -26,8 +27,8 @@ export default async function Home() {
 
   // Generate aggregate rating schema for reviews/testimonials
   const ratingSchema = generateAggregateRatingSchema({
-    ratingValue: 4.9,
-    reviewCount: 11, // Based on "11 Client Reviews" in banner
+    ratingValue: CLUTCH.rating,
+    reviewCount: CLUTCH.reviewCount,
     bestRating: 5,
     worstRating: 1,
   });
