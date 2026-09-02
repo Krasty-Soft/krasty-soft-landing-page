@@ -107,6 +107,11 @@ export const REDIRECTS: Redirect[] = [
   // links to them, so these exist purely to preserve any external backlinks.
   { source: "/team", destination: "/about" },
   { source: "/blog/order-management-software", destination: "/blog" },
+  // --- Tech audit p.12.1: legacy URLs still in Google's index from an older
+  // version of the site. They 404 today, so they're redirected to the nearest
+  // live equivalent to preserve their accumulated ranking signals.
+  { source: "/ecommerce-case-study", destination: "/case-studies" },
+  { source: "/contact", destination: "/about" },
 ];
 
 // Derived from REDIRECTS so the two can't drift.
