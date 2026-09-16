@@ -1,5 +1,6 @@
 import { Case, CaseTemplate } from '@/lib/cases'
 import { TemplateDefault } from './default'
+import { TemplateBrief } from './brief'
 
 interface CaseTemplateRendererProps {
     caseData: Case
@@ -8,7 +9,10 @@ interface CaseTemplateRendererProps {
 
 export function CaseTemplateRenderer({
     caseData,
-    //template = 'default',
+    template = 'default',
 }: CaseTemplateRendererProps) {
+    if (template === 'brief' && caseData.brief) {
+        return <TemplateBrief caseData={{ ...caseData, brief: caseData.brief }} />
+    }
     return <TemplateDefault caseData={caseData} />
 }

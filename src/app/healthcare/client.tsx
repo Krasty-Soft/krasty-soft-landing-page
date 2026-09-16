@@ -253,7 +253,7 @@ export default function HealthcareClient({ cases }: { cases: Case[] }) {
         cases={cases}
         industry="healthcare"
         title="Healthcare Software Solutions: Client Success Stories"
-        intro="From courses management platforms to AI desktop assistants, our clinical software development work spans patient-facing products and internal medtech tooling. These projects show how we approach the healthcare industry in practice: strict handling of sensitive data, integration with existing clinical systems, and interfaces designed for staff who are already short on time."
+        intro="From a HIPAA-compliant AI assistant working over live patient data to a revenue cycle platform serving 20+ healthcare clients, our clinical software development work runs inside real compliance constraints. These projects show how we approach the healthcare industry in practice: role-based PHI access enforced beneath the interface, integration with EHRs like Epic and ModMed, and tools designed for staff who are already short on time."
       />
 
       {/* CTA Section */}

@@ -252,7 +252,7 @@ export default function FintechClient({ cases }: { cases: Case[] }) {
         cases={cases}
         industry="fintech"
         title="Custom Fintech Software Solutions: Client Success Stories"
-        intro="Our end to end fintech development services span trading and arbitrage tooling, payment and rewards platforms, and Web3 and DeFi products. These projects show how we handle the parts that matter in finance: precise transaction handling, secure access control, and integrations that stay reliable under real transaction volume."
+        intro="Our end to end fintech development services cover billing, revenue analytics and subscription operations. This project shows how we handle the parts that matter in finance: revenue definitions that hold up under scrutiny, reliable joins between payment and product data, and financial tooling that finance teams run themselves without pulling engineers off the core product."
       />
 
       {/* CTA Section */}

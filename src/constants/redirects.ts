@@ -45,6 +45,57 @@ export const REDIRECTS: Redirect[] = [
     source: `${CASE_STUDIES_PREFIX}ai-powered-investments-platform`,
     destination: "/case-studies",
   },
+  // --- Sep 2026: case studies rebuilt in the one-page "brief" format. Cases
+  // the new pack replaces point straight at their successor (single hop);
+  // cases not yet rewritten are hidden until they are.
+  {
+    source: `${CASE_STUDIES_PREFIX}ai-desktop-helper-for-a-healthcare-platform`,
+    destination: `${CASE_STUDIES_PREFIX}hipaa-compliant-ai-assistant-for-healthcare`,
+  },
+  {
+    source: `${CASE_STUDIES_PREFIX}veterinary-purchasing-ai-assistant`,
+    destination: `${CASE_STUDIES_PREFIX}predictive-ordering-for-veterinary-clinics`,
+  },
+  {
+    source: `${CASE_STUDIES_PREFIX}e-commerce-marketing-analytics-dashboard-development`,
+    destination: `${CASE_STUDIES_PREFIX}multi-channel-marketing-analytics-dashboard`,
+  },
+  {
+    source: `${CASE_STUDIES_PREFIX}ai-bureaucracy-navigator-for-eu`,
+    destination: `${CASE_STUDIES_PREFIX}ai-regulatory-intelligence-platform`,
+  },
+  {
+    source: `${CASE_STUDIES_PREFIX}oolu-ai-powered-hiring-platform`,
+    destination: "/case-studies",
+  },
+  {
+    source: `${CASE_STUDIES_PREFIX}retool-platform-for-finance-task-automation`,
+    destination: "/case-studies",
+  },
+  {
+    source: `${CASE_STUDIES_PREFIX}amazon-ads-analytics-platform`,
+    destination: "/case-studies",
+  },
+  {
+    source: `${CASE_STUDIES_PREFIX}courses-management-platform-for-healthcare-businesses`,
+    destination: "/case-studies",
+  },
+  {
+    source: `${CASE_STUDIES_PREFIX}crm-system-with-unified-communications`,
+    destination: "/case-studies",
+  },
+  {
+    source: `${CASE_STUDIES_PREFIX}marines-supply-coordination-platform`,
+    destination: "/case-studies",
+  },
+  {
+    source: `${CASE_STUDIES_PREFIX}rewards-management-platform`,
+    destination: "/case-studies",
+  },
+  {
+    source: `${CASE_STUDIES_PREFIX}web-three-defi-platform-decentralized-liquidity-protocol-development`,
+    destination: "/case-studies",
+  },
   // --- Sheet 1: legacy case-study URLs (old top-level slug pattern) ---
   { source: "/loyalty-app-case-study", destination: "/case-studies" },
   { source: "/payment-project-case-study", destination: "/case-studies" },

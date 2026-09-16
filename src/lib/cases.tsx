@@ -2,7 +2,7 @@ import { safeGetEntries } from "@/lib/cms";
 import { REMOVED_CASE_SLUGS } from "@/constants/redirects";
 import type { EntrySkeletonType } from "contentful";
 
-export type CaseTemplate = "default" | "srm";
+export type CaseTemplate = "default" | "srm" | "brief";
 
 export type Industry =
   | "fintech"
@@ -15,6 +15,8 @@ export interface Media {
   url: string;
   title?: string;
   description?: string;
+  width?: number;
+  height?: number;
 }
 
 export interface Case {
@@ -32,6 +34,24 @@ export interface Case {
   content?: any;
   overview?: any;
   industries?: Industry[];
+  brief?: CaseBrief;
+}
+
+/** Structured one-page case format (template "brief"). */
+export interface CaseBrief {
+  sector: string;
+  client: string;
+  headline: string;
+  summary: string;
+  bestFor: string;
+  proofLead: string;
+  proofEmphasis: string;
+  proofPoints: string[];
+  whatWeDid: string[];
+  result: string;
+  hardPart: string;
+  stack: string[];
+  focus: string[];
 }
 
 export interface ContentfulCaseFields {
@@ -48,6 +68,19 @@ export interface ContentfulCaseFields {
   content: any;
   overview: any;
   industry?: string; // Single industry (dropdown)
+  sector?: string;
+  client?: string;
+  headline?: string;
+  summary?: string;
+  bestFor?: string;
+  proofLead?: string;
+  proofEmphasis?: string;
+  proofPoints?: string[];
+  whatWeDid?: string[];
+  result?: string;
+  hardPart?: string;
+  stack?: string[];
+  focus?: string[];
 }
 
 interface CaseSkeleton extends EntrySkeletonType {
@@ -98,6 +131,79 @@ export const cases: Case[] = [
   },
 ];
 
+function splitList(value: unknown): string[] {
+  if (typeof value !== "string" || !value.trim()) return [];
+  return value
+    .split(",")
+    .map((v) => v.trim())
+    .filter(Boolean);
+}
+
+function withProtocol(url: string): string {
+  return url.startsWith("http") ? url : `https:${url}`;
+}
+
+function mapCase(item: CaseSkeleton): Case {
+  const fields = item.fields;
+
+  // Contentful stores media as linked assets; skip any that failed to resolve.
+  const media: Media[] = Array.isArray((fields as any).media)
+    ? (fields as any).media
+        .filter((asset: any) => asset?.fields?.file?.url)
+        .map((asset: any) => ({
+          url: withProtocol(asset.fields.file.url),
+          title: asset.fields.title || "",
+          description: asset.fields.description || "",
+          width: asset.fields.file.details?.image?.width,
+          height: asset.fields.file.details?.image?.height,
+        }))
+    : [];
+
+  // `preview` is a plain text field in the current model, but older entries
+  // may still hold a linked asset.
+  const rawPreview: unknown = (fields as any).preview;
+  const previewUrl =
+    typeof rawPreview === "string"
+      ? rawPreview
+      : (rawPreview as any)?.fields?.file?.url || "";
+
+  const template = (fields.template || "default") as CaseTemplate;
+
+  return {
+    slug: fields.slug,
+    title: fields.title,
+    tags: splitList(fields.tags),
+    categories: splitList(fields.categories),
+    cardDescription: fields.cardDescription || "",
+    preview: previewUrl ? withProtocol(previewUrl) : "",
+    media,
+    template,
+    seoTitle: fields.seoTitle || "",
+    seoDescription: fields.seoDescription || "",
+    content: fields.content,
+    overview: fields.overview,
+    industries: fields.industry ? [fields.industry as Industry] : [],
+    brief:
+      template === "brief"
+        ? {
+            sector: fields.sector || "",
+            client: fields.client || "",
+            headline: fields.headline || fields.title,
+            summary: fields.summary || "",
+            bestFor: fields.bestFor || "",
+            proofLead: fields.proofLead || "",
+            proofEmphasis: fields.proofEmphasis || "",
+            proofPoints: fields.proofPoints || [],
+            whatWeDid: fields.whatWeDid || [],
+            result: fields.result || "",
+            hardPart: fields.hardPart || "",
+            stack: fields.stack || [],
+            focus: fields.focus || [],
+          }
+        : undefined,
+  };
+}
+
 export async function getAllCases() {
   const res = await safeGetEntries<CaseSkeleton>({
     content_type: CONTENT_TYPE_CASE,
@@ -107,78 +213,7 @@ export async function getAllCases() {
   if (res && res.items.length > 0) {
     return res.items
       .filter((item: CaseSkeleton) => !REMOVED_CASE_SLUGS.has(item.fields.slug))
-      .map((item: CaseSkeleton) => {
-      const fields = item.fields;
-      const previewUrl = (fields as any).preview?.fields?.file?.url;
-
-      // Tags from Contentful are comma-separated strings
-      let tags: string[] = [];
-      try {
-        if (typeof fields.tags === "string" && fields.tags.trim()) {
-          tags = fields.tags
-            .split(",")
-            .map((t: string) => t.trim())
-            .filter(Boolean);
-        }
-      } catch {
-        tags = [];
-      }
-
-      // Parse media assets from Contentful
-      let media: Media[] = [];
-      try {
-        const mediaAssets = (fields as any).media;
-        if (Array.isArray(mediaAssets)) {
-          media = mediaAssets
-            .filter((asset: any) => asset?.fields?.file?.url)
-            .map((asset: any) => {
-              const url = asset.fields.file.url;
-              return {
-                url: url.startsWith("http") ? url : `https:${url}`,
-                title: asset.fields.title || "",
-                description: asset.fields.description || "",
-              };
-            });
-        }
-      } catch {
-        media = [];
-      }
-
-      // Parse industry from Contentful (single string dropdown)
-      let industries: Industry[] = [];
-      if (fields.industry && typeof fields.industry === "string") {
-        industries = [fields.industry as Industry];
-      }
-
-      // Category labels for the card meta line (comma-separated, like tags)
-      let categories: string[] = [];
-      if (typeof fields.categories === "string" && fields.categories.trim()) {
-        categories = fields.categories
-          .split(",")
-          .map((c: string) => c.trim())
-          .filter(Boolean);
-      }
-
-      return {
-        slug: fields.slug,
-        title: fields.title,
-        tags,
-        categories,
-        cardDescription: fields.cardDescription || "",
-        preview: previewUrl
-          ? previewUrl.startsWith("http")
-            ? previewUrl
-            : `https:${previewUrl}`
-          : "",
-        media,
-        template: fields.template || "default",
-        seoTitle: fields.seoTitle || "",
-        seoDescription: fields.seoDescription || "",
-        content: fields.content,
-        overview: fields.overview,
-        industries,
-      } as Case;
-    });
+      .map(mapCase);
   }
   // Fallback to hardcoded data
   return cases.filter((item) => !REMOVED_CASE_SLUGS.has(item.slug));
@@ -193,62 +228,7 @@ export async function getCaseBySlug(slug: string) {
   });
 
   if (res && res.items.length > 0) {
-    const item = res.items[0];
-    const fields = item.fields;
-
-    // Tags from Contentful are comma-separated strings
-    let tags: string[] = [];
-    try {
-      if (typeof fields.tags === "string" && fields.tags.trim()) {
-        tags = fields.tags
-          .split(",")
-          .map((t: string) => t.trim())
-          .filter(Boolean);
-      }
-    } catch {
-      tags = [];
-    }
-
-    // Parse media assets from Contentful
-    let media: Media[] = [];
-    try {
-      const mediaAssets = (fields as any).media;
-      if (Array.isArray(mediaAssets)) {
-        media = mediaAssets
-          .filter((asset: any) => asset?.fields?.file?.url)
-          .map((asset: any) => {
-            const url = asset.fields.file.url;
-            return {
-              url: url.startsWith("http") ? url : `https:${url}`,
-              title: asset.fields.title || "",
-              description: asset.fields.description || "",
-            };
-          });
-      }
-    } catch {
-      media = [];
-    }
-
-    // Parse industry from Contentful (single string dropdown)
-    let industries: Industry[] = [];
-    if (fields.industry && typeof fields.industry === "string") {
-      industries = [fields.industry as Industry];
-    }
-
-    return {
-      slug: fields.slug,
-      title: fields.title,
-      tags,
-      cardDescription: fields.cardDescription || "",
-      preview: fields.preview || "",
-      media,
-      template: fields.template || "default",
-      seoTitle: fields.seoTitle || "",
-      seoDescription: fields.seoDescription || "",
-      content: fields.content,
-      overview: fields.overview,
-      industries,
-    } as Case;
+    return mapCase(res.items[0]);
   }
 
   return cases.find((item) => item.slug === slug) || null;

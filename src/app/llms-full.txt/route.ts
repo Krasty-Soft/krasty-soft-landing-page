@@ -62,6 +62,13 @@ export async function GET() {
       out.push(`### ${c.title}`);
       out.push(`URL: ${BASE_URL}/case-studies/${c.slug}`);
       if (c.cardDescription) out.push(strip(c.cardDescription));
+      if (c.brief) {
+        const b = c.brief;
+        out.push(`Outcome: ${b.headline}`);
+        out.push(`Proof: ${[b.proofLead, b.proofEmphasis].filter(Boolean).join(" ")}`);
+        if (b.result) out.push(`Result: ${b.result}`);
+        if (b.stack.length) out.push(`Stack: ${b.stack.join(", ")}`);
+      }
       out.push("");
     }
   }
