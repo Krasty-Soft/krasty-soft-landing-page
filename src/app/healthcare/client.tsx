@@ -226,10 +226,10 @@ export default function HealthcareClient({ cases }: { cases: Case[] }) {
           >
             Healthcare projects fail on the details: consent and access rules, audit trails, and
             integration with systems that were never designed to share data. Our approach to{' '}
-            <strong>medical software development</strong> starts with those constraints rather than
+            medical software development starts with those constraints rather than
             treating them as a late-stage checklist. We handle{' '}
-            <strong>custom healthcare app development</strong> for patients and clinicians alike, and stay
-            through <strong>implementation</strong> — data migration, staff onboarding, and post-launch
+            custom healthcare app development for patients and clinicians alike, and stay
+            through implementation — data migration, staff onboarding, and post-launch
             support — so the system is actually adopted, not just delivered.
           </p>
         </div>

@@ -226,10 +226,10 @@ export default function FintechClient({ cases }: { cases: Case[] }) {
           >
             In finance the hard part is rarely the interface — it is money movement that must reconcile
             exactly, permissions that must hold up to audit, and integrations that cannot silently fail.
-            Our <strong>fintech application development</strong> work starts from those requirements:
+            Our fintech application development work starts from those requirements:
             explicit transaction logic, complete audit trails, and monitoring that surfaces problems before
-            customers notice. As an engineering <strong>agency</strong> we build the whole product — the{' '}
-            <strong>app</strong> your customers use and the services behind it — and support it in production.
+            customers notice. As an engineering agency we build the whole product — the{' '}
+            app your customers use and the services behind it — and support it in production.
           </p>
         </div>
 

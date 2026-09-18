@@ -189,7 +189,7 @@ export default function CustomSoftwareClient({
             >
               <p style={bodyTextStyle}>
                 Krasty Soft delivers{" "}
-                <strong>custom software development services</strong> that help
+                custom software development services that help
                 businesses replace manual routines, fragmented tools, and rigid
                 systems. We design and implement end-to-end solutions when
                 ready-made products no longer fit operational needs. The goal is
@@ -198,13 +198,13 @@ export default function CustomSoftwareClient({
               </p>
               <p style={bodyTextStyle}>
                 Our services focus on building{" "}
-                <strong>custom software for business</strong> that removes
+                custom software for business that removes
                 unnecessary complexity and gives teams a system they can rely on
                 day to day.
               </p>
               <p style={bodyTextStyle}>
                 We work with small and mid-sized businesses, startups, and teams
-                that need <strong>custom software development</strong> aligned
+                that need custom software development aligned
                 with their real processes.
               </p>
             </motion.div>
@@ -228,7 +228,7 @@ export default function CustomSoftwareClient({
             />
           </h2>
           <p style={{ ...bodyTextStyle, marginTop: "1rem" }}>
-            A <strong>bespoke software development service</strong> makes sense
+            A bespoke software development service makes sense
             when business logic no longer fits into standard tools. Typical
             signals include:
           </p>
@@ -282,7 +282,7 @@ export default function CustomSoftwareClient({
             />
           </h2>
           <p style={{ ...bodyTextStyle, marginTop: "1rem" }}>
-            As a <strong>custom software development agency</strong>, we focus
+            As a custom software development agency, we focus
             on essential services:
           </p>
         </div>
@@ -358,7 +358,7 @@ export default function CustomSoftwareClient({
         </div>
 
         <p style={{ ...bodyTextStyle, marginTop: "2rem" }}>
-          This approach allows <strong>custom software outsourcing</strong>{" "}
+          This approach allows custom software outsourcing{" "}
           without losing control over priorities, timelines, or quality.
         </p>
       </Section>
@@ -383,7 +383,7 @@ export default function CustomSoftwareClient({
         <div style={{ maxWidth: "var(--max-width)" }}>
           <p style={bodyTextStyle}>
             Krasty Soft approaches projects with business logic as the starting
-            point. In our <strong>custom software development services</strong>,
+            point. In our custom software development services,
             technology follows the process, enabling us to design systems that
             remain practical long after launch.
           </p>
@@ -410,15 +410,15 @@ export default function CustomSoftwareClient({
           <p style={{ ...bodyTextStyle, marginTop: "1.5rem" }}>
             Our small, focused team combines strong engineering and architecture
             with a deep understanding of operational workflows. From{" "}
-            <strong>custom application development</strong> to technical
+            custom application development to technical
             consultancy, this makes Krasty Soft a trusted{" "}
-            <strong>custom software development company</strong> — one that keeps
+            custom software development company — one that keeps
             delivery cost and long-term maintainability in view, not just the
             initial build.
           </p>
           <p style={bodyTextStyle}>
             If you are looking for{" "}
-            <strong>bespoke software development services</strong>, Krasty Soft
+            bespoke software development services, Krasty Soft
             is ready to help.
           </p>
         </div>
