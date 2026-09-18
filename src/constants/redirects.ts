@@ -64,6 +64,11 @@ export const REDIRECTS: Redirect[] = [
     source: `${CASE_STUDIES_PREFIX}ai-bureaucracy-navigator-for-eu`,
     destination: `${CASE_STUDIES_PREFIX}ai-regulatory-intelligence-platform`,
   },
+  // Pulled at the CTO's request shortly after publishing (2026-09-18).
+  {
+    source: `${CASE_STUDIES_PREFIX}ai-outbound-sales-automation-platform`,
+    destination: "/case-studies",
+  },
   {
     source: `${CASE_STUDIES_PREFIX}oolu-ai-powered-hiring-platform`,
     destination: "/case-studies",

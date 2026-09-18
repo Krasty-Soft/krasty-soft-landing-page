@@ -35,6 +35,8 @@ export interface Case {
   overview?: any;
   industries?: Industry[];
   brief?: CaseBrief;
+  /** Listing position; lower sorts first, unset sorts last. */
+  displayOrder?: number;
 }
 
 /** Structured one-page case format (template "brief"). */
@@ -81,6 +83,7 @@ export interface ContentfulCaseFields {
   hardPart?: string;
   stack?: string[];
   focus?: string[];
+  displayOrder?: number;
 }
 
 interface CaseSkeleton extends EntrySkeletonType {
@@ -183,6 +186,8 @@ function mapCase(item: CaseSkeleton): Case {
     content: fields.content,
     overview: fields.overview,
     industries: fields.industry ? [fields.industry as Industry] : [],
+    displayOrder:
+      typeof fields.displayOrder === "number" ? fields.displayOrder : undefined,
     brief:
       template === "brief"
         ? {
@@ -211,9 +216,16 @@ export async function getAllCases() {
   });
 
   if (res && res.items.length > 0) {
+    // Editors control the listing order through displayOrder; anything without
+    // one keeps its Contentful order behind the cases that have been ranked.
     return res.items
       .filter((item: CaseSkeleton) => !REMOVED_CASE_SLUGS.has(item.fields.slug))
-      .map(mapCase);
+      .map(mapCase)
+      .sort(
+        (a: Case, b: Case) =>
+          (a.displayOrder ?? Number.MAX_SAFE_INTEGER) -
+          (b.displayOrder ?? Number.MAX_SAFE_INTEGER),
+      );
   }
   // Fallback to hardcoded data
   return cases.filter((item) => !REMOVED_CASE_SLUGS.has(item.slug));
