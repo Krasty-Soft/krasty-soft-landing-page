@@ -106,6 +106,25 @@ function renderRichTextNode(
         )
     }
 
+    // Hyperlink — without this, links in rich text render as plain text
+    if (nodeType === 'hyperlink') {
+        const href = (node as any).data?.uri || ''
+        const isInternal = href.startsWith('/')
+        return React.createElement(
+            'a',
+            {
+                key,
+                href,
+                ...(isInternal
+                    ? {}
+                    : { target: '_blank', rel: 'noopener noreferrer' }),
+            },
+            content?.map((child, i) =>
+                renderRichTextNode(child, `${key}-${i}`),
+            ),
+        )
+    }
+
     // Unordered list
     if (nodeType === 'unordered-list') {
         return React.createElement(

@@ -225,6 +225,15 @@ html {
     margin-bottom: 1.25rem;
 }
 
+/* Without this, the base reset strips the numbers from ordered lists in
+   rich-text content, so numbered steps render as unmarked lines. */
+.prose ol {
+    list-style-type: decimal;
+    padding-left: 1.75rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
 .prose li {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;

@@ -8,6 +8,8 @@ export interface Post {
   content: string;
   preview: string;
   richContent?: any;
+  seoTitle?: string;
+  seoDescription?: string;
 }
 
 type PostFields = {
@@ -16,6 +18,8 @@ type PostFields = {
   tags?: string[];
   content?: any;
   preview?: any;
+  seoTitle?: string;
+  seoDescription?: string;
 };
 
 interface PostSkeleton extends EntrySkeletonType {
@@ -37,6 +41,17 @@ function parseTags(tags: any): string[] {
   return [];
 }
 
+
+// Rich text carries no plain-text copy, but search and the metadata fallback
+// both need one, so flatten the document to text.
+function richTextToPlain(node: any): string {
+  if (!node) return "";
+  if (typeof node.value === "string") return node.value;
+  if (Array.isArray(node.content))
+    return node.content.map(richTextToPlain).join(" ");
+  return "";
+}
+
 // Fallback array is intentionally empty — test/filler posts have been removed.
 // When Contentful is unreachable, getAllPosts/getAllSlugs return [] instead of fake data.
 export const posts: Post[] = [];
@@ -55,8 +70,13 @@ export async function getAllPosts(): Promise<Post[]> {
         slug: fields.slug,
         title: fields.title,
         tags: parseTags(fields.tags),
-        content: typeof fields.content === "string" ? fields.content : "",
+        content:
+          typeof fields.content === "string"
+            ? fields.content
+            : richTextToPlain(fields.content).replace(/\s+/g, " ").trim(),
         richContent: typeof fields.content === "object" ? fields.content : null,
+        seoTitle: fields.seoTitle || "",
+        seoDescription: fields.seoDescription || "",
         preview: previewUrl
           ? previewUrl.startsWith("http")
             ? previewUrl
@@ -86,8 +106,13 @@ export async function getPostBySlug(slug: string) {
       slug: fields.slug,
       title: fields.title,
       tags: parseTags(fields.tags),
-      content: typeof fields.content === "string" ? fields.content : "",
+      content:
+        typeof fields.content === "string"
+          ? fields.content
+          : richTextToPlain(fields.content).replace(/\s+/g, " ").trim(),
       richContent: typeof fields.content === "object" ? fields.content : null,
+      seoTitle: fields.seoTitle || "",
+      seoDescription: fields.seoDescription || "",
       preview: previewUrl
         ? previewUrl.startsWith("http")
           ? previewUrl

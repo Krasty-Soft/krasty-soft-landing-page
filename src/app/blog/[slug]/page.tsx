@@ -48,9 +48,10 @@ export async function generateMetadata({
 
   const noIndex = NOINDEX_SLUGS.has(slug);
 
+  // generateSEO appends " | Krasty Soft", so seoTitle is stored without it.
   return generateSEO({
-    title: `${post.title} - Krasty Soft Blog`,
-    description: post.content.substring(0, 160),
+    title: post.seoTitle || `${post.title} - Krasty Soft Blog`,
+    description: post.seoDescription || post.content.substring(0, 160),
     path: `/blog/${slug}`,
     type: "article",
     noIndex,
