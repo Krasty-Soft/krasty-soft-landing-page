@@ -10,6 +10,12 @@ export interface Post {
   richContent?: any;
   seoTitle?: string;
   seoDescription?: string;
+  /** ISO date the entry was first published in Contentful. */
+  publishedAt?: string;
+  /** ISO date of the entry's last update in Contentful. */
+  updatedAt?: string;
+  /** Estimated reading time in minutes, derived from the body text. */
+  readingMinutes?: number;
 }
 
 type PostFields = {
@@ -52,6 +58,14 @@ function richTextToPlain(node: any): string {
   return "";
 }
 
+
+const WORDS_PER_MINUTE = 200;
+
+function readingMinutes(text: string): number {
+  const words = text.trim() ? text.trim().split(/\s+/).length : 0;
+  return Math.max(1, Math.round(words / WORDS_PER_MINUTE));
+}
+
 // Fallback array is intentionally empty — test/filler posts have been removed.
 // When Contentful is unreachable, getAllPosts/getAllSlugs return [] instead of fake data.
 export const posts: Post[] = [];
@@ -66,17 +80,22 @@ export async function getAllPosts(): Promise<Post[]> {
     return res.items.map((item: PostSkeleton) => {
       const fields = item.fields;
       const previewUrl = (fields as any).preview?.fields?.file?.url;
+      const plain =
+        typeof fields.content === "string"
+          ? fields.content
+          : richTextToPlain(fields.content).replace(/\s+/g, " ").trim();
+      const sys = (item as any).sys || {};
       return {
         slug: fields.slug,
         title: fields.title,
         tags: parseTags(fields.tags),
-        content:
-          typeof fields.content === "string"
-            ? fields.content
-            : richTextToPlain(fields.content).replace(/\s+/g, " ").trim(),
+        content: plain,
         richContent: typeof fields.content === "object" ? fields.content : null,
         seoTitle: fields.seoTitle || "",
         seoDescription: fields.seoDescription || "",
+        publishedAt: sys.firstPublishedAt || sys.createdAt || undefined,
+        updatedAt: sys.updatedAt || undefined,
+        readingMinutes: readingMinutes(plain),
         preview: previewUrl
           ? previewUrl.startsWith("http")
             ? previewUrl
@@ -102,17 +121,22 @@ export async function getPostBySlug(slug: string) {
     const fields = item.fields;
 
     const previewUrl = (fields as any).preview?.fields?.file?.url;
+    const plain =
+      typeof fields.content === "string"
+        ? fields.content
+        : richTextToPlain(fields.content).replace(/\s+/g, " ").trim();
+    const sys = (item as any).sys || {};
     return {
       slug: fields.slug,
       title: fields.title,
       tags: parseTags(fields.tags),
-      content:
-        typeof fields.content === "string"
-          ? fields.content
-          : richTextToPlain(fields.content).replace(/\s+/g, " ").trim(),
+      content: plain,
       richContent: typeof fields.content === "object" ? fields.content : null,
       seoTitle: fields.seoTitle || "",
       seoDescription: fields.seoDescription || "",
+      publishedAt: sys.firstPublishedAt || sys.createdAt || undefined,
+      updatedAt: sys.updatedAt || undefined,
+      readingMinutes: readingMinutes(plain),
       preview: previewUrl
         ? previewUrl.startsWith("http")
           ? previewUrl

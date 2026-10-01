@@ -74,7 +74,8 @@ export default async function BlogPostPage({
   const articleSchema = generateBlogSchema({
     title: post.title,
     description: post.content.substring(0, 200),
-    datePublished: new Date().toISOString(),
+    datePublished: post.publishedAt || new Date().toISOString(),
+    dateModified: post.updatedAt || post.publishedAt,
     author: "Krasty Soft Team",
   });
 
@@ -137,12 +138,14 @@ export default async function BlogPostPage({
           >
             <div className="flex items-center gap-2">
               <Calendar size={16} />
-              <time>
-                {new Date().toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
+              <time dateTime={post.publishedAt}>
+                {post.publishedAt
+                  ? new Date(post.publishedAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })
+                  : ""}
               </time>
             </div>
           </div>

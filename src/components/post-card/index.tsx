@@ -117,11 +117,18 @@ export const PostCard = ({ data }: { data: Post }) => {
             }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
                 <Calendar size={14} />
-                <span>Dec 2024</span>
+                <span>
+                  {data.publishedAt
+                    ? new Date(data.publishedAt).toLocaleDateString('en-US', {
+                          month: 'short',
+                          year: 'numeric',
+                      })
+                    : ''}
+                </span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.375rem' }}>
                 <Clock size={14} />
-                <span>5 min read</span>
+                <span>{data.readingMinutes ?? 5} min read</span>
               </div>
             </div>
 
