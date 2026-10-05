@@ -62,24 +62,40 @@ export const Banner = () => {
           initial={{ y: 20 }}
           animate={{ y: 0 }}
           transition={{ duration: 0.5, ease: EASE }}
-          className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center mb-6 tracking-tight"
+          className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center mb-6"
           style={{
             color: "var(--text-primary)",
-            lineHeight: "1.1",
+            lineHeight: "1.04",
+            letterSpacing: "-0.02em",
+            textWrap: "balance",
           }}
         >
-          Software Company Focused on{" "}
-          <br className="hidden md:block" />
-          AI and Software Engineering
+          {/* Two-tier heading: the generic half is a muted kicker so the
+              differentiator carries the weight. One H1, same text for SEO. */}
+          <span
+            className="block text-xl md:text-2xl lg:text-3xl font-semibold mb-2 md:mb-3"
+            style={{
+              color: "var(--text-muted)",
+              lineHeight: 1.2,
+              letterSpacing: "normal",
+            }}
+          >
+            Software Company Focused on
+          </span>{" "}
+          <span className="block">
+            <span style={{ color: "var(--brand-red)" }}>AI</span> and Software
+            Engineering
+          </span>
         </motion.h1>
 
         {/* Subtitle */}
         <motion.p
           {...fadeUp(0.15)}
-          className="text-lg md:text-xl lg:text-2xl text-center mb-12 max-w-3xl"
+          className="text-base md:text-lg lg:text-xl text-center mb-10 max-w-4xl"
           style={{
             color: "var(--text-muted)",
-            lineHeight: "1.6",
+            lineHeight: "1.5",
+            textWrap: "pretty",
           }}
         >
           Krasty Soft is a B2B software development company — we build custom
