@@ -35,7 +35,7 @@ export default function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
             <Section variant="primary" animate={false}>
                 <div style={{ paddingTop: '3rem', paddingBottom: '2rem' }}>
                     <motion.div
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={false}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                         style={{ textAlign: 'center' }}
@@ -79,7 +79,7 @@ export default function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
                         </h1>
 
                         <motion.p
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={false}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 0.8 }}
                             style={{
@@ -98,7 +98,7 @@ export default function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
 
                         {/* Search Bar */}
                         <motion.div
-                            initial={{ opacity: 0, y: 20 }}
+                            initial={false}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.6, delay: 1 }}
                             style={{
@@ -147,7 +147,7 @@ export default function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
                         {/* Results count */}
                         {searchTerm && (
                             <motion.p
-                                initial={{ opacity: 0 }}
+                                initial={false}
                                 animate={{ opacity: 1 }}
                                 style={{
                                     marginTop: '1.5rem',
@@ -171,7 +171,8 @@ export default function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
                                 <motion.li
                                     key={i}
                                     className="h-full"
-                                    initial={{ opacity: 0, y: 30 }}
+                                    // First row renders in place; later cards keep the reveal.
+                                    initial={i < 3 ? false : { opacity: 0, y: 30 }}
                                     whileInView={{ opacity: 1, y: 0 }}
                                     viewport={{ once: true, margin: "-50px" }}
                                     transition={{ delay: i * 0.1, duration: 0.5 }}
@@ -183,7 +184,7 @@ export default function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
                     </ul>
                 ) : (
                     <motion.div
-                        initial={{ opacity: 0 }}
+                        initial={false}
                         animate={{ opacity: 1 }}
                         style={{
                             textAlign: 'center',

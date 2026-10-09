@@ -43,7 +43,7 @@ const PerkCard = ({ perk, index }: { perk: typeof perks[number], index: number }
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={false}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ delay: index * 0.1, duration: 0.5 }}
@@ -105,7 +105,7 @@ export default function CareersClient({
       <Section variant="primary" animate={false}>
         <div style={{ paddingTop: '4rem', paddingBottom: '5rem' }}>
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             style={{ textAlign: 'center' }}
@@ -149,7 +149,7 @@ export default function CareersClient({
             </h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
               style={{
@@ -167,7 +167,7 @@ export default function CareersClient({
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 1 }}
               style={{

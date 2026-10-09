@@ -527,3 +527,21 @@ textarea:-webkit-autofill:focus {
     caret-color: #ffffff;
     transition: background-color 9999s ease-out 0s;
 }
+
+/* Content stays readable before hydration and without JS.
+   framer-motion server-renders animated blocks in their start state
+   (opacity:0, offset transform), so the text is in the HTML but invisible
+   until JS runs. While <html> carries `pre-hydration` (removed by
+   HydrationFlag), those blocks are forced visible. Decorative layers that are
+   meant to stay hidden carry pointer-events:none and are left alone. */
+html.pre-hydration
+  :is([style*="opacity:0;"], [style$="opacity:0"]):not(
+    [style*="pointer-events:none"]
+  ):not([aria-hidden="true"]) {
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+html.pre-hydration header[style*="translateY(-100px)"] {
+    transform: none !important;
+}

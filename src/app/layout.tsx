@@ -1,6 +1,7 @@
 import { WebVitalsReporter } from "@/components/analytics/web-vitals-reporter";
 import { Footer, Header } from "@/components/blocks";
 import { SmoothScroll } from "@/components/smooth-scroll";
+import { HydrationFlag } from "@/components/hydration-flag";
 import { ScrollTop } from "@/components/ui";
 import { sora } from "@/lib/fonts";
 import {
@@ -50,7 +51,7 @@ export default function RootLayout({
   const websiteSchema = generateWebSiteSchema();
 
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark pre-hydration">
       <head>
         {/* Google Tag Manager — canonical snippet as a static inline script,
             placed as high as possible in <head> so Google Search Console can
@@ -105,6 +106,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
 
+        <HydrationFlag />
         <SmoothScroll />
         <Header />
         <div id="app-scroll" className="overflow-y-auto flex-auto">

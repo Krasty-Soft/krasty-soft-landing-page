@@ -9,8 +9,10 @@ import { CLUTCH, CLUTCH_RATING } from "@/lib/clutch";
 // Above-the-fold hero entrance. The heading renders visible immediately (no
 // opacity gate) so it's not held back for LCP; supporting elements fade up.
 const EASE = [0.32, 0.72, 0, 1] as const;
+// Hero content renders in its final state (initial: false) so it is visible
+// in the server HTML before hydration; delay is kept for call-site symmetry.
 const fadeUp = (delay: number) => ({
-  initial: { opacity: 0, y: 20 },
+  initial: false as const,
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.5, delay, ease: EASE },
 });

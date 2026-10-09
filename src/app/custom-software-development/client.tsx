@@ -135,7 +135,7 @@ export default function CustomSoftwareClient({
       <Section variant="primary" animate={false}>
         <div style={{ paddingTop: "4rem" }}>
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             style={{ textAlign: "center" }}
@@ -178,7 +178,7 @@ export default function CustomSoftwareClient({
             </h1>
 
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
               style={{

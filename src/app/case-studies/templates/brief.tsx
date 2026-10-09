@@ -77,7 +77,7 @@ export function TemplateBrief({ caseData }: TemplateProps) {
           </Link>
 
           <motion.div
-            initial={{ opacity: 0, y: 24 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
@@ -154,6 +154,7 @@ export function TemplateBrief({ caseData }: TemplateProps) {
         >
           <motion.div
             {...fadeUp}
+            initial={false}
             style={{
               backgroundColor: "var(--bg-elevated)",
               border: "1px solid var(--border-default)",
@@ -264,7 +265,7 @@ export function TemplateBrief({ caseData }: TemplateProps) {
 
           <div style={{ minWidth: 0 }}>
             {shot && (
-              <motion.figure {...fadeUp} style={{ margin: 0 }}>
+              <motion.figure {...fadeUp} initial={false} style={{ margin: 0 }}>
                 <button
                   type="button"
                   onClick={() => setLightboxOpen(true)}

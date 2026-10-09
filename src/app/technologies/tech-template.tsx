@@ -13,6 +13,9 @@ interface TechTemplateProps {
   tech: TechDetail;
 }
 
+// "What we build" items that fit in the first screen on desktop.
+const FIRST_SCREEN_ITEMS = 6;
+
 const renderTextWithHighlight = (text: string) => {
   const parts = text.split(/(<strong>.*?<\/strong>)/g);
   return parts.map((part, index) => {
@@ -37,7 +40,7 @@ export default function TechTemplate({ tech }: TechTemplateProps) {
         <SectionWrapper>
           <div style={{ paddingTop: "4rem" }}>
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
@@ -69,7 +72,7 @@ export default function TechTemplate({ tech }: TechTemplateProps) {
                 {tech.introParagraphs.map((para, index) => (
                   <motion.p
                     key={index}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={false}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.4 + index * 0.2 }}
                     style={{
@@ -125,7 +128,9 @@ export default function TechTemplate({ tech }: TechTemplateProps) {
             {tech.whatWeBuild.items.map((item, index) => (
               <motion.li
                 key={index}
-                initial={{ opacity: 0, x: -20 }}
+                // Items in the first screen render in place (no flicker on
+                // hydration); the rest keep their scroll reveal.
+                initial={index < FIRST_SCREEN_ITEMS ? false : { opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}

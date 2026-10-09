@@ -43,7 +43,7 @@ export function BlogClient({ posts }: { posts: Post[] }) {
                     />
                 </h1>
                 <motion.p
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={false}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5 }}
                     style={{
@@ -58,7 +58,7 @@ export function BlogClient({ posts }: { posts: Post[] }) {
 
             {/* Search and Filters */}
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 }}
                 style={{ marginBottom: '3rem' }}
@@ -128,7 +128,7 @@ export function BlogClient({ posts }: { posts: Post[] }) {
                     {allTags.map((tag, i) => (
                         <motion.button
                             key={i}
-                            initial={{ opacity: 0, scale: 0.8 }}
+                            initial={false}
                             animate={{ opacity: 1, scale: 1 }}
                             transition={{ delay: 0.8 + i * 0.05 }}
                             whileHover={{ scale: 1.05 }}
@@ -155,7 +155,7 @@ export function BlogClient({ posts }: { posts: Post[] }) {
 
             {/* Results Count */}
             <motion.p
-                initial={{ opacity: 0 }}
+                initial={false}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1 }}
                 style={{
@@ -176,7 +176,7 @@ export function BlogClient({ posts }: { posts: Post[] }) {
                 {filteredPosts.map((post, i) => (
                     <motion.div
                         key={post.slug}
-                        initial={{ opacity: 0, y: 30 }}
+                        initial={false}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 1 + i * 0.1 }}
                     >
@@ -188,7 +188,7 @@ export function BlogClient({ posts }: { posts: Post[] }) {
             {/* Empty State */}
             {filteredPosts.length === 0 && (
                 <motion.div
-                    initial={{ opacity: 0 }}
+                    initial={false}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.5 }}
                     style={{

@@ -305,7 +305,7 @@ export default function AboutClient() {
         <div style={{ paddingTop: "2rem", paddingBottom: "4rem" }}>
           {/* Title */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
@@ -328,7 +328,7 @@ export default function AboutClient() {
 
           {/* Description */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.8 }}
             style={{
@@ -353,7 +353,7 @@ export default function AboutClient() {
 
           {/* Stats Banner */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1 }}
             style={{
@@ -464,7 +464,9 @@ export default function AboutClient() {
             />
           </h2>
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            // Starts at the bottom of the first screen on desktop, so it
+            // renders in place rather than flickering on hydration.
+            initial={false}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.5 }}
