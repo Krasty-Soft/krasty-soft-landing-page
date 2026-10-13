@@ -68,9 +68,15 @@ function renderRichTextNode(
 
     const { nodeType, content, value } = node
 
-    // Text node
+    // Text node. Only the `code` mark is rendered: bold and italic marks are
+    // deliberately ignored so emphasis on keywords never reaches the page.
     if (nodeType === 'text') {
-        return React.createElement(React.Fragment, { key }, value || '')
+        const isCode = (node as any).marks?.some(
+            (mark: { type: string }) => mark.type === 'code',
+        )
+        return isCode
+            ? React.createElement('code', { key }, value || '')
+            : React.createElement(React.Fragment, { key }, value || '')
     }
 
     // Paragraph
