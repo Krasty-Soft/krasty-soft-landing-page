@@ -16,7 +16,7 @@ export default function JobPageClient({ job }: JobPageClientProps) {
     <>
       {/* Hero Section */}
       <Section variant="primary" animate={false}>
-        <div style={{ paddingTop: "3rem", paddingBottom: "4rem" }}>
+        <div style={{ paddingBottom: "4rem" }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}

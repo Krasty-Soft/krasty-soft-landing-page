@@ -103,7 +103,7 @@ export default function CareersClient({
     <>
       {/* Hero Section */}
       <Section variant="primary" animate={false}>
-        <div style={{ paddingTop: '4rem', paddingBottom: '5rem' }}>
+        <div style={{ paddingBottom: '5rem' }}>
           <motion.div
             initial={false}
             animate={{ opacity: 1, y: 0 }}

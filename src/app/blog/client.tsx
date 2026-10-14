@@ -24,7 +24,7 @@ export function BlogClient({ posts }: { posts: Post[] }) {
     })
 
     return (
-        <Section variant={'primary'} animate={false} sectionCls="pt-4 md:pt-8">
+        <Section variant={'primary'} animate={false}>
             {/* Header */}
             <div className="mb-12 md:mb-16">
                 <h1

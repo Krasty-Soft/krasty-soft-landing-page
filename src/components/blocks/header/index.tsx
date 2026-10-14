@@ -219,8 +219,11 @@ export const Header = () => {
         </div>
       </motion.header>
 
-      {/* Spacer to prevent content from hiding under fixed header */}
-      <div style={{ height: "80px" }} />
+      {/* Spacer to prevent content from hiding under fixed header. It sits in
+          the body's flex column next to #app-scroll, so it must not shrink —
+          otherwise long pages squeeze it to a few px and content starts under
+          the header. */}
+      <div style={{ height: "80px", flexShrink: 0 }} />
 
       {/* Mobile Menu - Always in DOM for SEO, visibility controlled by CSS */}
       <MobileMenu

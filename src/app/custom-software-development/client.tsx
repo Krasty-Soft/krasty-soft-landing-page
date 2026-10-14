@@ -133,7 +133,7 @@ export default function CustomSoftwareClient({
     <>
       {/* Hero Section */}
       <Section variant="primary" animate={false}>
-        <div style={{ paddingTop: "4rem" }}>
+        <div>
           <motion.div
             initial={false}
             animate={{ opacity: 1, y: 0 }}

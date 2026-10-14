@@ -38,7 +38,7 @@ export default function TechTemplate({ tech }: TechTemplateProps) {
       {/* Hero Section */}
       <Section variant="primary" animate={false}>
         <SectionWrapper>
-          <div style={{ paddingTop: "4rem" }}>
+          <div>
             <motion.div
               initial={false}
               animate={{ opacity: 1, y: 0 }}

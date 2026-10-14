@@ -302,7 +302,7 @@ export default function AboutClient() {
     <>
       {/* Hero Section */}
       <Section variant="primary" animate={false}>
-        <div style={{ paddingTop: "2rem", paddingBottom: "4rem" }}>
+        <div style={{ paddingBottom: "4rem" }}>
           {/* Title */}
           <motion.div
             initial={false}

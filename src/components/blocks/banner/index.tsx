@@ -34,7 +34,7 @@ export const Banner = () => {
 
   return (
     <section
-      className="relative min-h-screen flex flex-col items-center justify-center px-4 py-24 md:py-32 overflow-hidden"
+      className="relative min-h-[calc(100svh-80px)] flex flex-col items-center justify-center px-4 pt-6 pb-24 md:pt-16 md:pb-32 overflow-hidden"
       style={{
         backgroundColor: "var(--bg-primary)",
       }}

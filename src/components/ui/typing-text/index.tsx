@@ -71,7 +71,9 @@ export const TypingText = ({
     }
 
     // Create a regex pattern to match highlight words (case-insensitive)
-    const pattern = new RegExp(`\\b(${highlightWords.join("|")})\\b`, "gi");
+    // Trailing punctuation goes inside the chip, so a heading doesn't end
+    // with a stray dot after the terminal-styled word.
+    const pattern = new RegExp(`\\b(?:${highlightWords.join("|")})\\b[.,:;!?]?`, "gi");
 
     const parts: React.ReactNode[] = [];
     let lastIndex = 0;

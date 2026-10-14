@@ -222,7 +222,7 @@ export function TemplateDefault({ caseData }: TemplateProps) {
 
       {/* Hero Section */}
       <Section variant="primary" animate={false}>
-        <div style={{ paddingTop: "3rem", paddingBottom: "0.5rem" }}>
+        <div style={{ paddingBottom: "0.5rem" }}>
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}

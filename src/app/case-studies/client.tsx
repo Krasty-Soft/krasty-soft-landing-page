@@ -33,7 +33,7 @@ export default function CaseStudiesClient({ cases }: CaseStudiesClientProps) {
         <>
             {/* Hero Section */}
             <Section variant="primary" animate={false}>
-                <div style={{ paddingTop: '3rem', paddingBottom: '2rem' }}>
+                <div style={{ paddingBottom: '2rem' }}>
                     <motion.div
                         initial={false}
                         animate={{ opacity: 1, y: 0 }}

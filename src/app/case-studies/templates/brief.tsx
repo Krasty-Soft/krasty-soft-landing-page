@@ -62,7 +62,7 @@ export function TemplateBrief({ caseData }: TemplateProps) {
 
       {/* Hero: who the client is, the outcome, and who this is for */}
       <Section variant="primary" animate={false}>
-        <div style={{ paddingTop: "3rem", maxWidth: "var(--max-width)" }}>
+        <div style={{ maxWidth: "var(--max-width)" }}>
           <Link
             href="/case-studies"
             className="inline-flex items-center gap-2 transition-colors hover:text-[var(--brand-red)]"
