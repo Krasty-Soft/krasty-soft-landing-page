@@ -2,6 +2,8 @@
 export interface Redirect {
   source: string;
   destination: string;
+  // Defaults to true (301). Set false for a temporary 302 that will be removed.
+  permanent?: boolean;
 }
 
 const CASE_STUDIES_PREFIX = "/case-studies/";
@@ -167,7 +169,8 @@ export const REDIRECTS: Redirect[] = [
   // version of the site. They 404 today, so they're redirected to the nearest
   // live equivalent to preserve their accumulated ranking signals.
   { source: "/ecommerce-case-study", destination: "/case-studies" },
-  { source: "/contact", destination: "/about" },
+  // Temporary (302) per the audit: remove once a standalone Contacts page is back.
+  { source: "/contact", destination: "/about", permanent: false },
 ];
 
 // Derived from REDIRECTS so the two can't drift.

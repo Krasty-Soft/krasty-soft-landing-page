@@ -6,10 +6,10 @@ import { REDIRECTS } from "@/constants/redirects";
 // in a SINGLE hop — no intermediate redirects.
 const CANONICAL_HOST = "www.krastysoft.com";
 
-// Pathname -> destination lookup for legacy URL redirects. Built once at module
+// Pathname -> redirect lookup for legacy URL redirects. Built once at module
 // load. REDIRECTS is intentionally dependency-free, so it is safe to import
 // into the edge runtime.
-const PATH_REDIRECTS = new Map(REDIRECTS.map((r) => [r.source, r.destination]));
+const PATH_REDIRECTS = new Map(REDIRECTS.map((r) => [r.source, r]));
 
 export function middleware(req: NextRequest) {
   const { pathname, search } = req.nextUrl;
@@ -21,7 +21,8 @@ export function middleware(req: NextRequest) {
   const isProduction = process.env.VERCEL_ENV === "production";
   const hostNeedsFix = isProduction && host !== CANONICAL_HOST;
 
-  const pathDest = PATH_REDIRECTS.get(pathname);
+  const pathRedirect = PATH_REDIRECTS.get(pathname);
+  const pathDest = pathRedirect?.destination;
 
   // Nothing to canonicalize — let the request through untouched.
   if (!hostNeedsFix && !pathDest) {
@@ -38,7 +39,10 @@ export function middleware(req: NextRequest) {
   // through for pure host/protocol canonicalization.
   const qs = pathDest ? "" : search;
 
-  return NextResponse.redirect(`https://${targetHost}${targetPath}${qs}`, 301);
+  // Path redirects marked temporary stay 302 even when the host is also fixed.
+  const status = pathRedirect?.permanent === false ? 302 : 301;
+
+  return NextResponse.redirect(`https://${targetHost}${targetPath}${qs}`, status);
 }
 
 export const config = {
