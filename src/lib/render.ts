@@ -131,6 +131,37 @@ function renderRichTextNode(
         )
     }
 
+    // Embedded asset (images and infographics inserted into the post body).
+    // A plain <img> rather than next/image, so SVGs work without enabling
+    // dangerouslyAllowSVG; width/height reserve the space to avoid layout shift.
+    // Wide infographics get small on phones, so the image links to the full file.
+    if (nodeType === 'embedded-asset-block') {
+        const fields = (node.data as any)?.target?.fields
+        const file = fields?.file
+        if (!file?.url || !file.contentType?.startsWith('image/')) {
+            return React.createElement(React.Fragment, { key })
+        }
+        const src = file.url.startsWith('//') ? `https:${file.url}` : file.url
+        const size = file.details?.image
+        return React.createElement(
+            'figure',
+            { key, className: 'my-8' },
+            React.createElement(
+                'a',
+                { href: src, target: '_blank', rel: 'noopener noreferrer' },
+                React.createElement('img', {
+                    src,
+                    alt: fields.description || fields.title || '',
+                    width: size?.width,
+                    height: size?.height,
+                    loading: 'lazy',
+                    decoding: 'async',
+                    className: 'block w-full h-auto rounded-lg',
+                }),
+            ),
+        )
+    }
+
     // Unordered list
     if (nodeType === 'unordered-list') {
         return React.createElement(
