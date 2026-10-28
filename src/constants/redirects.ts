@@ -171,6 +171,11 @@ export const REDIRECTS: Redirect[] = [
   { source: "/ecommerce-case-study", destination: "/case-studies" },
   // Temporary (302) per the audit: remove once a standalone Contacts page is back.
   { source: "/contact", destination: "/about", permanent: false },
+  // --- Blog slug changes (Oct 2026, SEO team) ---
+  {
+    source: "/blog/code-audit-ai-agent-gateway-large-prompts",
+    destination: "/blog/ai-agent-reliability-silent-failures",
+  },
 ];
 
 // Derived from REDIRECTS so the two can't drift.

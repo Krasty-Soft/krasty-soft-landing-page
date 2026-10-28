@@ -60,6 +60,17 @@ export function renderRichTextAsHtml(
     return content.map((node, index) => renderRichTextNode(node, index))
 }
 
+// Editors paste full krastysoft.com URLs into Contentful, which would open our
+// own pages in a new tab. Make them relative, and point any link to a contact
+// form at this page's own form (every page has it in the footer) so the click
+// scrolls down instead of loading another post.
+function normalizeHref(href: string): string {
+    const own = href.match(/^(?:https?:)?\/\/(?:www\.)?krastysoft\.com(\/[^?#]*)?(\?[^#]*)?(#.*)?$/i)
+    const relative = own ? `${own[1] || '/'}${own[2] || ''}${own[3] || ''}` : href
+    const hash = relative.match(/#.*$/)?.[0]
+    return hash === '#contacts' ? hash : relative
+}
+
 function renderRichTextNode(
     node: RichTextNode,
     key: number | string,
@@ -114,8 +125,8 @@ function renderRichTextNode(
 
     // Hyperlink — without this, links in rich text render as plain text
     if (nodeType === 'hyperlink') {
-        const href = (node as any).data?.uri || ''
-        const isInternal = href.startsWith('/')
+        const href = normalizeHref((node as any).data?.uri || '')
+        const isInternal = href.startsWith('/') || href.startsWith('#')
         return React.createElement(
             'a',
             {
