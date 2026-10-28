@@ -8,6 +8,9 @@ import { getAllSlugs as getAllPostSlugs } from "@/lib/posts";
 // Update this when static page content changes meaningfully.
 const STATIC_LASTMOD = new Date("2026-06-25");
 
+// Same window as the blog pages; the Contentful publish webhook refreshes it sooner.
+export const revalidate = 3600;
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Static pages — lastModified reflects the last content update, not the build time
   const staticPages: MetadataRoute.Sitemap = [

@@ -21,6 +21,9 @@ export async function POST(request: NextRequest) {
         revalidatePath('/careers')
         revalidatePath('/careers/[slug]', 'page')
 
+        // Sitemap lists post, case and job slugs
+        revalidatePath('/sitemap.xml')
+
         return NextResponse.json({ revalidated: true, now: Date.now() })
     } catch {
         return NextResponse.json(
