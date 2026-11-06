@@ -23,7 +23,7 @@ const NOINDEX_SLUGS = new Set([
 import { Section } from "@/components/ui";
 import { renderRichTextAsHtml } from "@/lib/render";
 import Link from "next/link";
-import { ArrowLeft, Calendar, Tag as TagIcon } from "lucide-react";
+import { ArrowLeft, Calendar, Tag as TagIcon, UserRound } from "lucide-react";
 import Image from "next/image";
 
 export async function generateStaticParams() {
@@ -54,6 +54,7 @@ export async function generateMetadata({
     description: post.seoDescription || post.content.substring(0, 160),
     path: `/blog/${slug}`,
     type: "article",
+    ...(post.author ? { authors: [post.author] } : {}),
     noIndex,
   });
 }
@@ -76,7 +77,7 @@ export default async function BlogPostPage({
     description: post.content.substring(0, 200),
     datePublished: post.publishedAt || new Date().toISOString(),
     dateModified: post.updatedAt || post.publishedAt,
-    author: "Krasty Soft Team",
+    ...(post.author ? { author: post.author, authorIsPerson: true } : {}),
   });
 
   // Generate BreadcrumbList structured data
@@ -133,7 +134,7 @@ export default async function BlogPostPage({
 
           {/* Meta info */}
           <div
-            className="flex items-center gap-4 mb-8 text-sm"
+            className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-8 text-sm"
             style={{ color: "var(--text-secondary)" }}
           >
             <div className="flex items-center gap-2">
@@ -148,6 +149,12 @@ export default async function BlogPostPage({
                   : ""}
               </time>
             </div>
+            {post.author && (
+              <div className="flex items-center gap-2">
+                <UserRound size={16} />
+                <span>Author: {post.author}</span>
+              </div>
+            )}
           </div>
 
           {/* Featured Image */}

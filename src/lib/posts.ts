@@ -10,6 +10,8 @@ export interface Post {
   richContent?: any;
   seoTitle?: string;
   seoDescription?: string;
+  /** Author's full name; empty when the post has none, and then it isn't shown. */
+  author?: string;
   /** ISO date the entry was first published in Contentful. */
   publishedAt?: string;
   /** ISO date of the entry's last update in Contentful. */
@@ -26,6 +28,7 @@ type PostFields = {
   preview?: any;
   seoTitle?: string;
   seoDescription?: string;
+  author?: string;
 };
 
 interface PostSkeleton extends EntrySkeletonType {
@@ -134,6 +137,7 @@ export async function getPostBySlug(slug: string) {
       richContent: typeof fields.content === "object" ? fields.content : null,
       seoTitle: fields.seoTitle || "",
       seoDescription: fields.seoDescription || "",
+      author: fields.author?.trim() || "",
       publishedAt: sys.firstPublishedAt || sys.createdAt || undefined,
       updatedAt: sys.updatedAt || undefined,
       readingMinutes: readingMinutes(plain),

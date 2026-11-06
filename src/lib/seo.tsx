@@ -395,6 +395,7 @@ export function generateBlogSchema({
   datePublished,
   dateModified,
   author = "Krasty Soft Team",
+  authorIsPerson = false,
   image,
 }: {
   title: string;
@@ -402,6 +403,7 @@ export function generateBlogSchema({
   datePublished: string;
   dateModified?: string;
   author?: string;
+  authorIsPerson?: boolean;
   image?: string;
 }) {
   return {
@@ -411,8 +413,9 @@ export function generateBlogSchema({
     description,
     datePublished,
     dateModified: dateModified || datePublished,
+    // A named author is a person; posts without one are credited to the team.
     author: {
-      "@type": "Organization",
+      "@type": authorIsPerson ? "Person" : "Organization",
       name: author,
     },
     publisher: {
