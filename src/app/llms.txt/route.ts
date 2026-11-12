@@ -1,5 +1,5 @@
 import { BASE_URL } from "@/lib/site-url";
-import PAGES from "@/lib/navigation";
+import PAGES, { flattenNav } from "@/lib/navigation";
 import { getAllCases } from "@/lib/cases";
 import { getAllPosts } from "@/lib/posts";
 
@@ -58,8 +58,8 @@ export async function GET() {
   out.push("");
 
   out.push("## Services");
-  for (const s of asArray(PAGES.services))
-    out.push(link(s.slug, s.label, DESCRIPTIONS[s.slug]));
+  for (const s of flattenNav(PAGES.services))
+    out.push(link(s.slug, s.label, DESCRIPTIONS[s.slug] ?? s.description));
   out.push("");
 
   out.push("## Industries");

@@ -4,7 +4,18 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
-import PAGES from "@/lib/navigation";
+import PAGES, { type NavigationItem } from "@/lib/navigation";
+
+// Split a dropdown into columns by `group`; ungrouped lists stay one column.
+const groupItems = (items: NavigationItem[]) => {
+  const groups: { title?: string; items: NavigationItem[] }[] = [];
+  for (const item of items) {
+    const last = groups[groups.length - 1];
+    if (last && last.title === item.group) last.items.push(item);
+    else groups.push({ title: item.group, items: [item] });
+  }
+  return groups;
+};
 
 export const DesktopMenu = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -18,7 +29,7 @@ export const DesktopMenu = () => {
     { label: "Technologies", key: "technologies", hasDropdown: true },
   ];
 
-  const getDropdownItems = (key: string) => {
+  const getDropdownItems = (key: string): NavigationItem[] => {
     const items = PAGES[key];
     return Array.isArray(items) ? items : [];
   };
@@ -90,6 +101,9 @@ export const DesktopMenu = () => {
                     left: 0,
                     marginTop: "0.5rem",
                     minWidth: "280px",
+                    display: "grid",
+                    gridAutoFlow: "column",
+                    gridAutoColumns: "minmax(280px, 320px)",
                     backgroundColor: "rgba(15, 15, 15, 0.98)",
                     backdropFilter: "blur(12px)",
                     border: "1px solid rgba(42, 42, 42, 0.5)",
@@ -100,37 +114,74 @@ export const DesktopMenu = () => {
                     pointerEvents: "auto",
                   }}
                 >
-                  {dropdownItems.map((dropdownItem, index) => (
-                    <Link
-                      key={dropdownItem.slug}
-                      href={`/${dropdownItem.slug}`}
+                  {groupItems(dropdownItems).map((group, groupIndex) => (
+                    <div
+                      key={group.title ?? groupIndex}
+                      style={{
+                        borderLeft:
+                          groupIndex > 0
+                            ? "1px solid rgba(42, 42, 42, 0.5)"
+                            : "none",
+                      }}
                     >
-                      <motion.div
-                        whileHover={{
-                          backgroundColor: "rgba(220, 38, 38, 0.1)",
-                        }}
-                        className="px-4 py-3 transition-colors duration-200"
-                        style={{
-                          borderBottom:
-                            index < dropdownItems.length - 1
-                              ? "1px solid rgba(42, 42, 42, 0.5)"
-                              : "none",
-                        }}
-                      >
+                      {group.title && (
                         <div
-                          className="font-medium mb-1"
-                          style={{ color: "var(--text-primary)" }}
+                          className="px-4 pt-3 pb-2 text-xs uppercase tracking-wider font-semibold"
+                          style={{ color: "var(--text-muted)" }}
                         >
-                          {dropdownItem.label}
+                          {group.title}
                         </div>
+                      )}
+                      {group.items.map((dropdownItem, index) => (
                         <div
-                          className="text-xs"
-                          style={{ color: "var(--text-secondary)" }}
+                          key={dropdownItem.slug}
+                          style={{
+                            borderBottom:
+                              index < group.items.length - 1
+                                ? "1px solid rgba(42, 42, 42, 0.5)"
+                                : "none",
+                          }}
                         >
-                          {dropdownItem.description}
+                          <Link href={`/${dropdownItem.slug}`}>
+                            <motion.div
+                              whileHover={{
+                                backgroundColor: "rgba(220, 38, 38, 0.1)",
+                              }}
+                              className="px-4 py-3 transition-colors duration-200"
+                            >
+                              <div
+                                className="font-medium mb-1"
+                                style={{ color: "var(--text-primary)" }}
+                              >
+                                {dropdownItem.label}
+                              </div>
+                              <div
+                                className="text-xs"
+                                style={{ color: "var(--text-secondary)" }}
+                              >
+                                {dropdownItem.description}
+                              </div>
+                            </motion.div>
+                          </Link>
+                          {dropdownItem.children?.map((child) => (
+                            <Link key={child.slug} href={`/${child.slug}`}>
+                              <motion.div
+                                whileHover={{
+                                  backgroundColor: "rgba(220, 38, 38, 0.1)",
+                                }}
+                                className="py-2 pr-4 pl-8 text-sm transition-colors duration-200"
+                                style={{ color: "var(--text-secondary)" }}
+                              >
+                                <span style={{ color: "var(--brand-red)" }}>
+                                  ↳{" "}
+                                </span>
+                                {child.label}
+                              </motion.div>
+                            </Link>
+                          ))}
                         </div>
-                      </motion.div>
-                    </Link>
+                      ))}
+                    </div>
                   ))}
                 </motion.div>
               )}

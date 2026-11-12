@@ -1,0 +1,1475 @@
+[
+ {
+  "name": "Code Audit Services",
+  "path": "/code-audit",
+  "title": "Code Audit Services for Secure & High-Performance Software",
+  "description": "Professional code audit services with comprehensive codebase review to identify vulnerabilities and improve software security, quality, and maintainability.",
+  "blocks": [
+   {
+    "type": "h1",
+    "text": "Code Audit: Secure & Optimize Your Software"
+   },
+   {
+    "type": "p",
+    "text": "Every codebase carries decisions nobody remembers making. Some of them are harmless. Others are an open admin route, a query that will stall at ten times the traffic, or a payment flow that fails without anyone noticing."
+   },
+   {
+    "type": "p",
+    "text": "Krasty Soft provides code audit services that find those decisions before your users, an investor or an attacker does. Senior engineers read your code by hand, rank every finding by business impact and tie each one to a file and line. You get a clear fix list, not a scanner dump."
+   },
+   {
+    "type": "h2",
+    "text": "When Does Your Business Need Code Auditing?"
+   },
+   {
+    "type": "p",
+    "text": "A code audit pays off most at the moments when a wrong assumption becomes expensive. The common triggers are:"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "You are about to launch, and nobody can say what happens when real users, real data and real payments arrive.",
+     "The product was built fast, by a freelancer, an outsourced team or an AI coding tool, and you have never had it reviewed.",
+     "You are raising a round or selling the company, and technical due diligence is coming.",
+     "A new CTO or a new team is taking over a codebase they did not write.",
+     "Releases keep breaking things, and every change takes longer than the last.",
+     "A customer or a compliance framework is asking for proof of security controls."
+    ]
+   },
+   {
+    "type": "p",
+    "text": "Our code audit services for startups are built for the first two cases. Founders who shipped an MVP quickly usually need a fast, ranked answer to one question: what must be fixed before launch, and what can wait."
+   },
+   {
+    "type": "h2",
+    "text": "What Is Included in Code Audit Services?"
+   },
+   {
+    "type": "p",
+    "text": "Every audit starts from your goals, so the scope differs from project to project. Most engagements combine three areas of review, and you can order them together or one at a time."
+   },
+   {
+    "type": "h3",
+    "text": "Code Quality Audit and Architecture Assessment"
+   },
+   {
+    "type": "p",
+    "text": "We assess how the system is put together and whether it can grow. That covers the architecture and module boundaries, data model and migrations, error handling, test coverage and the overall quality of the code."
+   },
+   {
+    "type": "p",
+    "text": "The goal is a practical view of maintainability and scalability: which parts are safe to build on, which parts slow your team down, and which parts will break first under load. Findings point to concrete refactoring steps, not general advice."
+   },
+   {
+    "type": "h3",
+    "text": "Security and Performance Analysis"
+   },
+   {
+    "type": "p",
+    "text": "On the security side we review authentication, authorization, input handling, secrets management and third-party dependencies for known vulnerabilities. We pay special attention to what is missing: the access check that was never written, or the database policy that exists but permits everything."
+   },
+   {
+    "type": "p",
+    "text": "On the performance side we look for slow queries, missing indexes, unbounded loops over user data and expensive calls on hot paths. Each issue comes with an estimate of when it will start to hurt."
+   },
+   {
+    "type": "h3",
+    "text": "Website and Software Code Audit"
+   },
+   {
+    "type": "p",
+    "text": "A website code audit covers the frontend and the server code behind your site or web app: rendering, forms, APIs, sessions and integrations with payment, email or CRM providers. A software code audit extends the same review to backend services, background jobs and internal tools."
+   },
+   {
+    "type": "p",
+    "text": "We also check the infrastructure the code depends on: environment configuration, deployment setup, logging and backups. A secure codebase on a misconfigured server is still a risk."
+   },
+   {
+    "type": "h2",
+    "text": "Industries & Use Cases"
+   },
+   {
+    "type": "p",
+    "text": "We audit products in the industries we build for, where a defect costs more than a bug report:"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "SaaS: multi-tenant data isolation, billing logic and admin tools before launch or fundraising.",
+     "Healthcare: access to patient data, audit trails and session handling in clinical and HIPAA-regulated software.",
+     "Fintech: payment flows, balance calculations, idempotency and fraud-sensitive endpoints.",
+     "Ecommerce: checkout reliability, inventory sync and integrations with marketplaces and payment providers.",
+     "AI products: prompt injection, agent permissions and data exposure in LLM-based applications."
+    ]
+   },
+   {
+    "type": "p",
+    "text": "A recent example is our [production readiness audit of an AI-generated SaaS](/case-studies/ai-generated-code-production-readiness-audit). In 11,580 lines of code we found 98 issues, 35 of them critical, and delivered the report in 7 business days."
+   },
+   {
+    "type": "h2",
+    "text": "Our Code Auditing Process"
+   },
+   {
+    "type": "note",
+    "text": "[Інфографіка: 5 етапів процесу]"
+   },
+   {
+    "type": "p",
+    "text": "Our process is the same whether the codebase has ten thousand lines or half a million. Only the depth of each step changes."
+   },
+   {
+    "type": "ol",
+    "items": [
+     "Scoping call. We agree on goals, the parts of the system that matter most and the deadline. You get a fixed quote.",
+     "Access and context. You share read-only repository access and any documentation. We review the code at a fixed commit, so results are reproducible.",
+     "Manual review. Senior engineers read the code, supported by automated tools for dependencies and known patterns. Every candidate finding is confirmed before it goes into the report.",
+     "Report. Findings are ranked by severity and written as business consequences, each with the file, the line and a recommended fix.",
+     "Walkthrough and follow-up. We walk your team through the results, answer questions and, if you want, re-check the fixes."
+    ]
+   },
+   {
+    "type": "h2",
+    "text": "What You Get from Our Code Audit Services"
+   },
+   {
+    "type": "note",
+    "text": "[Інфографіка: переваги аудиту]"
+   },
+   {
+    "type": "p",
+    "text": "The report is the deliverable, but the outcome is what matters. After a codebase review with us, teams typically gain:"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "Fewer incidents. Critical defects are fixed before users find them.",
+     "Better security. You know where data can leak and how to close each gap.",
+     "Less technical debt. You see which shortcuts will cost you and which can stay.",
+     "Lower development costs. Your team stops fighting the code and ships features faster.",
+     "Better performance. Slow paths are found before traffic grows.",
+     "A clear plan. Every issue is prioritized, so the fixes fit into your normal sprints."
+    ]
+   },
+   {
+    "type": "p",
+    "text": "You also get an independent view of the functionality you already have: what works as intended, what only works in the demo, and what was never finished."
+   },
+   {
+    "type": "h2",
+    "text": "Take the Next Step with Software Audit Services"
+   },
+   {
+    "type": "note",
+    "text": "[Банер-CTA за зразком із ТЗ] Let's discuss how we can help you achieve your goals. [Button: Get in Touch]"
+   },
+   {
+    "type": "p",
+    "text": "Let's discuss how we can help you achieve your goals. Tell us what you are building and what worries you, and we will suggest the right scope for a software audit service."
+   },
+   {
+    "type": "h2",
+    "text": "Cost of Code Audit Services"
+   },
+   {
+    "type": "p",
+    "text": "The cost of code audit services depends on the work, not on a fixed package. The main factors are:"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "The size of the codebase and the number of services or apps in scope.",
+     "The depth of review: a focused security pass or a full audit of quality, architecture and performance.",
+     "The tech stack and the number of external integrations.",
+     "The deadline, for example an audit that must finish before a due diligence date."
+    ]
+   },
+   {
+    "type": "p",
+    "text": "After a short scoping call we give you a fixed price and a delivery date in writing. You know the full cost before the work starts, with no hourly surprises."
+   },
+   {
+    "type": "p",
+    "text": "An audit is usually a fraction of what a single serious incident costs. A data leak, a broken checkout during a sales peak or a failed due diligence will cost more than finding the problem in advance."
+   },
+   {
+    "type": "h2",
+    "text": "Explore Our Other Software Audit Services"
+   },
+   {
+    "type": "p",
+    "text": "If you already know where the risk is, start with a focused audit. Each one goes deeper into a single area than a general review."
+   },
+   {
+    "type": "ul",
+    "items": [
+     "[Application security audit](/application-security-audit): a security review of your application code, authentication, data handling and integrations. It includes a [web application security audit](/application-security-audit/web-app) for browser-based products and a [mobile application security audit](/application-security-audit/mobile-app) for iOS and Android apps.",
+     "[API audit](/api-security-audit): authentication, access control and data exposure across REST and GraphQL endpoints.",
+     "[AI agent security audit](/ai-agent-security-audit): prompt injection, tool permissions, memory and data leakage in LLM-based agents."
+    ]
+   },
+   {
+    "type": "h2",
+    "text": "Get in touch for expert support"
+   },
+   {
+    "type": "note",
+    "text": "[Форма зворотного зв'язку]"
+   },
+   {
+    "type": "h2",
+    "text": "FAQ About Code Audits"
+   },
+   {
+    "type": "p",
+    "text": "These are the questions founders and CTOs ask us most often before they order an audit."
+   },
+   {
+    "type": "h3",
+    "text": "How Long Does a Code Audit Take?"
+   },
+   {
+    "type": "p",
+    "text": "Most audits take one to three weeks. A focused review of a small product can finish in a few business days, while a large platform with several services takes longer. We agree on the timeline before we start."
+   },
+   {
+    "type": "h3",
+    "text": "Can a Code Audit Help Improve Application Performance?"
+   },
+   {
+    "type": "p",
+    "text": "Yes. We find slow database queries, missing indexes, heavy client bundles and expensive calls on frequent paths. Each finding explains the expected impact, so your team can fix the costly ones first."
+   },
+   {
+    "type": "h3",
+    "text": "How Do You Prioritize Issues Found During a Code Audit?"
+   },
+   {
+    "type": "p",
+    "text": "We rank each issue by severity and by likelihood: what could happen, how easy it is to trigger and how many users it affects. Critical issues that expose data or money come first, and cosmetic issues come last."
+   },
+   {
+    "type": "h3",
+    "text": "Can You Audit a Codebase Without Disrupting Development?"
+   },
+   {
+    "type": "p",
+    "text": "Yes. We work from read-only access at a fixed commit, so your team keeps shipping as usual. We only need a short call at the start and an hour of a developer's time for questions."
+   },
+   {
+    "type": "h3",
+    "text": "Do You Provide Recommendations for Fixing Identified Issues?"
+   },
+   {
+    "type": "p",
+    "text": "Yes. Every finding includes a recommended fix, and many include example code. Our technical code audit services can also cover the fixes themselves if your team does not have the capacity."
+   }
+  ]
+ },
+ {
+  "name": "Application Security Audit",
+  "path": "/application-security-audit",
+  "title": "Application Security Audit (App Security Audit) for Secure Software Solutions",
+  "description": "Application security code review to identify vulnerabilities, assess security risks, and strengthen software protection.",
+  "blocks": [
+   {
+    "type": "h1",
+    "text": "Application Security Audit"
+   },
+   {
+    "type": "p",
+    "text": "Most security incidents do not start with a clever exploit. They start with a missing check: an endpoint that trusts the user ID in the request, a storage bucket left public, or a database policy that allows more than anyone intended."
+   },
+   {
+    "type": "p",
+    "text": "An application security audit from Krasty Soft finds those gaps in your code before someone else does. Senior engineers review your source code, test how authentication and permissions behave, and give you a ranked list of fixes tied to specific files and lines."
+   },
+   {
+    "type": "h2",
+    "text": "When Does Your Business Need an Application Security Audit?"
+   },
+   {
+    "type": "p",
+    "text": "An audit is most valuable before a change in risk, not after an incident. Consider one when:"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "You are preparing to launch and the app will hold customer data, payments or health records.",
+     "The product was built quickly, by a contractor or with AI coding tools, and its security was never reviewed.",
+     "An enterprise customer sends a security questionnaire or asks for proof of controls.",
+     "You are preparing for SOC 2, HIPAA, GDPR or another compliance review.",
+     "You are raising funding and expect technical due diligence.",
+     "Something already went wrong, and you need to know whether it can happen again."
+    ]
+   },
+   {
+    "type": "h2",
+    "text": "What Our Application Security Audit Covers"
+   },
+   {
+    "type": "p",
+    "text": "Each app security audit is scoped to your product, but four areas of review appear in almost every engagement. Together they show how an attacker could reach your data and what stops them today."
+   },
+   {
+    "type": "h3",
+    "text": "Application Security Code Review"
+   },
+   {
+    "type": "p",
+    "text": "The core of the work is an application code review focused on risk. We read the code paths that handle user input, money and personal data, and look for injection, unsafe deserialization, insecure file handling and logic flaws."
+   },
+   {
+    "type": "p",
+    "text": "A code review for security differs from an ordinary peer review. The question is not whether the code is clean, but what happens when a user sends something the developer did not expect."
+   },
+   {
+    "type": "h3",
+    "text": "Authentication and Access Control Assessment"
+   },
+   {
+    "type": "p",
+    "text": "Broken access control is the most common serious finding in modern apps. We check how users sign in, how sessions and tokens are issued and expire, and whether every request is checked against the right owner and role."
+   },
+   {
+    "type": "p",
+    "text": "We test both authentication and authorization. Can one customer read another customer's records? Can a regular user reach admin functions? Can password reset, invite or email change flows be abused to take over an account?"
+   },
+   {
+    "type": "p",
+    "text": "Many of these flaws are invisible in a demo, because the interface simply never shows the button. The server still accepts the request, and that is exactly what we test."
+   },
+   {
+    "type": "h3",
+    "text": "Vulnerability Detection and Risk Analysis"
+   },
+   {
+    "type": "p",
+    "text": "We combine manual review with automated scanning of source code and dependencies. Every vulnerability is confirmed by hand and rated by impact and likelihood, so you do not waste time on false positives."
+   },
+   {
+    "type": "p",
+    "text": "The assessment also covers secrets in the repository, encryption of data in transit and at rest, logging of sensitive fields and error messages that reveal too much."
+   },
+   {
+    "type": "h3",
+    "text": "API and Third-Party Integration Security"
+   },
+   {
+    "type": "p",
+    "text": "Modern apps depend on payment providers, email services, analytics and AI APIs. We review how keys are stored, how webhooks are verified and what data each integration receives."
+   },
+   {
+    "type": "p",
+    "text": "For apps built on Supabase or Firebase, a Supabase security audit checks row-level security policies, storage rules and which operations the public client key allows. These backends are secure by design only when their policies are written correctly."
+   },
+   {
+    "type": "h2",
+    "text": "Types of Application Security Audits"
+   },
+   {
+    "type": "p",
+    "text": "The checks above apply to any product, but the attack surface depends on where the app runs. We offer two focused audits, and you can order either one or both."
+   },
+   {
+    "type": "h3",
+    "text": "Web Application Security Audit"
+   },
+   {
+    "type": "p",
+    "text": "A [web application security audit](/application-security-audit/web-app) covers browser-based products: the frontend, the server and the APIs between them. It includes testing for common web threats such as cross-site scripting, request forgery and broken session handling."
+   },
+   {
+    "type": "h3",
+    "text": "Mobile Application Security Audit"
+   },
+   {
+    "type": "p",
+    "text": "A [mobile application security audit](/application-security-audit/mobile-app) covers iOS and Android apps and the backend they talk to. It focuses on local data storage, secrets in the app bundle, network traffic and protection against tampering."
+   },
+   {
+    "type": "h2",
+    "text": "Our Application Security Audit Process"
+   },
+   {
+    "type": "note",
+    "text": "[Інфографіка: 5 етапів процесу]"
+   },
+   {
+    "type": "p",
+    "text": "Our process keeps the audit predictable for your team and the results easy to act on."
+   },
+   {
+    "type": "ol",
+    "items": [
+     "Scope. We agree on the components, user roles and risks that matter most, and confirm the price and timeline.",
+     "Access. You grant read-only access to the repository and, if needed, a test environment with sample accounts.",
+     "Review and testing. We analyze the code, test authentication and permissions with real requests, and confirm each finding.",
+     "Analysis. Every issue is rated by severity and described as a business risk, with the exact location and a fix.",
+     "Report and debrief. We walk your team through the findings and can re-check the fixes once they are merged."
+    ]
+   },
+   {
+    "type": "h2",
+    "text": "Benefits of Professional Application Security Auditing"
+   },
+   {
+    "type": "p",
+    "text": "Professional application security audit services give you more than a list of bugs. The main benefits are:"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "Early detection. Vulnerabilities are found while they are cheap to fix and before anyone exploits them.",
+     "Lower risk of data leaks. Gaps in access control and encryption are closed before customer data is exposed.",
+     "More reliable software. Security fixes often remove hidden logic errors and crashes too.",
+     "Easier sales and compliance. You can answer security questionnaires with evidence instead of promises.",
+     "Protected reputation. Customers trust a product that has been checked by an independent team."
+    ]
+   },
+   {
+    "type": "h2",
+    "text": "Industries & Use Cases"
+   },
+   {
+    "type": "p",
+    "text": "We focus on products where a security failure has real cost. In SaaS, we test tenant isolation and admin tools. In healthcare, we review access to patient records and audit trails. In fintech and ecommerce, we check payment flows, refunds and account takeover risks."
+   },
+   {
+    "type": "p",
+    "text": "AI-built products are a growing share of our work. In one [production readiness audit](/case-studies/ai-generated-code-production-readiness-audit) of a Supabase-based SaaS, 82 of 98 findings were high or critical, including policies that looked correct but allowed far more than intended."
+   },
+   {
+    "type": "h2",
+    "text": "Ready to Secure Your Application?"
+   },
+   {
+    "type": "note",
+    "text": "[Button: Get in Touch]"
+   },
+   {
+    "type": "p",
+    "text": "Tell us about your app, your users and the deadline you are working toward. We will suggest a scope and send a fixed quote within a few days."
+   },
+   {
+    "type": "h2",
+    "text": "FAQ About Application Security Audit"
+   },
+   {
+    "type": "p",
+    "text": "Below are short answers to the questions we hear most often before an application audit."
+   },
+   {
+    "type": "h3",
+    "text": "How Often Should You Audit Applications?"
+   },
+   {
+    "type": "p",
+    "text": "We recommend an audit before launch, after major changes to authentication, payments or data handling, and at least once a year for products that hold sensitive data. Regulated products may need more frequent reviews."
+   },
+   {
+    "type": "h3",
+    "text": "Can an Application Security Audit Identify All Vulnerabilities?"
+   },
+   {
+    "type": "p",
+    "text": "No audit can promise that. A careful manual review finds the issues that matter most, especially in access control and business logic, which automated scanners usually miss. Regular audits and secure development practices close the remaining gap."
+   },
+   {
+    "type": "h3",
+    "text": "What Happens After Security Vulnerabilities Are Found?"
+   },
+   {
+    "type": "p",
+    "text": "You receive a report with every issue ranked by severity, plus a recommended fix. Critical findings are shared with you immediately, before the final report. After your team applies the fixes, we can verify them."
+   },
+   {
+    "type": "h3",
+    "text": "Can You Perform a Supabase Security Audit?"
+   },
+   {
+    "type": "p",
+    "text": "Yes. We review row-level security policies, storage bucket rules, database functions, edge functions and how the anon and service keys are used. These are the most common sources of data exposure in Supabase projects."
+   },
+   {
+    "type": "h2",
+    "text": "Get in touch for expert support"
+   },
+   {
+    "type": "note",
+    "text": "[Форма зворотного зв'язку]"
+   }
+  ]
+ },
+ {
+  "name": "Web Application Security Audit",
+  "path": "/application-security-audit/web-app",
+  "title": "Web Application Security Audit for Reliable Web Apps",
+  "description": "Comprehensive web app security assessment and audit to identify vulnerabilities, evaluate security risks, and strengthen web application protection against cyber threats.",
+  "blocks": [
+   {
+    "type": "h1",
+    "text": "Web Application Security Audit"
+   },
+   {
+    "type": "p",
+    "text": "Your web application is open to the whole internet, every hour of the day. Anyone can create an account, change a request in the browser and see what the server does with it."
+   },
+   {
+    "type": "p",
+    "text": "A web application security audit from Krasty Soft shows you what they would find. We review the source code, test how the app handles accounts, sessions and data, and deliver a ranked list of fixes your developers can act on right away."
+   },
+   {
+    "type": "h2",
+    "text": "When Does Your Business Need a Web Application Security Audit?"
+   },
+   {
+    "type": "p",
+    "text": "The best time to audit is before the risk grows, not after a breach. Teams usually come to us at one of these points:"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "Before a public launch or a move from beta to paid customers.",
+     "After a large release that changed sign-in, payments, roles or file uploads.",
+     "When an enterprise client or partner asks for a recent security report.",
+     "Before a compliance review, such as SOC 2, ISO 27001, HIPAA or PCI DSS.",
+     "When the app was built by a previous team or generated with AI tools and nobody has checked it.",
+     "After an incident, to find the root cause and anything similar."
+    ]
+   },
+   {
+    "type": "p",
+    "text": "If any of these apply, it is time to audit web application security properly rather than rely on a scanner report."
+   },
+   {
+    "type": "h2",
+    "text": "What Is Included in Our Web App Security Audit"
+   },
+   {
+    "type": "p",
+    "text": "Each web app security assessment combines manual code review with hands-on testing of the running application. The scope depends on your product, but it usually covers four areas."
+   },
+   {
+    "type": "h3",
+    "text": "Web Application Code Review"
+   },
+   {
+    "type": "p",
+    "text": "We read the server-side and client-side code that handles input, files, money and personal data. We look for injection points, unsafe use of templates, insecure file uploads, server-side request forgery and secrets left in the repository."
+   },
+   {
+    "type": "p",
+    "text": "Reading the code finds problems that black-box testing misses: a debug route that is never linked, a feature flag that disables a check, or an admin function protected only by a hidden button."
+   },
+   {
+    "type": "h3",
+    "text": "Authentication, Authorization & Access Control Testing"
+   },
+   {
+    "type": "p",
+    "text": "We test sign-up, sign-in, password reset, multi-factor flows and social login. Then we check session management: how tokens are created, where they are stored, when they expire and whether logout really ends the session."
+   },
+   {
+    "type": "p",
+    "text": "For authorization, we create accounts with different roles and try to cross the lines between them. Can a user open another user's invoice by changing an ID? Can a viewer call an editor's endpoint? Are permissions enforced on the server, or only hidden in the interface? Broken access control is the issue we find most often."
+   },
+   {
+    "type": "h3",
+    "text": "Comprehensive Vulnerability Assessment"
+   },
+   {
+    "type": "p",
+    "text": "We combine manual testing with trusted automated tools to cover the full range of known weaknesses. Every result is verified by hand before it reaches the report."
+   },
+   {
+    "type": "p",
+    "text": "The assessment includes:"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "Input handling and output encoding across forms, search, filters and file names.",
+     "Security headers, cookie flags, CORS and content security policy.",
+     "Encryption in transit and at rest, and how keys and secrets are stored.",
+     "Third-party libraries and dependencies with known vulnerabilities.",
+     "Error messages, logs and analytics that may expose personal data and break user privacy."
+    ]
+   },
+   {
+    "type": "h3",
+    "text": "API and Database Security Assessment"
+   },
+   {
+    "type": "p",
+    "text": "Most web apps are a frontend on top of an API. We check every endpoint the app uses, including the ones the interface no longer calls, for authentication, rate limits and excessive data in responses."
+   },
+   {
+    "type": "p",
+    "text": "On the database side, we review query construction, row-level policies, backups, migrations and the permissions of the database user the app connects with. If your API is a product on its own, or serves mobile apps and partners too, we recommend a dedicated [API security audit](/api-security-audit) as well."
+   },
+   {
+    "type": "h2",
+    "text": "Common Web Application Security Risks and Vulnerabilities"
+   },
+   {
+    "type": "p",
+    "text": "The OWASP Top 10 lists the risks that cause most real-world breaches. A security audit web application teams order from us covers all of them, with extra attention to the following:"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "SQL Injection. User input reaches a database query without proper handling. An attacker can read, change or delete data, and sometimes take over the server.",
+     "Cross-Site Scripting (XSS). The app shows user content without escaping it, so a script runs in other users' browsers. It can steal sessions or act on their behalf.",
+     "Cross-Site Request Forgery (CSRF). Another site tricks a logged-in user's browser into sending a request, such as changing an email address or making a payment.",
+     "Broken Access Control. The server does not check whether the user may access a record or action. This includes insecure direct object references and missing role checks.",
+     "Security Misconfiguration. Default settings, open storage buckets, verbose errors and exposed admin panels.",
+     "Vulnerable and Outdated Components. Libraries and frameworks with known, published flaws.",
+     "Server-Side Request Forgery (SSRF). The server can be made to call internal addresses, often leading to cloud credentials."
+    ]
+   },
+   {
+    "type": "p",
+    "text": "Business logic flaws deserve a separate mention. Applying a discount twice, skipping a payment step or approving your own request will not show up in any scanner. Finding them takes a reviewer who understands what the app is supposed to do."
+   },
+   {
+    "type": "h2",
+    "text": "Our Web Application Security Audit Process"
+   },
+   {
+    "type": "note",
+    "text": "[Інфографіка: 6 етапів процесу]"
+   },
+   {
+    "type": "p",
+    "text": "We follow a clear sequence, so you always know what is happening and what comes next."
+   },
+   {
+    "type": "ol",
+    "items": [
+     "Scoping. We agree on the app's components, user roles, environments and goals, and fix the price and dates.",
+     "Preparation. You provide read-only code access and a staging environment with test accounts for each role.",
+     "Code review. Engineers study the source to map entry points, data flows and trust boundaries.",
+     "Testing. We test the running app against that map, focusing on authentication, access control and data handling.",
+     "Reporting. Each confirmed finding gets a severity rating, a clear description of impact, steps to reproduce and a fix.",
+     "Debrief and retest. We review the report with your team and can confirm the fixes after deployment."
+    ]
+   },
+   {
+    "type": "h2",
+    "text": "Benefits of a Professional Security Audit for Web Applications"
+   },
+   {
+    "type": "p",
+    "text": "Automated scanners are useful, but they only find what they were built to look for. A professional audit adds judgment and context, and that brings practical benefits:"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "Real risks, not noise. Findings are verified and ranked, so your team spends time on what matters.",
+     "Fewer breaches and incidents. Critical gaps are closed before attackers find them.",
+     "Stronger data protection. Customer and business data stays private, which supports GDPR and similar laws.",
+     "Faster deals. A recent audit report helps you pass vendor security reviews.",
+     "Better engineering habits. Your developers learn the patterns behind each issue and avoid them in new code."
+    ]
+   },
+   {
+    "type": "h2",
+    "text": "Industries & Use Cases"
+   },
+   {
+    "type": "p",
+    "text": "We audit web platforms in SaaS, healthcare, fintech and ecommerce. Typical projects include customer portals, admin dashboards, booking and marketplace platforms, internal tools and B2B products with many user roles."
+   },
+   {
+    "type": "p",
+    "text": "The risks differ by industry. A healthcare portal must keep each patient's records separate and log every access. A fintech dashboard must protect balances, transfers and payout details. An ecommerce store must stop account takeover, coupon abuse and leaks of order data. We adapt the test plan to these scenarios."
+   },
+   {
+    "type": "p",
+    "text": "A web audit can stand alone or be part of a wider [application security audit](/application-security-audit) that also covers your mobile apps and integrations."
+   },
+   {
+    "type": "h2",
+    "text": "Ready to Secure Your Web Application?"
+   },
+   {
+    "type": "note",
+    "text": "[Button: Get in Touch]"
+   },
+   {
+    "type": "p",
+    "text": "Share a few details about your web app and your timeline. We will propose a scope that fits your risk and budget, and send a fixed quote."
+   },
+   {
+    "type": "h2",
+    "text": "FAQ About Web Application Security Audit"
+   },
+   {
+    "type": "p",
+    "text": "Here are answers to the questions clients ask most before a web application audit."
+   },
+   {
+    "type": "h3",
+    "text": "Does a Web Application Security Audit Cover Third-Party Libraries and Dependencies?"
+   },
+   {
+    "type": "p",
+    "text": "Yes. We check your dependencies for known vulnerabilities and review how third-party scripts, SDKs and services are loaded and configured. We also flag outdated packages that are likely to cause problems soon."
+   },
+   {
+    "type": "h3",
+    "text": "Can You Perform a Security Audit Before a Web Application Goes Live?"
+   },
+   {
+    "type": "p",
+    "text": "Yes, and it is the best time to do it. A pre-launch audit costs less, and fixes are easier before real users and data arrive. We can work with a staging environment and a frozen release candidate."
+   },
+   {
+    "type": "h3",
+    "text": "Will a Security Audit Affect My Website's Performance or Availability?"
+   },
+   {
+    "type": "p",
+    "text": "Code review has no effect on your live site. Hands-on testing is done on staging by default. If production testing is needed, we agree on the time window, the request rate and the accounts in advance."
+   },
+   {
+    "type": "h3",
+    "text": "How Are Security Vulnerabilities Prioritized?"
+   },
+   {
+    "type": "p",
+    "text": "We rate each vulnerability by impact and by how easy it is to exploit, using a scale based on CVSS. Issues that expose data, money or admin access come first. The report states clearly what to fix before release and what can be scheduled."
+   },
+   {
+    "type": "h2",
+    "text": "Get in Touch for Expert Support"
+   },
+   {
+    "type": "note",
+    "text": "[Форма зворотного зв'язку]"
+   }
+  ]
+ },
+ {
+  "name": "Mobile Application Security Audit",
+  "path": "/application-security-audit/mobile-app",
+  "title": "Mobile App Security Audit for iOS & Android Applications",
+  "description": "Identify vulnerabilities and security risks through a mobile application security audit designed to strengthen the protection of iOS and Android applications.",
+  "blocks": [
+   {
+    "type": "h1",
+    "text": "Mobile App Security Audit"
+   },
+   {
+    "type": "p",
+    "text": "Once your app is in the App Store or Google Play, anyone can download it, unpack it and study how it works. What they find depends on decisions your team made months ago."
+   },
+   {
+    "type": "p",
+    "text": "A mobile app security audit from Krasty Soft shows you those decisions from an attacker's point of view. We review the app and the backend it talks to, test how it stores and sends data, and give you a ranked list of fixes for both iOS and Android."
+   },
+   {
+    "type": "h2",
+    "text": "When Does Your Business Need a Mobile App Security Audit?"
+   },
+   {
+    "type": "p",
+    "text": "Mobile apps often hold more personal data than websites: location, contacts, health records, payment details. An audit makes sense in these situations:"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "Before the first public release or a major version update.",
+     "When the app handles payments, medical data, identity documents or other sensitive information.",
+     "When a partner, bank or enterprise client asks for a security report before integration.",
+     "Before compliance checks such as HIPAA, PCI DSS or GDPR.",
+     "When the app was built by an external agency and your team has not reviewed its code.",
+     "After a suspicious event, such as fake accounts, cloned apps or unusual API traffic."
+    ]
+   },
+   {
+    "type": "h2",
+    "text": "What Is Included in Our Mobile Application Security Audit"
+   },
+   {
+    "type": "p",
+    "text": "A mobile application security audit looks at the app on the device, the network traffic and the server. We follow the OWASP Mobile Application Security Verification Standard (MASVS) and adapt it to your product."
+   },
+   {
+    "type": "h3",
+    "text": "Mobile Application Code Review"
+   },
+   {
+    "type": "p",
+    "text": "We review the source code of the app, whether it is native Swift or Kotlin, React Native or Flutter. Our review looks for hardcoded keys, unsafe use of web views, weak deep link handling, debug features left in release builds and insecure use of platform APIs."
+   },
+   {
+    "type": "p",
+    "text": "Cross-platform apps need extra care. A React Native or Flutter bundle is easier to read than many teams expect, so any key or business rule shipped inside it should be treated as public."
+   },
+   {
+    "type": "h3",
+    "text": "Data Storage and Encryption Assessment"
+   },
+   {
+    "type": "p",
+    "text": "We check what the app keeps on the device and how. Tokens, personal data and cached files must be stored in the Keychain or Keystore, not in plain preferences or local databases."
+   },
+   {
+    "type": "p",
+    "text": "We also review encryption: the algorithms in use, how keys are generated and stored, and whether sensitive storage is cleared on logout. Screenshots, logs, the clipboard and backups are checked for leaks too."
+   },
+   {
+    "type": "h3",
+    "text": "Authentication and Access Control Testing"
+   },
+   {
+    "type": "p",
+    "text": "We test sign-in, biometric unlock, one-time codes and session handling. We check whether credentials or tokens can be stolen or reused, and whether a session survives logout or a password change."
+   },
+   {
+    "type": "p",
+    "text": "On the server side, we test authorization for every action the app can perform. A mobile client is easy to modify, so the server must never trust it to decide what a user may see or do."
+   },
+   {
+    "type": "h3",
+    "text": "Network and API Security Testing"
+   },
+   {
+    "type": "p",
+    "text": "We intercept and analyze the app's traffic to confirm that all connections use TLS and that certificate validation cannot be bypassed easily. Then we test the backend APIs the app calls for authentication, rate limits and excessive data in responses."
+   },
+   {
+    "type": "p",
+    "text": "We also list the third-party SDKs in the app, such as analytics, ads, crash reporting and chat, and check what data each one sends and where. These SDKs are a common source of unexpected data sharing."
+   },
+   {
+    "type": "h3",
+    "text": "Reverse Engineering and Tampering Protection"
+   },
+   {
+    "type": "p",
+    "text": "We decompile the app the way an attacker would, to see which secrets and logic are exposed. We also test root and jailbreak detection, integrity checks, code obfuscation and certificate pinning, and how hard it is to bypass each of them."
+   },
+   {
+    "type": "h2",
+    "text": "Common Mobile Application Security Risks and Vulnerabilities"
+   },
+   {
+    "type": "p",
+    "text": "Our testing is based on the OWASP Mobile Top 10. The issues we find most often in mobile apps are:"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "Insecure data storage: tokens, passwords or personal data saved in plain text on the device.",
+     "Hardcoded secrets: API keys and service credentials embedded in the app bundle.",
+     "Weak authentication: sessions that never expire, or local checks that can be skipped.",
+     "Insecure communication: missing or misconfigured TLS and certificate validation.",
+     "Broken server-side authorization: the API trusts whatever the app sends.",
+     "Excessive permissions and data collection that put user privacy at risk.",
+     "Insufficient protection against reverse engineering, cloned apps and modified builds."
+    ]
+   },
+   {
+    "type": "h2",
+    "text": "Our Mobile App Security Audit Process"
+   },
+   {
+    "type": "note",
+    "text": "[Інфографіка: 5 етапів процесу]"
+   },
+   {
+    "type": "p",
+    "text": "Each mobile app security assessment follows the same five steps."
+   },
+   {
+    "type": "ol",
+    "items": [
+     "Scoping. We agree on platforms, app versions, user roles and backend components, and confirm the price and timeline.",
+     "Setup. You provide test builds, test accounts and, ideally, access to the source code.",
+     "Analysis. We combine static analysis of the code and binary with dynamic testing on real devices.",
+     "Reporting. Each confirmed vulnerability is rated by severity and explained with impact, evidence and a fix.",
+     "Debrief and verification. We review the results with your developers and can retest the fixed build."
+    ]
+   },
+   {
+    "type": "h2",
+    "text": "Benefits of a Professional Mobile App Audit"
+   },
+   {
+    "type": "p",
+    "text": "A professional mobile application security assessment gives your team clarity and your users confidence:"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "Protected user data on the device, in transit and on the server.",
+     "Lower risk of fraud, account takeover and cloned apps.",
+     "Smoother app store reviews and partner security checks.",
+     "Evidence for compliance with privacy and data protection rules.",
+     "A clear, prioritized fix list for your iOS and Android developers."
+    ]
+   },
+   {
+    "type": "h2",
+    "text": "Industries & Use Cases"
+   },
+   {
+    "type": "p",
+    "text": "We audit mobile apps where trust is part of the product: telemedicine and patient apps, banking and payment apps, ecommerce and loyalty apps, and field service tools used by employees. The test plan reflects the data each app holds."
+   },
+   {
+    "type": "p",
+    "text": "For a health app, the focus is on records stored offline and shared with other apps. For a fintech app, it is on transaction signing, session timeouts and protection against modified builds."
+   },
+   {
+    "type": "p",
+    "text": "A mobile audit can be ordered on its own or as part of a broader [application security audit](/application-security-audit) together with your web app and APIs."
+   },
+   {
+    "type": "h2",
+    "text": "Ready to Secure Your Mobile App?"
+   },
+   {
+    "type": "note",
+    "text": "[Button: Get in Touch]"
+   },
+   {
+    "type": "p",
+    "text": "Tell us about your app, its platforms and your release date. We will suggest the right scope and send a fixed quote."
+   },
+   {
+    "type": "h2",
+    "text": "FAQ About Mobile App Security Audit"
+   },
+   {
+    "type": "p",
+    "text": "Here are answers to the questions we are asked most often about mobile audits."
+   },
+   {
+    "type": "h3",
+    "text": "Can You Audit a Mobile App Before It Is Released?"
+   },
+   {
+    "type": "p",
+    "text": "Yes, and it is the best time to do it. We can work with TestFlight or internal test builds, so issues are fixed before the app reaches the stores. Fixing a flaw before release is also cheaper, because you do not have to wait for users to update."
+   },
+   {
+    "type": "h3",
+    "text": "Can You Perform a Security Audit Without Access to the Source Code?"
+   },
+   {
+    "type": "p",
+    "text": "Yes. We can analyze the compiled app, its storage and its network traffic, as an outside attacker would. Access to the source code makes the audit deeper and faster, so we recommend it when possible."
+   },
+   {
+    "type": "h3",
+    "text": "Can a Mobile App Security Audit Detect Reverse Engineering and Code Tampering Risks?"
+   },
+   {
+    "type": "p",
+    "text": "Yes. We decompile the app, look for exposed secrets and logic, and test how easily integrity checks, root detection and pinning can be bypassed. The report explains which protections are worth adding for your risk level."
+   },
+   {
+    "type": "h3",
+    "text": "How Long Does a Mobile App Security Assessment Take?"
+   },
+   {
+    "type": "p",
+    "text": "A typical assessment of one app on both platforms takes one to two weeks. The timeline depends on the number of features, user roles and backend services in scope."
+   },
+   {
+    "type": "h2",
+    "text": "Get in Touch for Expert Support"
+   },
+   {
+    "type": "note",
+    "text": "[Форма зворотного зв'язку]"
+   }
+  ]
+ },
+ {
+  "name": "API Audit",
+  "path": "/api-security-audit",
+  "title": "API Security Audit for Secure & Reliable Integrations",
+  "description": "We provide API security audit services to identify vulnerabilities, evaluate authentication and authorization mechanisms, and ensure secure data exchange across integrated systems.",
+  "blocks": [
+   {
+    "type": "h1",
+    "text": "API Security Audit"
+   },
+   {
+    "type": "p",
+    "text": "APIs carry the most valuable traffic your product has: customer records, payments, internal operations. They are also easy to call directly, without your app's interface and the limits it imposes."
+   },
+   {
+    "type": "p",
+    "text": "An API security audit from Krasty Soft checks whether each endpoint protects that traffic on its own. We review the code, test every route with real requests and deliver a ranked list of fixes with exact locations and clear guidance."
+   },
+   {
+    "type": "h2",
+    "text": "When Does Your Business Need an API Security Audit?"
+   },
+   {
+    "type": "p",
+    "text": "An API needs its own review whenever more people or systems start to depend on it. Common triggers include:"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "You are opening a public or partner API, or publishing an SDK.",
+     "Your mobile app, web app and integrations all share one backend.",
+     "You are moving from a monolith to microservices or adding a new gateway.",
+     "A partner or enterprise client requires a security assessment before integration.",
+     "You process payments, health data or personal data under PCI DSS, HIPAA or GDPR.",
+     "You have added AI features that call model APIs or expose new endpoints."
+    ]
+   },
+   {
+    "type": "p",
+    "text": "Teams often ask us to audit API endpoints before they are announced, because changing a public contract later is slow and expensive."
+   },
+   {
+    "type": "h2",
+    "text": "What Is Included in Our API Security Audit"
+   },
+   {
+    "type": "p",
+    "text": "Our API audit combines code review with hands-on testing of the running service. We follow the OWASP API Security Top 10 and extend it with checks for your business logic. The scope usually covers five areas."
+   },
+   {
+    "type": "h3",
+    "text": "API Authentication and Authorization Testing"
+   },
+   {
+    "type": "p",
+    "text": "We check how clients prove who they are: API keys, sessions, OAuth flows and JWT tokens. We look at how each token is issued, signed, validated, refreshed and revoked, and whether it can be forged, replayed or used after logout."
+   },
+   {
+    "type": "p",
+    "text": "Then we test authorization on every route. A valid token must not give access to someone else's data, and each scope must allow only what it promises."
+   },
+   {
+    "type": "h3",
+    "text": "API Endpoint and Access Control Assessment"
+   },
+   {
+    "type": "p",
+    "text": "We map every endpoint, including old versions, debug routes and internal services that are reachable from outside. For each one we test access control by object, by field and by function."
+   },
+   {
+    "type": "p",
+    "text": "The most common finding is broken object-level authorization: change an ID in the URL and you get another customer's record. We test for it systematically, with accounts in different roles and tenants."
+   },
+   {
+    "type": "h3",
+    "text": "Data Protection and Input Validation"
+   },
+   {
+    "type": "p",
+    "text": "We check what each response returns. APIs often send whole database objects, including fields the interface never shows, such as internal notes, other users' emails or password hashes."
+   },
+   {
+    "type": "p",
+    "text": "On input, we test validation, type handling and limits: injection, mass assignment of fields like \"role\" or \"balance\", oversized payloads and file uploads."
+   },
+   {
+    "type": "h3",
+    "text": "API Configuration and Infrastructure Security"
+   },
+   {
+    "type": "p",
+    "text": "We review rate limiting, CORS, TLS, error handling, logging and the gateway or proxy in front of the service. Misconfiguration here can expose stack traces or secrets and turn a small bug into a large incident."
+   },
+   {
+    "type": "p",
+    "text": "We also check how services talk to each other inside your network. Internal APIs are often left without authentication on the assumption that only trusted services can reach them, and one exposed service breaks that assumption."
+   },
+   {
+    "type": "h3",
+    "text": "Third-Party API and Integration Security"
+   },
+   {
+    "type": "p",
+    "text": "Your API also consumes other APIs. We check how webhooks are verified, how outgoing requests are restricted and how keys for payment, email and cloud services are stored and rotated."
+   },
+   {
+    "type": "p",
+    "text": "An AI API security audit adds checks for endpoints that call language models: prompt injection, leaks of system prompts and private data, and cost abuse through unlimited requests. For autonomous agents with tools, we recommend a dedicated [AI agent security audit](/ai-agent-security-audit)."
+   },
+   {
+    "type": "h2",
+    "text": "Common API Security Risks and Vulnerabilities"
+   },
+   {
+    "type": "p",
+    "text": "Most API breaches come from a short list of mistakes. These are the ones we test for in every engagement:"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "Broken object-level authorization: users access records that belong to others.",
+     "Broken authentication: weak tokens, missing expiry or flawed login and refresh flows.",
+     "Excessive data exposure: responses include fields the client should never see.",
+     "Missing rate limits: brute force, scraping and expensive requests are not blocked.",
+     "Broken function-level authorization: regular users can call admin actions.",
+     "Server-side request forgery: the API can be made to fetch internal resources.",
+     "Forgotten endpoints: old versions and test routes that still run without protection."
+    ]
+   },
+   {
+    "type": "h2",
+    "text": "Our API Security Audit Process"
+   },
+   {
+    "type": "note",
+    "text": "[Інфографіка: 5 етапів процесу]"
+   },
+   {
+    "type": "p",
+    "text": "Each engagement follows the same clear steps, from scoping to verified fixes."
+   },
+   {
+    "type": "ol",
+    "items": [
+     "Scoping. We agree on the services, versions and roles in scope and confirm the price and timeline.",
+     "Discovery. We study your code, specification files and traffic to build a full map of endpoints.",
+     "Testing. We test each endpoint with penetration techniques on staging and confirm every vulnerability by hand.",
+     "Reporting. Findings are ranked by severity, with requests that reproduce them and recommended fixes.",
+     "Debrief and retest. We review the report with your developers and verify the fixes once they ship."
+    ]
+   },
+   {
+    "type": "h2",
+    "text": "Benefits of a Professional API Audit"
+   },
+   {
+    "type": "p",
+    "text": "A professional assessment protects both your data and your integrations:"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "Customer data stays private, even when attackers call the API directly.",
+     "Partners and clients get evidence that your platform is safe to integrate with.",
+     "Hidden and outdated endpoints are found and removed.",
+     "Abuse and runaway costs are prevented with proper limits.",
+     "Your developers get specific, reproducible fixes instead of generic advice."
+    ]
+   },
+   {
+    "type": "h2",
+    "text": "Industries & Use Cases"
+   },
+   {
+    "type": "p",
+    "text": "We audit APIs for fintech platforms, healthcare systems, SaaS products and ecommerce backends. Typical cases include public developer APIs, mobile backends, partner integrations, payment and payout services, and internal APIs exposed through a gateway."
+   },
+   {
+    "type": "p",
+    "text": "In multi-tenant SaaS products, the key question is whether one tenant can ever reach another tenant's data. We test it with separate accounts in each role."
+   },
+   {
+    "type": "p",
+    "text": "An API audit can be ordered on its own or as part of a broader [application security audit](/application-security-audit) that covers your web and mobile apps as well."
+   },
+   {
+    "type": "h2",
+    "text": "Ready to Secure Your APIs?"
+   },
+   {
+    "type": "note",
+    "text": "[Button: Get in Touch]"
+   },
+   {
+    "type": "p",
+    "text": "Tell us about your API, its consumers and your deadline. We will suggest a scope and send a fixed quote."
+   },
+   {
+    "type": "h2",
+    "text": "FAQ About API Security Audit"
+   },
+   {
+    "type": "p",
+    "text": "Here are short answers to the questions we hear most often about API audits."
+   },
+   {
+    "type": "h3",
+    "text": "Does an API Audit Include Third-Party Integrations?"
+   },
+   {
+    "type": "p",
+    "text": "Yes. We review how your API calls and receives data from third parties, including webhooks, payment providers and cloud services. We do not test the providers' own systems."
+   },
+   {
+    "type": "h3",
+    "text": "Does an API Security Audit Cover REST, GraphQL, and SOAP APIs?"
+   },
+   {
+    "type": "p",
+    "text": "Yes. We test all three. GraphQL gets extra checks for introspection, query depth, batching and field-level access, and SOAP gets checks for XML parsing issues."
+   },
+   {
+    "type": "h3",
+    "text": "Can an API Security Audit Identify Business Logic Vulnerabilities?"
+   },
+   {
+    "type": "p",
+    "text": "Yes, and this is where manual testing matters most. Scanners cannot tell that a refund should not exceed a payment or that a step should not be skipped. We learn how your application should behave and test where it does not."
+   },
+   {
+    "type": "h3",
+    "text": "How Often Should APIs Undergo Security Audits?"
+   },
+   {
+    "type": "p",
+    "text": "We recommend an audit before any public release, after major changes to authentication or data models, and at least once a year. APIs that handle payments or sensitive data benefit from more frequent reviews."
+   },
+   {
+    "type": "h2",
+    "text": "Get in Touch for Expert Support"
+   },
+   {
+    "type": "note",
+    "text": "[Форма зворотного зв'язку]"
+   }
+  ]
+ },
+ {
+  "name": "AI Agent Security Audit",
+  "path": "/ai-agent-security-audit",
+  "title": "AI Agent Security Audit for Secure AI Systems",
+  "description": "We deliver AI agent security assessment services to identify vulnerabilities, mitigate prompt injection risks, and prevent data exposure.",
+  "blocks": [
+   {
+    "type": "h1",
+    "text": "AI Agent Security Audit"
+   },
+   {
+    "type": "p",
+    "text": "An AI agent does more than answer questions. It reads email, tickets and web pages, calls tools, runs code and acts on your systems with real permissions. Any text it reads can try to change what it does next."
+   },
+   {
+    "type": "p",
+    "text": "An AI agent security audit from Krasty Soft tests what an attacker could make your agent do. We review the code and configuration around the model, trace every source of untrusted text to the tools it can reach, and give you a ranked list of fixes."
+   },
+   {
+    "type": "h2",
+    "text": "When Should You Conduct an AI Agent Security Audit?"
+   },
+   {
+    "type": "p",
+    "text": "The risk of an agent grows with its access. We recommend an audit at these points:"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "Before you give an agent access to customer data, payments, email or production systems.",
+     "Before launching an agent that reads content from users, the web or public repositories.",
+     "When you connect new tools, MCP servers or third-party integrations.",
+     "When moving from a single assistant to a multi-agent workflow.",
+     "Before an enterprise sale or a compliance review that asks how AI risks are controlled.",
+     "After an incident, such as an agent taking an action nobody approved."
+    ]
+   },
+   {
+    "type": "h2",
+    "text": "What Is Included in Our AI Agent Security Audit"
+   },
+   {
+    "type": "p",
+    "text": "Each AI agent security assessment looks at the whole system, not only the prompt. The model's behaviour changes between versions, but the code that decides what it can reach does not. That is where we focus, across five areas."
+   },
+   {
+    "type": "h3",
+    "text": "AI Agent Architecture and Configuration Review"
+   },
+   {
+    "type": "p",
+    "text": "We map the agent's components: models, system prompts, tools, memory, retrieval sources and the services it runs on. Then we check the configuration: which actions are enabled, which are granted by wildcard, where keys are stored and which safeguards are switched off by default."
+   },
+   {
+    "type": "h3",
+    "text": "Prompt Injection and Instruction Manipulation Testing"
+   },
+   {
+    "type": "p",
+    "text": "We find every place where text from outside reaches the model's context: chat messages, documents, web pages, emails, issue comments and tool results. For each one we check who can write that text and which tools the agent holds while reading it."
+   },
+   {
+    "type": "p",
+    "text": "We then test direct and indirect prompt injection against those paths. The goal is not a clever jailbreak, but proof of whether planted instructions can trigger a real action."
+   },
+   {
+    "type": "h3",
+    "text": "Tool Access and Permission Security Assessment"
+   },
+   {
+    "type": "p",
+    "text": "We review every tool and integration the agent can call, and compare its permissions with what the task really needs. Agents that read untrusted content should hold the smallest possible set of tools."
+   },
+   {
+    "type": "p",
+    "text": "We also check how high-risk actions are approved. An approval that arrives after the email is sent or the file is deleted protects nothing."
+   },
+   {
+    "type": "h3",
+    "text": "Data Access, Memory and Context Security"
+   },
+   {
+    "type": "p",
+    "text": "We test whether the agent can reveal private data, system prompts or other users' conversations. For RAG systems, we review how documents are ingested, how embeddings are stored and whether retrieval respects each user's permissions."
+   },
+   {
+    "type": "p",
+    "text": "We also check memory poisoning: whether an attacker can plant false facts or instructions that the agent will trust in later sessions."
+   },
+   {
+    "type": "h3",
+    "text": "Code Execution and Multi-Agent Communication Security"
+   },
+   {
+    "type": "p",
+    "text": "If your agent runs code, we review the sandbox: file system access, network rules, secrets in the environment and escape paths to the host. In multi-agent systems, we check what each agent trusts from the others and whether a compromised agent can pass instructions up the chain."
+   },
+   {
+    "type": "h2",
+    "text": "Common AI Agent Security Risks and Vulnerabilities"
+   },
+   {
+    "type": "p",
+    "text": "An AI agent vulnerability assessment usually uncovers issues from this list, which follows the OWASP Top 10 for LLM Applications:"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "Indirect prompt injection through documents, web pages, emails or comments.",
+     "Excessive agency: tools and permissions far beyond what the task needs.",
+     "Data leakage of system prompts, credentials and customer data.",
+     "Identity confusion: trust granted by a display name or another field the sender controls.",
+     "Poisoned memory and RAG sources that persist across sessions.",
+     "Unsafe code execution and weak sandboxing.",
+     "Missing limits on cost, loops and the number of actions per task."
+    ]
+   },
+   {
+    "type": "p",
+    "text": "These are not theoretical. In our review of Open Session, a [comment from any GitHub account reached an agent with admin tools](/blog/ai-agent-prompt-injection-pr-comments). In another project, a [display name was enough to get owner-level access](/blog/ai-agent-security-review-access-control) to the agent. Both teams fixed the issues after our reports."
+   },
+   {
+    "type": "h2",
+    "text": "Our AI Agent Security Audit Process"
+   },
+   {
+    "type": "note",
+    "text": "[Інфографіка: 5 етапів процесу]"
+   },
+   {
+    "type": "p",
+    "text": "Our process is designed to give you findings you can fix, not a list of model quirks."
+   },
+   {
+    "type": "ol",
+    "items": [
+     "Scoping. We agree on the agents, tools, data sources and environments in scope.",
+     "Mapping. We trace every input that reaches a prompt and every tool and credential the agent can use.",
+     "Review and testing. We review the code statically and, where agreed, test injection paths in a safe environment.",
+     "Reporting. Each finding is tied to files and lines, rated by severity and paired with a remediation step.",
+     "Debrief and retest. We walk your team through the results and verify the fixes."
+    ]
+   },
+   {
+    "type": "h2",
+    "text": "Benefits of a Professional AI Agent Security Audit"
+   },
+   {
+    "type": "p",
+    "text": "A professional audit gives you control over a system that is hard to predict:"
+   },
+   {
+    "type": "ul",
+    "items": [
+     "Your agent cannot be turned against your users or your infrastructure.",
+     "Customer data and user privacy are protected in prompts, logs and memory.",
+     "High-risk actions require approval at the right moment.",
+     "You have evidence for compliance reviews and enterprise security questionnaires.",
+     "Your team gets design patterns that keep new tools and agents safe."
+    ]
+   },
+   {
+    "type": "h2",
+    "text": "Industries & Use Cases"
+   },
+   {
+    "type": "p",
+    "text": "We review coding agents, customer support agents, inbox and calendar assistants, internal knowledge bots built on RAG, and agent platforms that host other people's agents. The audit fits AI startups and SaaS companies adding agent features to an existing product. It is especially important in healthcare, fintech and legal services, where an agent that exposes data creates legal and financial risk."
+   },
+   {
+    "type": "p",
+    "text": "We also check reliability, not only security. In our [AI agent gateway review](/blog/ai-agent-reliability-silent-failures), large prompts failed silently with no error for support to see."
+   },
+   {
+    "type": "h2",
+    "text": "Ready to Secure Your AI Agents?"
+   },
+   {
+    "type": "note",
+    "text": "[Button: Get in Touch]"
+   },
+   {
+    "type": "p",
+    "text": "Tell us what your agent can read and what it can do. We will suggest the right scope and send a fixed quote."
+   },
+   {
+    "type": "h2",
+    "text": "FAQ About AI Agent Security Audit and Assessment"
+   },
+   {
+    "type": "p",
+    "text": "These are the questions teams ask us most often before an agent audit."
+   },
+   {
+    "type": "h3",
+    "text": "Can You Assess the Security of Multi-Agent Systems?"
+   },
+   {
+    "type": "p",
+    "text": "Yes. We map how agents pass tasks and messages to each other, which agent holds which tools, and where untrusted text can travel through the chain. The weakest agent often decides the security of the whole system."
+   },
+   {
+    "type": "h3",
+    "text": "Are Third-Party Tools and API Integrations Included in the Assessment?"
+   },
+   {
+    "type": "p",
+    "text": "Yes. We review every tool, MCP server and API the agent can call, including the permissions and credentials it uses. We test how your system uses them, not the providers' own infrastructure."
+   },
+   {
+    "type": "h3",
+    "text": "What Deliverables Can We Expect After the Assessment?"
+   },
+   {
+    "type": "p",
+    "text": "You receive a written report with every finding ranked by severity, tied to specific files and lines, and paired with a recommended fix. We also hold a walkthrough session and can verify the fixes."
+   },
+   {
+    "type": "h3",
+    "text": "How Often Should AI Agents Undergo Security Testing?"
+   },
+   {
+    "type": "p",
+    "text": "Test before launch, whenever you add tools, data sources or agents, and after major model upgrades. Agent capabilities change fast, so a yearly audit alone is rarely enough. Between audits, keep a set of planted-instruction tests in your test suite and run it on every release."
+   },
+   {
+    "type": "h2",
+    "text": "Get in Touch for Expert Support"
+   },
+   {
+    "type": "note",
+    "text": "[Форма зворотного зв'язку]"
+   }
+  ]
+ }
+]

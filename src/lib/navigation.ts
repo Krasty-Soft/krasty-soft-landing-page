@@ -1,8 +1,19 @@
-type NavigationItem = {
+export type NavigationItem = {
   slug: string;
   label: string;
   description: string;
+  /** Column heading in the desktop Services dropdown */
+  group?: string;
+  /** Sub-services shown directly under their parent in every menu */
+  children?: NavigationItem[];
 };
+
+/** Items with their children inlined after them, for flat lists (sitemap, llms.txt) */
+export const flattenNav = (items: unknown): NavigationItem[] =>
+  (Array.isArray(items) ? (items as NavigationItem[]) : []).flatMap((item) => [
+    item,
+    ...(item.children ?? []),
+  ]);
 
 type NavigationConfig = {
   [key: string]: NavigationItem | NavigationItem[];
@@ -56,26 +67,67 @@ const PAGES: NavigationConfig = {
       slug: "ai-development",
       label: "AI Development",
       description: "Production AI — agents, LLM integrations, RAG, and copilots wired into your products.",
+      group: "Development",
     },
     {
       slug: "ai-automation",
       label: "AI Automation",
       description: "Automate document processing, support triage, and multi-step workflows with AI agents.",
+      group: "Development",
     },
     {
       slug: "custom-software-development",
       label: "Custom Software Development",
       description: "End-to-end custom software, MVPs, and legacy modernization built around your business.",
+      group: "Development",
     },
     {
       slug: "backend-development",
       label: "Backend Development",
       description: "Scalable APIs, database architecture, authentication, and cloud infrastructure.",
+      group: "Development",
     },
     {
       slug: "frontend-development",
       label: "Frontend Development",
       description: "Fast, accessible React and Next.js interfaces with strong Core Web Vitals.",
+      group: "Development",
+    },
+    {
+      slug: "code-audit",
+      label: "Code Audit",
+      description: "Manual review of architecture, quality, security and performance, with a ranked fix list.",
+      group: "Audit & Security",
+    },
+    {
+      slug: "application-security-audit",
+      label: "Application Security Audit",
+      description: "Source code review, authentication and access control testing for your app.",
+      group: "Audit & Security",
+      children: [
+        {
+          slug: "application-security-audit/web-app",
+          label: "Web Application Security Audit",
+          description: "Frontend, server and APIs of browser-based products.",
+        },
+        {
+          slug: "application-security-audit/mobile-app",
+          label: "Mobile Application Security Audit",
+          description: "iOS and Android apps and the backend they talk to.",
+        },
+      ],
+    },
+    {
+      slug: "api-security-audit",
+      label: "API Security Audit",
+      description: "Authentication, access control and data exposure across REST and GraphQL APIs.",
+      group: "Audit & Security",
+    },
+    {
+      slug: "ai-agent-security-audit",
+      label: "AI Agent Security Audit",
+      description: "Prompt injection, tool permissions, memory and data leakage in LLM agents.",
+      group: "Audit & Security",
     },
   ],
   technologies: [

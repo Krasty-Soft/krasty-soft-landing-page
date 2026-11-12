@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import { X, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui";
-import PAGES from "@/lib/navigation";
+import PAGES, { type NavigationItem } from "@/lib/navigation";
 
 interface MobileMenuProps {
   isOpen: boolean;
@@ -160,18 +160,33 @@ export const MobileMenu = ({
             </div>
             <div className="space-y-2">
               {(Array.isArray(PAGES.services) ? PAGES.services : []).map(
-                (service: any) => (
-                  <Link
-                    key={service.slug}
-                    href={`/${service.slug}`}
-                    onClick={onClose}
-                    className="block p-3 px-4 rounded-lg transition-colors duration-200"
-                    style={{
-                      color: "var(--text-secondary)",
-                    }}
-                  >
-                    {service.label}
-                  </Link>
+                (service: NavigationItem) => (
+                  <div key={service.slug}>
+                    <Link
+                      href={`/${service.slug}`}
+                      onClick={onClose}
+                      className="block p-3 px-4 rounded-lg transition-colors duration-200"
+                      style={{
+                        color: "var(--text-secondary)",
+                      }}
+                    >
+                      {service.label}
+                    </Link>
+                    {service.children?.map((child) => (
+                      <Link
+                        key={child.slug}
+                        href={`/${child.slug}`}
+                        onClick={onClose}
+                        className="block py-2 pr-4 pl-8 rounded-lg text-sm transition-colors duration-200"
+                        style={{
+                          color: "var(--text-secondary)",
+                        }}
+                      >
+                        <span style={{ color: "var(--brand-red)" }}>↳ </span>
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
                 ),
               )}
             </div>

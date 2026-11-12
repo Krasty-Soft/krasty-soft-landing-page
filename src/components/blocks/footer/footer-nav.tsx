@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Mail, MapPin, Star } from "lucide-react";
-import PAGES from "@/lib/navigation";
+import PAGES, { flattenNav } from "@/lib/navigation";
 import { CLUTCH, CLUTCH_RATING_OUT_OF_5 } from "@/lib/clutch";
 
 // Expanded footer navigation required by the usability audit: column links to
@@ -11,8 +11,14 @@ import { CLUTCH, CLUTCH_RATING_OUT_OF_5 } from "@/lib/clutch";
 // omitted until those pages exist — linking to 404s would be worse than not
 // linking at all.
 
-type NavItem = { slug: string; label: string };
+type NavItem = { slug: string; label: string; isChild?: boolean };
 const asArray = (v: unknown): NavItem[] => (Array.isArray(v) ? (v as NavItem[]) : []);
+
+// Audit services get their own column, with sub-services indented under their parent.
+const AUDIT_ITEMS: NavItem[] = asArray(PAGES.services)
+  .filter((s) => (s as { group?: string }).group === "Audit & Security")
+  .flatMap((s) => flattenNav([s]).map((item, i) => ({ ...item, isChild: i > 0 })));
+const AUDIT_SLUGS = new Set(AUDIT_ITEMS.map((s) => s.slug));
 
 const CONTACT_EMAIL = "contact@krastysoft.com";
 const CLUTCH_PROFILE = CLUTCH.profileUrl;
@@ -31,7 +37,8 @@ const linkCls =
 
 export const FooterNav = () => {
   const columns: { title: string; items: NavItem[] }[] = [
-    { title: "Services", items: asArray(PAGES.services) },
+    { title: "Services", items: asArray(PAGES.services).filter((s) => !AUDIT_SLUGS.has(s.slug)) },
+    { title: "Audit & Security", items: AUDIT_ITEMS },
     { title: "Industries", items: asArray(PAGES.industries) },
     { title: "Technologies", items: asArray(PAGES.technologies) },
     { title: "Company", items: COMPANY_LINKS },
@@ -48,7 +55,7 @@ export const FooterNav = () => {
         borderTop: "1px solid var(--border-default)",
       }}
     >
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-[repeat(5,minmax(0,1fr))_minmax(0,1.5fr)] gap-x-6 gap-y-8">
         {columns.map((col) => (
           <nav key={col.title} aria-label={col.title}>
             <div className={columnTitle} style={{ color: "var(--text-muted)" }}>
@@ -58,7 +65,7 @@ export const FooterNav = () => {
               <Link
                 key={item.slug}
                 href={`/${item.slug}`}
-                className={linkCls}
+                className={item.isChild ? `${linkCls} pl-4` : linkCls}
                 style={{ color: "var(--text-secondary)" }}
               >
                 {item.label}
