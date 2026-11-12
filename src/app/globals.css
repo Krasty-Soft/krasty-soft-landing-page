@@ -264,6 +264,27 @@ html {
     font-size: 0.875em;
 }
 
+/* Multi-line code snippets in blog posts (see isCodeBlock in lib/render.ts) */
+.prose pre {
+    margin: 1.5rem 0;
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    background-color: rgba(127, 127, 127, 0.1);
+    border: 1px solid rgba(127, 127, 127, 0.2);
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+}
+
+.prose pre code {
+    color: var(--text-primary);
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-size: inherit;
+    white-space: pre;
+}
+
 .prose blockquote {
     border-left: 4px solid var(--brand-red);
     padding-left: 1.5rem;

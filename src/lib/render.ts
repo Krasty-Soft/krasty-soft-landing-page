@@ -71,6 +71,23 @@ function normalizeHref(href: string): string {
     return hash === '#contacts' ? hash : relative
 }
 
+function isCodeBlock(node: RichTextNode): boolean {
+    const parts = (node.content || []).filter(
+        (child) => !(child.nodeType === 'text' && !child.value),
+    )
+    return (
+        parts.length > 0 &&
+        parts.every(
+            (child) =>
+                child.nodeType === 'text' &&
+                (child as any).marks?.some(
+                    (mark: { type: string }) => mark.type === 'code',
+                ),
+        ) &&
+        parts.some((child) => child.value?.includes('\n'))
+    )
+}
+
 function renderRichTextNode(
     node: RichTextNode,
     key: number | string,
@@ -88,6 +105,17 @@ function renderRichTextNode(
         return isCode
             ? React.createElement('code', { key }, value || '')
             : React.createElement(React.Fragment, { key }, value || '')
+    }
+
+    // Code block. Contentful rich text has no code-block node, so a snippet is
+    // a paragraph set entirely in the code mark, with Shift+Enter line breaks.
+    // Requiring a line break keeps one-word inline-code paragraphs as they were.
+    if (nodeType === 'paragraph' && isCodeBlock(node)) {
+        return React.createElement(
+            'pre',
+            { key },
+            React.createElement('code', null, extractTextContent(node)),
+        )
     }
 
     // Paragraph
