@@ -1,0 +1,73 @@
+/* Krasty Soft — component renditions for the brand book (mirrors src/components/ui) */
+.ks-row { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+.ks-stack { display: grid; gap: 16px; }
+
+/* Button — rounded-full, border 1px, font-medium */
+.ks-btn { display: inline-flex; align-items: center; justify-content: center; gap: var(--tw-2); border-radius: var(--radius-full); border: 1px solid transparent; font-family: inherit; font-weight: 500; white-space: nowrap; cursor: pointer; transition: all 200ms cubic-bezier(0.4, 0, 0.2, 1); }
+.ks-btn:focus-visible { outline: 2px solid var(--brand-red); outline-offset: 2px; }
+.ks-btn:disabled { opacity: .5; cursor: not-allowed; }
+.ks-btn--sm { padding: var(--tw-2) var(--tw-4); font-size: 14px; line-height: 20px; }
+.ks-btn--md { padding: var(--tw-3) var(--tw-6); font-size: 16px; line-height: 24px; }
+.ks-btn--lg { padding: var(--tw-4) var(--tw-8); font-size: 18px; line-height: 28px; gap: var(--tw-3); }
+.ks-btn--xl { padding: 20px var(--tw-10); font-size: 20px; line-height: 28px; gap: var(--tw-3); }
+.ks-btn--accent { background: var(--brand-red); color: var(--text-primary); border-color: var(--brand-red); }
+.ks-btn--accent:hover { background: var(--brand-red-light); box-shadow: var(--shadow-red-md); }
+.ks-btn--primary { background: var(--bg-elevated); color: var(--text-primary); border-color: var(--border-default); }
+.ks-btn--primary:hover { border-color: var(--brand-red); box-shadow: var(--shadow-red-sm); }
+.ks-btn--secondary { background: var(--bg-secondary); color: var(--text-primary); border-color: var(--border-subtle); }
+.ks-btn--secondary:hover { background: var(--bg-tertiary); border-color: var(--border-default); }
+.ks-btn--ghost { background: transparent; color: var(--text-secondary); }
+.ks-btn--ghost:hover { background: var(--state-hover); color: var(--text-primary); }
+.ks-btn--outline { background: transparent; color: var(--text-primary); border-color: var(--border-default); }
+.ks-btn--outline:hover { border-color: var(--brand-red); background: var(--state-hover); }
+
+/* Pill — case-study tag */
+.ks-pill { display: inline-flex; align-items: center; padding: 6px 14px; font-size: 12px; font-weight: 600; letter-spacing: .01em; border-radius: var(--radius-full); background: var(--pill-red-fill); border: 1px solid var(--pill-red-fill); color: var(--brand-red); }
+.ks-pill--outline { background: transparent; border-color: var(--border-default); color: var(--text-secondary); font-weight: 400; padding: 8px 16px; }
+.ks-pill--active { background: var(--brand-red); border-color: var(--brand-red); color: var(--text-primary); font-weight: 400; padding: 8px 16px; }
+
+/* StatusBadge */
+.ks-status { display: inline-flex; align-items: center; gap: var(--tw-3); padding: var(--tw-3) var(--tw-6); border-radius: var(--radius-full); border: 1px solid var(--border-red); background: var(--bg-secondary); }
+.ks-status__dot { width: 8px; height: 8px; border-radius: 50%; background: var(--brand-red); flex: none; }
+.ks-status__text { font-size: 14px; font-weight: 600; color: var(--brand-red); }
+.ks-status__sub { font-size: 12px; color: var(--text-muted); }
+.ks-status--success { border-color: rgba(0, 217, 126, 0.3); }
+.ks-status--success .ks-status__dot { background: var(--status-success); }
+.ks-status--success .ks-status__text { color: var(--status-success); }
+.ks-status--warning { border-color: rgba(255, 176, 32, 0.3); }
+.ks-status--warning .ks-status__dot { background: var(--status-warning); }
+.ks-status--warning .ks-status__text { color: var(--status-warning); }
+.ks-status--info { border-color: rgba(0, 102, 255, 0.3); }
+.ks-status--info .ks-status__dot { background: var(--status-info); }
+.ks-status--info .ks-status__text { color: var(--status-info); }
+
+/* Card — rounded-xl (12px), 1px border */
+.ks-card { border-radius: var(--radius-lg); border: 1px solid transparent; padding: var(--tw-6); transition: transform 200ms, box-shadow 200ms; min-width: 0; }
+.ks-card--default { background: var(--bg-secondary); border-color: var(--border-subtle); }
+.ks-card--elevated { background: var(--bg-elevated); border-color: var(--border-default); box-shadow: var(--shadow-card); }
+.ks-card--outline { background: transparent; border-color: var(--border-default); }
+.ks-card--ghost { background: transparent; }
+.ks-card:hover { transform: translateY(-4px) scale(1.02); }
+.ks-card__title { margin: 0 0 6px; font-size: 18px; font-weight: 600; color: var(--text-primary); }
+.ks-card__text { margin: 0; font-size: 14px; line-height: 20px; color: var(--text-muted); }
+.ks-card__tag { display: block; font-size: 12px; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px; letter-spacing: .05em; }
+
+/* CTABanner — 135deg red gradient */
+.ks-cta { position: relative; overflow: hidden; padding: 4rem 2rem; text-align: center; border-radius: var(--radius-xl); background: linear-gradient(135deg, var(--cta-red-900) 0%, var(--cta-red-800) 40%, var(--cta-red-700) 100%); }
+.ks-cta::before { content: ""; position: absolute; inset: 0; background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.12), transparent 60%); opacity: .25; pointer-events: none; }
+.ks-cta > * { position: relative; }
+.ks-cta__title { margin: 0 0 12px; font-size: 30px; line-height: 1.2; font-weight: 700; color: var(--text-primary); text-wrap: balance; }
+.ks-cta__text { margin: 0 auto 28px; max-width: 46ch; font-size: 16px; line-height: 1.5; color: var(--text-secondary); }
+.ks-cta__btn { display: inline-flex; align-items: center; gap: .5rem; padding: .875rem 1.75rem; font: 600 1rem/1.5 var(--font-sans); color: var(--cta-red-900); background: #ffffff; border: none; border-radius: var(--radius-lg); box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15); cursor: pointer; }
+
+/* Input — rounded-xl, bg-elevated */
+.ks-field { display: grid; gap: 8px; min-width: 0; }
+.ks-field__label { font-size: 14px; font-weight: 500; color: var(--text-secondary); }
+.ks-input { width: 100%; box-sizing: border-box; padding: var(--tw-3) var(--tw-4); font: 400 16px/24px var(--font-sans); color: var(--text-primary); background: var(--bg-elevated); border: 1px solid var(--border-default); border-radius: var(--radius-lg); outline: none; }
+.ks-input::placeholder { color: var(--text-muted); }
+.ks-input:hover { border-color: var(--border-strong); }
+.ks-input:focus, .ks-input--focus { border-color: var(--brand-red); box-shadow: 0 0 0 2px var(--state-focus); }
+.ks-input--error { border-color: var(--status-error); }
+.ks-field__help { font-size: 12px; color: var(--text-muted); }
+.ks-field__error { font-size: 12px; color: var(--status-error); }
+.ks-field--error .ks-field__label { color: var(--status-error); }
