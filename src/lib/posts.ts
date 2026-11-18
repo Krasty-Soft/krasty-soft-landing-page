@@ -80,7 +80,7 @@ export async function getAllPosts(): Promise<Post[]> {
   });
 
   if (res && res.items.length > 0) {
-    return res.items.map((item: PostSkeleton) => {
+    const list: Post[] = res.items.map((item: PostSkeleton) => {
       const fields = item.fields;
       const previewUrl = (fields as any).preview?.fields?.file?.url;
       const plain =
@@ -106,6 +106,10 @@ export async function getAllPosts(): Promise<Post[]> {
           : "",
       } as Post;
     });
+    // Newest first, by the same date the cards show, so the order matches
+    // what readers see. Posts without a date go last.
+    const time = (p: Post) => (p.publishedAt ? Date.parse(p.publishedAt) : 0);
+    return list.sort((a, b) => time(b) - time(a));
   }
 
   return [];
