@@ -59,6 +59,9 @@ export const DesktopMenu = () => {
         }
 
         const dropdownItems = getDropdownItems(item.key!);
+        // Services lists titles only, to keep the menu light; the descriptions
+        // stay in navigation.ts because llms.txt uses them.
+        const showDescriptions = item.key !== "services";
 
         return (
           <div
@@ -150,17 +153,19 @@ export const DesktopMenu = () => {
                               className="px-4 py-3 transition-colors duration-200"
                             >
                               <div
-                                className="font-medium mb-1"
+                                className={`font-medium${showDescriptions ? " mb-1" : ""}`}
                                 style={{ color: "var(--text-primary)" }}
                               >
                                 {dropdownItem.label}
                               </div>
-                              <div
-                                className="text-xs"
-                                style={{ color: "var(--text-secondary)" }}
-                              >
-                                {dropdownItem.description}
-                              </div>
+                              {showDescriptions && (
+                                <div
+                                  className="text-xs"
+                                  style={{ color: "var(--text-secondary)" }}
+                                >
+                                  {dropdownItem.description}
+                                </div>
+                              )}
                             </motion.div>
                           </Link>
                           {dropdownItem.children?.map((child) => (
