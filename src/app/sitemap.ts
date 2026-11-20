@@ -8,7 +8,7 @@ import { AUDIT_PAGES } from "@/lib/audit-pages";
 // Last known content update date for static pages.
 // Update this when static page content changes meaningfully.
 const STATIC_LASTMOD = new Date("2026-06-25");
-const AUDIT_LASTMOD = new Date("2026-11-12");
+const AUDIT_LASTMOD = new Date("2026-11-20");
 
 // Same window as the blog pages; the Contentful publish webhook refreshes it sooner.
 export const revalidate = 3600;
@@ -96,7 +96,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "monthly",
       priority: 0.8,
     },
-    // Audit service pages (sub-services sit under /application-security-audit)
+    // Audit service pages (web and mobile sub-services have flat URLs; only the menu nests them)
     ...AUDIT_PAGES.map((page) => ({
       url: `${BASE_URL}${page.path}`,
       lastModified: AUDIT_LASTMOD,

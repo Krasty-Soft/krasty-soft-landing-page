@@ -106,12 +106,12 @@ const PAGES: NavigationConfig = {
       group: "Audit & Security",
       children: [
         {
-          slug: "application-security-audit/web-app",
+          slug: "web-application-security-audit",
           label: "Web Application Security Audit",
           description: "Frontend, server and APIs of browser-based products.",
         },
         {
-          slug: "application-security-audit/mobile-app",
+          slug: "mobile-application-security-audit",
           label: "Mobile Application Security Audit",
           description: "iOS and Android apps and the backend they talk to.",
         },

@@ -30,12 +30,12 @@ const META: Record<string, { label: string; parent?: string; serviceName: string
     label: "Application Security Audit",
     serviceName: "Application Security Audit",
   },
-  "/application-security-audit/web-app": {
+  "/web-application-security-audit": {
     label: "Web Application Security Audit",
     parent: "/application-security-audit",
     serviceName: "Web Application Security Audit",
   },
-  "/application-security-audit/mobile-app": {
+  "/mobile-application-security-audit": {
     label: "Mobile Application Security Audit",
     parent: "/application-security-audit",
     serviceName: "Mobile Application Security Audit",

@@ -3,7 +3,7 @@ import { AuditPageTemplate } from "@/components/blocks/audit-page";
 import { getAuditPage } from "@/lib/audit-pages";
 import { generateSEO } from "@/lib/seo";
 
-const page = getAuditPage("/application-security-audit/mobile-app");
+const page = getAuditPage("/web-application-security-audit");
 
 export const metadata: Metadata = generateSEO({
   title: page.title,

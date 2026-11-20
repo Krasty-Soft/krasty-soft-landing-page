@@ -10,6 +10,15 @@ const CASE_STUDIES_PREFIX = "/case-studies/";
 const CAREERS_PREFIX = "/careers/";
 
 export const REDIRECTS: Redirect[] = [
+  // --- Audit sub-services moved to flat URLs (SEO review item 15, Nov 2026) ---
+  {
+    source: "/application-security-audit/web-app",
+    destination: "/web-application-security-audit",
+  },
+  {
+    source: "/application-security-audit/mobile-app",
+    destination: "/mobile-application-security-audit",
+  },
   // --- Sheet 3: removed case studies (current /case-studies/[slug] URLs) ---
   {
     source: `${CASE_STUDIES_PREFIX}aims-international-ai-driven-recruitment-platform`,

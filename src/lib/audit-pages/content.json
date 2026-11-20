@@ -203,7 +203,7 @@
    {
     "type": "ul",
     "items": [
-     "[Application security audit](/application-security-audit): a security review of your application code, authentication, data handling and integrations. It includes a [web application security audit](/application-security-audit/web-app) for browser-based products and a [mobile application security audit](/application-security-audit/mobile-app) for iOS and Android apps.",
+     "[Application security audit](/application-security-audit): a security review of your application code, authentication, data handling and integrations. It includes a [web application security audit](/web-application-security-audit) for browser-based products and a [mobile application security audit](/mobile-application-security-audit) for iOS and Android apps.",
      "[API audit](/api-security-audit): authentication, access control and data exposure across REST and GraphQL endpoints.",
      "[AI agent security audit](/ai-agent-security-audit): prompt injection, tool permissions, memory and data leakage in LLM-based agents."
     ]
@@ -377,7 +377,7 @@
    },
    {
     "type": "p",
-    "text": "A [web application security audit](/application-security-audit/web-app) covers browser-based products: the frontend, the server and the APIs between them. It includes testing for common web threats such as cross-site scripting, request forgery and broken session handling."
+    "text": "A [web application security audit](/web-application-security-audit) covers browser-based products: the frontend, the server and the APIs between them. It includes testing for common web threats such as cross-site scripting, request forgery and broken session handling."
    },
    {
     "type": "h3",
@@ -385,7 +385,7 @@
    },
    {
     "type": "p",
-    "text": "A [mobile application security audit](/application-security-audit/mobile-app) covers iOS and Android apps and the backend they talk to. It focuses on local data storage, secrets in the app bundle, network traffic and protection against tampering."
+    "text": "A [mobile application security audit](/mobile-application-security-audit) covers iOS and Android apps and the backend they talk to. It focuses on local data storage, secrets in the app bundle, network traffic and protection against tampering."
    },
    {
     "type": "h2",
@@ -503,7 +503,7 @@
  },
  {
   "name": "Web Application Security Audit",
-  "path": "/application-security-audit/web-app",
+  "path": "/web-application-security-audit",
   "title": "Web Application Security Audit for Reliable Web Apps",
   "description": "Comprehensive web app security assessment and audit to identify vulnerabilities, evaluate security risks, and strengthen web application protection against cyber threats.",
   "blocks": [
@@ -753,7 +753,7 @@
  },
  {
   "name": "Mobile Application Security Audit",
-  "path": "/application-security-audit/mobile-app",
+  "path": "/mobile-application-security-audit",
   "title": "Mobile App Security Audit for iOS & Android Applications",
   "description": "Identify vulnerabilities and security risks through a mobile application security audit designed to strengthen the protection of iOS and Android applications.",
   "blocks": [
