@@ -192,5 +192,20 @@ export const SERVICE_FAQ: Record<string, FAQItem[]> = {
       answer:
         "Yes — you own 100% of the code and intellectual property we build for you.",
     },
+    {
+      question: "What types of custom software can Krasty Soft develop?",
+      answer:
+        "We build business systems such as CRMs, ERPs and inventory tools, client portals and B2B SaaS platforms, internal admin panels, operational dashboards, and AI-powered features and agents. Most projects combine custom code with integrations into the tools you already use.",
+    },
+    {
+      question: "Can you integrate custom software with our existing business systems?",
+      answer:
+        "Yes. We connect new software to your CRM, ERP, payment providers such as Stripe, and other third-party services through REST and webhook APIs, with two-way sync so data stays consistent without manual copying.",
+    },
+    {
+      question: "Do you provide software maintenance after launch?",
+      answer:
+        "Yes. We offer SLA-backed maintenance that covers monitoring, bug fixes, security patches, performance optimization, and continued feature development as your business changes.",
+    },
   ],
 };

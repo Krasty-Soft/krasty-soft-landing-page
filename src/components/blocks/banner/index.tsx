@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { StatusBadge } from "@/components/ui";
@@ -117,8 +118,12 @@ export const Banner = () => {
           Top REST API Company, Ukraine 2026.
         </motion.p>
 
-        {/* CTA Button */}
-        <motion.div {...fadeUp(0.25)} className="mb-16 relative">
+        {/* CTA buttons: the main action plus a quieter way into the portfolio */}
+        <motion.div
+          {...fadeUp(0.25)}
+          className="mb-16 flex flex-col items-center gap-4 sm:flex-row sm:gap-5"
+        >
+        <div className="relative">
           {/* Pulsing glow - CSS animation instead of framer-motion */}
           <div
             className="absolute inset-0 rounded-full blur-3xl -z-10"
@@ -163,6 +168,15 @@ export const Banner = () => {
               </span>
             </span>
           </motion.button>
+        </div>
+
+          <Link
+            href="/case-studies"
+            className="inline-flex items-center gap-2 rounded-full border px-8 py-[1.125rem] text-lg font-semibold transition-[border-color,background-color,transform] duration-200 hover:scale-[1.02] hover:border-[var(--brand-red)] hover:bg-[var(--state-hover)]"
+            style={{ borderColor: "var(--border-default)", color: "var(--text-primary)" }}
+          >
+            Explore Our Case Studies
+          </Link>
         </motion.div>
 
         <motion.div {...fadeUp(0.35)} className="w-full max-w-5xl">

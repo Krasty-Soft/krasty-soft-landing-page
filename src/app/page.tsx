@@ -37,12 +37,16 @@ export default async function Home() {
     <>
       <StructuredData data={[ratingSchema, generateFAQSchema(COMPANY_FAQ)]} />
       <Banner />
-      <Services />
+      <Services cta={{ label: "Discuss Your Software Requirements" }} />
       <TrustStats />
       <Difference />
       <Industries />
-      <Technologies />
-      <Cases cases={cases} />
+      <Technologies cta={{ label: "Find the Right Technology Stack for Your Project" }} />
+      <Cases
+        cases={cases}
+        showResults
+        cta={{ label: "Build Your Next Digital Product" }}
+      />
       <AboutTeaser />
       <Faq items={COMPANY_FAQ} />
       <Opportunities isEmpty={isEmpty} jobs={jobs} />

@@ -5,7 +5,13 @@ import useEmblaCarousel from "embla-carousel-react";
 import React, { ReactNode, useCallback, useEffect, useState } from "react";
 
 export const Slider = ({ children }: { children: ReactNode }) => {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: false });
+  // Several slides can be in view at once; each dot then moves a full view.
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: false,
+    align: "start",
+    containScroll: "trimSnaps",
+    slidesToScroll: "auto",
+  });
   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false);
   const [nextBtnEnabled, setNextBtnEnabled] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -36,6 +42,16 @@ export const Slider = ({ children }: { children: ReactNode }) => {
     onSelect();
     setScrollSnaps(emblaApi.scrollSnapList());
     emblaApi.on("select", onSelect);
+    // The number of views changes with the screen width.
+    const onReInit = () => {
+      setScrollSnaps(emblaApi.scrollSnapList());
+      onSelect();
+    };
+    emblaApi.on("reInit", onReInit);
+    return () => {
+      emblaApi.off("select", onSelect);
+      emblaApi.off("reInit", onReInit);
+    };
   }, [emblaApi, setScrollSnaps, onSelect]);
   return (
     <div className="relative w-full">

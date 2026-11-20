@@ -1,0 +1,87 @@
+/* Shared look for the site infographics: brand tokens from src/app/globals.css. */
+@font-face {
+  font-family: "Sora";
+  src: url("Sora-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 800;
+}
+:root {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #121212;
+  --bg-tertiary: #1a1a1a;
+  --bg-elevated: #1f1f1f;
+  --brand-red: #e50606;
+  --text-primary: #ffffff;
+  --text-secondary: #e5e5e5;
+  --text-muted: #8a8a8a;
+  --border-subtle: #2a2a2a;
+  --border-default: #3a3a3a;
+  --pill-red-fill: rgba(229, 6, 6, 0.12);
+}
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: "Sora", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+.card {
+  padding: 56px 64px 44px;
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 0%, rgba(229, 6, 6, 0.10), transparent 70%),
+    var(--bg-primary);
+}
+.kicker {
+  font: 600 18px ui-monospace, "SF Mono", Menlo, monospace;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--brand-red);
+}
+h1 {
+  margin: 14px 0 12px;
+  font-size: 54px;
+  line-height: 1.08;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+h1 em { font-style: normal; color: var(--brand-red); }
+.sub {
+  margin: 0 0 36px;
+  max-width: 900px;
+  font-size: 24px;
+  line-height: 1.45;
+  color: var(--text-muted);
+}
+.chip {
+  display: inline-block;
+  padding: 7px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border-default);
+  background: var(--bg-elevated);
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+.footer {
+  margin-top: 36px;
+  padding-top: 22px;
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font: 500 18px ui-monospace, "SF Mono", Menlo, monospace;
+  color: var(--text-muted);
+}
+.footer img { height: 34px; display: block; }
+
+/* Phone rendition: the same card laid out at ~400 CSS px. */
+@media (max-width: 600px) {
+  .card { padding: 32px 22px 26px; }
+  .kicker { font-size: 13px; }
+  h1 { font-size: 31px; margin: 10px 0 10px; }
+  .sub { font-size: 17px; margin-bottom: 24px; }
+  .chip { font-size: 15px; padding: 5px 12px; }
+  .footer { margin-top: 24px; padding-top: 16px; font-size: 13px; }
+  .footer img { height: 26px; }
+}

@@ -7,6 +7,8 @@ export interface ProcessStepItem {
   number: string;
   title: string;
   description: string;
+  /** What the client receives at the end of the stage. */
+  deliverables?: string;
 }
 
 interface ProcessStepProps {
@@ -78,6 +80,21 @@ export function ProcessStep({ step, index }: ProcessStepProps) {
         >
           {step.description}
         </p>
+        {step.deliverables && (
+          <p
+            style={{
+              marginTop: "0.75rem",
+              fontSize: "0.9375rem",
+              lineHeight: "1.6",
+              color: "var(--text-muted)",
+            }}
+          >
+            <span style={{ color: "var(--text-primary)", fontWeight: 600 }}>
+              You get:
+            </span>{" "}
+            {step.deliverables}
+          </p>
+        )}
       </div>
     </motion.div>
   );

@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<link rel="icon" href="data:,">
+<!--
+  Claim: custom software takes manual work off a team's week.
+  Source: the "result", "proofLead" and "proofEmphasis" fields of three published custom
+  software case studies in Contentful (checked 2026-11-20). "Before" and "after" restate the
+  case text; the only figures are the ones the cases give.
+-->
+<link rel="stylesheet" href="shared.css">
+<style>
+  h1 { font-size: 50px; }
+  .head { display: grid; grid-template-columns: 1fr 64px 1fr; gap: 20px; margin-bottom: 12px; padding: 0 28px; font: 600 15px ui-monospace, "SF Mono", Menlo, monospace; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); }
+  .head span:last-child { color: var(--brand-red); }
+  .rows { display: grid; gap: 16px; }
+  .row {
+    position: relative;
+    padding: 24px 28px 20px;
+    border: 1px solid var(--border-default);
+    border-radius: 14px;
+    background: linear-gradient(180deg, #121214 0%, #0d0d0f 100%);
+    overflow: hidden;
+  }
+  .row::before { content: ""; position: absolute; left: 0; top: 0; width: 14px; height: 14px; background: var(--brand-red); clip-path: polygon(0 0, 100% 0, 0 100%); }
+  .pair { display: grid; grid-template-columns: 1fr 64px 1fr; gap: 20px; align-items: center; }
+  .before { font-size: 22px; line-height: 1.4; color: var(--text-muted); }
+  .before b { font-weight: 600; color: var(--text-secondary); }
+  .arrow { display: grid; place-items: center; width: 52px; height: 52px; border-radius: 50%; border: 1px solid rgba(229, 6, 6, 0.45); background: var(--pill-red-fill); color: var(--brand-red); font-size: 24px; justify-self: center; }
+  .after { font-size: 22px; line-height: 1.4; color: var(--text-primary); }
+  .after b { font-weight: 700; color: var(--brand-red); }
+  .meta { margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; gap: 16px; font: 500 15px ui-monospace, "SF Mono", Menlo, monospace; color: var(--text-muted); }
+  .meta span:last-child { color: var(--text-secondary); }
+  .tag { display: none; }
+
+  @media (max-width: 600px) {
+    h1 { font-size: 30px; }
+    .head { display: none; }
+    .rows { gap: 10px; }
+    .row { padding: 16px; }
+    .pair { grid-template-columns: 1fr; gap: 8px; }
+    .tag { display: block; font: 600 11px ui-monospace, "SF Mono", Menlo, monospace; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 4px; }
+    .after .tag { color: var(--brand-red); }
+    .before, .after { font-size: 16px; }
+    .arrow { width: 32px; height: 32px; font-size: 16px; justify-self: start; transform: rotate(90deg); }
+    .meta { flex-direction: column; gap: 4px; font-size: 12px; margin-top: 12px; padding-top: 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="kicker">Custom software development · Results</div>
+  <h1>What custom software <em>replaced</em></h1>
+  <p class="sub">Weekly manual work at our clients, and what runs in its place now.</p>
+
+  <div class="head"><span>Before</span><span></span><span>After</span></div>
+  <div class="rows">
+    <div class="row">
+      <div class="pair">
+        <div class="before"><span class="tag">Before</span><b>~6&nbsp;hours a&nbsp;week</b> exporting and merging ad data into one report</div>
+        <div class="arrow">→</div>
+        <div class="after"><span class="tag">After</span>Four ad channels in one dashboard, reporting time <b>close to zero</b></div>
+      </div>
+      <div class="meta"><span>Multi-channel marketing analytics dashboard</span><span>One developer · two months</span></div>
+    </div>
+    <div class="row">
+      <div class="pair">
+        <div class="before"><span class="tag">Before</span>The clinic's purchasing cart <b>rebuilt from memory</b> every week</div>
+        <div class="arrow">→</div>
+        <div class="after"><span class="tag">After</span>The next order predicted from the clinic's history, saving <b>several&nbsp;hours a&nbsp;week</b></div>
+      </div>
+      <div class="meta"><span>Predictive ordering for veterinary clinics</span><span>One-click GPO connection</span></div>
+    </div>
+    <div class="row">
+      <div class="pair">
+        <div class="before"><span class="tag">Before</span>Revenue questions sent to engineering as <b>one-off queries</b></div>
+        <div class="arrow">→</div>
+        <div class="after"><span class="tag">After</span>MRR, churn and usage per account in <b>one live view</b></div>
+      </div>
+      <div class="meta"><span>Stripe billing and SaaS revenue analytics</span><span>One developer · two months</span></div>
+    </div>
+  </div>
+
+  <div class="footer"><img src="krastysoft-black.svg" alt="Krasty Soft"><span>krastysoft.com</span></div>
+</div>
+<script type="module">
+  await document.fonts.load('700 50px "Sora"');
+  await document.fonts.load('400 22px "Sora"');
+  await document.fonts.ready;
+  window.__ready = true;
+</script>
+</body>
+</html>

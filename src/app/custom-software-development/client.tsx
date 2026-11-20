@@ -9,9 +9,15 @@ import {
   Network,
   TrendingUp,
   Eye,
-  Clock,
+  Workflow,
+  AppWindow,
+  Plug,
+  BarChart3,
+  Compass,
+  LifeBuoy,
+  ArrowRight,
 } from "lucide-react";
-import { Section, TypingText } from "@/components/ui";
+import { IconCard, Section, TypingText } from "@/components/ui";
 import {
   Technologies,
   Cases,
@@ -22,6 +28,8 @@ import {
 } from "@/components/blocks";
 import { CTABanner } from "@/components/ui/cta-banner";
 import { SERVICE_FAQ } from "@/lib/faq";
+import { scrollToSection } from "@/lib/scroll";
+import { Infographic } from "@/components/infographic";
 
 const whenRightChoice = [
   {
@@ -73,36 +81,96 @@ const problemsWeSolve = [
   },
 ];
 
+// Service copy from the SEO brief (Nov 2026).
 const ourServices = [
-  "Business Systems & Workflows",
-  "Web Platforms & Internal Tools",
-  "Process Automation & Integrations",
-  "Dashboards & Operational Analytics",
-  "Technical Consulting & Architecture",
-  "Ongoing Support & Post-Launch Development",
+  {
+    icon: Workflow,
+    title: "Business Systems & Workflows",
+    description:
+      "Custom CRM, ERP, and inventory management systems tailored to your exact operational rules. We replace rigid spreadsheets and manual approvals with centralized software that scales with your team.",
+  },
+  {
+    icon: AppWindow,
+    title: "Web Platforms & Internal Tools",
+    description:
+      "Client portals, B2B SaaS products, and high-load admin panels built on React, Next.js, and Node.js. We combine modern custom code with low-code tools like Retool to launch internal operations faster.",
+  },
+  {
+    icon: Plug,
+    title: "Process Automation & Integrations",
+    description:
+      "Custom REST and webhook APIs and reliable two-way sync between your payment gateways (Stripe), CRMs, ERPs, and third-party services. We eliminate data silos and manual copy-pasting across your software stack.",
+  },
+  {
+    icon: BarChart3,
+    title: "Dashboards & Operational Analytics",
+    description:
+      "Real-time executive dashboards and automated reporting pipelines aggregating data from multiple sources. Give leadership instant visibility into revenue, bottlenecks, and team KPIs.",
+  },
+  {
+    icon: Compass,
+    title: "Technical Consulting & Architecture",
+    description:
+      "System architecture design, legacy modernization, and production readiness audits for MVPs or AI-generated codebases. We help you choose the right tech stack, reduce cloud costs, and eliminate technical debt before scaling.",
+  },
+  {
+    icon: LifeBuoy,
+    title: "Ongoing Support & Post-Launch Development",
+    description:
+      "Dedicated SLA maintenance, performance optimization, security patching, and continuous feature rollout. We ensure high uptime and keep your software aligned with evolving market demands.",
+  },
 ];
 
+// Six stages from the SEO brief (Nov 2026): the work, the result, and the
+// artifacts the client receives at each stage.
 const howWeWork = [
   {
     number: "01",
-    title: "Discovery",
-    description: "Understanding business logic and operational priorities.",
+    title: "Discovery Phase",
+    description:
+      "We analyze your business needs, define project goals, gather requirements, and research the people who will use the software. Workshops with your team uncover the real process behind each request.",
+    deliverables:
+      "a requirements document, a prioritized feature list, and a rough timeline and budget.",
   },
   {
     number: "02",
-    title: "Technical Approach",
+    title: "Architecture & Planning",
     description:
-      "Defining the most effective technical approach for your needs.",
+      "We design the system architecture, select the technology stack, and define the database structure, APIs, and integrations, checking each choice against your expected load and growth.",
+    deliverables:
+      "an architecture diagram, the chosen stack with reasons, and a release plan split into milestones.",
   },
   {
     number: "03",
-    title: "Build & Refine",
-    description: "Building, testing, and refining the solution.",
+    title: "UI/UX Design",
+    description:
+      "We map user flows, then build wireframes, clickable prototypes, and final interfaces that follow usability principles and support the product's business goals.",
+    deliverables:
+      "user flows, a clickable prototype you can test with real users, and production-ready design files.",
   },
   {
     number: "04",
-    title: "Launch & Support",
-    description: "Launching the system with ongoing support and iteration.",
+    title: "Development",
+    description:
+      "We build the software in Agile/Scrum sprints: functionality, integrations, and modules. Every sprint ends with a demo of working software, so you see progress and can adjust priorities early.",
+    deliverables:
+      "working increments after each sprint, access to the code repository, and regular progress reports.",
+  },
+  {
+    number: "05",
+    title: "Quality Assurance (QA)",
+    description:
+      "We run functional, integration, and regression testing, and check the system's security and performance before every release.",
+    deliverables:
+      "test reports, a list of fixed issues, and automated tests that keep protecting the code after launch.",
+  },
+  {
+    number: "06",
+    title: "Deployment & Maintenance",
+    description:
+      "We deploy the software, configure environments, and set up monitoring. After launch we provide technical support under an SLA and keep improving the product.",
+    deliverables:
+      "a live system, technical documentation, monitoring and alerts, and a support plan.",
   },
 ];
 
@@ -208,6 +276,31 @@ export default function CustomSoftwareClient({
                 with their real processes.
               </p>
             </motion.div>
+
+            {/* Hero CTAs (SEO brief, Nov 2026). The microcopy repeats only
+                promises the contact block already makes. */}
+            <div className="mt-10 flex flex-col items-center gap-4">
+              <div className="flex flex-col items-center gap-4 sm:flex-row">
+                <button
+                  type="button"
+                  onClick={() => scrollToSection("contacts")}
+                  className="inline-flex items-center gap-2 rounded-full border border-[var(--brand-red)] bg-[var(--brand-red)] px-8 py-4 text-lg font-semibold text-white transition-[transform,background-color,box-shadow] duration-200 hover:scale-[1.02] hover:bg-[var(--brand-red-light)] hover:shadow-[var(--shadow-red-md)] active:scale-[0.98]"
+                >
+                  Book a 30-Min Discovery Call
+                  <ArrowRight size={18} />
+                </button>
+                <button
+                  type="button"
+                  onClick={() => scrollToSection("cases")}
+                  className="inline-flex items-center gap-2 rounded-full border border-[var(--border-default)] px-8 py-4 text-lg font-semibold text-[var(--text-primary)] transition-[transform,border-color,background-color] duration-200 hover:scale-[1.02] hover:border-[var(--brand-red)] hover:bg-[var(--state-hover)]"
+                >
+                  Explore Relevant Cases
+                </button>
+              </div>
+              <p className="text-sm" style={{ color: "var(--text-muted)" }}>
+                Free 30-minute call • Reply within one business day • NDA ready
+              </p>
+            </div>
           </motion.div>
         </div>
       </Section>
@@ -264,6 +357,9 @@ export default function CustomSoftwareClient({
           </h2>
         </div>
         <ProblemSolutionTable items={problemsWeSolve} />
+        <div style={{ marginTop: "3rem" }}>
+          <Infographic name="custom-before-after" />
+        </div>
       </Section>
 
       {/* Our Custom Software Development Services */}
@@ -281,47 +377,25 @@ export default function CustomSoftwareClient({
               highlightWords={["Custom"]}
             />
           </h2>
-          <p style={{ ...bodyTextStyle, marginTop: "1rem" }}>
+          <p style={{ ...bodyTextStyle, marginTop: "1rem", textIndent: 0 }}>
             As a custom software development agency, we focus
             on essential services:
           </p>
         </div>
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))",
-            gap: "1rem",
-          }}
-        >
-          {ourServices.map((service, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ delay: index * 0.08, duration: 0.4 }}
-              whileHover={{ scale: 1.02 }}
-              style={{
-                padding: "1.5rem",
-                backgroundColor: "var(--surface-primary)",
-                border: "1px solid var(--border-default)",
-                borderRadius: "var(--radius-lg)",
-                textAlign: "center",
-                fontSize: "1.125rem",
-                fontWeight: 600,
-                color: "var(--text-primary)",
-              }}
-            >
-              <Clock
-                size={24}
-                color="var(--brand-red)"
-                style={{ margin: "0 auto 0.75rem", display: "block" }}
-              />
-              {service}
-            </motion.div>
+        <ul className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 lg:gap-6">
+          {ourServices.map(({ icon, title, description }, index) => (
+            <IconCard
+              key={title}
+              icon={icon}
+              title={title}
+              description={description}
+              index={index}
+              showIndex
+              surface="sunken"
+            />
           ))}
-        </div>
+        </ul>
       </Section>
 
       {/* How We Work */}
@@ -464,17 +538,7 @@ export default function CustomSoftwareClient({
           </p>
           <motion.button
             type="button"
-            onClick={() => {
-              const container = document.getElementById("app-scroll");
-              const section = document.getElementById("contacts");
-              if (container && section) {
-                const containerRect = container.getBoundingClientRect();
-                const sectionRect = section.getBoundingClientRect();
-                const offsetTop =
-                  sectionRect.top - containerRect.top + container.scrollTop;
-                container.scrollTo({ top: offsetTop, behavior: "smooth" });
-              }
-            }}
+            onClick={() => scrollToSection("contacts")}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
             style={{

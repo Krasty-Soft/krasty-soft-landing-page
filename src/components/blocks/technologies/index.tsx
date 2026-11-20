@@ -1,170 +1,214 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React from "react";
 import Link from "next/link";
-import technologies from "@/constants/technologies";
-import AiIcon from "@/assets/ai.svg";
-import Icon2 from "@/assets/react.svg";
-import Icon3 from "@/assets/python.svg";
-import Icon4 from "@/assets/node.svg";
+import { motion } from "framer-motion";
+import {
+  ArrowUpRight,
+  Blocks,
+  Brain,
+  Cloud,
+  Database,
+  Monitor,
+  Server,
+  type LucideIcon,
+} from "lucide-react";
 import { Section, TypingText } from "@/components/ui";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
+import { InlineCta } from "@/components/blocks/inline-cta";
 
-const icons = {
-  AI: AiIcon,
-  React: Icon2,
-  Python: Icon3,
-  Node: Icon4,
+type Tech = { name: string; href?: string };
+
+type TechGroup = {
+  icon: LucideIcon;
+  title: string;
+  text: string;
+  techs: Tech[];
+  service?: { label: string; href: string };
+  /** A case study where this stack was used in production. */
+  caseStudy: { label: string; slug: string };
 };
 
-const TechCard = ({
-  tech,
-  index,
-}: {
-  tech: (typeof technologies)[number];
-  index: number;
-}) => {
-  const [isHovered, setIsHovered] = useState(false);
-  const Icon = icons[tech.key];
+// Grouped by purpose (SEO brief, Nov 2026). Every technology here appears in
+// at least one published case study; each group links to one of them.
+const GROUPS: TechGroup[] = [
+  {
+    icon: Brain,
+    title: "AI & Machine Learning",
+    text: "LLM features that do real work: agents that take actions, RAG search over your documents, and extraction pipelines that turn unstructured text into data.",
+    techs: [
+      { name: "OpenAI" },
+      { name: "Claude" },
+      { name: "LLM integrations" },
+      { name: "RAG" },
+      { name: "AI agents" },
+    ],
+    service: { label: "AI Development", href: "/ai-development" },
+    caseStudy: { label: "AI Event Data Extraction Pipeline", slug: "ai-event-data-extraction-pipeline" },
+  },
+  {
+    icon: Monitor,
+    title: "Frontend Development",
+    text: "Fast, accessible interfaces for web platforms, client portals and dashboards, with server rendering where search visibility matters.",
+    techs: [
+      { name: "React.js", href: "/react" },
+      { name: "Next.js" },
+      { name: "TypeScript" },
+    ],
+    service: { label: "Frontend Development", href: "/frontend-development" },
+    caseStudy: {
+      label: "AI Shopping Assistant for a Grocery Marketplace",
+      slug: "ai-shopping-assistant-for-grocery-marketplace",
+    },
+  },
+  {
+    icon: Server,
+    title: "Backend Development",
+    text: "Server-side logic, REST APIs and integrations with payment, CRM and ERP systems, built to stay stable as traffic and data grow.",
+    techs: [
+      { name: "Python", href: "/python" },
+      { name: "Node.js", href: "/node" },
+      { name: "FastAPI" },
+      { name: "Java" },
+    ],
+    service: { label: "Backend Development", href: "/backend-development" },
+    caseStudy: {
+      label: "AI Voice Agent for After-Hours Lead Booking",
+      slug: "ai-voice-agent-for-after-hours-lead-booking",
+    },
+  },
+  {
+    icon: Database,
+    title: "Database Solutions",
+    text: "Data models for transactions, reporting and search: relational storage for business records, document stores for flexible content, caching for speed.",
+    techs: [
+      { name: "PostgreSQL" },
+      { name: "MongoDB" },
+      { name: "Redis" },
+      { name: "Supabase" },
+    ],
+    service: { label: "Backend Development", href: "/backend-development" },
+    caseStudy: {
+      label: "Predictive Ordering Platform for Veterinary Clinics",
+      slug: "predictive-ordering-for-veterinary-clinics",
+    },
+  },
+  {
+    icon: Cloud,
+    title: "Cloud & DevOps",
+    text: "Cloud infrastructure, containerised deployments and automated releases, so the system scales with load and new versions ship without downtime.",
+    techs: [
+      { name: "AWS" },
+      { name: "Docker" },
+      { name: "Kubernetes" },
+      { name: "Vercel" },
+    ],
+    service: { label: "Custom Software Development", href: "/custom-software-development" },
+    caseStudy: { label: "Rewards Management Platform", slug: "rewards-management-platform" },
+  },
+  {
+    icon: Blocks,
+    title: "Low-Code Development",
+    text: "Internal tools, admin panels and operational dashboards on Retool, connected to your databases and APIs and launched in weeks instead of months.",
+    techs: [{ name: "Retool" }],
+    service: { label: "Custom Software Development", href: "/custom-software-development" },
+    caseStudy: {
+      label: "Retool Platform for Senior Finance Task Automation",
+      slug: "retool-platform-for-finance-task-automation",
+    },
+  },
+];
 
+const chipClass =
+  "inline-flex items-center rounded-full border px-3 py-1 text-sm transition-colors duration-200";
+
+const TechChip = ({ tech }: { tech: Tech }) =>
+  tech.href ? (
+    <Link
+      href={tech.href}
+      className={`${chipClass} border-[var(--border-red)] text-[var(--text-primary)] hover:border-[var(--brand-red)] hover:bg-[var(--state-hover)]`}
+    >
+      {tech.name}
+    </Link>
+  ) : (
+    <span className={`${chipClass} border-[var(--border-default)] text-[var(--text-secondary)]`}>
+      {tech.name}
+    </span>
+  );
+
+const GroupCard = ({ group, index }: { group: TechGroup; index: number }) => {
+  const Icon = group.icon;
   return (
     <motion.li
-      initial={{ opacity: 0, scale: 0.8 }}
-      whileInView={{ opacity: 1, scale: 1 }}
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
-      style={{ listStyle: "none" }}
+      transition={{ delay: index * 0.06, duration: 0.5, ease: [0.32, 0.72, 0, 1] }}
+      className="flex flex-col rounded-xl border p-6 transition-colors duration-200 hover:border-[var(--brand-red)]"
+      style={{
+        listStyle: "none",
+        backgroundColor: "var(--bg-secondary)",
+        borderColor: "var(--border-default)",
+      }}
     >
-      <Link href={tech.link} style={{ textDecoration: "none" }}>
-        <motion.div
-        animate={{
-          y: isHovered ? -12 : 0,
-        }}
-        transition={{ duration: 0.4, ease: [0.32, 0.72, 0, 1] }}
-        style={{
-          position: "relative",
-          padding: "2rem 1.5rem",
-          textAlign: "center",
-          border: "1px solid var(--border-default)",
-          borderRadius: "var(--radius-xl)",
-          backgroundColor: "var(--surface-primary)",
-          cursor: "pointer",
-          overflow: "hidden",
-        }}
+      <div className="mb-4 flex items-center gap-3">
+        <span
+          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full"
+          style={{ backgroundColor: "var(--pill-red-fill)", color: "var(--brand-red)" }}
+        >
+          <Icon size={20} />
+        </span>
+        <h3 className="text-lg font-semibold md:text-xl" style={{ color: "var(--text-primary)" }}>
+          {group.title}
+        </h3>
+      </div>
+      <p className="mb-5 text-[0.9375rem] leading-relaxed" style={{ color: "var(--text-secondary)" }}>
+        {group.text}
+      </p>
+      <div className="mb-6 flex flex-wrap gap-2">
+        {group.techs.map((tech) => (
+          <TechChip key={tech.name} tech={tech} />
+        ))}
+      </div>
+      <div
+        className="mt-auto flex flex-col gap-2 border-t pt-4 text-sm"
+        style={{ borderColor: "var(--border-subtle)" }}
       >
-        {/* Background glow that awakens */}
-        <motion.div
-          initial={false}
-          animate={{
-            opacity: isHovered ? 0.15 : 0,
-            scale: isHovered ? 1.5 : 1,
-          }}
-          transition={{ duration: 0.5 }}
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: `radial-gradient(circle at center, ${tech.brandColor}, transparent 70%)`,
-            pointerEvents: "none",
-            zIndex: 0,
-            opacity: 0, // Start invisible
-          }}
-        />
-
-        {/* Icon container - awakens with rotation */}
-        <motion.div
-          initial={false}
-          animate={{
-            scale: isHovered ? 1.15 : 1,
-            rotate: isHovered ? 360 : 0,
-          }}
-          transition={{
-            scale: { duration: 0.4, ease: [0.32, 0.72, 0, 1] },
-            rotate: { duration: 0.8, ease: [0.32, 0.72, 0, 1] },
-          }}
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            height: "4rem",
-            marginBottom: "1rem",
-            position: "relative",
-            zIndex: 1,
-          }}
-        >
-          {/* SVG wrapper with color filter */}
-          <motion.div
-            initial={false}
-            animate={{
-              filter: isHovered
-                ? "grayscale(0%) brightness(1.2)"
-                : "grayscale(100%) brightness(0.7)",
-            }}
-            transition={{ duration: 0.5 }}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              filter: "grayscale(100%) brightness(0.7)", // Start in sleeping state
-            }}
+        {group.service && (
+          <Link
+            href={group.service.href}
+            className="inline-flex items-center gap-1.5 font-medium text-[var(--text-primary)] underline-offset-4 hover:underline"
           >
-            <Icon className="scale-150" />
-          </motion.div>
-        </motion.div>
-
-        {/* Tech name - color awakens */}
-        <motion.span
-          initial={false}
-          animate={{
-            color: isHovered ? tech.brandColor : "var(--text-secondary)",
-          }}
-          transition={{ duration: 0.4 }}
-          className="text-base md:text-lg font-bold block"
-          style={{ color: "var(--text-secondary)" }} // Start in sleeping state
+            {group.service.label}
+            <ArrowUpRight size={16} style={{ color: "var(--brand-red)" }} />
+          </Link>
+        )}
+        <Link
+          href={`/case-studies/${group.caseStudy.slug}`}
+          className="inline-flex items-start gap-1.5 text-[var(--text-muted)] underline-offset-4 hover:text-[var(--text-primary)] hover:underline"
         >
-          {tech.title}
-        </motion.span>
-
-        {/* Border glow pulse */}
-        <motion.div
-          animate={{
-            opacity: isHovered ? [0.3, 0.6, 0.3] : 0,
-          }}
-          transition={{
-            duration: 2,
-            repeat: isHovered ? Infinity : 0,
-            ease: "easeInOut",
-          }}
-          style={{
-            position: "absolute",
-            inset: "-2px",
-            borderRadius: "var(--radius-xl)",
-            background: `linear-gradient(135deg, ${tech.brandColor}, transparent)`,
-            pointerEvents: "none",
-            zIndex: -1,
-          }}
-        />
-      </motion.div>
-      </Link>
+          <span>Case study: {group.caseStudy.label}</span>
+        </Link>
+      </div>
     </motion.li>
   );
 };
 
-export const Technologies = ({ title }: { title?: string } = {}) => {
+export const Technologies = ({
+  title,
+  cta,
+}: {
+  title?: string;
+  /** Optional call to action under the grid (used on the home page). */
+  cta?: { label: string; text?: string; href?: string };
+} = {}) => {
   return (
     <Section variant={"primary"} animate={false}>
-      {/* Custom Title with Typing Effect */}
       <SectionWrapper>
-        <div className="mb-12 md:mb-16">
+        <div className="mb-12 md:mb-16" style={{ width: "100%", maxWidth: "var(--max-width)" }}>
           <h2
             className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold"
-            style={{
-              color: "var(--text-primary)",
-              lineHeight: "1.4",
-              maxWidth: "var(--max-width)",
-            }}
+            style={{ color: "var(--text-primary)", lineHeight: "1.4" }}
           >
             <span style={{ color: "var(--brand-red)" }}>&gt; </span>
             <TypingText
@@ -174,16 +218,27 @@ export const Technologies = ({ title }: { title?: string } = {}) => {
               highlightWords={["Technologies", "Results"]}
             />
           </h2>
+          <p
+            className="mt-6 text-base leading-relaxed md:text-lg"
+            style={{ color: "var(--text-secondary)", maxWidth: "60rem" }}
+          >
+            We pick the stack for the task, not the other way round. These are
+            the technologies we use in production, grouped by what they do for
+            your product.
+          </p>
         </div>
 
         <ul
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 2xl:grid-cols-4 gap-5 lg:gap-6 xl:gap-8"
-          style={{ width: "100%", maxWidth: "var(--max-width)" }}
+          className="grid w-full grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 lg:gap-6"
+          style={{ maxWidth: "var(--max-width)" }}
         >
-          {technologies.map((tech, index) => (
-            <TechCard key={index} tech={tech} index={index} />
+          {GROUPS.map((group, index) => (
+            <GroupCard key={group.title} group={group} index={index} />
           ))}
         </ul>
+
+
+        {cta && <InlineCta {...cta} />}
       </SectionWrapper>
     </Section>
   );

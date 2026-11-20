@@ -6,6 +6,8 @@ import { Section, Slider, TypingText } from "@/components/ui";
 import { Case, Industry } from "@/lib/cases";
 import { Slide } from "./slide";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
+import { InlineCta } from "@/components/blocks/inline-cta";
+import { Infographic } from "@/components/infographic";
 
 interface CasesProps {
   cases: Case[];
@@ -14,15 +16,20 @@ interface CasesProps {
   title?: string;
   /** Optional lead paragraph override under the heading. */
   intro?: string;
+  /** Optional call to action under the carousel (used on the home page). */
+  cta?: { label: string; text?: string; href?: string };
+  /** Show the measured-results infographic under the carousel (home page). */
+  showResults?: boolean;
 }
 
-export const Cases = ({ cases, industry, title, intro }: CasesProps) => {
+export const Cases = ({ cases, industry, title, intro, cta, showResults }: CasesProps) => {
   // Filter cases by industry if provided
   const filteredCases = industry
     ? cases.filter((c) => c.industries?.includes(industry))
     : cases;
   return (
-    <Section variant="secondary" animate={false}>
+    // id lets hero buttons such as "Explore Relevant Cases" scroll here.
+    <Section variant="secondary" animate={false} id="cases">
       {/* Custom Title with Typing Effect */}
       <SectionWrapper>
         <div className="mb-12 md:mb-16">
@@ -96,6 +103,14 @@ export const Cases = ({ cases, industry, title, intro }: CasesProps) => {
             </Link>
           </div>
         )}
+
+        {showResults && (
+          <div className="mt-12 w-full md:mt-16" style={{ maxWidth: "var(--max-width)" }}>
+            <Infographic name="case-results" />
+          </div>
+        )}
+
+        {cta && <InlineCta {...cta} />}
       </SectionWrapper>
     </Section>
   );

@@ -2,7 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Paperclip, X, Send, Check, ArrowLeft } from "lucide-react";
+import {
+  Paperclip,
+  X,
+  Send,
+  Check,
+  ArrowLeft,
+  Plus,
+  Minus,
+} from "lucide-react";
 
 const allowedMimeTypes = new Set([
   "application/pdf",
@@ -33,8 +41,7 @@ type FieldErrors = {
 
 const cardClass =
   "rounded-[var(--radius-lg)] border border-white/10 bg-white/[0.03] p-6 md:p-7";
-const labelClass =
-  "mb-2 block text-sm font-medium tracking-wide text-white/70";
+const labelClass = "mb-2 block text-sm font-medium tracking-wide text-white/70";
 const inputBase =
   "w-full rounded-[var(--radius-md)] bg-white/[0.04] px-4 py-3 text-[0.9375rem] text-white placeholder:text-white/35 outline-none border transition-[border-color,box-shadow,background-color] duration-200 focus:bg-white/[0.06] focus:border-[var(--brand-red)] focus:shadow-[0_0_0_3px_rgba(229,6,6,0.15)]";
 const errText = "mt-1.5 text-sm text-[var(--brand-red)]";
@@ -56,6 +63,9 @@ export const FooterForm = () => {
   const [submitted, setSubmitted] = useState(false);
   const [fileName, setFileName] = useState<string | null>(null);
   const [errors, setErrors] = useState<FieldErrors>({});
+  // Phone, subject and attachment sit behind a toggle to keep the form short
+  // (SEO brief, Nov 2026). They stay in the DOM so FormData still sends them.
+  const [moreOpen, setMoreOpen] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const loadedAtRef = useRef<HTMLInputElement | null>(null);
 
@@ -95,6 +105,7 @@ export const FooterForm = () => {
       next.message = "Tell us a little more — at least 10 characters.";
     if (Object.keys(next).length) {
       setErrors(next);
+      if (next.phone) setMoreOpen(true);
       return;
     }
 
@@ -110,7 +121,9 @@ export const FooterForm = () => {
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error(data?.error || "Something went wrong. Please try again.");
+        throw new Error(
+          data?.error || "Something went wrong. Please try again.",
+        );
       }
       form.reset();
       setFileName(null);
@@ -131,6 +144,7 @@ export const FooterForm = () => {
     }
     if (file.size > 15 * 1024 * 1024) {
       setErrors((p) => ({ ...p, file: "Attachment must be 15MB or smaller." }));
+      setMoreOpen(true);
       e.target.value = "";
       setFileName(null);
       return;
@@ -143,6 +157,7 @@ export const FooterForm = () => {
         ...p,
         file: "Only PDF or Office files (doc, docx, xls, xlsx, ppt, pptx).",
       }));
+      setMoreOpen(true);
       e.target.value = "";
       setFileName(null);
       return;
@@ -172,7 +187,12 @@ export const FooterForm = () => {
         <motion.div
           initial={{ scale: 0 }}
           animate={{ scale: 1 }}
-          transition={{ delay: 0.1, type: "spring", stiffness: 200, damping: 15 }}
+          transition={{
+            delay: 0.1,
+            type: "spring",
+            stiffness: 200,
+            damping: 15,
+          }}
           style={{
             width: "4.5rem",
             height: "4.5rem",
@@ -180,8 +200,7 @@ export const FooterForm = () => {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            background:
-              "linear-gradient(135deg, var(--brand-red), #a30303)",
+            background: "linear-gradient(135deg, var(--brand-red), #a30303)",
             boxShadow: "0 0 32px rgba(229, 6, 6, 0.35)",
           }}
         >
@@ -268,61 +287,28 @@ export const FooterForm = () => {
           {errors.name && <p className={errText}>{errors.name}</p>}
         </div>
 
-        {/* Email + Phone */}
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-          <div>
-            <label htmlFor="cf-email" className={labelClass}>
-              Email <Req />
-            </label>
-            <input
-              id="cf-email"
-              type="email"
-              name="email"
-              autoComplete="email"
-              placeholder="jane@company.com"
-              aria-invalid={!!errors.email}
-              onChange={() => clearFieldError("email")}
-              className={inputCls(errors.email)}
-            />
-            {errors.email && <p className={errText}>{errors.email}</p>}
-          </div>
-          <div>
-            <label htmlFor="cf-phone" className={labelClass}>
-              Phone <span className="text-white/40">(optional)</span>
-            </label>
-            <input
-              id="cf-phone"
-              type="tel"
-              name="phone"
-              autoComplete="tel"
-              inputMode="tel"
-              placeholder="+1 555 000 0000"
-              aria-invalid={!!errors.phone}
-              onChange={() => clearFieldError("phone")}
-              className={inputCls(errors.phone)}
-            />
-            {errors.phone && <p className={errText}>{errors.phone}</p>}
-          </div>
-        </div>
-
-        {/* Subject */}
+        {/* Email */}
         <div>
-          <label htmlFor="cf-subject" className={labelClass}>
-            Subject <span className="text-white/40">(optional)</span>
+          <label htmlFor="cf-email" className={labelClass}>
+            Email <Req />
           </label>
           <input
-            id="cf-subject"
-            type="text"
-            name="subject"
-            placeholder="New project inquiry"
-            className={inputCls()}
+            id="cf-email"
+            type="email"
+            name="email"
+            autoComplete="email"
+            placeholder="jane@company.com"
+            aria-invalid={!!errors.email}
+            onChange={() => clearFieldError("email")}
+            className={inputCls(errors.email)}
           />
+          {errors.email && <p className={errText}>{errors.email}</p>}
         </div>
 
         {/* Message */}
         <div>
           <label htmlFor="cf-message" className={labelClass}>
-            Message <Req />
+            Project details <Req />
           </label>
           <textarea
             id="cf-message"
@@ -336,40 +322,99 @@ export const FooterForm = () => {
           {errors.message && <p className={errText}>{errors.message}</p>}
         </div>
 
-        {/* Attachment */}
+        {/* Optional details */}
         <div>
-          <label
-            htmlFor="cf-attach"
-            className="flex cursor-pointer items-center gap-3 rounded-[var(--radius-md)] border border-dashed border-white/15 bg-white/[0.02] px-4 py-3 transition-colors duration-200 hover:border-[rgba(229,6,6,0.5)] hover:bg-white/[0.04]"
+          <button
+            type="button"
+            onClick={() => setMoreOpen((v) => !v)}
+            aria-expanded={moreOpen}
+            aria-controls="cf-more"
+            className="inline-flex items-center gap-2 text-[0.9375rem] font-medium text-white/70 transition-colors hover:text-white"
           >
-            <input
-              id="cf-attach"
-              type="file"
-              name="attach"
-              accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
-              onChange={handleFileChange}
-              ref={fileInputRef}
-              className="hidden"
-            />
-            <Paperclip size={18} color="var(--brand-red)" className="shrink-0" />
-            <span className="truncate text-[0.9375rem] text-white/70">
-              {fileName ?? "Attach a file"}
-            </span>
-            <span className="ml-auto shrink-0 text-[0.75rem] text-white/35">
-              {fileName ? "" : "PDF · DOC · XLS · PPT · 15MB"}
-            </span>
-            {fileName && (
-              <button
-                type="button"
-                onClick={handleClearFile}
-                aria-label="Remove file"
-                className="ml-auto flex shrink-0 items-center text-white/50 transition-colors hover:text-white"
-              >
-                <X size={18} />
-              </button>
+            {moreOpen ? (
+              <Minus size={16} color="var(--brand-red)" />
+            ) : (
+              <Plus size={16} color="var(--brand-red)" />
             )}
-          </label>
-          {errors.file && <p className={errText}>{errors.file}</p>}
+            {moreOpen
+              ? "Hide optional details"
+              : "Add more project details (optional)"}
+          </button>
+          <div id="cf-more" hidden={!moreOpen} className="mt-5">
+            <div className="flex flex-col gap-5">
+              <div>
+                <label htmlFor="cf-phone" className={labelClass}>
+                  Phone <span className="text-white/40">(optional)</span>
+                </label>
+                <input
+                  id="cf-phone"
+                  type="tel"
+                  name="phone"
+                  autoComplete="tel"
+                  inputMode="tel"
+                  placeholder="+1 555 000 0000"
+                  aria-invalid={!!errors.phone}
+                  onChange={() => clearFieldError("phone")}
+                  className={inputCls(errors.phone)}
+                />
+                {errors.phone && <p className={errText}>{errors.phone}</p>}
+              </div>
+
+              {/* Subject */}
+              <div>
+                <label htmlFor="cf-subject" className={labelClass}>
+                  Subject <span className="text-white/40">(optional)</span>
+                </label>
+                <input
+                  id="cf-subject"
+                  type="text"
+                  name="subject"
+                  placeholder="New project inquiry"
+                  className={inputCls()}
+                />
+              </div>
+
+              {/* Attachment */}
+              <div>
+                <label
+                  htmlFor="cf-attach"
+                  className="flex cursor-pointer items-center gap-3 rounded-[var(--radius-md)] border border-dashed border-white/15 bg-white/[0.02] px-4 py-3 transition-colors duration-200 hover:border-[rgba(229,6,6,0.5)] hover:bg-white/[0.04]"
+                >
+                  <input
+                    id="cf-attach"
+                    type="file"
+                    name="attach"
+                    accept=".pdf,.doc,.docx,.xls,.xlsx,.ppt,.pptx"
+                    onChange={handleFileChange}
+                    ref={fileInputRef}
+                    className="hidden"
+                  />
+                  <Paperclip
+                    size={18}
+                    color="var(--brand-red)"
+                    className="shrink-0"
+                  />
+                  <span className="truncate text-[0.9375rem] text-white/70">
+                    {fileName ?? "Attach a file"}
+                  </span>
+                  <span className="ml-auto shrink-0 text-[0.75rem] text-white/35">
+                    {fileName ? "" : "PDF · DOC · XLS · PPT · 15MB"}
+                  </span>
+                  {fileName && (
+                    <button
+                      type="button"
+                      onClick={handleClearFile}
+                      aria-label="Remove file"
+                      className="ml-auto flex shrink-0 items-center text-white/50 transition-colors hover:text-white"
+                    >
+                      <X size={18} />
+                    </button>
+                  )}
+                </label>
+                {errors.file && <p className={errText}>{errors.file}</p>}
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Submit */}
@@ -401,7 +446,7 @@ export const FooterForm = () => {
           ) : (
             <>
               <Send size={18} />
-              Send message
+              Request Free Consultation
             </>
           )}
         </motion.button>
